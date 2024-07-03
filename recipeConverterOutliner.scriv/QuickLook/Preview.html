@@ -1,0 +1,234 @@
+<html>
+
+<head>
+<title>recipeConverterOutliner</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!-- NOTE: margin property = top-right-bottom-left -->
+<style type="text/css">
+
+	body {background-color: #e2e2e2}
+    
+    p.topLevelItemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 30px;
+    	}
+    	
+    p.folderTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 18px;
+    	}
+    
+    p.itemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	font-weight: bold;
+    	}
+    	
+    p.itemText {
+    	margin: 0px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    	
+    p.itemTextStart {
+    	margin: 30px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    
+    .page {border: 1px solid #c0c0c0; background: #fff}
+    
+    hr {
+        border: none;
+        height: 1px;
+        color: #d4d4d4;
+        background-color: #d4d4d4;
+      	}
+      	
+    hr.afterTitle {
+    	margin-top: -3px;
+    }
+      	
+    hr.afterText {
+    	margin-top: 30px;
+    }
+      	
+    ul {
+      	list-style-type: none;
+      	padding-left: 30px;
+      	}
+      	
+</style>
+
+</head>
+
+<body>
+
+<table border="0" width="100%" cellspacing="3">
+<tr>
+<td>
+
+<table class="page" width="100%" cellspacing="10" cellpadding="2">
+
+<!-- Top margin -->
+<!-- Not needed, because of the padding above titles. -->
+<!--<tr><td height="15px"></td></tr>-->
+
+<tr>
+
+<!-- 42 + 30 of list indent = 72 - one inch. -->
+<!-- Actually that ends up too much, so we do 25 + 30 = 55px. -->
+<td width="25px">
+
+<td valign="top">
+
+<ul>
+<li>
+<p class="topLevelItemTitle">Breakfast Dishes</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Appetizers</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Sauces &amp; Salsas</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Soups</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Salads</p>
+</li>
+<li>
+<p class="topLevelItemTitle">Entrées</p>
+</li>
+<hr class="afterTitle"/>
+<ul>
+<li>
+<p class="folderTitle">Meat</p>
+</li>
+<hr class="afterTitle"/>
+<ul>
+<li>
+<p class="folderTitle">Poultry</p>
+</li>
+<li>
+<p class="folderTitle">Seafood</p>
+</li>
+<li>
+<p class="folderTitle">Beef</p>
+</li>
+<li>
+<p class="folderTitle">Pork</p>
+</li>
+<li>
+<p class="folderTitle">Veal</p>
+</li>
+<li>
+<p class="folderTitle">Lamb</p>
+</li>
+</ul>
+<hr class="afterTitle"/>
+
+<li>
+<p class="folderTitle">Pasta</p>
+</li>
+<li>
+<p class="folderTitle">Pizzas &amp; Stromboli</p>
+</li>
+<li>
+<p class="folderTitle">Eggs &amp; Cheese</p>
+</li>
+</ul>
+<hr class="afterTitle"/>
+
+<li>
+<p class="topLevelItemTitle">Sides</p>
+</li>
+<hr class="afterTitle"/>
+<ul>
+<li>
+<p class="folderTitle">Vegetables</p>
+</li>
+<li>
+<p class="folderTitle">Grains</p>
+</li>
+<li>
+<p class="folderTitle">Rice &amp; Potatoes</p>
+</li>
+</ul>
+<hr class="afterTitle"/>
+
+<li>
+<p class="topLevelItemTitle">Breads</p>
+</li>
+<hr class="afterTitle"/>
+<ul>
+<li>
+<p class="folderTitle">Artisan</p>
+<p class="itemText">Whole grain breads, sourdough, Italian, French, and other artisan breads</p>
+</li>
+<li>
+<p class="folderTitle">Enriched</p>
+<p class="itemText">"Dessert" or "breakfast" breads, enriched with eggs and butter</p>
+</li>
+<li>
+<p class="folderTitle">Regular</p>
+<p class="itemText">Basic everyday and bread-machine breads</p>
+</li>
+</ul>
+<hr class="afterText"/>
+
+<li>
+<p class="topLevelItemTitle">Desserts</p>
+</li>
+<hr class="afterTitle"/>
+<ul>
+<li>
+<p class="folderTitle">Cakes &amp; Pies</p>
+</li>
+<li>
+<p class="folderTitle">Cookies</p>
+</li>
+<li>
+<p class="folderTitle">Candies</p>
+</li>
+<li>
+<p class="folderTitle">Miscellaneous</p>
+</li>
+</ul>
+<hr class="afterTitle"/>
+
+<li>
+<p class="topLevelItemTitle">Beverages</p>
+</li>
+<hr class="afterTitle"/>
+<ul>
+<li>
+<p class="folderTitle">Hot</p>
+</li>
+<li>
+<p class="folderTitle">Cold</p>
+</li>
+</ul>
+</ul>
+
+</td>
+<td width="55px">
+</td>
+</tr>
+
+<!-- Bottom margin -->
+<tr><td height="15px"></td></tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

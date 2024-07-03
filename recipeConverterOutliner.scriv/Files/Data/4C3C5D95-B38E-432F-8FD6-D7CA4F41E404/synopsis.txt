@@ -1,0 +1,3 @@
+Allows you to quickly convert an ingredient and the amount you need for a quick lookup for a recipe not in the book or being added
+
+Has same ADT menu of items as add new ingredient but only with your added ingredients.  If it is not there, prompts to add.

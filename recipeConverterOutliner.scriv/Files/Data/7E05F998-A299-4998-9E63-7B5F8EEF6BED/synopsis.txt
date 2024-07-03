@@ -1,0 +1,3 @@
+Allows you to store and look up your recipes by type, view them looking nice and neat and print them in the same style  They are not stored in the viewable vile they are printed and displayed in that style which are their own functions
+
+Print prints to a .pdf file saved into a recipe book folder with the rest of your pdfs

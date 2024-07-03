@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompileSettings Template="Yes">
+    <FormatSettings>
+        <Format ID="recipe-collection">
+            <Font>Helvetica</Font>
+            <SectionLayouts>
+                <Type ID="A285AEBE-1AE6-4238-A5E5-ECB8B75E5AE4">F450BDB0-15B4-41ED-90F4-0C44461FE2A9</Type>
+                <Type ID="48726C1E-0DFC-4C25-B265-EB028ED1A67C">948DC15E-2F9E-4E5F-9FEB-DEC60C51F4A9</Type>
+                <Type ID="C75D3726-397C-49D0-B7A9-1327F9AC3D18">EC37DF5B-CFE0-4246-9336-A841B8E97354</Type>
+                <Type ID="BD628AB1-A747-4771-98B2-AECFEB769700">7BE02779-715C-4529-A38E-3357442D0907</Type>
+            </SectionLayouts>
+        </Format>
+    </FormatSettings>
+    <CurrentFileType>Print</CurrentFileType>
+    <LastUsedFormats>
+        <Print>recipe-collection</Print>
+    </LastUsedFormats>
+</CompileSettings>
