@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ScrivenerProject Identifier="C30CA341-5448-42EB-8D39-77CA528DB941" Version="2.0" Creator="SCRMAC-3.3.6-16304" Device="Mac-Pro" Author="" Modified="2024-05-27 23:49:23 -0700" ModID="BFD184AB-4987-4817-96E9-F62DE147B781">
+<ScrivenerProject Identifier="C30CA341-5448-42EB-8D39-77CA528DB941" Version="2.0" Creator="SCRMAC-3.3.6-16304" Device="Mac-Pro" Author="" Modified="2024-07-09 15:48:55 -0700" ModID="195EEC48-80BC-4E9B-A900-8858FCEED715">
     <Binder>
         <BinderItem UUID="7DC81BA3-53AF-45B6-ABC3-87EDE1C0B229" Type="Text" Created="2024-05-27 23:20:48 -0700" Modified="2024-05-27 23:20:48 -0700">
             <Title>How to Use</Title>
@@ -18,9 +18,6 @@
             <TextSettings>
                 <TextSelection>0,0</TextSelection>
             </TextSettings>
-            <CorkboardAndOutliner>
-                <SelectedSubdocumentUUIDs>4C3C5D95-B38E-432F-8FD6-D7CA4F41E404</SelectedSubdocumentUUIDs>
-            </CorkboardAndOutliner>
             <Children>
                 <BinderItem UUID="9C2F5531-548E-4B00-9765-87FD39A7B47C" Type="Text" Created="2024-05-27 23:23:37 -0700" Modified="2024-05-27 23:48:00 -0700">
                     <Title>ADT for Main Menu</Title>
@@ -37,10 +34,10 @@
                         <IncludeInCompile>Yes</IncludeInCompile>
                     </MetaData>
                     <TextSettings>
-                        <TextSelection>157,0</TextSelection>
+                        <TextSelection>35,0</TextSelection>
                     </TextSettings>
                 </BinderItem>
-                <BinderItem UUID="FFB63591-4477-4AC2-AF67-24C0618E92FA" Type="Text" Created="2024-05-27 23:31:57 -0700" Modified="2024-05-27 23:40:50 -0700">
+                <BinderItem UUID="FFB63591-4477-4AC2-AF67-24C0618E92FA" Type="Text" Created="2024-05-27 23:31:57 -0700" Modified="2024-07-09 15:34:45 -0700">
                     <Title>Code Ideas</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -504,6 +501,26 @@
                 </BinderItem>
             </Children>
         </BinderItem>
+        <BinderItem UUID="1EE3D30C-1EE8-4523-9ADB-90511BD17F4F" Type="Folder" Created="2024-07-09 15:36:06 -0700" Modified="2024-07-09 15:36:10 -0700">
+            <Title>Scratch</Title>
+            <MetaData>
+                <IncludeInCompile>Yes</IncludeInCompile>
+            </MetaData>
+            <TextSettings>
+                <TextSelection>0,0</TextSelection>
+            </TextSettings>
+            <Children>
+                <BinderItem UUID="49A8846F-F540-48F1-9B7F-2D3DDA4DD783" Type="Text" Created="2024-07-09 15:36:11 -0700" Modified="2024-07-09 15:48:55 -0700">
+                    <Title>7.9.24</Title>
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>399,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+            </Children>
+        </BinderItem>
     </Binder>
     <Collections>
         <Collection Type="Binder" ID="23182582-C7A4-4220-AED4-5F0892C89F79" Color="1.0 1.0 1.0">
@@ -730,14 +747,14 @@
     </CustomMetaDataSettings>
     <ProjectTargets Notify="No">
         <DraftTarget Type="Words" CountIncludedOnly="No" CurrentCompileGroupOnly="Yes" Deadline="2011-07-07 05:39:27 -0700" IgnoreDeadline="Yes">0</DraftTarget>
-        <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" NextResetDate="2024-05-28 01:00:00 -0700" ResetType="Time" ResetTime="00:00" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
-        <PreviousSession Words="0" Characters="0" Date="2024-05-27 23:20:46 -0700"/>
+        <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" NextResetDate="2024-07-10 01:00:00 -0700" ResetType="Time" ResetTime="00:00" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
+        <PreviousSession Words="0" Characters="0" Date="2024-07-09 15:31:07 -0700"/>
     </ProjectTargets>
-    <RecentWritingHistory Date="2024-05-27 23:20:49 -0700">
+    <RecentWritingHistory Date="2024-07-09 00:00:00 -0700">
         <DraftWordCount>0</DraftWordCount>
         <DraftCharCount>0</DraftCharCount>
-        <OtherWordCount>20</OtherWordCount>
-        <OtherCharCount>157</OtherCharCount>
+        <OtherWordCount>48</OtherWordCount>
+        <OtherCharCount>400</OtherCharCount>
     </RecentWritingHistory>
     <PrintSettings PaperSize="612.0,792.0" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="na-letter" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"/>
 </ScrivenerProject>

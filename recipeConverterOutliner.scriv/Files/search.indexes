@@ -96,14 +96,14 @@ The template’s default compile settings keep individual documents’ tabs and 
         <Document ID="9D367DE9-E4EA-47C2-BF05-0E55D931B34A">
             <Title>Seafood</Title>
         </Document>
-        <Document ID="8F7D96D0-30ED-4104-9833-7D98F96F36D0">
-            <Title>Rice &amp; Potatoes</Title>
-        </Document>
         <Document ID="9C2F5531-548E-4B00-9765-87FD39A7B47C">
             <Title>ADT for Main Menu</Title>
             <Synopsis>				MENU OPTIONS
 Add new recipe by type View existing recipes by type Print recipe by type
 Add new ingredient Convert ingredient amount Exit (saves all documents and dumps)</Synopsis>
+        </Document>
+        <Document ID="8F7D96D0-30ED-4104-9833-7D98F96F36D0">
+            <Title>Rice &amp; Potatoes</Title>
         </Document>
         <Document ID="A124EAF7-3459-483B-BB76-3134784C1F26">
             <Title>Measurements &amp; Equivalents</Title>
@@ -135,21 +135,21 @@ Add new ingredient Convert ingredient amount Exit (saves all documents and d
 Store ingredients in structs with both weight and size
 
 struct foodItem{
-	char name[NAME_LEN]; 
+	char name[NAME_LEN + 1]; 
 	double metric;
 	double imperial;
 	int unitFlag;		       //measurement type used
-	char note[NOTE_LEN];
+	char note[NOTE_LEN + 1];
 };</Synopsis>
-        </Document>
-        <Document ID="1AE8C898-A25F-4B52-A9E6-28DFA7D0BDEE">
-            <Title>Breads</Title>
         </Document>
         <Document ID="7E05F998-A299-4998-9E63-7B5F8EEF6BED">
             <Title>Print Recipe by type</Title>
             <Synopsis>Allows you to store and look up your recipes by type, view them looking nice and neat and print them in the same style  They are not stored in the viewable vile they are printed and displayed in that style which are their own functions
 
 Print prints to a .pdf file saved into a recipe book folder with the rest of your pdfs</Synopsis>
+        </Document>
+        <Document ID="1AE8C898-A25F-4B52-A9E6-28DFA7D0BDEE">
+            <Title>Breads</Title>
         </Document>
         <Document ID="52629E68-DAA2-4DA0-892C-CD034D006A5C">
             <Title>Breakfast Dishes</Title>
@@ -246,6 +246,29 @@ olive oil
 Sprinkle herbs on chicken. Heat skillet over med-high and add a drizzle of olive oil (about 1-2 Tbs). Sauté chicken until cooked through, about 3-4 minutes per side.
 Serve chicken drizzled with sauce.</Text>
             <Notes>Yes, I realize this is not a very exciting recipe. Ergo, two stars. You can do better, I feel sure of it.</Notes>
+        </Document>
+        <Document ID="49A8846F-F540-48F1-9B7F-2D3DDA4DD783">
+            <Title>7.9.24</Title>
+            <Text>BASIC STRUCTS FOR CONVERSION FUNCTIONS
+
+struct foodItem{
+	char foodName[NAME_LEN + 1];
+	float gramsPerCup;
+	struct *foodItem next;
+}
+
+struct foodType{
+	char foodTypeName[NAME_LEN +1];
+	struct *foodType next;
+	struct *foodItem next;
+}
+
+int main(){
+	struct *foodItemHead = NULL;
+	struct *foodTypeHead = NULL;
+
+foodItemHead = //location returned from function that populates linked list from text files
+</Text>
         </Document>
         <Document ID="AEB04C3C-2157-4123-B127-851BAF1C7994">
             <Title>Artisan</Title>

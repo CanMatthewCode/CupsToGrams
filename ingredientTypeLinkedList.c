@@ -49,7 +49,7 @@ struct ingredientType *loadIngredientTypes(struct ingredientType *head){
 *		returns a pointer to the new memory block on success, NULL on failure								*
 *																											*
 *************************************************************************************************************/
-struct ingredientType *createNode(void){
+struct ingredientType *createIngredientTypeNode(void){
 	struct ingredientType *ingredientTypePointer = malloc(sizeof(struct ingredientType));
 	if (ingredientTypePointer == NULL){
 		perror("Failure to allocate memory for ingredientType node");

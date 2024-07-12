@@ -22,7 +22,7 @@ struct ingredientType *loadIngredientTypes(struct ingredientType *head);
 *		returns a pointer to the new memory block on success, NULL on failure								*
 *																											*
 *************************************************************************************************************/
-struct ingredientType *createNode(void);
+struct ingredientType *createIngredientTypeNode(void);
 
 
 /************************************************************************************************************

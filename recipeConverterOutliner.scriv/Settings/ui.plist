@@ -64,8 +64,8 @@
 	<false/>
 	<key>binderSplitFrames</key>
 	<array>
-		<string>{{0, 0}, {209, 1248}}</string>
-		<string>{{210, 0}, {2087, 1248}}</string>
+		<string>{{0, 0}, {282, 1248}}</string>
+		<string>{{283, 0}, {2014, 1248}}</string>
 	</array>
 	<key>binderState</key>
 	<array>
@@ -112,6 +112,11 @@
 	<real>210</real>
 	<key>bookmarksSelectionInfo</key>
 	<dict>
+		<key>1EE3D30C-1EE8-4523-9ADB-90511BD17F4F</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
 		<key>2D972B57-8323-486B-B3DD-CCAED52CF360</key>
 		<dict>
 			<key>DocID</key>
@@ -132,6 +137,11 @@
 			<integer>-1</integer>
 		</dict>
 		<key>429BBA45-DBA5-4C64-AA1D-FA91C58EC3DD</key>
+		<dict>
+			<key>Row</key>
+			<integer>-1</integer>
+		</dict>
+		<key>49A8846F-F540-48F1-9B7F-2D3DDA4DD783</key>
 		<dict>
 			<key>Row</key>
 			<integer>-1</integer>
@@ -232,8 +242,8 @@
 	</dict>
 	<key>collectionsSplitFrames</key>
 	<array>
-		<string>{{0, 0}, {209, 134.5}}</string>
-		<string>{{0, 135.5}, {209, 1086.5}}</string>
+		<string>{{0, 0}, {282, 135}}</string>
+		<string>{{0, 136}, {282, 1086}}</string>
 	</array>
 	<key>collectionsTabListIsCollapsed</key>
 	<false/>
@@ -245,8 +255,7 @@
 	<true/>
 	<key>editorSplitFrames</key>
 	<array>
-		<string>{{0, 0}, {639, 247}}</string>
-		<string>{{0, 257}, {639, 247}}</string>
+		<string>{{0, 0}, {1859, 609}}</string>
 	</array>
 	<key>editorSplitType</key>
 	<integer>0</integer>
@@ -285,8 +294,8 @@
 	<integer>0</integer>
 	<key>inspectorSplitFrames</key>
 	<array>
-		<string>{{0, 0}, {1859, 1218}}</string>
-		<string>{{1860, 0}, {227, 1218}}</string>
+		<string>{{0, 0}, {1786, 1218}}</string>
+		<string>{{1787, 0}, {227, 1218}}</string>
 	</array>
 	<key>inspectorSynopsisIsCollapsed</key>
 	<false/>
@@ -4584,7 +4593,7 @@
 	<key>mainDocumentEditor.outlinerVisible</key>
 	<false/>
 	<key>mainDocumentEditor.scrollRect</key>
-	<string>{{0, 0}, {620, 1162}}</string>
+	<string>{{0, 0}, {620, 553}}</string>
 	<key>mainDocumentEditor.selectedRanges</key>
 	<string>{0, 0}</string>
 	<key>mainDocumentEditor.textEditorState</key>
@@ -4764,7 +4773,7 @@
 	<key>supportingDocumentEditor.outlinerVisible</key>
 	<false/>
 	<key>supportingDocumentEditor.scrollRect</key>
-	<string>{{0, 0}, {620, 294}}</string>
+	<string>{{0, 0}, {620, 1162}}</string>
 	<key>supportingDocumentEditor.selectedItemIDs</key>
 	<array/>
 	<key>supportingDocumentEditor.selectedItemUUIDs</key>

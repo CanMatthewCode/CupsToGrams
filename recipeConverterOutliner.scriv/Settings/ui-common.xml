@@ -6,10 +6,10 @@
         <SubdocumentCounts>No</SubdocumentCounts>
         <ExpandedItems>
             <ItemID>84864FE6-0B58-48FD-934D-9CC59384CA50</ItemID>
-            <ItemID>60A5E4C7-7907-4E33-96AC-457267FE8D7E</ItemID>
+            <ItemID>1EE3D30C-1EE8-4523-9ADB-90511BD17F4F</ItemID>
         </ExpandedItems>
         <Selection>
-            <ItemID>84864FE6-0B58-48FD-934D-9CC59384CA50</ItemID>
+            <ItemID>49A8846F-F540-48F1-9B7F-2D3DDA4DD783</ItemID>
         </Selection>
         <SearchResultsSort Titles="Ascending" Dates="Ascending">None</SearchResultsSort>
     </Binder>
@@ -53,21 +53,15 @@
         <PageLayout Facing="No">No</PageLayout>
         <TypewriterScrolling>Yes</TypewriterScrolling>
     </FullScreen>
-    <Editors Primary="Editor1">
+    <Editors Primary="Editor2">
         <Editor1>
             <View>
                 <ShowHeader>Yes</ShowHeader>
                 <ShowFooter>Yes</ShowFooter>
                 <GroupsViewMode>Corkboard</GroupsViewMode>
-                <CurrentViewMode>Corkboard</CurrentViewMode>
+                <CurrentViewMode>Single</CurrentViewMode>
                 <SelectionAffects>None</SelectionAffects>
-                <Content>
-                    <ItemID>84864FE6-0B58-48FD-934D-9CC59384CA50</ItemID>
-                </Content>
-                <Selection>
-                    <ItemID>4C3C5D95-B38E-432F-8FD6-D7CA4F41E404</ItemID>
-                </Selection>
-                <NavigationHistory CurrentIndex="27">
+                <NavigationHistory CurrentIndex="35">
                     <HistoryItem Type="BinderItems" ViewMode="Single">3017B16B-EBB5-4212-B8C5-027D386D1517</HistoryItem>
                     <HistoryItem Type="BinderItems" ViewMode="Outliner">76132AA9-81B4-48C9-9F65-7E1A9EEB6E50</HistoryItem>
                     <HistoryItem Type="BinderItems" ViewMode="Outliner">9EF9B112-E1F3-4C9B-8EA0-4AB5C987F622</HistoryItem>
@@ -96,6 +90,14 @@
                     <HistoryItem Type="BinderItems" ViewMode="Single">9F836589-75DE-455A-ADEF-34471A140C85</HistoryItem>
                     <HistoryItem Type="BinderItems" ViewMode="Single">7DC81BA3-53AF-45B6-ABC3-87EDE1C0B229</HistoryItem>
                     <HistoryItem Type="BinderItems" ViewMode="Corkboard">84864FE6-0B58-48FD-934D-9CC59384CA50</HistoryItem>
+                    <HistoryItem Type="BinderItems" ViewMode="Single">FFB63591-4477-4AC2-AF67-24C0618E92FA</HistoryItem>
+                    <HistoryItem Type="BinderItems" ViewMode="Corkboard">84864FE6-0B58-48FD-934D-9CC59384CA50</HistoryItem>
+                    <HistoryItem Type="BinderItems" ViewMode="Single">9C2F5531-548E-4B00-9765-87FD39A7B47C</HistoryItem>
+                    <HistoryItem Type="BinderItems" ViewMode="Single">9F836589-75DE-455A-ADEF-34471A140C85</HistoryItem>
+                    <HistoryItem Type="BinderItems" ViewMode="Corkboard">84864FE6-0B58-48FD-934D-9CC59384CA50</HistoryItem>
+                    <HistoryItem Type="BinderItems" ViewMode="Corkboard">429BBA45-DBA5-4C64-AA1D-FA91C58EC3DD</HistoryItem>
+                    <HistoryItem Type="BinderItems" ViewMode="Corkboard">1EE3D30C-1EE8-4523-9ADB-90511BD17F4F</HistoryItem>
+                    <HistoryItem Type="BinderItems" ViewMode="Single">49A8846F-F540-48F1-9B7F-2D3DDA4DD783</HistoryItem>
                 </NavigationHistory>
             </View>
             <Text>
@@ -177,15 +179,21 @@
                 <ShowHeader>Yes</ShowHeader>
                 <ShowFooter>Yes</ShowFooter>
                 <GroupsViewMode>Corkboard</GroupsViewMode>
-                <CurrentViewMode>Corkboard</CurrentViewMode>
+                <CurrentViewMode>Single</CurrentViewMode>
                 <SelectionAffects>None</SelectionAffects>
+                <Content>
+                    <ItemID>49A8846F-F540-48F1-9B7F-2D3DDA4DD783</ItemID>
+                </Content>
+                <NavigationHistory CurrentIndex="0">
+                    <HistoryItem Type="BinderItems" ViewMode="Single">49A8846F-F540-48F1-9B7F-2D3DDA4DD783</HistoryItem>
+                </NavigationHistory>
             </View>
             <Text>
                 <ShowRuler>No</ShowRuler>
                 <PageLayout Facing="No">No</PageLayout>
                 <TypewriterScrolling>No</TypewriterScrolling>
                 <LineNumbers Interval="1">No</LineNumbers>
-                <Selection>0,0</Selection>
+                <Selection>399,0</Selection>
             </Text>
             <Outliner>
                 <Columns>

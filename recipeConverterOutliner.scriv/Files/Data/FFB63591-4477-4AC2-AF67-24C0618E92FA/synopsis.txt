@@ -3,9 +3,9 @@ Main ADT is blind with no access to the other .c files
 Store ingredients in structs with both weight and size
 
 struct foodItem{
-	char name[NAME_LEN]; 
+	char name[NAME_LEN + 1]; 
 	double metric;
 	double imperial;
 	int unitFlag;		       //measurement type used
-	char note[NOTE_LEN];
+	char note[NOTE_LEN + 1];
 };
