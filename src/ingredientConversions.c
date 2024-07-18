@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <ctype.h>
-#include "ingredientconversions.h"
+#include "ingredientConversions.h"
 
 
 /************************************************************************************************************
@@ -9,7 +9,7 @@
 *																											*
 *************************************************************************************************************/
 float getCups(void){
-	char inputBuffer[7] = {'\0'};
+	char inputBuffer[20] = {'\0'};
 	int counter = 0;
 	char c = '\0';
 	int cups = 0;
@@ -19,7 +19,7 @@ float getCups(void){
 	
 	printf("Enter number of cups: ");
 	//read character input until you fill the buffer or get to new line
-	while (((c = getchar()) != '\n') && (counter < 6)){
+	while (((c = getchar()) != '\n') && (counter < 20)){
 		inputBuffer[counter] = c;
 		counter++;
 	}
@@ -53,7 +53,7 @@ float cupsToGrams(float cups, float gramsPerCup){
 /************************************************************************************************************
 * 																											*
 *	 	read input into user buffer. must pass in a buffer[INGREDIENT_BUFFER_LEN]							*
-*		upon completion, buffer will be filled by "Output"													*
+*		upon completion, buffer will be filled by "Capitalized First Letter Syntax"							*
 *																											*
 *************************************************************************************************************/
 void readUserInputIntoBuffer(char buffer[INGREDIENT_BUFFER_LEN]){
@@ -76,4 +76,13 @@ void readUserInputIntoBuffer(char buffer[INGREDIENT_BUFFER_LEN]){
 	}
 	if (*(temp+counter) == ' ')
 		*(temp+counter) = '\0';  
+}
+
+/************************************************************************************************************
+* 																											*
+*	  clearScreen prints an escape sequence to clear the terminal											*
+*																											*
+*************************************************************************************************************/
+void clearScreen(void){
+	printf("\033[2J\033[H"); // ANSI escape sequence to clear screen
 }

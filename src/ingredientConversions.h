@@ -9,12 +9,14 @@
 struct ingredientItem{
 	char ingredientName[INGREDIENT_BUFFER_LEN];
 	float gramsPerCup;
+	struct ingredientItem *prev;
 	struct ingredientItem *next;	
 };
 
 struct ingredientType{
 	char typeName[INGREDIENT_BUFFER_LEN];
 	struct ingredientItem *head;
+	struct ingredientType *prev;
 	struct ingredientType *next;
 };
 
@@ -39,5 +41,13 @@ float cupsToGrams(float cups, float gramsPerCup);
 *																											*
 *************************************************************************************************************/
 void readUserInputIntoBuffer(char buffer[INGREDIENT_BUFFER_LEN]);
+
+/************************************************************************************************************
+* 																											*
+*	  clearScreen prints an escape sequence to clear the terminal											*
+*																											*
+*************************************************************************************************************/
+void clearScreen(void);
+
  
-#endif
+#endif //INGREDIENTCONVERSIONS_H

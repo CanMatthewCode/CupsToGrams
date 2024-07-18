@@ -1,14 +1,14 @@
-#ifdef INGREDIENTITEMLINKEDLIST_H
+#ifndef INGREDIENTITEMLINKEDLIST_H
 #define INGREDIENTITEMLINKEDLIST_H
 
 #include <stdio.h>
 #include <ctype.h>
 #include <stdlib.h>
-#include "ingredientconversions.h"
+#include "ingredientConversions.h"
 #include "ingredientTypeLinkedList.h"
 
 
 
 
 
-#endif (INGREDIENTITEMLINKEDLIST_H)
+#endif //INGREDIENTITEMLINKEDLIST_H
