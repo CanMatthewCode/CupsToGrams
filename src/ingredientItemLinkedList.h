@@ -34,5 +34,13 @@ struct ingredientItem *loadIngredientItem(struct ingredientType *node);
 *********************************************************************************************************************/
 int dumpIngredientItemList(struct ingredientType *typeNode);
 
+/********************************************************************************************************************
+* 																													*
+*	 			check user input key against existing ingredientItem list											*
+*				returns pointer to node found on success, NULL on failure											*
+*																													*
+*********************************************************************************************************************/
+struct ingredientItem *findIngredientItem(struct ingredientItem *head, char buffer[INGREDIENT_BUFFER_LEN]);
+
 
 #endif //INGREDIENTITEMLINKEDLIST_H

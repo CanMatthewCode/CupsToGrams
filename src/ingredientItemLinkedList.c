@@ -135,7 +135,19 @@ int dumpIngredientItemList(struct ingredientType *typeNode){
 	fp = NULL;
 	return 0;
 }
-
+/********************************************************************************************************************
+* 																													*
+*	 			check user input key against existing ingredientItem list											*
+*				returns pointer to node found on success, NULL on failure											*
+*																													*
+*********************************************************************************************************************/
+struct ingredientItem *findIngredientItem(struct ingredientItem *head, char buffer[INGREDIENT_BUFFER_LEN]){
+	struct ingredientItem *cur = NULL;
+	for (cur = head; cur != NULL; cur=cur->next)
+		if (strcmp(buffer, cur->ingredientName) == 0)
+			return cur;
+	return NULL;
+}
 /********************************************************************************************************************
 * 																													*
 *	 			add a new node into the ingredientItem linked-list alphabetically									*
