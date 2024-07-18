@@ -54,7 +54,7 @@ int main (int argc, char **argv){
 		menu = toupper(menu);
 		switch (menu){
 			case '1': 	clearScreen();
-						head = convertIngredient(head); //- leads to submenu to ask to search by name, by type, or all 
+						head = convertIngredientMenu(head); //- leads to submenu to ask to search by name, by type, or all 
 						//					 			  -- further submenu asks to add type of ingredient or add ingredient
 						break; 
 			case '2': 	//convertRecipe(); - leads to submenu to ask to convert recipe then to save or not

@@ -15,8 +15,8 @@ struct ingredientType *loadIngredientTypes(void){
 	FILE *fp = NULL;
 	struct ingredientType *cur = NULL;
 	//open linked list of ingredient types which each have their own linked list inside
-	if((fp = fopen("IngredientTypes.txt", "r+")) == NULL){
-		if((fp = fopen("IngredientTypes.txt", "w+")) == NULL){
+	if((fp = fopen("./textFiles/IngredientTypes.txt", "r+")) == NULL){
+		if((fp = fopen("./textFiles/IngredientTypes.txt", "w+")) == NULL){
 			fp = NULL;
 			return NULL;
 		}
