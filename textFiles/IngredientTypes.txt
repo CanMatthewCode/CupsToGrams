@@ -6,4 +6,5 @@ Cheddar
 Corn
 Duck
 Egg
+Lemon Pepper
 Pork

@@ -66,7 +66,7 @@ struct ingredientType *loadIngredientTypes(void){
 
 /********************************************************************************************************************
 * 																													*
-*	  			create a new node memory block with malloc for an ingredientType linked-list node		 			*
+*	  			create a new node memory block with calloc for an ingredientType linked-list node		 			*
 *				returns a pointer to the new memory block on success, NULL on failure								*
 *																													*
 *********************************************************************************************************************/
@@ -74,7 +74,6 @@ struct ingredientType *createIngredientTypeNode(void){
 	struct ingredientType *ingredientTypeNode = calloc(1, sizeof(struct ingredientType));
 	if (ingredientTypeNode == NULL){
 		perror("Failure to allocate memory for ingredientType node");
-		ingredientTypeNode = NULL;
 		return NULL;
 	}
 	return ingredientTypeNode;
@@ -178,7 +177,7 @@ void printIngredientTypeList(struct ingredientType *head){
 int dumpIngredientTypeList(struct ingredientType *head){
 	FILE *fp = NULL;
 	struct ingredientType *cur = head;
-	if ((fp = fopen ("IngredientTypes.txt", "w+")) == NULL){
+	if ((fp = fopen ("./textFiles/IngredientTypes.txt", "w+")) == NULL){
 		printf("Unable to open ingredientTypes.txt file\n");
 		return -1;
 	}
