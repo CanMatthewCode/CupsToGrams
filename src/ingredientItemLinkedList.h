@@ -26,5 +26,13 @@ struct ingredientItem *createIngredientItemNode(void);
 *************************************************************************************************************/
 struct ingredientItem *loadIngredientItem(struct ingredientType *node);
 
+/********************************************************************************************************************
+* 																													*
+*	 			dump the ingredient item names from linked-list into link ingredientTypes->typeName.txt file		*
+*				returns -1 on failure to open IngredientTypes.txt file, return 0 on successful dump					*
+*																													*
+*********************************************************************************************************************/
+int dumpIngredientItemList(struct ingredientType *typeNode);
+
 
 #endif //INGREDIENTITEMLINKEDLIST_H

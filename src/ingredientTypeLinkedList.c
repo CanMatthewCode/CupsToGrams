@@ -47,7 +47,7 @@ struct ingredientType *loadIngredientTypes(void){
     	}
     	if (newNode->typeName[strlen(newNode->typeName)-1] == '\n')
     			newNode->typeName[strlen(newNode->typeName)-1] = '\0';
-    	//if prev is NULL this is the first node in the linked list and is therefore head, otherwise, link backwards
+    	//if cur is NULL this is the first node in the linked list and is therefore head, otherwise, link backwards
     	if (cur == NULL)
     		cur = newNode;
     	else {
@@ -56,9 +56,9 @@ struct ingredientType *loadIngredientTypes(void){
     		cur = newNode;
     	}
     }
-    rewind(fp);
     fclose(fp);
     fp = NULL;
+    //rewind file pointer to head
     while (cur->prev != NULL)
     	cur = cur->prev;
     return cur;

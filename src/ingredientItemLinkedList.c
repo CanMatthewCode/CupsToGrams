@@ -38,8 +38,6 @@ struct ingredientItem *createIngredientItemNode(void){
 *		returns a pointer to ingredientItem link-list head on success, NULL on failure						*
 *																											*
 *************************************************************************************************************/
-//REDO TO MEET AGNOSTIC OS DECISIONS fread() fwrite() change to fscanf() fprintf() and move through '\0' nodes
-
 struct ingredientItem *loadIngredientItem(struct ingredientType *node){
 	FILE *fp = NULL;
 	struct ingredientType *ingredientType = node;
@@ -75,21 +73,34 @@ struct ingredientItem *loadIngredientItem(struct ingredientType *node){
     		fp = NULL;
     		return NULL;
     	}
-    	//need to redo this to match the add structure and how that will print out
-    	if (fread(newNode, structSize, 1, fp) != 1){
+    	//print characters until you get to a new line
+    	ch = '\0';
+    	int position = 0;
+    	while (((ch = fgetc(fp)) != '\t') && (position < (INGREDIENT_BUFFER_LEN - 1)))
+    		newNode->ingredientName[position++] = ch;
+    	if (ch == EOF){
     		fprintf(stderr, "Unable to populate Ingredient Items from %s\n", openFileBuffer);
     		free(newNode);
     		fclose(fp);
     		fp = NULL;
     		return NULL;
     	}
-    	newNode->next = cur;
-    	cur = newNode;
+    	fscanf(fp, "\t%f\n", &newNode->gramsPerCup);
+		//if cur is NULL it is the first node of the linked list and is therefore head, otherwise, link backwards
+		if (cur == NULL)
+    		cur = newNode;
+    	else {
+    		cur->next = newNode;
+    		newNode->prev = cur;
+    		cur = newNode;
+    	}
     }
-    ingredientType->ingredientItem = cur;
     fclose(fp);
     fp = NULL;
-    return ingredientType->ingredientItem;
+    //rewind file pointer to head
+    while (cur->prev != NULL)
+    	cur = cur->prev;
+    return cur;
 }
 
 /********************************************************************************************************************
@@ -115,7 +126,7 @@ int dumpIngredientItemList(struct ingredientType *typeNode){
 		return -1;
 	}
 	//head for ingredientItem of each ingredientType is attached to the ingredientType node
-	struct ingredientItem *cur = ingredientTypeNode->ingredientItem;
+	struct ingredientItem *cur = ingredientTypeNode->head;
 	while (cur){
 		fprintf(fp, "%s\t\t%f\n", cur->ingredientName, cur->gramsPerCup);
 		cur = cur->next;
