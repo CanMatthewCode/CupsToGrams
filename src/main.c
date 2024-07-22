@@ -32,9 +32,10 @@
  
 int main (int argc, char **argv){
 	clearScreen();
-	//create head pointer and load ingredientType link list
+	//create head pointer and load ingredientType linked-list then sub linked-lists
 	struct ingredientType *head = NULL;
 	head = loadIngredientTypes();
+	head = loadAllIngredientTypeSubLists(head);
 	char menu = '\0';
 	while (menu != 'Q'){
 		clearScreen();
