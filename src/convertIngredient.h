@@ -23,6 +23,12 @@ struct ingredientType *convertIngredientMenu(struct ingredientType *head);
 *************************************************************************************************************/
 struct ingredientType *addIngredientType(struct ingredientType *head);
 
-
+/************************************************************************************************************
+* 																											*
+*				add a node to the ingredientItem linked-list from the convert ingredient menu				*
+*				enter ingredient type to access linked-list type. returns pointer to head of list 			*
+*																											*
+*************************************************************************************************************/
+struct ingredientType *addIngredient(struct ingredientType *head);
 
 #endif //CONVERTINGREDIENT_H
