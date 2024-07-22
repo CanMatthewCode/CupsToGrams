@@ -58,7 +58,7 @@ struct ingredientType *loadIngredientTypes(void){
     }
     fclose(fp);
     fp = NULL;
-    //rewind file pointer to head
+    //resetting file pointer to head
     while (cur->prev != NULL)
     	cur = cur->prev;
     return cur;
@@ -109,9 +109,8 @@ struct ingredientType *addNewIngredientTypeNode(struct ingredientType *head, cha
 	
 	strcpy(newNode->typeName, buffer);
 	//if cur == NULL it is the first node
-	if (cur == NULL){
+	if (cur == NULL)
 		return newNode;
-	}
 	//if buffer is smaller than 1st node, it is new 1st node
 	if ((cur != NULL) && (strcmp(newNode->typeName, cur->typeName) < 0)){
 		newNode->next = cur;
@@ -119,10 +118,12 @@ struct ingredientType *addNewIngredientTypeNode(struct ingredientType *head, cha
 		return newNode;
 	}
 	
-	for ( ; cur->next != NULL && (strcmp(newNode->typeName, cur->typeName) > 0); prev = cur, cur=cur->next)
+	for ( ; cur->next != NULL && (strcmp(newNode->typeName, cur->typeName) > 0); prev = cur, cur = cur->next)
 		;	
 	if (strcmp(newNode->typeName, cur->typeName) == 0){
 		printf("Ingredient Type Already Exists\n");
+		free(newNode);
+		newNode = NULL;
 	}
 	//all middle cases
 	if ((strcmp(newNode->typeName, prev->typeName) > 0) && 
@@ -136,10 +137,10 @@ struct ingredientType *addNewIngredientTypeNode(struct ingredientType *head, cha
 	if ((strcmp(newNode->typeName, cur->typeName) > 0) && cur->next == NULL){
 		newNode->prev = cur;
 		cur->next = newNode;
-
 	}
+	//resetting file pointer to head
 	while (cur->prev != NULL)
-		cur=cur->prev;
+		cur = cur->prev;
 	return cur;
 }
 
