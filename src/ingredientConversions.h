@@ -8,6 +8,7 @@
 
 struct ingredientItem{
 	char ingredientName[INGREDIENT_BUFFER_LEN];
+	int tablespoonFlag;
 	float gramsPerCup;
 	struct ingredientItem *prev;
 	struct ingredientItem *next;	

@@ -26,6 +26,15 @@ struct ingredientItem *createIngredientItemNode(void);
 *************************************************************************************************************/
 struct ingredientItem *loadIngredientItem(struct ingredientType *node);
 
+/************************************************************************************************************
+* 																											*
+*	  	loadIngredientItem loads the ingredientsItems linked-list associated with an ingredientType pointer *
+*		loads a .txt file from the typeName buffer in the ingredientType struct								*
+*		returns a pointer to ingredientItem link-list head on success, NULL on failure						*
+*																											*
+*************************************************************************************************************/
+struct ingredientType *loadAllIngredientTypeSubLists(struct ingredientType *head);
+
 /********************************************************************************************************************
 * 																													*
 *	 			dump the ingredient item names from linked-list into link ingredientTypes->typeName.txt file		*
