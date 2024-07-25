@@ -49,7 +49,50 @@ int dumpIngredientItemList(struct ingredientType *typeNode);
 *				returns pointer to node found on success, NULL on failure											*
 *																													*
 *********************************************************************************************************************/
-struct ingredientItem *findIngredientItem(struct ingredientItem *head, char buffer[INGREDIENT_BUFFER_LEN]);
+struct ingredientItem *findIngredientItemNode(struct ingredientType *head, char buffer[INGREDIENT_BUFFER_LEN]);
 
+/********************************************************************************************************************
+* 																													*
+*	 			add a new node into the ingredientItem linked-list alphabetically									*
+*				returns pointer to head on success, NULL on failure													*
+*																													*
+*********************************************************************************************************************/
+struct ingredientItem *addNewIngredientItemNode(struct ingredientItem *head, char buffer[INGREDIENT_BUFFER_LEN]);
+
+/********************************************************************************************************************
+* 																													*
+*	 			modifies the ingredientName in an existing ingredientType node in the linked-list 					*
+*																													*
+*********************************************************************************************************************/
+void modifyIngredientItemNodeName(struct ingredientItem *node);
+
+/********************************************************************************************************************
+* 																													*
+*	 			modifies the cupsPerGram amount in an existing ingredientType node in the linked-list 				*
+*																													*
+*********************************************************************************************************************/
+void modifyIngredientItemNodeWeight(struct ingredientItem *node);
+
+/********************************************************************************************************************
+* 																													*
+*	 			modifies the tablespoonFlag in an existing ingredientType node in the linked-list 					*
+*																													*
+*********************************************************************************************************************/
+void modifyIngredientItemNodeFlag(struct ingredientItem *node);
+
+/********************************************************************************************************************
+* 																													*
+*	 			modify a value in an existing node in the ingredientItem linked-list 								*
+*				modifies values on success, NULL on failure															*
+*																													*
+*********************************************************************************************************************/
+void modifyIngredientItemNode(struct ingredientItem *node);
+
+/********************************************************************************************************************
+* 																													*
+*	 			print the information stored in an ingredientItem node 				 								*
+*																													*
+*********************************************************************************************************************/
+void printIngredientItemNode(struct ingredientItem *node);
 
 #endif //INGREDIENTITEMLINKEDLIST_H
