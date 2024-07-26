@@ -3,6 +3,7 @@ Bacon
 Banana
 Carrot
 Cheddar
+Chocolate
 Corn
 Duck
 Egg
