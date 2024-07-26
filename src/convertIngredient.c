@@ -68,10 +68,11 @@ struct ingredientType *convertIngredientMenu(struct ingredientType *head){
 *************************************************************************************************************/
 struct ingredientType *addIngredientType(struct ingredientType *head){
 	 char choice = '\0';
+	 struct ingredientType *headPointer = head;
 	 while (choice != 'N'){
 		clearScreen();
 		choice = '\0';
-		struct ingredientType *headPointer = head;
+
 		char buffer[INGREDIENT_BUFFER_LEN] = {'\0'};
 		puts("\t\t*****************************************************************");
 		puts("\t\t*\t\t\t\t\t\t\t\t*");
