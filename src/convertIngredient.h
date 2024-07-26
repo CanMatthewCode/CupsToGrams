@@ -29,6 +29,6 @@ struct ingredientType *addIngredientType(struct ingredientType *head);
 *				enter ingredient type to access linked-list type. returns pointer to head of list 			*
 *																											*
 *************************************************************************************************************/
-struct ingredientType *addIngredient(struct ingredientType *head);
+struct ingredientType *addIngredientItem(struct ingredientType *head);
 
 #endif //CONVERTINGREDIENT_H

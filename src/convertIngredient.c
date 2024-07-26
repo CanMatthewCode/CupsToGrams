@@ -17,11 +17,11 @@ struct ingredientType *convertIngredientMenu(struct ingredientType *head){
 		;
 	while (menu != 'B'){
 		clearScreen();
-		puts("\t\t*****************************************************************");
-		puts("\t\t*\t\t\t\t\t\t\t\t*");
-		puts("\t\t*\t\t      -CONVERT INGREDIENT- \t\t\t*");
-		puts("\t\t*\t\t\t\t\t\t\t\t*");
-		puts("\t\t*****************************************************************");
+		puts("\t\t*********************************************************************************");
+		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
+		puts("\t\t*\t\t\t      -CONVERT INGREDIENT- \t\t\t\t*");
+		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
+		puts("\t\t*********************************************************************************");
 		puts("\n\t\tMenu Options:\n");
 	
 		puts("\t\t(1) Convert Ingredient\n\t\t(2) Search For Ingredient\n\t\t"
@@ -50,7 +50,7 @@ struct ingredientType *convertIngredientMenu(struct ingredientType *head){
 						headPointer = deleteIngredientTypeNode(headPointer);
 						break;
 			case '7':	clearScreen();
-						headPointer = addIngredient(headPointer);
+						headPointer = addIngredientType(headPointer);
 						break;
 			case 'B':	return head;
 			default: 	;
@@ -74,11 +74,11 @@ struct ingredientType *addIngredientType(struct ingredientType *head){
 		choice = '\0';
 
 		char buffer[INGREDIENT_BUFFER_LEN] = {'\0'};
-		puts("\t\t*****************************************************************");
-		puts("\t\t*\t\t\t\t\t\t\t\t*");
-		puts("\t\t*\t\t      -ADD INGREDIENT TYPE- \t\t\t*");
-		puts("\t\t*\t\t\t\t\t\t\t\t*");
-		puts("\t\t*****************************************************************");
+		puts("\t\t*********************************************************************************");
+		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
+		puts("\t\t*\t\t\t      -ADD INGREDIENT TYPE- \t\t\t\t*");
+		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
+		puts("\t\t*********************************************************************************");
 		printf("\n\n\t\tEnter Ingredient Type to Add: ");
 	 	readUserInputIntoBuffer(buffer);
 		headPointer = addNewIngredientTypeNode(headPointer, buffer);
@@ -100,7 +100,7 @@ struct ingredientType *addIngredientType(struct ingredientType *head){
 *				enter ingredient type to access linked-list type. returns pointer to head of Typelist 		*
 *																											*
 *************************************************************************************************************/
-struct ingredientType *addIngredient(struct ingredientType *head){
+struct ingredientType *addIngredientItem(struct ingredientType *head){
 //ask for the ingredient type, take input and use searchIngredientType to find the node with the head pointer for that type
 //offer to print types, then put in type.  use the buffer to find the node type, when it's found, ask for input, if not found say not found
 //then show how input is wanted and ask for input first for weight then for cups or tbsp.  Ask for confirmation

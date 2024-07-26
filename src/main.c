@@ -39,11 +39,11 @@ int main (int argc, char **argv){
 	char menu = '\0';
 	while (menu != 'Q'){
 		clearScreen();
-		puts("\t\t*****************************************************************");
-		puts("\t\t*\t\t\t\t\t\t\t\t*");
-		puts("\t\t*\t\t-RECIPE AND INGREDIENT CONVERTER-\t\t*");
-		puts("\t\t*\t\t\t\t\t\t\t\t*");
-		puts("\t\t*****************************************************************");
+		puts("\t\t*********************************************************************************");
+		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
+		puts("\t\t*\t\t\t-RECIPE AND INGREDIENT CONVERTER-\t\t\t*");
+		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
+		puts("\t\t*********************************************************************************");
 		puts("\n\t\tMain Menu Options:\n");
 	
 		puts("\t\t(1) Convert Ingredient\n\t\t(2) Convert Recipe\n\t\t"

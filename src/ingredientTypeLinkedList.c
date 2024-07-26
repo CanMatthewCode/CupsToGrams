@@ -152,14 +152,14 @@ struct ingredientType *addNewIngredientTypeNode(struct ingredientType *head, cha
 void printIngredientTypeList(struct ingredientType *head){
 	struct ingredientType *cur = NULL;
 	int counter = 0;
-	puts("\t\t*****************************************************************");
-	puts("\t\t*\t\t\t\t\t\t\t\t*");
-	puts("\t\t*\t\t  -INGREDIENT TYPES AVAILABLE:-      \t\t*");
-	puts("\t\t*\t\t\t\t\t\t\t\t*");
-	puts("\t\t*****************************************************************\n\n");
+	puts("\t\t*********************************************************************************");
+	puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
+	puts("\t\t*\t\t\t  -INGREDIENT TYPES AVAILABLE-       \t\t\t*");
+	puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
+	puts("\t\t*********************************************************************************\n\n");
 	printf("\t\t");
 	for (cur = head; cur; cur = cur->next){
-		printf("%-25s", cur->typeName);
+		printf("%-32s", cur->typeName);
 		counter++;
 		if (counter % 3 == 0)
 			printf("\n\n\n\t\t");
@@ -218,11 +218,11 @@ struct ingredientType *deleteIngredientTypeNode(struct ingredientType *head){
 	struct ingredientType *prev = NULL;
 	struct ingredientType *next = NULL;
 	struct ingredientType *headPointer = head;
-	puts("\t\txxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-	puts("\t\tx\t\t\t\t\t\t\t\tx");
-	puts("\t\tx\t\t      -DELETE INGREDIENT TYPE- \t\t\tx");
-	puts("\t\tx\t\t\t\t\t\t\t\tx");
-	puts("\t\txxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+	puts("\t\txxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+	puts("\t\tx\t\t\t\t\t\t\t\t\t\tx");
+	puts("\t\tx\t\t\t      -DELETE INGREDIENT TYPE- \t\t\t\tx");
+	puts("\t\tx\t\t\t\t\t\t\t\t\t\tx");
+	puts("\t\txxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 	printf("\n\n\t\tEnter Ingredient Type to PERMANENTLY DELETE: ");
 	char buffer[INGREDIENT_BUFFER_LEN] = {'\0'};
 	readUserInputIntoBuffer(buffer);
@@ -244,7 +244,7 @@ struct ingredientType *deleteIngredientTypeNode(struct ingredientType *head){
 		switch (confirm) {
 			case 'Y': break; //change back to break to check next functionality
 			case 'N': return headPointer;
-			default : printf("\n\t\t***Invalid Entry, Try Again***\n\t\t"); 	
+			default : printf("\n\t\tInvalid Entry, Try Again\n\t\t"); 	
 					  while (getchar() != '\n')
 					  	;
 		}
