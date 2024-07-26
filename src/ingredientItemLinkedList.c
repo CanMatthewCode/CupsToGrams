@@ -10,10 +10,12 @@
 *		XCheck if wanted ingredientType exists already in node
 *		XCreate new node for ingredientTypeLinkedList
 *		XPopulate and Add new node to ingredientItemLinkedList
-*		Delete selected node
-*		Print ingredient node list
+*		XDelete selected node
+*		XPrint ingredient node list
 *		XDump ingredientTypeLinkedList into text file named ingredientType->ingredientName
-*		Free ingredientTypeLinkedList 
+*		Print All Ingredients by Type ~pretty~
+*		freeIngredientTypeLinkedList function
+*		freeAllIngredientTypeLinkedLists function
 */
 
 /********************************************************************************************************************
@@ -444,8 +446,8 @@ int deleteIngredientItemNode(struct ingredientType *head, char buffer[INGREDIENT
 	struct ingredientType *foundIngredientsTypes[MAX_INGREDIENTS_FOUND] = {NULL};
 	memset(foundIngredientsTypes, 0, sizeof(foundIngredientsTypes));
 	
-	int ingredientItemCounter = 0;
-	int ingredientItemChoice = 0;
+	unsigned int ingredientItemCounter = 0;
+	unsigned int ingredientItemChoice = 0;
 	//iterate through all sub-lists from the head node of the ingredientType linked list searching for partial matches
 	//store partial matches in array to share with user
 	struct ingredientType *ingredientTypePointer = NULL;
