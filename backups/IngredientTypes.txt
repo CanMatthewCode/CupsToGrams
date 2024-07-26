@@ -1,11 +1,16 @@
-Apple
-Bacon
-Banana
-Carrot
-Cheddar
-Chocolate
-Corn
-Duck
-Egg
-Lemon Pepper
-Pork
+Baked Goods, Dry
+Baked Goods, Wet
+Dairy
+Flours
+Fruit
+Grains & Cereals
+Herbs & Spices
+Legumes
+Meat & Poultry
+Milks
+Miscellaneous 
+Nuts & Seeds
+Oils & Syrups
+Sauces & Condiments
+Seafood
+Vegetables
