@@ -120,11 +120,6 @@ struct ingredientType *addNewIngredientTypeNode(struct ingredientType *head, cha
 	
 	for ( ; cur->next != NULL && (strcmp(newNode->typeName, cur->typeName) > 0); prev = cur, cur = cur->next)
 		;	
-	if (strcmp(newNode->typeName, cur->typeName) == 0){
-		printf("Ingredient Type Already Exists\n");
-		free(newNode);
-		newNode = NULL;
-	}
 	//all middle cases
 	if ((strcmp(newNode->typeName, prev->typeName) > 0) && 
 	   (strcmp(newNode->typeName, cur->typeName) < 0)){
@@ -137,6 +132,11 @@ struct ingredientType *addNewIngredientTypeNode(struct ingredientType *head, cha
 	if ((strcmp(newNode->typeName, cur->typeName) > 0) && cur->next == NULL){
 		newNode->prev = cur;
 		cur->next = newNode;
+	}
+	if (strcmp(newNode->typeName, cur->typeName) == 0){
+		printf("\n\t\tIngredient Type Already Exists\n");
+		free(newNode);
+		newNode = NULL;
 	}
 	//resetting file pointer to head
 	while (cur->prev != NULL)
@@ -159,10 +159,10 @@ void printIngredientTypeList(struct ingredientType *head){
 	puts("\t\t*****************************************************************\n\n");
 	printf("\t\t");
 	for (cur = head; cur; cur = cur->next){
-		printf("%-19s", cur->typeName);
+		printf("%-25s", cur->typeName);
 		counter++;
-		if (counter % 4 == 0)
-			printf("\n\n\t\t");
+		if (counter % 3 == 0)
+			printf("\n\n\n\t\t");
 	}
 	while (getchar() != '\n')
 		;
