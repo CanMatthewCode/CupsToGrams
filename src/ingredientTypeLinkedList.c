@@ -237,13 +237,13 @@ struct ingredientType *deleteIngredientTypeNode(struct ingredientType *head){
 		return headPointer;
 	}
 	printf("\n\t\t%s Found, ", buffer);
-	while ((confirm != 'y') && (confirm !='n')){
+	while ((confirm != 'Y') && (confirm != 'N')){
 		printf("Confirm Delete (y/n): ");
 		confirm = getchar();
-		confirm = tolower(confirm);
+		confirm = toupper(confirm);
 		switch (confirm) {
-			case 'y': break; //change back to break to check next functionality
-			case 'n': return headPointer;
+			case 'Y': break; //change back to break to check next functionality
+			case 'N': return headPointer;
 			default : printf("\n\t\t***Invalid Entry, Try Again***\n\t\t"); 	
 					  while (getchar() != '\n')
 					  	;
@@ -260,8 +260,8 @@ struct ingredientType *deleteIngredientTypeNode(struct ingredientType *head){
 		next->prev=prev;
 	}
 	//if it is the final node
-	else if(prev && next==NULL)
-		prev->next=NULL;
+	else if(prev && next == NULL)
+		prev->next = NULL;
 	free(cur);
 	cur = NULL;
 	//dump to .txt file
