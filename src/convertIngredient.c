@@ -51,6 +51,7 @@ struct ingredientType *convertIngredientMenu(struct ingredientType *head){
 						break;
 			case '7':	clearScreen();
 						headPointer = addIngredient(headPointer);
+						break;
 			case 'B':	return head;
 			default: 	;
 		}
