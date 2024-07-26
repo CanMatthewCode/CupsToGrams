@@ -95,4 +95,19 @@ void modifyIngredientItemNode(struct ingredientItem *node);
 *********************************************************************************************************************/
 void printIngredientItemNode(struct ingredientItem *node);
 
+/********************************************************************************************************************
+* 																													*
+*	 			prints all the ingredientItem nodes stored in the head member of an ingredientType node 			*
+*																													*
+*********************************************************************************************************************/
+void printAllIngredientItemNodes(struct ingredientType *node);
+
+/********************************************************************************************************************
+* 																													*
+*	 			delete a an ingredientItem node						 				 								*
+*				returns 0 on success, 1 on cancel,  -1 on failure																	*
+*																													*
+*********************************************************************************************************************/
+int deleteIngredientItemNode(struct ingredientType *head, char buffer[INGREDIENT_BUFFER_LEN]);
+
 #endif //INGREDIENTITEMLINKEDLIST_H
