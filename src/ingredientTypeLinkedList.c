@@ -242,7 +242,7 @@ struct ingredientType *deleteIngredientTypeNode(struct ingredientType *head){
 		confirm = getchar();
 		confirm = toupper(confirm);
 		switch (confirm) {
-			case 'Y': break; //change back to break to check next functionality
+			case 'Y': break; 
 			case 'N': return headPointer;
 			default : printf("\n\t\tInvalid Entry, Try Again\n\t\t"); 	
 					  while (getchar() != '\n')

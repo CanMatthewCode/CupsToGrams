@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <ctype.h>
-#include "convertIngredient.h"
+#include "ingredientMenus.h"
 #include "ingredientConversions.h"
 #include "ingredientTypeLinkedList.h"
 
@@ -15,7 +15,7 @@ struct ingredientType *convertIngredientMenu(struct ingredientType *head){
 	//struct ingredientItem *itemHead;
 	while (getchar() != '\n')
 		;
-	while (menu != 'B'){
+	do {
 		clearScreen();
 		puts("\t\t*********************************************************************************");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
@@ -57,7 +57,7 @@ struct ingredientType *convertIngredientMenu(struct ingredientType *head){
 		}
 		while (getchar() != '\n')
 			;
-	}
+	} while (menu != 'B');
 }
 
 /************************************************************************************************************
@@ -69,7 +69,7 @@ struct ingredientType *convertIngredientMenu(struct ingredientType *head){
 struct ingredientType *addIngredientType(struct ingredientType *head){
 	 char choice = '\0';
 	 struct ingredientType *headPointer = head;
-	 while (choice != 'N'){
+	 do {
 		clearScreen();
 		choice = '\0';
 
@@ -82,16 +82,18 @@ struct ingredientType *addIngredientType(struct ingredientType *head){
 		printf("\n\n\t\tEnter Ingredient Type to Add: ");
 	 	readUserInputIntoBuffer(buffer);
 		headPointer = addNewIngredientTypeNode(headPointer, buffer);
-		printf("\n\t\tAdd Another Ingredient Type (y/n)?");
-		choice = getchar();
-		choice = toupper(choice);
-		switch (choice){
-			case 'Y' :	break;
-			case 'N' :	dumpIngredientTypeList(headPointer);
-						return headPointer;
-			default	 : 	printf("Invalid Entry\n");
-		}
-	}
+		char innerChoice = '\0';
+		do{
+			innerChoice = '\0';
+			printf("\n\t\tAdd Another Ingredient Type (y/n)?");
+			innerChoice = toupper(getchar());
+			if ((innerChoice != 'Y') && (innerChoice != 'N'))
+				printf("\t\tInvalid Entry\n");
+		} while ((innerChoice != 'Y') && ((innerChoice) != 'N'));
+		choice = innerChoice;
+	} while (choice != 'N');
+	dumpIngredientTypeList(headPointer);
+	return headPointer;
 }
 
 /************************************************************************************************************
@@ -100,6 +102,7 @@ struct ingredientType *addIngredientType(struct ingredientType *head){
 *				enter ingredient type to access linked-list type. returns pointer to head of Typelist 		*
 *																											*
 *************************************************************************************************************/
+/*
 struct ingredientType *addIngredientItem(struct ingredientType *head){
 //ask for the ingredient type, take input and use searchIngredientType to find the node with the head pointer for that type
 //offer to print types, then put in type.  use the buffer to find the node type, when it's found, ask for input, if not found say not found
@@ -107,6 +110,28 @@ struct ingredientType *addIngredientItem(struct ingredientType *head){
 //link it into the right list, ask for more.  if not, moves the sub list to the head, dumps the sub linked list, then resets to head and
 //links the head back to the type node, reset the type nodes back to head 
 //return headPointer to the overall ingredientType link list
+	char choice = '\0';
 	char ingredientTypeBuffer[INGREDIENT_BUFFER_LEN]={'\0'};
-	struct ingredientType *cur = head;
+	struct ingredientType *headPointer = head;
+	struct ingredientType *foundIngredientType = NULL;
 }
+
+		printf("\n\n\t\tEnter Ingredient Type to Add: ");
+	 	readUserInputIntoBuffer(buffer);
+	 	if (findIngredientType(headPointer, buffer) == NULL){
+	 		printf("\n\t\tIngredient Type Not Found");
+	 		printf("\n\t\tPrint Ingredient List (y/n)? ");
+	 		choice = getchar();
+			choice = toupper(choice);
+			while ((choice != 'N') && (choice != 'Y')){
+				switch (choice){
+					case 'Y' :	printIngredientTypeList();
+								break;
+					case 'N' :	break;
+					default	 : 	printf("Invalid Entry\n");
+								
+				}
+			}
+		}
+		
+*/
