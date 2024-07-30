@@ -31,3 +31,8 @@ if ((scanf(" %i", &ingredientItemChoice) != 1) ||
 	       			while (getchar() != '\n')
 	           			;
 	        }
+	        
+	        
+	        
+//characters to print out "¾  ⅔  ½  ⅓  ¼"	        
+printf("%c%c  %c%c%c  %c%c  %c%c%c  %c%c",  0xC2, 0xBE,   0xE2, 0x85, 0x94,   0xC2, 0xBD,   0xE2, 0x85, 0x93,   0xC2, 0xBC);
