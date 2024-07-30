@@ -164,9 +164,6 @@ void printIngredientTypeList(struct ingredientType *head){
 		if (counter % 3 == 0)
 			printf("\n\n\n\t\t");
 	}
-	while (getchar() != '\n')
-		;
-	printf("\n\n\n\n\n\n\n\n\n\n\n\n\t\t(Press Enter to Continue)");
 }
 
 /********************************************************************************************************************

@@ -49,10 +49,9 @@ int main (int argc, char **argv){
 		puts("\t\t(1) Convert Ingredient\n\t\t(2) Convert Recipe\n\t\t"
 			 "(3) See Ingredient List\n\t\t(4) See Recipe List"
 			 "\n\t\t(Q) Quit");
-		printf("\n\t\tEnter Selection : ");
+		printf("\n\t\tEnter Selection: ");
 		char menu = '\0';
-		menu = getchar();
-		menu = toupper(menu);
+		menu = toupper(getchar());
 		switch (menu){
 			case '1': 	clearScreen();
 						head = convertIngredientMenu(head); //- leads to submenu to ask to search by name, by type, or all 
@@ -65,10 +64,9 @@ int main (int argc, char **argv){
 			case '4':	//printRecipes(); - leads to submenu to ask to search by name, food type, or cuisine 
 						break;
 			case 'Q':	return 0;
-			default: 	printf("\n\t\tInvalid Selection, Please Try Again\n");
+			default: 	printf("\n\t\tInvalid Selection, Please Try Again: ");
 		}
-		while (getchar() != '\n')
-			;
+		while (getchar() != '\n');
 	}
 	return 0;
 }
