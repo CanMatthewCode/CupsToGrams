@@ -120,6 +120,14 @@ struct ingredientType *addNewIngredientTypeNode(struct ingredientType *head, cha
 	
 	for ( ; cur->next != NULL && (strcmp(newNode->typeName, cur->typeName) > 0); prev = cur, cur = cur->next)
 		;	
+	//final node case
+	if ((strcmp(newNode->typeName, cur->typeName) > 0) && cur->next == NULL){
+		newNode->prev = cur;
+		cur->next = newNode;
+	//if the list is 1 long and this is 2nd node added
+		if (prev == NULL)
+			return cur;
+	}
 	//all middle cases
 	if ((strcmp(newNode->typeName, prev->typeName) > 0) && 
 	   (strcmp(newNode->typeName, cur->typeName) < 0)){
@@ -128,11 +136,7 @@ struct ingredientType *addNewIngredientTypeNode(struct ingredientType *head, cha
 		prev->next = newNode;
 		cur->prev = newNode;
 	} 
-	//final node case
-	if ((strcmp(newNode->typeName, cur->typeName) > 0) && cur->next == NULL){
-		newNode->prev = cur;
-		cur->next = newNode;
-	}
+
 	if (strcmp(newNode->typeName, cur->typeName) == 0){
 		printf("\n\t\tIngredient Type Already Exists\n");
 		free(newNode);
