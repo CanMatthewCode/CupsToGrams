@@ -45,7 +45,7 @@ struct ingredientItem *loadIngredientItem(struct ingredientType *node){
 	struct ingredientType *ingredientType = node;
 	struct ingredientItem *cur = NULL;
 
-	char openFileBuffer[INGREDIENT_BUFFER_LEN+15] ={'\0'};
+	char openFileBuffer[INGREDIENT_BUFFER_LEN+15] = {'\0'};
 	//add path to fopen() variable in openFileBuffer
 	strcpy(openFileBuffer, "./textFiles/");
 	//copy name from struct IngredientType node into openFileBuffer
@@ -68,7 +68,7 @@ struct ingredientItem *loadIngredientItem(struct ingredientType *node){
     rewind(fp);
 	
 	//loop to populate the link list from the text file
-    for (int i = 1; i < numNodes; i++){
+    for (int i = 0; i < numNodes; i++){
     	struct ingredientItem *newNode = NULL;
     	if ((newNode = createIngredientItemNode()) == NULL){
     	    fprintf(stderr, "Unable to Create Ingredient Item Node to Load List\n");
@@ -119,15 +119,17 @@ struct ingredientItem *loadIngredientItem(struct ingredientType *node){
 *************************************************************************************************************/
 struct ingredientType *loadAllIngredientTypeSubLists(struct ingredientType *head){
 	struct ingredientType *cur = head;
-	while (cur->next != NULL){
+	struct ingredientType *prev = NULL;
+	while (cur){
 		cur->head = loadIngredientItem(cur);
 		if (cur->head == NULL)
-			printf("%s Ingredient List Empty or Failed to Load.  Check Text Files", cur->typeName);
+			printf("\t\t%s Ingredient List Empty or Failed to Load.  Check Text Files\n", cur->typeName);
+		prev = cur;
 		cur = cur->next;
 	}
-	while (cur->prev != NULL)
-		cur = cur->prev;
-	return cur;
+	while (prev->prev != NULL)
+		prev = prev->prev;
+	return prev;
 }
 
 /********************************************************************************************************************
@@ -201,20 +203,21 @@ struct ingredientItem *findIngredientItemNode(struct ingredientType *head, char 
 		for (i = 1; i <= ingredientItemCounter; i++)
 			printf("\t\t%i) %s\n", i, foundIngredients[i-1]->ingredientName);
 		//add option that is 1 more than #of choices to be none of the above, exit without choosing
-		printf("\t\t%i) None Of The Above\n", i+1);
+		printf("\t\t%i) None Of The Above\n", i);
 		while ((ingredientItemChoice == 0) || ((ingredientItemChoice <= 0) || (ingredientItemChoice > (ingredientItemCounter + 1)))){
         	printf("\t\tEnter Ingredient Number: ");
 	   		if ((scanf(" %i", &ingredientItemChoice) != 1) || 
 	       	   ((ingredientItemChoice <= 0) || (ingredientItemChoice > (ingredientItemCounter + 1)))){
 	       			printf("\t\tInvalid Entry\n");
-	       			while (getchar() != '\n')
-	           			;
+	       			while (getchar() != '\n');
 	    	}
     	}
     }
     //if none of the above are correct, return NULL
-    if (ingredientItemChoice == (ingredientItemCounter + 1))
+    if (ingredientItemChoice == (ingredientItemCounter + 1)){
+    	while (getchar() != '\n');
     	return NULL;
+    }
 	return foundIngredients[ingredientItemChoice - 1];
 }
 
@@ -252,19 +255,32 @@ struct ingredientItem *addNewIngredientItemNode(struct ingredientItem *head, cha
 	        printf("\t\tInvalid Entry\n");
 	        while (getchar() != '\n');
 	    }
+	printf("\t\tCheck 0");
 	newNode->gramsPerCup = gramsPerCup;
     }
+
 	//if cur == NULL, it is the first node
 	if (cur == NULL)
 		return newNode;
+	printf("\t\tCheck 1");
 	//if buffer is smaller than 1st node, it is the new 1st node
 	if ((cur != NULL) && (strcmp(newNode->ingredientName, cur->ingredientName) < 0)){
 		newNode->next = cur;
 		cur->prev = newNode;
 		return newNode;
 	}
+	printf("\t\tCheck 2");
 	for ( ; cur->next != NULL && (strcmp(newNode->ingredientName, cur->ingredientName) > 0); prev = cur, cur = cur->next)
 		;
+	//final node case
+	if ((strcmp(newNode->ingredientName, cur->ingredientName) > 0) && cur->next == NULL){
+		newNode->prev = cur;
+		cur->next = newNode;
+	//if the list is 1 long and this is 2nd node added
+		if (prev == NULL)
+			return cur;
+	}
+	printf("\t\tCheck 3");
 	//all middle cases
 	if ((strcmp(newNode->ingredientName, prev->ingredientName) > 0) &&
 		(strcmp(newNode->ingredientName, cur->ingredientName) < 0)){
@@ -273,16 +289,14 @@ struct ingredientItem *addNewIngredientItemNode(struct ingredientItem *head, cha
 			prev->next = newNode;
 			cur->prev = newNode;
 	}
-	//final node case
-	if ((strcmp(newNode->ingredientName, cur->ingredientName) > 0) && cur->next == NULL){
-		newNode->prev = cur;
-		cur->next = newNode;
-	}
+	printf("\t\tCheck 4");
+
 	if (strcmp(newNode->ingredientName, cur->ingredientName) == 0){
-		printf("Ingredient Type Already Exists\n");
+		printf("Ingredient Already Exists\n");
 		free(newNode);
 		newNode = NULL;
 	}
+	printf("\t\tCheck 5");
 	//resetting file pointer to head
 	while (cur->prev != NULL)
 		cur = cur->prev;
