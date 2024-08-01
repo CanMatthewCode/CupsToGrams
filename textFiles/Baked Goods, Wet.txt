@@ -1,0 +1,12 @@
+Almond Extract	12.600000 g/tbsp
+Cocoa Butter	218.000000 g/cup
+Coconut Cream	260.000000 g/cup
+Coconut Milk	241.000000 g/cup
+Condensed Milk	308.000000 g/cup
+Egg, Large White	38.000000 g/cup
+Egg, Large Whole	56.000000 g/cup
+Egg, Large Yolk	18.000000 g/cup
+Evaporated Milk	240.000000 g/cup
+Lemon Extract	12.600000 g/tbsp
+Sweetened Condensed Milk	306.000000 g/cup
+Vanilla Extract	14.000000 g/tbsp

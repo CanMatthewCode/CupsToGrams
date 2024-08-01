@@ -1,0 +1,29 @@
+All-purpose Flour	130.000000 g/cup
+Almond Flour	96.000000 g/cup
+Amaranth Flour	103.000000 g/cup
+Arrowroot Flour	128.000000 g/cup
+Barley Flour	85.000000 g/cup
+Bread Flour	139.000000 g/cup
+Buckweat Flour	120.000000 g/cup
+Cake Flour	137.000000 g/cup
+Chickpea Flour	92.000000 g/cup
+Coconut Flour	144.000000 g/cup
+Corn Flour	114.000000 g/cup
+Gluten-free Flour	148.000000 g/cup
+Graham Flour	122.000000 g/cup
+Masa Flour	114.000000 g/cup
+Millet Flour	119.000000 g/cup
+Oat Flour	104.000000 g/cup
+Pastry Flour	105.000000 g/cup
+Pizza 00 Flour	116.000000 g/cup
+Potato Flour	170.000000 g/cup
+Pumpernickel Flour	106.000000 g/cup
+Rice Flour, Brown	137.000000 g/cup
+Rice Flour, White	155.000000 g/cup
+Rye Flour	108.000000 g/cup
+Self-rising Flour	125.000000 g/cup
+Semolina Flour	167.000000 g/cup
+Sorghum Flour	121.000000 g/cup
+Spelt Flour	120.000000 g/cup
+Tapioca Flour	120.000000 g/cup
+Whole Wheat Flour	135.000000 g/cup
