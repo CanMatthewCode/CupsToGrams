@@ -192,26 +192,21 @@ struct ingredientItem *findIngredientItemNode(struct ingredientType *head, char 
 				foundIngredients[ingredientItemCounter++] = possibleItem;
 		}
 	}
-	if (ingredientItemCounter == 0){
-		//printf("%s Not Found\n", buffer);
+	if (ingredientItemCounter == 0)
 		return NULL;
-	}
-	if (ingredientItemCounter == 1)
+	if ((ingredientItemCounter == 1) && (strcmp(foundIngredients[0]->ingredientName, buffer) == 0))
 		return foundIngredients[0];
-	else if (ingredientItemCounter > 1){
-		int i = 0;
-		for (i = 1; i <= ingredientItemCounter; i++)
-			printf("\t\t%i) %s\n", i, foundIngredients[i-1]->ingredientName);
-		//add option that is 1 more than #of choices to be none of the above, exit without choosing
-		printf("\t\t%i) None Of The Above\n", i);
-		while ((ingredientItemChoice == 0) || ((ingredientItemChoice <= 0) || (ingredientItemChoice > (ingredientItemCounter + 1)))){
-        	printf("\t\tEnter Ingredient Number: ");
-	   		if ((scanf(" %i", &ingredientItemChoice) != 1) || 
-	       	   ((ingredientItemChoice <= 0) || (ingredientItemChoice > (ingredientItemCounter + 1)))){
-	       			printf("\t\tInvalid Entry\n");
-	       			while (getchar() != '\n');
-	    	}
-    	}
+	int i = 0;
+	for (i = 1; i <= ingredientItemCounter; i++)
+		printf("\t\t%i) %s\n", i, foundIngredients[i-1]->ingredientName);
+	printf("\t\t%i) None Of The Above\n", i);
+	while ((ingredientItemChoice == 0) || ((ingredientItemChoice <= 0) || (ingredientItemChoice > (ingredientItemCounter + 1)))){
+        printf("\t\tEnter Ingredient Number: ");
+	   	if ((scanf(" %i", &ingredientItemChoice) != 1) || 
+	    	((ingredientItemChoice <= 0) || (ingredientItemChoice > (ingredientItemCounter + 1)))){
+	       		printf("\t\tInvalid Entry\n");
+	       		while (getchar() != '\n');
+	    }
     }
     //if none of the above are correct, return NULL
     if (ingredientItemChoice == (ingredientItemCounter + 1)){
