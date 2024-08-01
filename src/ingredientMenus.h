@@ -31,4 +31,12 @@ struct ingredientType *addIngredientType(struct ingredientType *head);
 *************************************************************************************************************/
 void addIngredientItem(struct ingredientType *head);
 
+/************************************************************************************************************
+* 																											*
+*				find any ingredient item node that matches partially with user input				 		*
+*				if multiple options found, give options, then print chosen node								*
+*																											*
+*************************************************************************************************************/
+void findIngredient(struct ingredientType *head);
+
 #endif //CONVERTINGREDIENT_H

@@ -35,7 +35,8 @@ struct ingredientType *convertIngredientMenu(struct ingredientType *head){
 		menu = toupper(getchar());
 		switch (menu){
 			case '1':	//search for input along loop of linked-list ingredientType->ingredientItems then use input for conversion
-			case '2':	//search for input along loop of linked-list ingredientType->ingredientItems and print out value, then ask for conversion
+						break;
+			case '2':	findIngredient(headPointer);
 						break;
 						//print ingredientItem linked list from ingredientType node
 			case '3': 	break;
@@ -177,3 +178,47 @@ void addIngredientItem(struct ingredientType *head){
 		} while ((choice != 'Y') && (choice != 'N'));
 	} while (choice != 'N');
 }
+
+/************************************************************************************************************
+* 																											*
+*				find any ingredient item node that matches partially with user input				 		*
+*				if multiple options found, give options, then print chosen node								*
+*																											*
+*************************************************************************************************************/
+void findIngredient(struct ingredientType *head){
+	char choice = '\0';
+	char ingredientItemBuffer[INGREDIENT_BUFFER_LEN] = {'\0'};
+	do {
+		struct ingredientType *headPointer = head;
+		struct ingredientItem *foundIngredient = NULL;
+		memset(ingredientItemBuffer, 0, sizeof(ingredientItemBuffer)); 
+		clearScreen();
+		choice = '\0';
+		puts("\t\t*********************************************************************************");
+		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
+		puts("\t\t*\t\t\t      -FIND INGREDIENT- \t\t\t\t*");
+		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
+		puts("\t\t*********************************************************************************");
+		printf("\n\n\t\tEnter Ingredient Name: ");
+		readUserInputIntoBuffer(ingredientItemBuffer);
+		foundIngredient = findIngredientItemNode(headPointer, ingredientItemBuffer);
+		//safety in case no ingredient was found and foundIngredient == NULL
+		if (foundIngredient){
+			printf("\n\n\n");	
+			printIngredientItemNode(foundIngredient);
+			while (getchar() != '\n');
+		}
+		if (!foundIngredient)
+			printf("\n\n\t\tIngredient Not Found");
+		printf("\n\n\n\t\tFind Another Ingredient (y/n)? ");
+		do {
+			choice = '\0';
+			choice = toupper(getchar());
+			if ((choice != 'Y') && (choice != 'N')){
+				printf("\t\tInvalid Entry\n");
+				while (getchar() != '\n');
+			}
+		} while ((choice != 'Y') && (choice != 'N'));
+	} while (choice != 'N');
+}
+
