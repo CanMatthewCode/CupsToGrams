@@ -39,7 +39,9 @@ struct ingredientType *convertIngredientMenu(struct ingredientType *head){
 			case '2':	findIngredient(headPointer);
 						break;
 						//print ingredientItem linked list from ingredientType node
-			case '3': 	break;
+			case '3': 	clearScreen();
+						printAllIngredientItemsInTypeNode(headPointer);
+						break;
 			case '4': 	clearScreen();
 						printIngredientTypeList(headPointer);
 						printf("\n\n\n\n\n\n\n\n\n\n\n\n\t\t(Press Enter to Continue)");
@@ -132,8 +134,7 @@ void addIngredientItem(struct ingredientType *head){
 	 			do{
 	 				innerChoice = '\0';
 					innerChoice = toupper(getchar());
-					while (getchar() != '\n')
-						;
+					while (getchar() != '\n');
 					if ((innerChoice != 'Y') && (innerChoice != 'N'))
 						printf("\n\t\tInvalid Entry, Try Again: ");
 					if (innerChoice == 'Y'){
@@ -211,6 +212,58 @@ void findIngredient(struct ingredientType *head){
 		if (!foundIngredient)
 			printf("\n\n\t\tIngredient Not Found");
 		printf("\n\n\n\t\tFind Another Ingredient (y/n)? ");
+		do {
+			choice = '\0';
+			choice = toupper(getchar());
+			if ((choice != 'Y') && (choice != 'N')){
+				printf("\t\tInvalid Entry\n");
+				while (getchar() != '\n');
+			}
+		} while ((choice != 'Y') && (choice != 'N'));
+	} while (choice != 'N');
+}
+
+/************************************************************************************************************
+* 																											*
+*				print all ingredient items from sub-list stored in an ingredientType node					*
+*																											*
+*************************************************************************************************************/
+void printAllIngredientItemsInTypeNode(struct ingredientType *head){
+	char choice = '\0';
+	char ingredientTypeBuffer[INGREDIENT_BUFFER_LEN] = {'\0'};
+	do {
+		struct ingredientType *headPointer = head;
+		struct ingredientType *foundIngredientType = NULL;
+		memset(ingredientTypeBuffer, 0, sizeof(ingredientTypeBuffer));
+		clearScreen();
+		choice = '\0';
+		puts("\t\t*********************************************************************************");
+		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
+		puts("\t\t*\t\t\t      -INGREDIENTS BY FOOD TYPE- \t\t\t*");
+		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
+		puts("\t\t*********************************************************************************");
+		printf("\n\n\t\tEnter Desired Type Of Ingredient For Full List: ");
+		readUserInputIntoBuffer(ingredientTypeBuffer);
+		foundIngredientType = findIngredientType(headPointer, ingredientTypeBuffer);
+	 	if (!foundIngredientType){
+	 		char innerChoice = '\0';
+	 		printf("\n\t\tFood Type Not Found: ");
+	 		printf("Print Full Food Types List (y/n)? ");
+	 		do{
+	 			innerChoice = '\0';
+				innerChoice = toupper(getchar());
+				while (getchar() != '\n');
+				if ((innerChoice != 'Y') && (innerChoice != 'N'))
+					printf("\n\t\tInvalid Entry: ");
+				if (innerChoice == 'Y'){
+					printIngredientTypeList(head);
+					printf("\n\n");
+				}
+			} while ((innerChoice != 'N') && (innerChoice != 'Y'));
+		}
+		if (foundIngredientType)
+			printAllIngredientItemNodes(foundIngredientType);
+		printf("\n\n\t\tPrint Another Type Of Ingredient (y/n)? ");
 		do {
 			choice = '\0';
 			choice = toupper(getchar());

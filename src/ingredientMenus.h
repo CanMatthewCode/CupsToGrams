@@ -39,4 +39,11 @@ void addIngredientItem(struct ingredientType *head);
 *************************************************************************************************************/
 void findIngredient(struct ingredientType *head);
 
+/************************************************************************************************************
+* 																											*
+*				print all ingredient items from sub-list stored in an ingredientType node					*
+*																											*
+*************************************************************************************************************/
+void printAllIngredientItemsInTypeNode(struct ingredientType *head);
+
 #endif //CONVERTINGREDIENT_H
