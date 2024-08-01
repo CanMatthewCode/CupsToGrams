@@ -305,29 +305,24 @@ struct ingredientItem *addNewIngredientItemNode(struct ingredientItem *head, cha
 *********************************************************************************************************************/
 void modifyIngredientItemNodeName(struct ingredientItem *node){
 	struct ingredientItem *changedNode = node;
-	char ch = '\0';
+	char choice = '\0';
 	printIngredientItemNode(changedNode);
 	char buffer[INGREDIENT_BUFFER_LEN] = {'\0'};
-	while (ch != 'Y'){
+	while (choice != 'Y'){
 		printf("\n\t\tEnter New Ingredient Name: ");
 		memset(buffer, 0, sizeof(buffer));
 		readUserInputIntoBuffer(buffer);
 		printf("\n\t\tYou Entered: '%s', Is This Correct (y/n)?: ", buffer);
-		ch = getchar();
-		ch = toupper(ch);
-		while ((ch != 'Y') && (ch != 'N')){
-			switch (ch) {
-				case 'Y' : break;
-				case 'N' : break;
-				default  : printf("\n\t\tInvalid Selection, Try Again:");
-				           while (getchar() != '\n')
-				                ;
-				            ch = getchar();
-				            ch = toupper (ch);
-			    }
+		do {
+			choice = '\0';
+			choice = toupper(getchar());
+			if ((choice != 'Y') && (choice != 'N')){
+				printf("\t\tInvalid Entry\n");
+				while (getchar() != '\n');
 			}
-		}
-	if (ch == 'Y')
+		} while ((choice != 'Y') && (choice != 'N'));
+	}
+	if (choice == 'Y')
 		strcpy(changedNode->ingredientName, buffer);
 	printIngredientItemNode(changedNode);
 }
@@ -339,29 +334,27 @@ void modifyIngredientItemNodeName(struct ingredientItem *node){
 *********************************************************************************************************************/
 void modifyIngredientItemNodeWeight(struct ingredientItem *node){
 	struct ingredientItem *changedNode = node;
-	char ch = '\0';
+	char choice = '\0';
 	float gramsPerCup = 0.00;
 	printIngredientItemNode(changedNode);
-	while (ch != 'Y'){	
+	while (choice != 'Y'){	
 		while (gramsPerCup == 0.00){
 			printf("\n\t\tEnter New Ingredient Weight In Grams: ");
 	    	if (scanf(" %f", &gramsPerCup) != 1){
 	       	 	printf("\t\tInvalid Entry");
-	        	while (getchar() != '\n')
-	            	;
+	        	while (getchar() != '\n');
 	           }
 	       }
-	       while (getchar() != '\n')
-	        ;
+	    while (getchar() != '\n');
 	    printf("\n\t\tYou Entered: '%f grams', Is This Correct (y/n)?: ", gramsPerCup);
-	    ch = getchar();
-	    ch = toupper(ch);
-	    switch (ch) {
-	       	case 'Y' : break;
-	       	case 'N' : gramsPerCup = 0.00;
-	       			   break;
-	       	default  : printf("\n\t\tInvalid Selection, Try Again:");
-	    }
+	    do {
+			choice = '\0';
+			choice = toupper(getchar());
+			if ((choice != 'Y') && (choice != 'N')){
+				printf("\t\tInvalid Entry\n");
+				while (getchar() != '\n');
+			}
+		} while ((choice != 'Y') && (choice != 'N'));
     }
     changedNode->gramsPerCup = gramsPerCup;
     printIngredientItemNode(changedNode);
@@ -380,32 +373,26 @@ void modifyIngredientItemNodeFlag(struct ingredientItem *node){
 		printf("\n\t\tEnter Measurement Type (cups/tbsp): ");
 		measurementType = '\0';
 		while ((measurementType != 'C') && (measurementType != 'T')){
-			measurementType = getchar();
-			measurementType = toupper(measurementType);
+			measurementType = toupper(getchar());
 			switch (measurementType){
 			    case 'C': 	break;
 				case 'T': 	break;
-				default:	printf("\t\tInvalid Selection, Try Again: ");
-			   	  		   	while (getchar() != '\n')
-			    	      	  ;
+				default:	printf("\t\tInvalid Entry, Try Again: ");
+			   	  		   	while (getchar() != '\n');
 			}
 		}
-		while ((getchar()) != '\n')
-		    ;
+		while ((getchar()) != '\n');
 		printf("\n\t\tYou Entered: \"");
 		printf((measurementType == 'T') ? "g/tbsp" : "g/cups");
 		printf("\", Is This Correct (y/n)?: ");
-		while ((choice != 'Y') && (choice != 'N')){
-		    choice = getchar();
-		    choice = toupper(choice);
-		    switch (choice) {
-			    case 'Y' : break;
-			    case 'N' : break;
-			    default  : printf("\t\tInvalid Selection, Try Again: ");
+		do {
+			choice = '\0';
+			choice = toupper(getchar());
+			if ((choice != 'Y') && (choice != 'N')){
+				printf("\t\tInvalid Entry\n");
+				while (getchar() != '\n');
 			}
-		while (getchar() != '\n')
-			;
-		}
+		} while ((choice != 'Y') && (choice != 'N'));
 	}
 	//store choice of Tablespoon or Cup in the node's tablespoonFlag member
 	changedNode->tablespoonFlag = (measurementType == 'T') ? 1 : 0;
@@ -417,7 +404,7 @@ void modifyIngredientItemNodeFlag(struct ingredientItem *node){
 *																													*
 *********************************************************************************************************************/
 void printIngredientItemNode(struct ingredientItem *node){
-	printf("\t\t~%s~\n\n\t\t%.2f", node->ingredientName, node->gramsPerCup);
+	printf("\t\t%s: %.2f ", node->ingredientName, node->gramsPerCup);
 	printf(node->tablespoonFlag == 1 ? " g/tbsp" : "g/cups");
 }
 
