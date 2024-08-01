@@ -21,7 +21,7 @@ Pumpernickel Flour	106.000000 g/cup
 Rice Flour, Brown	137.000000 g/cup
 Rice Flour, White	155.000000 g/cup
 Rye Flour	108.000000 g/cup
-Self-rising Flour	125.000000 g/cup
+Self-Rising Flour	125.000000 g/cup
 Semolina Flour	167.000000 g/cup
 Sorghum Flour	121.000000 g/cup
 Spelt Flour	120.000000 g/cup
