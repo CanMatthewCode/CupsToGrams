@@ -38,7 +38,6 @@ struct ingredientType *convertIngredientMenu(struct ingredientType *head){
 						break;
 			case '2':	findIngredient(headPointer);
 						break;
-						//print ingredientItem linked list from ingredientType node
 			case '3': 	clearScreen();
 						printAllIngredientItemsInTypeNode(headPointer);
 						break;
@@ -156,7 +155,7 @@ void addIngredientItem(struct ingredientType *head){
 			memset(ingredientItemBuffer, 0, sizeof(ingredientItemBuffer));
 			printf("\n\t\tEnter New Ingredient Name: ");
 			readUserInputIntoBuffer(ingredientItemBuffer);
-			if (findIngredientItemNode(headPointer, ingredientItemBuffer) != NULL){
+			if (findIngredientItemNode(headPointer, ingredientItemBuffer, NULL) != NULL){
 				printf("\t\tIngredient Already Exists (Press Enter to Continue):");
 			//relink changed head back to where the ingredientType node the ingredientItem linked-list attaches
 			} else (foundIngredientType->head = addNewIngredientItemNode(foundIngredientType->head, ingredientItemBuffer));
@@ -208,12 +207,11 @@ void findIngredient(struct ingredientType *head){
 		puts("\t\t*********************************************************************************");
 		printf("\n\n\t\tEnter Ingredient Name: ");
 		readUserInputIntoBuffer(ingredientItemBuffer);
-		foundIngredient = findIngredientItemNode(headPointer, ingredientItemBuffer);
+		foundIngredient = findIngredientItemNode(headPointer, ingredientItemBuffer, NULL);
 		//safety in case no ingredient was found and foundIngredient == NULL
 		if (foundIngredient){
 			printf("\n\n\n");	
 			printIngredientItemNode(foundIngredient);
-			while (getchar() != '\n');
 		}
 		if (!foundIngredient)
 			printf("\n\n\t\tIngredient Not Found");
@@ -222,7 +220,7 @@ void findIngredient(struct ingredientType *head){
 			choice = '\0';
 			choice = toupper(getchar());
 			if ((choice != 'Y') && (choice != 'N')){
-				printf("\t\tInvalid Entry\n");
+				printf("\t\tInvalid Entry ");
 				while (getchar() != '\n');
 			}
 		} while ((choice != 'Y') && (choice != 'N'));
@@ -291,6 +289,8 @@ void modifyIngredientItem(struct ingredientType *head){
 	char ingredientItemBuffer[INGREDIENT_BUFFER_LEN] = {'\0'};
 	struct ingredientType *headPointer = NULL;
 	struct ingredientItem *foundIngredient = NULL;
+	//pointer to ingredientType which stores the head of the found ingredientItem that is to be modified
+	struct ingredientType *foundIngredientsTypeNode = NULL;
 	do {
 		headPointer = head;
 		foundIngredient = NULL;
@@ -308,8 +308,9 @@ void modifyIngredientItem(struct ingredientType *head){
 		do {
 			printf("\n\n\t\tEnter Ingredient Name You Wish To Modify: ");
 			memset(ingredientItemBuffer, 0, sizeof(ingredientItemBuffer));
+			foundIngredientsTypeNode = NULL;
 			readUserInputIntoBuffer(ingredientItemBuffer);
-			foundIngredient = findIngredientItemNode(headPointer, ingredientItemBuffer);
+			foundIngredient = findIngredientItemNode(headPointer, ingredientItemBuffer, &foundIngredientsTypeNode);
 			if(!foundIngredient){
 				printf("\n\n\t\tIngredient Not Found. Enter New Ingredient Name (y/n)? ");
 				do {
@@ -366,6 +367,7 @@ void modifyIngredientItem(struct ingredientType *head){
 				}
 			} while (innerChoice != 'N');
 			while (getchar() != '\n');
+			dumpIngredientItemList(foundIngredientsTypeNode);
 			printf("\n\n\t\tWould You Like To Modify A Different Ingredient (y/n)? ");
 			do {
 				choice = '\0';
