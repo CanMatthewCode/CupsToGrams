@@ -45,11 +45,13 @@ int dumpIngredientItemList(struct ingredientType *typeNode);
 
 /********************************************************************************************************************
 * 																													*
-*	 			check user input key against existing ingredientItem list											*
-*				returns pointer to node found on success, NULL on failure											*
+*	 			check user input key against existing ingredientItem lists											*
+*				accepts an ingredientType pointer as a 3rd argument to allow an out parameter when the matches'		*
+*				head node is needed. Enter NULL as 3rd parameter if ingredientType pointer is not wanted 			*
+*				returns pointer to ingredientItem node found on success, NULL on failure							*
 *																													*
 *********************************************************************************************************************/
-struct ingredientItem *findIngredientItemNode(struct ingredientType *head, char buffer[INGREDIENT_BUFFER_LEN]);
+struct ingredientItem *findIngredientItemNode(struct ingredientType *head, char buffer[INGREDIENT_BUFFER_LEN], struct ingredientType **ingredientTypeNode);
 
 /********************************************************************************************************************
 * 																													*

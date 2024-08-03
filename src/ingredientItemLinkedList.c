@@ -172,47 +172,62 @@ int dumpIngredientItemList(struct ingredientType *typeNode){
 /********************************************************************************************************************
 * 																													*
 *	 			check user input key against existing ingredientItem lists											*
-*				returns pointer to node found on success, NULL on failure											*
+*				accepts an ingredientType pointer as a 3rd argument to allow an out parameter when the matches'		*
+*				head node is needed. Enter NULL as 3rd parameter if ingredientType pointer is not wanted 			*
+*				returns pointer to ingredientItem node found on success, NULL on failure							*
 *																													*
 *********************************************************************************************************************/
-struct ingredientItem *findIngredientItemNode(struct ingredientType *head, char buffer[INGREDIENT_BUFFER_LEN]){
+//modify this function to either take variable argument ... or take "struct ingredientType *foundMatchingTypeNode" as an out parameter option
+//enter NULL if out parameter is not needed - have a check in the find code to make sure it is not NULL before use
+struct ingredientItem *findIngredientItemNode(struct ingredientType *head, char buffer[INGREDIENT_BUFFER_LEN], struct ingredientType **ingredientTypeNode){
 	//create array of pointers to store possible found ingredients, make sure it is NULL to start
 	struct ingredientItem *foundIngredients[MAX_INGREDIENTS_FOUND] = {NULL};
 	memset(foundIngredients, 0, sizeof(foundIngredients));
-	int ingredientItemCounter = 0;
-	int ingredientItemChoice = 0;
+	//create a pointer array for ingredientTypes that match the found ingredientItems so it can pass out an ingredientType pointer for the dumpIngredientItemList function
+	struct ingredientType *foundIngredientsTypes[MAX_INGREDIENTS_FOUND] = {NULL};
+	memset(foundIngredientsTypes, 0, sizeof(foundIngredientsTypes));
+	
+	unsigned int ingredientItemCounter = 0;
+	unsigned int ingredientItemChoice = 0;
 	//iterate through all sub-lists from the head node of the ingredientType linked list searching for partial matches
-	//store partial matches in array to share with user
+	//store partial matches in array to share with user as well as their ingredientTypeNodes which store the matches' head pointers
 	struct ingredientType *ingredientTypePointer = NULL;
 	struct ingredientItem *possibleItem = NULL;
 	//move through ingredientType linked-list and sub-lists one by one until NULL on both searching for partial matches
 	for (ingredientTypePointer = head; ingredientTypePointer != NULL; ingredientTypePointer=ingredientTypePointer->next){
 		for (possibleItem = ingredientTypePointer->head; possibleItem != NULL; possibleItem = possibleItem->next){
-			if (strstr(possibleItem->ingredientName, buffer) != NULL)
-				foundIngredients[ingredientItemCounter++] = possibleItem;
+			if (strstr(possibleItem->ingredientName, buffer) != NULL){
+				foundIngredients[ingredientItemCounter] = possibleItem;
+				foundIngredientsTypes[ingredientItemCounter++] = ingredientTypePointer;
+			}
 		}
 	}
 	if (ingredientItemCounter == 0)
 		return NULL;
-	if ((ingredientItemCounter == 1) && (strcmp(foundIngredients[0]->ingredientName, buffer) == 0))
+	if ((ingredientItemCounter == 1) && (strcmp(foundIngredients[0]->ingredientName, buffer) == 0)){
+		if (ingredientTypeNode)
+			*ingredientTypeNode = foundIngredientsTypes[0];
 		return foundIngredients[0];
+	}
 	int i = 0;
 	for (i = 1; i <= ingredientItemCounter; i++)
 		printf("\t\t%i) %s\n", i, foundIngredients[i-1]->ingredientName);
 	printf("\t\t%i) None Of The Above\n", i);
 	while ((ingredientItemChoice == 0) || ((ingredientItemChoice <= 0) || (ingredientItemChoice > (ingredientItemCounter + 1)))){
         printf("\t\tEnter Ingredient Number: ");
-	   	if ((scanf(" %i", &ingredientItemChoice) != 1) || 
-	    	((ingredientItemChoice <= 0) || (ingredientItemChoice > (ingredientItemCounter + 1)))){
+	   	if ((scanf(" %i", &ingredientItemChoice) == 1))
+	   		while (getchar() != '\n');
+	   	else (printf("\t\tInvalid Entry: "));
+	    if ((ingredientItemChoice <= 0) || (ingredientItemChoice > (ingredientItemCounter + 1))){
 	       		printf("\t\tInvalid Entry\n");
 	       		while (getchar() != '\n');
 	    }
     }
     //if none of the above are correct, return NULL
-    if (ingredientItemChoice == (ingredientItemCounter + 1)){
-    	while (getchar() != '\n');
+    if (ingredientItemChoice == (ingredientItemCounter + 1))
     	return NULL;
-    }
+    if (ingredientTypeNode)
+    	*ingredientTypeNode = foundIngredientsTypes[ingredientItemChoice - 1];
 	return foundIngredients[ingredientItemChoice - 1];
 }
 
@@ -306,7 +321,6 @@ struct ingredientItem *addNewIngredientItemNode(struct ingredientItem *head, cha
 void modifyIngredientItemNodeName(struct ingredientItem *node){
 	struct ingredientItem *changedNode = node;
 	char choice = '\0';
-	printIngredientItemNode(changedNode);
 	char buffer[INGREDIENT_BUFFER_LEN] = {'\0'};
 	while (choice != 'Y'){
 		printf("\n\t\tEnter New Ingredient Name: ");
@@ -324,7 +338,6 @@ void modifyIngredientItemNodeName(struct ingredientItem *node){
 	}
 	if (choice == 'Y')
 		strcpy(changedNode->ingredientName, buffer);
-	printIngredientItemNode(changedNode);
 }
 
 /********************************************************************************************************************
@@ -336,7 +349,6 @@ void modifyIngredientItemNodeWeight(struct ingredientItem *node){
 	struct ingredientItem *changedNode = node;
 	char choice = '\0';
 	float gramsPerCup = 0.00;
-	printIngredientItemNode(changedNode);
 	while (choice != 'Y'){	
 		while (gramsPerCup == 0.00){
 			printf("\n\t\tEnter New Ingredient Weight In Grams: ");
@@ -346,7 +358,7 @@ void modifyIngredientItemNodeWeight(struct ingredientItem *node){
 	           }
 	       }
 	    while (getchar() != '\n');
-	    printf("\n\t\tYou Entered: '%f grams', Is This Correct (y/n)?: ", gramsPerCup);
+	    printf("\n\t\tYou Entered: '%.3f grams', Is This Correct (y/n)?: ", gramsPerCup);
 	    do {
 			choice = '\0';
 			choice = toupper(getchar());
@@ -357,7 +369,6 @@ void modifyIngredientItemNodeWeight(struct ingredientItem *node){
 		} while ((choice != 'Y') && (choice != 'N'));
     }
     changedNode->gramsPerCup = gramsPerCup;
-    printIngredientItemNode(changedNode);
 }
 
 /********************************************************************************************************************
@@ -434,11 +445,10 @@ void printAllIngredientItemNodes(struct ingredientType *node){
 /********************************************************************************************************************
 * 																													*
 *	 			delete a an ingredientItem node						 				 								*
-*				returns 0 on success, 1 on cancel, -1 on failure																	*
+*				returns 0 on success, 1 on cancel, -1 on failure													*
 *																													*
 *********************************************************************************************************************/
 int deleteIngredientItemNode(struct ingredientType *head, char buffer[INGREDIENT_BUFFER_LEN]){
-	//reuse code form findIngredientItemNode to find node:
 	//create array of pointers to store possible found ingredients, make sure it is NULL to start
 	struct ingredientItem *foundIngredients[MAX_INGREDIENTS_FOUND] = {NULL};
 	memset(foundIngredients, 0, sizeof(foundIngredients));
@@ -449,7 +459,7 @@ int deleteIngredientItemNode(struct ingredientType *head, char buffer[INGREDIENT
 	unsigned int ingredientItemCounter = 0;
 	unsigned int ingredientItemChoice = 0;
 	//iterate through all sub-lists from the head node of the ingredientType linked list searching for partial matches
-	//store partial matches in array to share with user
+	//store partial matches in array to share with user as well as their ingredientTypeNodes which store the matches' head pointers
 	struct ingredientType *ingredientTypePointer = NULL;
 	struct ingredientItem *possibleItem = NULL;
 	//move through ingredientType linked-list and sub-lists one by one until NULL on both searching for partial matches
@@ -465,8 +475,7 @@ int deleteIngredientItemNode(struct ingredientType *head, char buffer[INGREDIENT
 		printf("%s Not Found\n", buffer);
 		return -1;
 	}
-	if (ingredientItemCounter == 1)
-		;
+	if (ingredientItemCounter == 1);
 	//if there are multiple possible choices in the array, print them, then ask for the user to pick (with safety)
 	else if (ingredientItemCounter > 1){
 		for (int i = 1; i <= ingredientItemCounter; i++)
@@ -476,8 +485,7 @@ int deleteIngredientItemNode(struct ingredientType *head, char buffer[INGREDIENT
 	   		if ((scanf(" %i", &ingredientItemChoice) != 1) || 
 	       	   ((ingredientItemChoice <= 0) || (ingredientItemChoice > ingredientItemCounter))){
 	       			printf("\t\tInvalid Entry\n");
-	       			while (getchar() != '\n')
-	           			;
+	       			while (getchar() != '\n');
 	        }
 	    }
 	}
@@ -485,14 +493,12 @@ int deleteIngredientItemNode(struct ingredientType *head, char buffer[INGREDIENT
 	printf("\n\t\t%s Found, ", foundIngredients[ingredientItemChoice-1]->ingredientName);
 	while ((confirm != 'Y') && (confirm !='N')){
 		printf("Confirm DELETE (y/n): ");
-		confirm = getchar();
-		confirm = toupper(confirm);
+		confirm = toupper(getchar());
 		switch (confirm) {
 			case 'Y': break; //change back to break to check next functionality
 			case 'N': return 1;
 			default : printf("\n\t\tInvalid Entry, Try Again\n\t\t"); 	
-					  while (getchar() != '\n')
-					  	;
+					  while (getchar() != '\n');
 		}
 	}
 	//delete functionality
