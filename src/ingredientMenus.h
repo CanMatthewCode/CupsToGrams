@@ -46,4 +46,11 @@ void findIngredient(struct ingredientType *head);
 *************************************************************************************************************/
 void printAllIngredientItemsInTypeNode(struct ingredientType *head);
 
+/************************************************************************************************************
+* 																											*
+*				modify an ingredientItem node's name, weight, tablespoonFlag								*
+*																											*
+*************************************************************************************************************/
+void modifyIngredientItem(struct ingredientType *head);
+
 #endif //CONVERTINGREDIENT_H
