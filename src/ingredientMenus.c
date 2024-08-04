@@ -53,7 +53,7 @@ struct ingredientType *convertIngredientMenu(struct ingredientType *head){
 						modifyIngredientItem(headPointer);
 						break;
 			case '7':	clearScreen();
-						//deleteIngredientItemNode();
+						deleteIngredientItem(headPointer);
 						break;
 			case '8':	clearScreen();
 						headPointer = addIngredientType(headPointer);
@@ -165,7 +165,7 @@ void addIngredientItem(struct ingredientType *head){
 				choice = '\0';
 				choice = toupper(getchar());
 				if ((choice != 'Y') && (choice != 'N')){
-					printf("\t\tInvalide Entry, Try Again: ");
+					printf("\t\tInvalid Entry, Try Again: ");
 					while (getchar() != '\n');
 				}
 			}
@@ -178,7 +178,7 @@ void addIngredientItem(struct ingredientType *head){
 			choice = '\0';
 			choice = toupper(getchar());
 			if ((choice != 'Y') && (choice != 'N')){
-				printf("\t\tInvalid Entry\n");
+				printf("\t\tInvalid Entry: ");
 				while (getchar() != '\n');
 			}
 		} while ((choice != 'Y') && (choice != 'N'));
@@ -295,9 +295,6 @@ void modifyIngredientItem(struct ingredientType *head){
 		headPointer = head;
 		foundIngredient = NULL;
 		memset(ingredientItemBuffer, 0, sizeof(ingredientItemBuffer));
-		//ask for user input, readintoBuffer, find node - enter sub-menu when node is found
-		//in submenu ask which option they want to change, when it is done ask if they want to change another part of this item
-		//if not ask if they want to modify a different ingredient - if yes, start loop over, if no, exit
 		clearScreen();
 		choice = '\0';
 		puts("\t\t*********************************************************************************");
@@ -322,7 +319,7 @@ void modifyIngredientItem(struct ingredientType *head){
 					}
 				} while ((choice != 'Y') && (choice != 'N'));
 			}
-		} while (!foundIngredient);
+		} while (!foundIngredient && (choice != 'N'));
 		if (foundIngredient){
 			char innerChoice = '\0';
 			int changeChoice = 0;
@@ -380,3 +377,43 @@ void modifyIngredientItem(struct ingredientType *head){
 		}
 	} while (choice != 'N');
 }
+
+/************************************************************************************************************
+* 																											*
+*				delete an ingredientItem node permanently from an ingredientItem linked list				*
+*																											*
+*************************************************************************************************************/
+void deleteIngredientItem (struct ingredientType *head){
+	struct ingredientItem *itemToBeDeleted = NULL;
+	struct ingredientType *itemToBeDeletedsAttachedTypeNode = NULL;
+	char ingredientItemBuffer[INGREDIENT_BUFFER_LEN] = {'\0'};
+	char choice = '\0';
+	do {
+		memset(ingredientItemBuffer, 0, sizeof(ingredientItemBuffer));
+		choice = '\0';
+		clearScreen();
+		puts("\t\txxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+		puts("\t\tx\t\t\t\t\t\t\t\t\t\tx");
+		puts("\t\tx\t\t\t      -DELETE INGREDIENT- \t\t\t\tx");
+		puts("\t\tx\t\t\t\t\t\t\t\t\t\tx");
+		puts("\t\txxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+		printf("\n\n\t\tEnter Name Of Ingredient You Wish To PERMANENTLY DELETE: ");
+		readUserInputIntoBuffer(ingredientItemBuffer);
+		itemToBeDeleted = findIngredientItemNode(head, ingredientItemBuffer, &itemToBeDeletedsAttachedTypeNode);
+		if (!itemToBeDeleted){
+			printf("\n\n\t\tIngredient Not Found");
+		}
+		if (itemToBeDeleted)
+			deleteIngredientItemNode(itemToBeDeleted, itemToBeDeletedsAttachedTypeNode);
+		while (getchar() != '\n');
+		printf("\n\n\t\tWould You Like To Delete Another Ingredient (y/n)? ");
+		do {
+				choice = '\0';
+				choice = toupper(getchar());
+				if ((choice != 'Y') && (choice != 'N')){
+					printf("\n\t\tInvalid Entry: ");
+					while (getchar() != '\n');
+				}
+			} while ((choice != 'Y') && (choice != 'N'));
+	} while (choice != 'N');
+} 

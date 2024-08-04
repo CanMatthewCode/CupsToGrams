@@ -53,4 +53,11 @@ void printAllIngredientItemsInTypeNode(struct ingredientType *head);
 *************************************************************************************************************/
 void modifyIngredientItem(struct ingredientType *head);
 
+/************************************************************************************************************
+* 																											*
+*				delete an ingredientItem node permanently from an ingredientItem linked list				*
+*																											*
+*************************************************************************************************************/
+void deleteIngredientItem (struct ingredientType *head);
+
 #endif //CONVERTINGREDIENT_H
