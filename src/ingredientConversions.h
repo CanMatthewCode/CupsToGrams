@@ -5,7 +5,7 @@
 #include <ctype.h>
 
 #define INGREDIENT_BUFFER_LEN 30
-#define MAX_INGREDIENTS_FOUND 40
+#define MAX_INGREDIENTS_FOUND 100
 
 struct ingredientItem{
 	char ingredientName[INGREDIENT_BUFFER_LEN];
