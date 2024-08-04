@@ -243,7 +243,7 @@ void printAllIngredientItemsInTypeNode(struct ingredientType *head){
 		choice = '\0';
 		puts("\t\t*********************************************************************************");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
-		puts("\t\t*\t\t\t      -INGREDIENTS BY FOOD TYPE- \t\t\t*");
+		puts("\t\t*\t\t\t    -INGREDIENTS BY FOOD TYPE-   \t\t\t*");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
 		puts("\t\t*********************************************************************************");
 		printf("\n\n\t\tEnter Desired Type Of Ingredient For Full List: ");
