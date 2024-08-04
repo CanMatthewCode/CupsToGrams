@@ -408,8 +408,12 @@ void modifyIngredientItemNodeFlag(struct ingredientItem *node){
 *																													*
 *********************************************************************************************************************/
 void printIngredientItemNode(struct ingredientItem *node){
-	printf("\t\t%s: %.2f ", node->ingredientName, node->gramsPerCup);
-	printf(node->tablespoonFlag == 1 ? " g/tbsp" : "g/cups");
+	printf("\t\t%-s:", node->ingredientName);
+	int spaceCounter = (26 - strlen(node->ingredientName));
+	for (int i = 0; i < spaceCounter; i++)
+		printf(" ");
+	printf("%.2f ", node->gramsPerCup);
+	printf(node->tablespoonFlag == 1 ? "g/tbsp" : "g/cups");
 }
 
 /********************************************************************************************************************
@@ -422,7 +426,10 @@ void printAllIngredientItemNodes(struct ingredientType *node){
 	struct ingredientItem *itemPointer = typePointer->head;
 	char ch = '\0';
 	int i = 0;
-	printf("\n\t\t");
+	int spaceCounter = (38 - (strlen(node->typeName) / 2));
+	printf("\n\n");
+	for (int c = 0; c < spaceCounter; c++)
+		printf(" ");
 	while (typePointer->typeName[i] != '\0'){
 		ch = typePointer->typeName[i++];
 		printf("%c", toupper(ch));
@@ -466,23 +473,16 @@ int deleteIngredientItemNode(struct ingredientItem *node, struct ingredientType 
 	//if it is the only node
 	if ((!prev) && (!next)){
 		headNode->head = NULL;
-		free (cur);
-		dumpIngredientItemList(headNode);
-		return 0;
-	}
 	//if prev == NULL, it is the first node;
-	if (!prev){
+	} else if ((!prev) && (next)){
 		headNode->head = next;
 		next->prev = NULL;
-		free (cur);
-		dumpIngredientItemList(headNode);
-		return 0;
 	//if it is a middle node	
-	} else if (prev !=NULL && next != NULL){
+	} else if ((prev) && (next)){
 		prev->next = next;
 		next->prev = prev;
 	//if it is the final node
-	} else if (prev && (next == NULL))
+	} else if (prev && (!next))
 		prev->next = NULL;
 		
 	//reset to head and reattach head to the ingredientType's head member;
@@ -491,7 +491,6 @@ int deleteIngredientItemNode(struct ingredientItem *node, struct ingredientType 
 			prev = prev->prev;
 		headNode->head = prev;
 	}
-	//headNode->head = prev;
 	//dump changed ingredientItem linked list to .txt file
 	free(cur);
 	cur = NULL;
