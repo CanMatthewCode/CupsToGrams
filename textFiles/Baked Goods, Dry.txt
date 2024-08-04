@@ -2,7 +2,7 @@ Baking Powder	13.800000 g/tbsp
 Baking Soda	13.800000 g/tbsp
 Cacao Nibs	160.000000 g/cup
 Cocoa Powder	100.000000 g/cup
-Cornmeal	157.000000 g/cup
+Cornmeal	122.000000 g/cup
 Cornstarch	8.000000 g/tbsp
 Cream Of Tartar	9.000000 g/tbsp
 Guar Gum	10.000000 g/tbsp

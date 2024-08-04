@@ -2,6 +2,7 @@ Asiago, Shredded	112.000000 g/cup
 Blue Cheese	245.438004 g/cup
 Boursin	232.000000 g/cup
 Butter	226.000000 g/cup
+Buttermilk	244.000000 g/cup
 Cheddar	113.000000 g/cup
 Clotted Cream	226.667007 g/cup
 Cotija	120.000000 g/cup
@@ -16,6 +17,9 @@ Heavy Cream	238.399994 g/cup
 Kefir	248.000000 g/cup
 Limburger	134.000000 g/cup
 Mascarpone	240.000000 g/cup
+Milk, 2%	244.000000 g/cup
+Milk, Skim	244.000000 g/cup
+Milk, Whole	244.000000 g/cup
 Monterey Jack	113.000000 g/cup
 Mozzarella	113.000000 g/cup
 Neufchatel	240.000000 g/cup

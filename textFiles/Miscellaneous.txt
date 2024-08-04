@@ -1,0 +1,17 @@
+Agar-agar	5.000000 g/tbsp
+Dried Fruit	180.000000 g/cup
+Gelatin	7.000000 g/tbsp
+Kelp	80.000000 g/cup
+Kombu	80.000000 g/cup
+Lotus Root	120.000000 g/cup
+Miso	17.000000 g/tbsp
+Nori	80.000000 g/cup
+Pickles	155.000000 g/cup
+Preserved Lemons	240.000000 g/cup
+Seaweed	80.000000 g/cup
+Seitan	257.600006 g/cup
+Tempeh	166.000000 g/cup
+Tofu	250.000000 g/cup
+Vegemite	17.010000 g/tbsp
+Wakame	80.000000 g/cup
+Yeast Extract	18.000000 g/tbsp

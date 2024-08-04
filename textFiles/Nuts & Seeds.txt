@@ -1,0 +1,5 @@
+Almonds	138.000000 g/cup
+Almonds, Chopped	120.000000 g/cup
+Brazil Nuts, Whole	133.000000 g/cup
+Butter, Almond	256.000000 g/cup
+Butter, Cashew	256.000000 g/cup
