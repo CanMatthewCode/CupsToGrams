@@ -31,13 +31,12 @@
  */
  
 int main (int argc, char **argv){
-	clearScreen();
 	//create head pointer and load ingredientType linked-list then sub linked-lists
 	struct ingredientType *head = NULL;
 	head = loadIngredientTypes();
 	head = loadAllIngredientTypeSubLists(head);
 	char menu = '\0';
-	while (menu != 'Q'){
+	do {
 		clearScreen();
 		puts("\t\t*********************************************************************************");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
@@ -50,7 +49,7 @@ int main (int argc, char **argv){
 			 "(3) See Ingredient List\n\t\t(4) See Recipe List"
 			 "\n\t\t(Q) Quit");
 		printf("\n\t\tEnter Selection: ");
-		char menu = '\0';
+		menu = '\0';
 		menu = toupper(getchar());
 		switch (menu){
 			case '1': 	clearScreen();
@@ -64,9 +63,10 @@ int main (int argc, char **argv){
 			case '4':	//printRecipes(); - leads to submenu to ask to search by name, food type, or cuisine 
 						break;
 			case 'Q':	return 0;
-			default: 	printf("\n\t\tInvalid Selection, Please Try Again: ");
+			default: 	printf("\n\t\t\t\t\t***Invalid Selection***\n\n");
 		}
-		while (getchar() != '\n');
-	}
+		while (getchar() != '\n')
+			;
+	} while (menu != 'Q');
 	return 0;
 }
