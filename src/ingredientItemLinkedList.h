@@ -106,10 +106,11 @@ void printAllIngredientItemNodes(struct ingredientType *node);
 
 /********************************************************************************************************************
 * 																													*
-*	 			delete a an ingredientItem node						 				 								*
-*				returns 0 on success, 1 on cancel,  -1 on failure																	*
+*	 			delete an ingredientItem node						 				 								*
+*				accepts the ingredientItem node to be deleted and it's attached ingredientType node as parameters	*
+*				returns 0 on success, 1 on cancel													*
 *																													*
 *********************************************************************************************************************/
-int deleteIngredientItemNode(struct ingredientType *head, char buffer[INGREDIENT_BUFFER_LEN]);
+int deleteIngredientItemNode(struct ingredientItem *node, struct ingredientType *headNode);
 
 #endif //INGREDIENTITEMLINKEDLIST_H
