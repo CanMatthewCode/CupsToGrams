@@ -267,6 +267,7 @@ struct ingredientItem *addNewIngredientItemNode(struct ingredientItem *head, cha
 			default:	printf("\t\tInvalid Selection, Try Again: ");
 						while (getchar() != '\n');
 		}
+		while (getchar () != '\n');
 	} while ((ch != 'C') && (ch != 'T'));
 	//if cur == NULL, it is the first node
 	if (cur == NULL)
@@ -320,17 +321,21 @@ void modifyIngredientItemNodeName(struct ingredientItem *node){
 		memset(buffer, 0, sizeof(buffer));
 		readUserInputIntoBuffer(buffer);
 		printf("\n\t\tYou Entered: '%s', Is This Correct (y/n)?: ", buffer);
-		do {
-			choice = '\0';
-			choice = toupper(getchar());
-			if ((choice != 'Y') && (choice != 'N')){
-				printf("\t\tInvalid Entry\n");
-				while (getchar() != '\n');
-			}
-		} while ((choice != 'Y') && (choice != 'N'));
+		YESNOCHOICE(choice);
+	//	do {
+	//		choice = '\0';
+	//		choice = toupper(getchar());
+	//		if ((choice != 'Y') && (choice != 'N')){
+	//			printf("\t\tInvalid Entry\n");
+	//			while (getchar() != '\n');
+	//		}
+	//	} while ((choice != 'Y') && (choice != 'N'));
 	}
 	if (choice == 'Y')
 		strcpy(changedNode->ingredientName, buffer);
+	//need functionality to check if it is still in the same place alphabetically as the name it changed
+	//if not, it needs to pull out the node into a temp node, connect prev to next, then scan from the head of the linked list
+	//to find where it should go, insert it in the correct spot and return head of sub-linked list 
 }
 
 /********************************************************************************************************************
@@ -343,23 +348,25 @@ void modifyIngredientItemNodeWeight(struct ingredientItem *node){
 	char choice = '\0';
 	float gramsPerCup = 0.00;
 	while (choice != 'Y'){	
+		gramsPerCup = 0.00;
 		while (gramsPerCup == 0.00){
 			printf("\n\t\tEnter New Ingredient Weight In Grams: ");
-	    	if (scanf(" %f", &gramsPerCup) != 1){
+	    	if (scanf(" %f ", &gramsPerCup) != 1){
 	       	 	printf("\t\tInvalid Entry");
 	        	while (getchar() != '\n');
 	           }
 	       }
 	    while (getchar() != '\n');
 	    printf("\n\t\tYou Entered: '%.3f grams', Is This Correct (y/n)?: ", gramsPerCup);
-	    do {
-			choice = '\0';
-			choice = toupper(getchar());
-			if ((choice != 'Y') && (choice != 'N')){
-				printf("\t\tInvalid Entry\n");
-				while (getchar() != '\n');
-			}
-		} while ((choice != 'Y') && (choice != 'N'));
+	    YESNOCHOICE(choice);
+	//    do {
+	//		choice = '\0';
+	//		choice = toupper(getchar());
+	//		if ((choice != 'Y') && (choice != 'N')){
+	//			printf("\t\tInvalid Entry\n");
+	//			while (getchar() != '\n');
+	//		}
+	//	} while ((choice != 'Y') && (choice != 'N'));
     }
     changedNode->gramsPerCup = gramsPerCup;
 }
@@ -389,14 +396,15 @@ void modifyIngredientItemNodeFlag(struct ingredientItem *node){
 		printf("\n\t\tYou Entered: \"");
 		printf((measurementType == 'T') ? "g/tbsp" : "g/cups");
 		printf("\", Is This Correct (y/n)?: ");
-		do {
-			choice = '\0';
-			choice = toupper(getchar());
-			if ((choice != 'Y') && (choice != 'N')){
-				printf("\t\tInvalid Entry\n");
-				while (getchar() != '\n');
-			}
-		} while ((choice != 'Y') && (choice != 'N'));
+		YESNOCHOICE(choice);
+	//	do {
+	//		choice = '\0';
+	//		choice = toupper(getchar());
+	//		if ((choice != 'Y') && (choice != 'N')){
+	//			printf("\t\tInvalid Entry\n");
+	//			while (getchar() != '\n');
+	//		}
+	//	} while ((choice != 'Y') && (choice != 'N'));
 	}
 	//store choice of Tablespoon or Cup in the node's tablespoonFlag member
 	changedNode->tablespoonFlag = (measurementType == 'T') ? 1 : 0;
@@ -412,7 +420,7 @@ void printIngredientItemNode(struct ingredientItem *node){
 	int spaceCounter = (26 - strlen(node->ingredientName));
 	for (int i = 0; i < spaceCounter; i++)
 		printf(" ");
-	printf("%.2f ", node->gramsPerCup);
+	printf("%6.2f ", node->gramsPerCup);
 	printf(node->tablespoonFlag == 1 ? "g/tbsp" : "g/cups");
 }
 
@@ -452,14 +460,15 @@ void printAllIngredientItemNodes(struct ingredientType *node){
 int deleteIngredientItemNode(struct ingredientItem *node, struct ingredientType *headNode){
 	char choice = '\0';
 	printf("\n\t\t%s Found, Confirm DELETE (y/n): ", node->ingredientName);
-	do {
-			choice = '\0';
-			choice = toupper(getchar());
-			if ((choice != 'Y') && (choice != 'N')){
-				printf("\n\t\tInvalid Entry: ");
-				while (getchar() != '\n');
-			}
-		} while ((choice != 'Y') && (choice != 'N'));
+	YESNOCHOICE(choice);
+//	do {
+//			choice = '\0';
+//			choice = toupper(getchar());
+//			if ((choice != 'Y') && (choice != 'N')){
+//				printf("\n\t\tInvalid Entry: ");
+//				while (getchar() != '\n');
+//			}
+//		} while ((choice != 'Y') && (choice != 'N'));
 	if (choice == 'N')
 		return 1;	
 	//delete functionality
@@ -497,3 +506,5 @@ int deleteIngredientItemNode(struct ingredientItem *node, struct ingredientType 
 	dumpIngredientItemList(headNode);
 	return 0;
 }
+
+

@@ -51,6 +51,7 @@ int main (int argc, char **argv){
 		printf("\n\t\tEnter Selection: ");
 		menu = '\0';
 		menu = toupper(getchar());
+		while (getchar() != '\n');
 		switch (menu){
 			case '1': 	clearScreen();
 						head = convertIngredientMenu(head); //- leads to submenu to ask to search by name, by type, or all 

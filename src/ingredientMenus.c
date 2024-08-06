@@ -14,7 +14,7 @@ struct ingredientType *convertIngredientMenu(struct ingredientType *head){
 	char menu = '\0';
 	struct ingredientType *headPointer = head;
 	//struct ingredientItem *itemHead;
-	while (getchar() != '\n');
+	//while (getchar() != '\n');
 	clearScreen();
 	do {
 		clearScreen();
@@ -65,7 +65,7 @@ struct ingredientType *convertIngredientMenu(struct ingredientType *head){
 			default: 	clearScreen();
 						printf("\n\t\tInvalid Selection, Try Again\n");
 		}
-		while (getchar() != '\n');
+		//while (getchar() != '\n');
 	} while (menu != 'B');
 	return headPointer;
 }
@@ -93,13 +93,15 @@ struct ingredientType *addIngredientType(struct ingredientType *head){
 	 	readUserInputIntoBuffer(buffer);
 		headPointer = addNewIngredientTypeNode(headPointer, buffer);
 		char innerChoice = '\0';
-		do{
-			innerChoice = '\0';
-			printf("\n\t\tAdd Another Ingredient Type (y/n)?");
-			innerChoice = toupper(getchar());
-			if ((innerChoice != 'Y') && (innerChoice != 'N'))
-				printf("\t\tInvalid Entry\n");
-		} while ((innerChoice != 'Y') && ((innerChoice) != 'N'));
+		printf("\n\t\tAdd Another Ingredient Type (y/n)?");
+		YESNOCHOICE(innerChoice);
+		//do{
+		//	innerChoice = '\0';
+		//	
+		//	innerChoice = toupper(getchar());
+		//	if ((innerChoice != 'Y') && (innerChoice != 'N'))
+		//		printf("\t\tInvalid Entry\n");
+		//} while ((innerChoice != 'Y') && ((innerChoice) != 'N'));
 		choice = innerChoice;
 	} while (choice != 'N');
 	dumpIngredientTypeList(headPointer);
@@ -137,10 +139,11 @@ void addIngredientItem(struct ingredientType *head){
 	 			printf("\n\t\tFood Type Not Found, Print Full Food Types List (y/n)? ");
 	 			do{
 	 				innerChoice = '\0';
-					innerChoice = toupper(getchar());
-					while (getchar() != '\n');
-					if ((innerChoice != 'Y') && (innerChoice != 'N'))
-						printf("\n\t\tInvalid Entry, Try Again: ");
+	 				YESNOCHOICE(innerChoice);
+				//	innerChoice = toupper(getchar());
+				//	while (getchar() != '\n');
+				//	if ((innerChoice != 'Y') && (innerChoice != 'N'))
+				//		printf("\n\t\tInvalid Entry, Try Again: ");
 					if (innerChoice == 'Y'){
 						printf("\n\n\n");
 						printIngredientTypeList(head);
@@ -159,29 +162,31 @@ void addIngredientItem(struct ingredientType *head){
 				printf("\t\tIngredient Already Exists (Press Enter to Continue):");
 			//relink changed head back to where the ingredientType node the ingredientItem linked-list attaches
 			} else (foundIngredientType->head = addNewIngredientItemNode(foundIngredientType->head, ingredientItemBuffer));
-			while (getchar() != '\n');
+		//	while (getchar() != '\n');
 			printf("\n\n\t\tAdd Another Ingredient Of The Same Food Type (y/n)? ");
-			while ((choice != 'Y') && (choice != 'N')){
-				choice = '\0';
-				choice = toupper(getchar());
-				if ((choice != 'Y') && (choice != 'N')){
-					printf("\t\tInvalid Entry, Try Again: ");
-					while (getchar() != '\n');
-				}
-			}
+			YESNOCHOICE(choice);
+		//	while ((choice != 'Y') && (choice != 'N')){
+		//		choice = '\0';
+		//		choice = toupper(getchar());
+		//		if ((choice != 'Y') && (choice != 'N')){
+		//			printf("\t\tInvalid Entry, Try Again: ");
+		//			while (getchar() != '\n');
+		//		}
+		//	}
 		} while (choice != 'N');
 		dumpIngredientItemList(foundIngredientType);
 		//then outer loop asking if there is a different ingredient type to add and start the inner loop again if they say yes.  if no, exit
-		while (getchar() != '\n');
+	//	while (getchar() != '\n');
 		printf("\n\n\t\tAdd An Ingredient For A Different Type Of Food (y/n)? ");
-		do {
-			choice = '\0';
-			choice = toupper(getchar());
-			if ((choice != 'Y') && (choice != 'N')){
-				printf("\t\tInvalid Entry: ");
-				while (getchar() != '\n');
-			}
-		} while ((choice != 'Y') && (choice != 'N'));
+		YESNOCHOICE(choice);
+	//	do {
+	//		choice = '\0';
+	//		choice = toupper(getchar());
+	//		if ((choice != 'Y') && (choice != 'N')){
+	//			printf("\t\tInvalid Entry: ");
+	//			while (getchar() != '\n');
+	//		}
+	//	} while ((choice != 'Y') && (choice != 'N'));
 	} while (choice != 'N');
 }
 
@@ -216,14 +221,15 @@ void findIngredient(struct ingredientType *head){
 		if (!foundIngredient)
 			printf("\n\n\t\tIngredient Not Found");
 		printf("\n\n\n\t\tFind Another Ingredient (y/n)? ");
-		do {
-			choice = '\0';
-			choice = toupper(getchar());
-			if ((choice != 'Y') && (choice != 'N')){
-				printf("\t\tInvalid Entry ");
-				while (getchar() != '\n');
-			}
-		} while ((choice != 'Y') && (choice != 'N'));
+//		do {
+//			choice = '\0';
+//			choice = toupper(getchar());
+//			if ((choice != 'Y') && (choice != 'N')){
+//				printf("\t\tInvalid Entry ");
+//				while (getchar() != '\n');
+//			}
+//		} while ((choice != 'Y') && (choice != 'N'));
+		YESNOCHOICE(choice);
 	} while (choice != 'N');
 }
 
@@ -255,10 +261,11 @@ void printAllIngredientItemsInTypeNode(struct ingredientType *head){
 	 		printf("Print Full Food Types List (y/n)? ");
 	 		do{
 	 			innerChoice = '\0';
-				innerChoice = toupper(getchar());
-				while (getchar() != '\n');
-				if ((innerChoice != 'Y') && (innerChoice != 'N'))
-					printf("\n\t\tInvalid Entry: ");
+	 			YESNOCHOICE(innerChoice);
+			//	innerChoice = toupper(getchar());
+			//	while (getchar() != '\n');
+			//	if ((innerChoice != 'Y') && (innerChoice != 'N'))
+			//		printf("\n\t\tInvalid Entry: ");
 				if (innerChoice == 'Y'){
 					printIngredientTypeList(head);
 					printf("\n\n");
@@ -268,14 +275,15 @@ void printAllIngredientItemsInTypeNode(struct ingredientType *head){
 		if (foundIngredientType)
 			printAllIngredientItemNodes(foundIngredientType);
 		printf("\n\n\t\tPrint Another Type Of Ingredient (y/n)? ");
-		do {
-			choice = '\0';
-			choice = toupper(getchar());
-			if ((choice != 'Y') && (choice != 'N')){
-				printf("\n\t\tInvalid Entry: ");
-				while (getchar() != '\n');
-			}
-		} while ((choice != 'Y') && (choice != 'N'));
+		YESNOCHOICE(choice);
+	//	do {
+	//		choice = '\0';
+	//		choice = toupper(getchar());
+	//		if ((choice != 'Y') && (choice != 'N')){
+	//			printf("\n\t\tInvalid Entry: ");
+	//			while (getchar() != '\n');
+	//		}
+	//	} while ((choice != 'Y') && (choice != 'N'));
 	} while (choice != 'N');
 }
 
@@ -310,14 +318,15 @@ void modifyIngredientItem(struct ingredientType *head){
 			foundIngredient = findIngredientItemNode(headPointer, ingredientItemBuffer, &foundIngredientsTypeNode);
 			if(!foundIngredient){
 				printf("\n\n\t\tIngredient Not Found. Enter New Ingredient Name (y/n)? ");
-				do {
-					choice = '\0';
-					choice = toupper(getchar());
-					if ((choice != 'Y') && (choice != 'N')){
-						printf("\n\t\tInvalid Entry: ");
-						while (getchar() != '\n');
-					}
-				} while ((choice != 'Y') && (choice != 'N'));
+				YESNOCHOICE(choice);
+			//	do {
+			//		choice = '\0';
+			//		choice = toupper(getchar());
+			//		if ((choice != 'Y') && (choice != 'N')){
+			//			printf("\n\t\tInvalid Entry: ");
+			//			while (getchar() != '\n');
+			//		}
+			//	} while ((choice != 'Y') && (choice != 'N'));
 			}
 		} while (!foundIngredient && (choice != 'N'));
 		if (foundIngredient){
@@ -352,28 +361,30 @@ void modifyIngredientItem(struct ingredientType *head){
 				}
 				while ((innerChoice != 'Y') && (innerChoice != 'N')){
 					printf("\n\n\t\tWould You Like To Make Another Change (y/n)? ");
-					while (getchar() != '\n');
-					do {
-						innerChoice = '\0';
-						innerChoice = toupper(getchar());
-						if ((innerChoice != 'Y') && (innerChoice != 'N')){
-							printf("\n\t\tInvalid Entry: ");
-							while (getchar() != '\n');
-						}
-					} while ((innerChoice != 'Y') && (innerChoice != 'N'));
+				//	while (getchar() != '\n');
+					YESNOCHOICE(innerChoice);
+				//	do {
+				//		innerChoice = '\0';
+				//		innerChoice = toupper(getchar());
+				//		if ((innerChoice != 'Y') && (innerChoice != 'N')){
+				//			printf("\n\t\tInvalid Entry: ");
+				//			while (getchar() != '\n');
+				//		}
+				//	} while ((innerChoice != 'Y') && (innerChoice != 'N'));
 				}
 			} while (innerChoice != 'N');
-			while (getchar() != '\n');
+		//	while (getchar() != '\n');
 			dumpIngredientItemList(foundIngredientsTypeNode);
 			printf("\n\n\t\tWould You Like To Modify A Different Ingredient (y/n)? ");
-			do {
-				choice = '\0';
-				choice = toupper(getchar());
-				if ((choice != 'Y') && (choice != 'N')){
-					printf("\n\t\tInvalid Entry: ");
-					while (getchar() != '\n');
-				}
-			} while ((choice != 'Y') && (choice != 'N'));
+			YESNOCHOICE(choice);
+		//	do {
+		//		choice = '\0';
+		//		choice = toupper(getchar());
+		//		if ((choice != 'Y') && (choice != 'N')){
+		//			printf("\n\t\tInvalid Entry: ");
+		//			while (getchar() != '\n');
+		//		}
+		//	} while ((choice != 'Y') && (choice != 'N'));
 		}
 	} while (choice != 'N');
 }
@@ -407,13 +418,14 @@ void deleteIngredientItem (struct ingredientType *head){
 			deleteIngredientItemNode(itemToBeDeleted, itemToBeDeletedsAttachedTypeNode);
 		while (getchar() != '\n');
 		printf("\n\n\t\tWould You Like To Delete Another Ingredient (y/n)? ");
-		do {
-				choice = '\0';
-				choice = toupper(getchar());
-				if ((choice != 'Y') && (choice != 'N')){
-					printf("\n\t\tInvalid Entry: ");
-					while (getchar() != '\n');
-				}
-			} while ((choice != 'Y') && (choice != 'N'));
+		YESNOCHOICE(choice);
+	//	do {
+	//			choice = '\0';
+	//			choice = toupper(getchar());
+	//			if ((choice != 'Y') && (choice != 'N')){
+	//				printf("\n\t\tInvalid Entry: ");
+	//				while (getchar() != '\n');
+	//			}
+	//		} while ((choice != 'Y') && (choice != 'N'));
 	} while (choice != 'N');
 } 

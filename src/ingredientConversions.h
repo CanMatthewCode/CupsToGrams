@@ -7,6 +7,20 @@
 #define INGREDIENT_BUFFER_LEN 30
 #define MAX_INGREDIENTS_FOUND 100
 
+#define YESNOCHOICE(choice)												\
+do {								    								\
+	int c;																\
+	(choice) = '\0';													\
+	while ((((c) = getchar()) != EOF) && ((c) != '\n')) {				\
+		if (((choice) == '\0') && ((c) != ' ') && ((c) != '\t')) {		\
+			(choice) = toupper((c));									\
+		}																\
+	}																	\
+	if (((choice) != 'Y') && ((choice) != 'N')) {						\
+		printf("\t\tInvalid Entry: ");									\
+	}																	\
+} while (((choice) != 'Y') && ((choice) != 'N'))
+
 struct ingredientItem{
 	char ingredientName[INGREDIENT_BUFFER_LEN];
 	int tablespoonFlag;
