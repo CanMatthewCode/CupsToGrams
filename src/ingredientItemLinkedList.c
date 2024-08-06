@@ -236,11 +236,8 @@ struct ingredientItem *findIngredientItemNode(struct ingredientType *head, char 
 *				returns pointer to head on success, NULL on failure													*
 *																													*
 *********************************************************************************************************************/
-struct ingredientItem *addNewIngredientItemNode(struct ingredientItem *head, char buffer[INGREDIENT_BUFFER_LEN]){
-	struct ingredientItem *cur = head;
-	struct ingredientItem *prev = NULL;
+struct ingredientItem *addNewIngredientItemNode(char buffer[INGREDIENT_BUFFER_LEN]){
 	struct ingredientItem *newNode = NULL;
-	
 	newNode = createIngredientItemNode();
 	strcpy(newNode->ingredientName, buffer);
 	//functionality and safety for invalid entry on weight
@@ -269,14 +266,30 @@ struct ingredientItem *addNewIngredientItemNode(struct ingredientItem *head, cha
 		}
 		while (getchar () != '\n');
 	} while ((ch != 'C') && (ch != 'T'));
+	return newNode;
+}
+
+/********************************************************************************************************************
+* 																													*
+*	 			puts an ingredientItem node into the ingredientItem linked-list alphabetically						*
+*																													*
+*********************************************************************************************************************/
+void placeIngredientItemNode(struct ingredientItem *ingredientItemNodeToAdd, struct ingredientType *nodeToAddsIngredientTypeNode){
+	struct ingredientItem *cur = nodeToAddsIngredientTypeNode->head;
+	struct ingredientItem *prev = NULL;
+	struct ingredientItem *newNode = ingredientItemNodeToAdd;
+
 	//if cur == NULL, it is the first node
-	if (cur == NULL)
-		return newNode;
+	if (cur == NULL){
+		nodeToAddsIngredientTypeNode->head = newNode;
+		return;
+	}
 	//if buffer is smaller than 1st node, it is the new 1st node
 	if ((cur != NULL) && (strcmp(newNode->ingredientName, cur->ingredientName) < 0)){
 		newNode->next = cur;
 		cur->prev = newNode;
-		return newNode;
+		nodeToAddsIngredientTypeNode->head = newNode;
+		return;
 	}
 	for ( ; cur->next != NULL && (strcmp(newNode->ingredientName, cur->ingredientName) > 0); prev = cur, cur = cur->next)
 		;
@@ -284,9 +297,12 @@ struct ingredientItem *addNewIngredientItemNode(struct ingredientItem *head, cha
 	if ((strcmp(newNode->ingredientName, cur->ingredientName) > 0) && cur->next == NULL){
 		newNode->prev = cur;
 		cur->next = newNode;
-	//if the list is 1 long and this is 2nd node added
-		if (prev == NULL)
-			return cur;
+		//if the list is 1 long and this is 2nd node added
+		if (prev == NULL){
+			nodeToAddsIngredientTypeNode->head = cur;
+			return;
+		}
+			
 	}
 	//all middle cases
 	if ((strcmp(newNode->ingredientName, prev->ingredientName) > 0) &&
@@ -304,7 +320,7 @@ struct ingredientItem *addNewIngredientItemNode(struct ingredientItem *head, cha
 	//resetting file pointer to head
 	while (cur->prev != NULL)
 		cur = cur->prev;
-	return cur;
+	nodeToAddsIngredientTypeNode->head = cur;
 }
 
 /********************************************************************************************************************
@@ -312,8 +328,8 @@ struct ingredientItem *addNewIngredientItemNode(struct ingredientItem *head, cha
 *	 			modifies the ingredientName in an existing ingredientType node in the linked-list 					*
 *																													*
 *********************************************************************************************************************/
-void modifyIngredientItemNodeName(struct ingredientItem *node){
-	struct ingredientItem *changedNode = node;
+void modifyIngredientItemNodeName(struct ingredientItem *nodeToModify){
+	struct ingredientItem *changedNode = nodeToModify;
 	char choice = '\0';
 	char buffer[INGREDIENT_BUFFER_LEN] = {'\0'};
 	while (choice != 'Y'){
@@ -322,14 +338,6 @@ void modifyIngredientItemNodeName(struct ingredientItem *node){
 		readUserInputIntoBuffer(buffer);
 		printf("\n\t\tYou Entered: '%s', Is This Correct (y/n)?: ", buffer);
 		YESNOCHOICE(choice);
-	//	do {
-	//		choice = '\0';
-	//		choice = toupper(getchar());
-	//		if ((choice != 'Y') && (choice != 'N')){
-	//			printf("\t\tInvalid Entry\n");
-	//			while (getchar() != '\n');
-	//		}
-	//	} while ((choice != 'Y') && (choice != 'N'));
 	}
 	if (choice == 'Y')
 		strcpy(changedNode->ingredientName, buffer);
@@ -343,8 +351,8 @@ void modifyIngredientItemNodeName(struct ingredientItem *node){
 *	 			modifies the cupsPerGram amount in an existing ingredientType node in the linked-list 				*
 *																													*
 *********************************************************************************************************************/
-void modifyIngredientItemNodeWeight(struct ingredientItem *node){
-	struct ingredientItem *changedNode = node;
+void modifyIngredientItemNodeWeight(struct ingredientItem *nodeToModify){
+	struct ingredientItem *changedNode = nodeToModify;
 	char choice = '\0';
 	float gramsPerCup = 0.00;
 	while (choice != 'Y'){	
@@ -359,14 +367,6 @@ void modifyIngredientItemNodeWeight(struct ingredientItem *node){
 	    while (getchar() != '\n');
 	    printf("\n\t\tYou Entered: '%.3f grams', Is This Correct (y/n)?: ", gramsPerCup);
 	    YESNOCHOICE(choice);
-	//    do {
-	//		choice = '\0';
-	//		choice = toupper(getchar());
-	//		if ((choice != 'Y') && (choice != 'N')){
-	//			printf("\t\tInvalid Entry\n");
-	//			while (getchar() != '\n');
-	//		}
-	//	} while ((choice != 'Y') && (choice != 'N'));
     }
     changedNode->gramsPerCup = gramsPerCup;
 }
@@ -376,8 +376,8 @@ void modifyIngredientItemNodeWeight(struct ingredientItem *node){
 *	 			modifies the tablespoonFlag in an existing ingredientType node in the linked-list 					*
 *																													*
 *********************************************************************************************************************/
-void modifyIngredientItemNodeFlag(struct ingredientItem *node){
-	struct ingredientItem *changedNode = node;
+void modifyIngredientItemNodeFlag(struct ingredientItem *nodeToModify){
+	struct ingredientItem *changedNode = nodeToModify;
 	char choice = '\0';
 	char measurementType = '\0';
 	while (choice != 'Y'){
@@ -397,14 +397,6 @@ void modifyIngredientItemNodeFlag(struct ingredientItem *node){
 		printf((measurementType == 'T') ? "g/tbsp" : "g/cups");
 		printf("\", Is This Correct (y/n)?: ");
 		YESNOCHOICE(choice);
-	//	do {
-	//		choice = '\0';
-	//		choice = toupper(getchar());
-	//		if ((choice != 'Y') && (choice != 'N')){
-	//			printf("\t\tInvalid Entry\n");
-	//			while (getchar() != '\n');
-	//		}
-	//	} while ((choice != 'Y') && (choice != 'N'));
 	}
 	//store choice of Tablespoon or Cup in the node's tablespoonFlag member
 	changedNode->tablespoonFlag = (measurementType == 'T') ? 1 : 0;
@@ -461,14 +453,6 @@ int deleteIngredientItemNode(struct ingredientItem *node, struct ingredientType 
 	char choice = '\0';
 	printf("\n\t\t%s Found, Confirm DELETE (y/n): ", node->ingredientName);
 	YESNOCHOICE(choice);
-//	do {
-//			choice = '\0';
-//			choice = toupper(getchar());
-//			if ((choice != 'Y') && (choice != 'N')){
-//				printf("\n\t\tInvalid Entry: ");
-//				while (getchar() != '\n');
-//			}
-//		} while ((choice != 'Y') && (choice != 'N'));
 	if (choice == 'N')
 		return 1;	
 	//delete functionality
@@ -506,5 +490,4 @@ int deleteIngredientItemNode(struct ingredientItem *node, struct ingredientType 
 	dumpIngredientItemList(headNode);
 	return 0;
 }
-
 

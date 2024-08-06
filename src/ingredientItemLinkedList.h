@@ -59,7 +59,15 @@ struct ingredientItem *findIngredientItemNode(struct ingredientType *head, char 
 *				returns pointer to head on success, NULL on failure													*
 *																													*
 *********************************************************************************************************************/
-struct ingredientItem *addNewIngredientItemNode(struct ingredientItem *head, char buffer[INGREDIENT_BUFFER_LEN]);
+struct ingredientItem *addNewIngredientItemNode(char buffer[INGREDIENT_BUFFER_LEN]);
+
+/********************************************************************************************************************
+* 																													*
+*	 			puts an ingredientItem node into the ingredientItem linked-list alphabetically						*
+*				returns pointer to head on success, NULL on failure													*
+*																													*
+*********************************************************************************************************************/
+void placeIngredientItemNode(struct ingredientItem *ingredientItemNodeToAdd, struct ingredientType *nodeToAddsIngredientTypeNode);
 
 /********************************************************************************************************************
 * 																													*

@@ -66,8 +66,6 @@ int main (int argc, char **argv){
 			case 'Q':	return 0;
 			default: 	printf("\n\t\t\t\t\t***Invalid Selection***\n\n");
 		}
-		while (getchar() != '\n')
-			;
 	} while (menu != 'Q');
 	return 0;
 }
