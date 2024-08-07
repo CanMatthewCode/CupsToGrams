@@ -1,4 +1,4 @@
-Agar-agar	5.000000 g/tbsp
+Agar-Agar	5.000000 g/tbsp
 Dried Fruit	180.000000 g/cup
 Gelatin	7.000000 g/tbsp
 Kelp	80.000000 g/cup

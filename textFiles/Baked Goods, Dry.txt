@@ -1,6 +1,11 @@
 Baking Powder	13.800000 g/tbsp
 Baking Soda	13.800000 g/tbsp
 Cacao Nibs	160.000000 g/cup
+Chocoalte, Rough Chop	120.000000 g/cup
+Chocolate Chips	170.000000 g/cup
+Chocolate Chunks	140.000000 g/cup
+Chocolate, Fine Chop	180.000000 g/cup
+Choocolate, Grated	100.000000 g/cup
 Cocoa Powder	100.000000 g/cup
 Cornmeal	122.000000 g/cup
 Cornstarch	8.000000 g/tbsp

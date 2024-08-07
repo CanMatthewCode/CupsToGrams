@@ -1,0 +1,4 @@
+Five	5.000000 g/cup
+One	1.000000 g/cup
+Seven	7.000000 g/cup
+Three	3.000000 g/cup

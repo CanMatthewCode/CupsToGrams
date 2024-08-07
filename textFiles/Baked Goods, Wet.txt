@@ -1,6 +1,7 @@
 Almond Extract	12.600000 g/tbsp
 Almond Milk	248.800003 g/cup
 Cashew Milk	247.000000 g/cup
+Chocolate, Melted	304.000000 g/cup
 Cocoa Butter	218.000000 g/cup
 Coconut Cream	260.000000 g/cup
 Coconut Milk	241.000000 g/cup
