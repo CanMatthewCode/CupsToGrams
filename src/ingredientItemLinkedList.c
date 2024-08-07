@@ -218,7 +218,7 @@ struct ingredientItem *findIngredientItemNode(struct ingredientType *head, char 
 	   		while (getchar() != '\n');
 	   	else (printf("\t\tInvalid Entry: "));
 	    if ((ingredientItemChoice <= 0) || (ingredientItemChoice > (ingredientItemCounter + 1))){
-	       		printf("\t\tInvalid Entry\n");
+	       		printf("\t\tInvalid Entry: ");
 	       		while (getchar() != '\n');
 	    }
     }
@@ -262,7 +262,6 @@ struct ingredientItem *addNewIngredientItemNode(char buffer[INGREDIENT_BUFFER_LE
 			case 'T': 	newNode->tablespoonFlag = 1;
 						break;
 			default:	printf("\t\tInvalid Selection, Try Again: ");
-						while (getchar() != '\n');
 		}
 		while (getchar () != '\n');
 	} while ((ch != 'C') && (ch != 'T'));

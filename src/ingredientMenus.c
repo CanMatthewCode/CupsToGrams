@@ -148,7 +148,7 @@ void addIngredientItem(struct ingredientType *head){
 			struct ingredientItem *nodeToAdd;
 			readUserInputIntoBuffer(ingredientItemBuffer);
 			if (findIngredientItemNode(headPointer, ingredientItemBuffer, NULL) != NULL){
-				printf("\t\tIngredient Already Exists (Press Enter to Continue):");
+				printf("\n\t\tIngredient Already Exists");
 			//relink changed head back to where the ingredientType node the ingredientItem linked-list attaches
 			} else {
 					nodeToAdd = addNewIngredientItemNode(ingredientItemBuffer);
