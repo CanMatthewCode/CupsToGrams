@@ -34,7 +34,8 @@ int main (int argc, char **argv){
 	//create head pointer and load ingredientType linked-list then sub linked-lists
 	struct ingredientType *head = NULL;
 	head = loadIngredientTypes();
-	head = loadAllIngredientTypeSubLists(head);
+	if (head)
+		head = loadAllIngredientTypeSubLists(head);
 	char menu = '\0';
 	do {
 		clearScreen();
