@@ -296,7 +296,7 @@ void modifyIngredientItem(struct ingredientType *head){
 				while (getchar() != '\n');
 				} while ((changeChoice < 1) || (changeChoice > 4));
 				switch (changeChoice){
-					case 1:		modifyIngredientItemNodeName(foundIngredient);
+					case 1:		modifyIngredientItemNodeName(foundIngredient, foundIngredientsTypeNode);
 								break;
 					case 2:		modifyIngredientItemNodeWeight(foundIngredient);
 								break;

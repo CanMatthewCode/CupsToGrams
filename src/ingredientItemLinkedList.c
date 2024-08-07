@@ -328,8 +328,10 @@ void placeIngredientItemNode(struct ingredientItem *ingredientItemNodeToAdd, str
 *	 			modifies the ingredientName in an existing ingredientType node in the linked-list 					*
 *																													*
 *********************************************************************************************************************/
-void modifyIngredientItemNodeName(struct ingredientItem *nodeToModify){
+void modifyIngredientItemNodeName(struct ingredientItem *nodeToModify, struct ingredientType *nodeToModifysIngredientTypeNode){
 	struct ingredientItem *changedNode = nodeToModify;
+	struct ingredientItem *prev = nodeToModify->prev;
+	struct ingredientItem *next = nodeToModify->next;
 	char choice = '\0';
 	char buffer[INGREDIENT_BUFFER_LEN] = {'\0'};
 	while (choice != 'Y'){
@@ -341,9 +343,27 @@ void modifyIngredientItemNodeName(struct ingredientItem *nodeToModify){
 	}
 	if (choice == 'Y')
 		strcpy(changedNode->ingredientName, buffer);
-	//need functionality to check if it is still in the same place alphabetically as the name it changed
-	//if not, it needs to pull out the node into a temp node, connect prev to next, then scan from the head of the linked list
-	//to find where it should go, insert it in the correct spot and return head of sub-linked list 
+//if it is still in the right place alphabetically:
+	if (((prev && next) && ((strcmp(changedNode->ingredientName, prev->ingredientName) > 0) && (strcmp(changedNode->ingredientName, next->ingredientName) < 0)))
+		|| ((!prev && next) && (strcmp(changedNode->ingredientName, next->ingredientName) < 0)) || ((prev && !next) && (strcmp(changedNode->ingredientName, prev->ingredientName) > 0))){
+		return;
+	//if not and it is the first node: 
+	} else {
+		changedNode->prev = NULL;
+		changedNode->next = NULL;
+	 	if (!prev && next){
+			nodeToModifysIngredientTypeNode->head = next;
+			next->prev = NULL;
+		//if it is a middle node:
+		} else if (prev && next){
+			prev->next = next;
+			next->prev = prev;
+		//if it is the final node:
+		} else if (prev && !next){
+			prev->next = NULL;
+		}
+	}
+	placeIngredientItemNode(changedNode, nodeToModifysIngredientTypeNode);	
 }
 
 /********************************************************************************************************************

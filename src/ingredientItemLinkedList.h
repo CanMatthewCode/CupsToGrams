@@ -74,7 +74,7 @@ void placeIngredientItemNode(struct ingredientItem *ingredientItemNodeToAdd, str
 *	 			modifies the ingredientName in an existing ingredientType node in the linked-list 					*
 *																													*
 *********************************************************************************************************************/
-void modifyIngredientItemNodeName(struct ingredientItem *node);
+void modifyIngredientItemNodeName(struct ingredientItem *nodeToModify, struct ingredientType *nodeToModifysIngredientTypeNode);
 
 /********************************************************************************************************************
 * 																													*
