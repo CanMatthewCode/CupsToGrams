@@ -41,7 +41,7 @@ struct ingredientType{
 *	  getCups Converts User Input in the form of Cups, Cups Part/Cups, or Cups.Parts to a float value		*
 *																											*
 *************************************************************************************************************/
-float getCups(void);
+float getCups(char *amountToConvert);
 
 /************************************************************************************************************
 * 																											*
@@ -56,7 +56,7 @@ float cupsToGrams(float cups, float gramsPerCup);
 *		upon completion, buffer will be filled by "Output"													*
 *																											*
 *************************************************************************************************************/
-void readUserInputIntoBuffer(char buffer[INGREDIENT_BUFFER_LEN]);
+void readUserInputIntoBuffer(char buffer[]);
 
 /************************************************************************************************************
 * 																											*
@@ -64,6 +64,14 @@ void readUserInputIntoBuffer(char buffer[INGREDIENT_BUFFER_LEN]);
 *																											*
 *************************************************************************************************************/
 void clearScreen(void);
+
+/************************************************************************************************************
+* 																											*
+*	  parses user input to determine if they mean cups(c), tablespoons(tbsp) or teaspoons(tsp)				*
+*	  returns the divisor number for the fraction of cups to calculate against
+*																											*
+*************************************************************************************************************/
+int typeOfMeasurement(char *typeToConvert);
 
  
 #endif //INGREDIENTCONVERSIONS_H

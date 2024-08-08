@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <ctype.h>
+#include <string.h>
 #include "ingredientConversions.h"
 
 
@@ -8,21 +9,22 @@
 *	  getCups Converts User Input in the form of Cups, Cups Part/Cups, or Cups.Parts to a float value		*
 *																											*
 *************************************************************************************************************/
-float getCups(void){
+float getCups(char *amountToConvert){
 	char inputBuffer[20] = {'\0'};
-	int counter = 0;
-	char c = '\0';
+	strcpy(inputBuffer, amountToConvert);
+//	int counter = 0;
+//	char c = '\0';
 	int cups = 0;
 	int cupsNominator = 0;
 	int cupsDenominator = 0;
 	float totalCups = 0;
 	
-	printf("Enter number of cups: ");
+//	printf("Enter number of cups: ");
 	//read character input until you fill the buffer or get to new line
-	while (((c = getchar()) != '\n') && (counter < 20)){
-		inputBuffer[counter] = c;
-		counter++;
-	}
+//	while (((c = getchar()) != '\n') && (counter < 20)){
+//		inputBuffer[counter] = c;
+//		counter++;
+//	}
 	//read the inputBuffer for all possible valid and invalid input possibilities: 
 	//"Cups fractionPart/Cups", "fractionPart/Cups", or "Cups.percentCups" - valid
 	//"cups cups", or "other" - invalid
@@ -56,7 +58,7 @@ float cupsToGrams(float cups, float gramsPerCup){
 *		upon completion, buffer will be filled by "Capitalized First Letter Syntax"							*
 *																											*
 *************************************************************************************************************/
-void readUserInputIntoBuffer(char buffer[INGREDIENT_BUFFER_LEN]){
+void readUserInputIntoBuffer(char buffer[]){
 	char *temp = buffer;
 	char ch = '\0';
 	ch = getchar();
@@ -65,7 +67,7 @@ void readUserInputIntoBuffer(char buffer[INGREDIENT_BUFFER_LEN]){
 	ch = toupper(ch);
 	*temp = ch;
 	int counter = 1;
-	while ((ch = getchar()) != '\n' && counter < INGREDIENT_BUFFER_LEN){
+	while ((ch = getchar()) != '\n' && counter < 50){
 		ch = tolower(ch);
 		if (((ch == ' ') || (ch == '\t')) && (*(temp+counter-1) == ' '))
 			continue;
@@ -85,4 +87,21 @@ void readUserInputIntoBuffer(char buffer[INGREDIENT_BUFFER_LEN]){
 *************************************************************************************************************/
 void clearScreen(void){
 	printf("\033[2J\033[H"); // ANSI escape sequence to clear screen
+}
+
+/************************************************************************************************************
+* 																											*
+*	  parses user input to determine if they mean cups(c), tablespoons(tbsp) or teaspoons(tsp)				*
+*	  returns the divisor number for the fraction of cups to calculate against
+*																											*
+*************************************************************************************************************/
+int typeOfMeasurement(char *typeToConvert){
+	if ((strcmp(typeToConvert, "Cups") == 0) || (strcmp(typeToConvert, "Cup") == 0) || (strcmp(typeToConvert, "C") == 0)){
+		return 1;
+	} else if ((strcmp(typeToConvert, "Tablespoons") == 0) || (strcmp(typeToConvert, "Tablespoon") == 0) || (strcmp(typeToConvert, "Tbsp") == 0) || (strcmp(typeToConvert, "Table") == 0)) {
+		return 16;
+    } else if ((strcmp(typeToConvert, "Teaspoons") == 0) || (strcmp(typeToConvert, "Teaspoon") == 0) || (strcmp(typeToConvert, "Tsp") == 0) || (strcmp(typeToConvert, "Tea") == 0)){
+		return 48;
+	} else 
+	    return 0;
 }
