@@ -17,6 +17,13 @@ struct ingredientType *convertIngredientMenu(struct ingredientType *head);
 
 /************************************************************************************************************
 * 																											*
+*				converts a user inputted amount against the grams per cup stored in the ingredient node		*
+*																											*
+*************************************************************************************************************/
+void convertIngredient(struct ingredientType *head);
+
+/************************************************************************************************************
+* 																											*
 *				add a node to the ingredientType linked-list from the main menu option						*
 *				returns pointer to head of list on success, NULL on failure									*
 *																											*
