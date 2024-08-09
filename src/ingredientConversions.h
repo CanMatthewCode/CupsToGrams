@@ -68,10 +68,17 @@ void clearScreen(void);
 /************************************************************************************************************
 * 																											*
 *	  parses user input to determine if they mean cups(c), tablespoons(tbsp) or teaspoons(tsp)				*
-*	  returns the divisor number for the fraction of cups to calculate against
+*	  returns the divisor number for the fraction of cups to calculate against								*
 *																											*
 *************************************************************************************************************/
 int typeOfMeasurement(char *typeToConvert);
 
- 
+/************************************************************************************************************
+* 																											*
+*	  	accepts user input only if it is numeric and within -999 to 999 bounds								*
+*																											*
+*************************************************************************************************************/
+int getNumericChoice();
+
+
 #endif //INGREDIENTCONVERSIONS_H

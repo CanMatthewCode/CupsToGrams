@@ -2,6 +2,7 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdlib.h>
 #include "ingredientConversions.h"
 #include "ingredientTypeLinkedList.h"
 #include "ingredientItemLinkedList.h"
@@ -13,7 +14,7 @@
 *		XDelete selected node
 *		XPrint ingredient node list
 *		XDump ingredientTypeLinkedList into text file named ingredientType->ingredientName
-*		Print All Ingredients by Type ~pretty~
+*		XPrint All Ingredients by Type ~pretty~
 *		freeIngredientTypeLinkedList function
 *		freeAllIngredientTypeLinkedLists function
 */
@@ -214,9 +215,7 @@ struct ingredientItem *findIngredientItemNode(struct ingredientType *head, char 
 	printf("\t\t%i) None Of The Above\n", i);
 	while ((ingredientItemChoice == 0) || ((ingredientItemChoice <= 0) || (ingredientItemChoice > (ingredientItemCounter + 1)))){
         printf("\t\tEnter Ingredient Number: ");
-	   	if ((scanf(" %i", &ingredientItemChoice) == 1))
-	   		while (getchar() != '\n');
-	   	else (printf("\t\tInvalid Entry: "));
+        ingredientItemChoice = getNumericChoice();
 	    if ((ingredientItemChoice <= 0) || (ingredientItemChoice > (ingredientItemCounter + 1))){
 	       		printf("\t\tInvalid Entry: ");
 	       		while (getchar() != '\n');
@@ -427,7 +426,7 @@ void modifyIngredientItemNodeFlag(struct ingredientItem *nodeToModify){
 *																													*
 *********************************************************************************************************************/
 void printIngredientItemNode(struct ingredientItem *node){
-	printf("\t\t%-s:", node->ingredientName);
+	printf("\t\t\t\t%-s:", node->ingredientName);
 	int spaceCounter = (26 - strlen(node->ingredientName));
 	for (int i = 0; i < spaceCounter; i++)
 		printf(" ");
@@ -446,7 +445,7 @@ void printAllIngredientItemNodes(struct ingredientType *node){
 	char ch = '\0';
 	int i = 0;
 	int spaceCounter = (38 - (strlen(node->typeName) / 2));
-	printf("\n\n");
+	printf("\n\n\t\t");
 	for (int c = 0; c < spaceCounter; c++)
 		printf(" ");
 	while (typePointer->typeName[i] != '\0'){

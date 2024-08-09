@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
+#include <stdlib.h>
 #include "ingredientConversions.h"
 
 
@@ -61,15 +62,25 @@ float cupsToGrams(float cups, float gramsPerCup){
 void readUserInputIntoBuffer(char buffer[]){
 	char *temp = buffer;
 	char ch = '\0';
-	ch = getchar();
+	int counter = 0;
+	do{
+	    ch = getchar();
+	    if ((counter == 0) && (ch == '\n'))
+    	    printf("\t\tInvalid Entry: ");
+    } while (ch == '\n');
+	//ch = getchar();
+//	if ((counter == 0) && (ch == '\n'))
+//    	printf("\n\t\tInvalid Entry: ");
 	while ((ch == ' ') || (ch == '\t') || (ch == '\n'))
 		ch = getchar();
 	ch = toupper(ch);
 	*temp = ch;
-	int counter = 1;
+	counter = 1;
 	while ((ch = getchar()) != '\n' && counter < 50){
 		ch = tolower(ch);
-		if (((ch == ' ') || (ch == '\t')) && (*(temp+counter-1) == ' '))
+		if (ch == '\t')
+		    ch = ' ';
+		if (((ch == ' ') || (ch == '\t')) && ((*(temp+counter-1) == ' ')))
 			continue;
 		if (*(temp+counter-1) == ' ')
 			ch = toupper(ch);
@@ -79,6 +90,8 @@ void readUserInputIntoBuffer(char buffer[]){
 	if (*(temp+counter) == ' ')
 		*(temp+counter) = '\0';  
 }
+
+
 
 /************************************************************************************************************
 * 																											*
@@ -92,7 +105,7 @@ void clearScreen(void){
 /************************************************************************************************************
 * 																											*
 *	  parses user input to determine if they mean cups(c), tablespoons(tbsp) or teaspoons(tsp)				*
-*	  returns the divisor number for the fraction of cups to calculate against
+*	  returns the divisor number for the fraction of cups to calculate against								*
 *																											*
 *************************************************************************************************************/
 int typeOfMeasurement(char *typeToConvert){
@@ -104,4 +117,50 @@ int typeOfMeasurement(char *typeToConvert){
 		return 48;
 	} else 
 	    return 0;
+}
+
+/************************************************************************************************************
+* 																											*
+*	  	accepts user input only if it is numeric and within -999 to 999 bounds								*
+*																											*
+*************************************************************************************************************/
+int getNumericChoice(){
+    char buffer[5];
+    long int number;
+    char *endptr;
+    int ch;
+    while (1) {
+        while ((ch = getchar()) == ' ' || ch == '\t')
+            ;
+        // Check for immediate newline
+        if (ch == '\n') {
+            printf("\t\tInvalid Entry: ");
+            continue;
+        }
+        // Put back the non-whitespace character
+        ungetc(ch, stdin);
+        // Read input
+        if (fgets(buffer, sizeof(buffer), stdin) == NULL) {
+            printf("\t\tInvalid Entry: ");
+            continue;
+        }
+
+        // Check for buffer overflow
+        if (strchr(buffer, '\n') == NULL) {
+            printf("\t\tInvalid Entry: ");
+            // Clear the rest of the input
+            while ((ch = getchar()) != '\n' && ch != EOF)
+                ;
+            continue;
+        }
+        // Remove trailing newline
+        buffer[strcspn(buffer, "\n")] = 0;
+        // Convert to number
+        number = strtol(buffer, &endptr, 10);
+        if (endptr == buffer) {
+            printf("\t\tInvalid Entry: ");
+            continue;
+        }
+        return (int)number;
+    }
 }
