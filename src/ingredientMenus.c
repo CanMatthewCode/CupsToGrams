@@ -39,7 +39,7 @@ struct ingredientType *convertIngredientMenu(struct ingredientType *head){
         	while (getchar() != '\n')
         		; // Clear the input buffer
 			if (strchr("123456789B", menu) == NULL)
-				printf("\t\tInvalid Entry: ");
+				printf("\t\tInvalid Selection: ");
     	} while (strchr("123456789B", menu) == NULL);
 		switch (menu){
 			case '1':	convertIngredient(headPointer);
@@ -287,7 +287,7 @@ void printAllIngredientItemsInTypeNode(struct ingredientType *head){
 		clearScreen();
 		choice = '\0';
 		printIngredientTypeList(head);
-		printf("\n\n\t\t");
+		printf("\n\n\n\n\t\t");
 		do {
 			printf("Enter Desired Type Of Ingredient For Full List: ");
 			readUserInputIntoBuffer(ingredientTypeBuffer);

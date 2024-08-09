@@ -58,7 +58,7 @@ int main (int argc, char **argv){
         	}
         	while (getchar() != '\n'); // Clear the input buffer
 			if (strchr("1234Q", menu) == NULL)
-				printf("\t\tInvalid Entry: ");
+				printf("\t\tInvalid Selection: ");
     	} while (strchr("1234Q", menu) == NULL);
 		switch (menu){
 			case '1': 	clearScreen();
