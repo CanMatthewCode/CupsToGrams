@@ -1,0 +1,144 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include <errno.h>
+
+long int getNumericChoice();
+
+int main(){
+    long int number = getNumericChoice();
+    printf("\nYou entered: %ld\n", number);
+    
+    return 0;
+}
+
+
+long int getNumericChoice() {
+    char buffer[5];	//allows up to 999 choices, removes number overflow issue
+    long int number;
+    char *endptr;
+    int ch;
+
+	printf("\t\tEnter Ingredient Number: ");
+    while (1) {
+        while ((ch = getchar()) == ' ' || ch == '\t')
+            ;
+        // Check for immediate newline
+        if (ch == '\n') {
+            printf("\t\tInvalid Entry: ");
+            continue;
+        }
+        // Put back the non-whitespace character
+        ungetc(ch, stdin);
+        // Read input
+        if (fgets(buffer, sizeof(buffer), stdin) == NULL) {
+            printf("\t\tInvalid Entry: ");
+            continue;
+        }
+        // Check for buffer overflow
+        if (strchr(buffer, '\n') == NULL) {
+            printf("\t\tInvalid Entry: ");
+            // Clear the rest of the input
+            while ((ch = getchar()) != '\n' && ch != EOF)
+                ;
+            continue;
+        }
+        // Remove trailing newline
+        buffer[strcspn(buffer, "\n")] = 0;
+        // Convert to number
+        number = strtol(buffer, &endptr, 10);
+        if (endptr == buffer) {
+            printf("\t\tInvalid Entry: ");
+            continue;
+        }
+        return (int)number;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+#define BUFFER_SIZE 3000
+
+long int getNumericChoice() {
+    char buffer[BUFFER_SIZE];
+    long int number;
+    char *endptr;
+    int ch;
+
+    while (1) {
+        printf("\t\tEnter Ingredient Number: ");
+        
+        // Skip leading whitespace
+        while ((ch = getchar()) == ' ' || ch == '\t')
+            ;
+
+        // Check for immediate newline
+        if (ch == '\n') {
+            printf("\t\tInvalid Entry: Empty input\n");
+            continue;
+        }
+
+        // Put back the non-whitespace character
+        ungetc(ch, stdin);
+
+        // Read input
+        if (fgets(buffer, sizeof(buffer), stdin) == NULL) {
+            printf("\t\tError reading input. Please try again.\n");
+            continue;
+        }
+
+        // Check for buffer overflow
+        if (strchr(buffer, '\n') == NULL) {
+            printf("\t\tInvalid Entry: Input too long\n");
+            // Clear the rest of the input
+            while ((ch = getchar()) != '\n' && ch != EOF)
+                ;
+            continue;
+        }
+
+        // Remove trailing newline
+        buffer[strcspn(buffer, "\n")] = 0;
+
+        // Convert to number
+        errno = 0;
+        number = strtol(buffer, &endptr, 10);
+
+        if (errno == ERANGE) {
+            printf("\t\tInvalid Entry: Number out of range\n");
+            continue;
+        }
+
+        if (endptr == buffer) {
+            printf("\t\tInvalid Entry: No valid number found\n");
+            continue;
+        }
+
+        if (number <= 0) {
+            printf("\t\tInvalid Entry: Number must be positive\n");
+            continue;
+        }
+
+        // If there are non-numeric characters after the number, clear them
+        if (*endptr != '\0') {
+            printf("\t\tWarning: Non-numeric characters after the number were ignored\n");
+        }
+
+        return number;
+    }
+}
+
+
+
+
+
