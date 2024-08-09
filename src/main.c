@@ -50,9 +50,16 @@ int main (int argc, char **argv){
 			 "(3) See Ingredient List\n\t\t(4) See Recipe List"
 			 "\n\t\t(Q) Quit");
 		printf("\n\t\tEnter Selection: ");
-		menu = '\0';
-		menu = toupper(getchar());
-		while (getchar() != '\n');
+		do {
+        	menu = toupper(getchar());
+        	if (menu == '\n'){
+            	printf("\t\tInvalid Selection: ");
+            	continue;
+        	}
+        	while (getchar() != '\n'); // Clear the input buffer
+			if (strchr("1234Q", menu) == NULL)
+				printf("\t\tInvalid Entry: ");
+    	} while (strchr("1234Q", menu) == NULL);
 		switch (menu){
 			case '1': 	clearScreen();
 						head = convertIngredientMenu(head); //- leads to submenu to ask to search by name, by type, or all 
