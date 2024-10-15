@@ -21,6 +21,9 @@ do {								    								\
 	}																	\
 } while (((choice) != 'Y') && ((choice) != 'N'))
 
+//#define clearScreen														\
+//	printf("\033[2J\033[H");
+
 struct ingredientItem{
 	char ingredientName[INGREDIENT_BUFFER_LEN];
 	int tablespoonFlag;
@@ -56,7 +59,7 @@ float cupsToGrams(float cups, float gramsPerCup);
 *		upon completion, buffer will be filled by "Output"													*
 *																											*
 *************************************************************************************************************/
-void readUserInputIntoBuffer(char buffer[]);
+void readUserInputIntoBuffer(char buffer[INGREDIENT_BUFFER_LEN]);
 
 /************************************************************************************************************
 * 																											*

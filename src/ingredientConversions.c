@@ -59,7 +59,7 @@ float cupsToGrams(float cups, float gramsPerCup){
 *		upon completion, buffer will be filled by "Capitalized First Letter Syntax"							*
 *																											*
 *************************************************************************************************************/
-void readUserInputIntoBuffer(char buffer[]){
+void readUserInputIntoBuffer(char buffer[INGREDIENT_BUFFER_LEN]){
 	char *temp = buffer;
 	char ch = '\0';
 	int counter = 0;
@@ -68,15 +68,12 @@ void readUserInputIntoBuffer(char buffer[]){
 	    if ((counter == 0) && (ch == '\n'))
     	    printf("\t\tInvalid Entry: ");
     } while (ch == '\n');
-	//ch = getchar();
-//	if ((counter == 0) && (ch == '\n'))
-//    	printf("\n\t\tInvalid Entry: ");
 	while ((ch == ' ') || (ch == '\t') || (ch == '\n'))
 		ch = getchar();
 	ch = toupper(ch);
 	*temp = ch;
 	counter = 1;
-	while ((ch = getchar()) != '\n' && counter < 50){
+	while ((ch = getchar()) != '\n' && counter < (INGREDIENT_BUFFER_LEN - 1)){
 		ch = tolower(ch);
 		if (ch == '\t')
 		    ch = ' ';

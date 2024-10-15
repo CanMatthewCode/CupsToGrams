@@ -431,7 +431,7 @@ void printIngredientItemNode(struct ingredientItem *node){
 	for (int i = 0; i < spaceCounter; i++)
 		printf(" ");
 	printf("%6.2f ", node->gramsPerCup);
-	printf(node->tablespoonFlag == 1 ? "g/tbsp" : "g/cups");
+	printf(node->tablespoonFlag == 1 ? "g/tbsp" : "g/cup");
 }
 
 /********************************************************************************************************************
