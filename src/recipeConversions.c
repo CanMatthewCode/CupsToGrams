@@ -61,3 +61,42 @@ void setRecipeType(struct recipeStruct *currentRecipe){
 	} while (choice < 1 || choice > 8);
 	currentRecipe->recipeType = choice - 1;
 }
+
+/************************************************************************************************************
+* 																											*
+*	  	used to fill in a recipeDirection or recipeNote field of a recipeStruct								*
+*																											*
+*************************************************************************************************************/
+void readUserInputIntoRecipe(char directionsBuffer[MAX_INGREDIENT_TEXT]){
+	char *temp = directionsBuffer;
+	char ch = '\0';
+	int counter = 0;
+	do{
+	    ch = getchar();
+	    if ((counter == 0) && (ch == '\n'))
+    	    printf("\t\tInvalid Entry: ");
+    } while (ch == '\n');
+	while ((ch == ' ') || (ch == '\t') || (ch == '\n'))
+		ch = getchar();
+	ch = toupper(ch);
+	*temp = ch;
+	counter = 1;
+	while ((ch = getchar()) != '\n' && counter < (MAX_INGREDIENT_TEXT - 1)){
+		ch = tolower(ch);
+		if (ch == '\t')
+		    ch = ' ';
+		if (((ch == ' ') || (ch == '\t')) && ((*(temp+counter-1) == ' ')))
+			continue;
+		//capitalize first letter of new sentence
+		if (((*(temp+counter-1) == ' ') && (*(temp+counter-2) == '.')) || ((*(temp+counter-1) == ' ') && (*(temp+counter-2) == '?')))
+			ch = toupper(ch);
+		//capitalize I when it stands alone
+		if ((ch == ' ') && (*(temp+counter-1) == 'i') && (*(temp+counter-2) == ' '))
+		    *(temp+counter-1) = 'I';
+		*(temp+counter) = ch;
+		counter++;
+	}
+	if (*(temp+counter) == ' ')
+		*(temp+counter) = '\0';  
+}
+

@@ -58,6 +58,11 @@ int addNewIngredient(struct recipeStruct *currentRecipe, struct ingredientType *
 *********************************************************************************************************************/
 void setRecipeType(struct recipeStruct *currentRecipe);
 
-
+/************************************************************************************************************
+* 																											*
+*	  	used to fill in a recipeDirection or recipeNote field of a recipeStruct								*
+*																											*
+*************************************************************************************************************/
+void readUserInputIntoRecipe(char directionsBuffer[MAX_INGREDIENT_TEXT]);
 
 #endif //RECIPECONVERSIONS_H
