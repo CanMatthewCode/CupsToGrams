@@ -4,6 +4,7 @@
 #include "ingredientTypeLinkedList.h"
 #include "ingredientItemLinkedList.h"
 #include "ingredientMenus.h"
+#include "recipeMenus.h"
 
 
 /*		switch statement and functionality to do the following:
@@ -32,10 +33,11 @@
  
 int main (int argc, char **argv){
 	//create head pointer and load ingredientType linked-list then sub linked-lists
-	struct ingredientType *head = NULL;
-	head = loadIngredientTypes();
-	if (head)
-		head = loadAllIngredientTypeSubLists(head);
+	struct ingredientType *ingredientHead = NULL;
+	struct recipeStruct *recipeHead = NULL;
+	ingredientHead = loadIngredientTypes();
+	if (ingredientHead)
+		ingredientHead = loadAllIngredientTypeSubLists(ingredientHead);
 	char menu = '\0';
 	do {
 		clearScreen();
@@ -62,12 +64,14 @@ int main (int argc, char **argv){
     	} while (strchr("1234Q", menu) == NULL);
 		switch (menu){
 			case '1': 	clearScreen();
-						head = convertIngredientMenu(head); //- leads to submenu to ask to search by name, by type, or all 
+						ingredientHead = convertIngredientMenu(ingredientHead); //- leads to submenu to ask to search by name, by type, or all 
 						//					 			  -- further submenu asks to add type of ingredient or add ingredient
 						break; 
 			case '2': 	//convertRecipe(); - leads to submenu to ask to convert recipe then to save or not
+						recipeMenus(recipeHead, ingredientHead);
 						break;
-			case '3':	//printIngredients(); - leads to submenu to ask to search by name, by type, or all
+			case '3':	clearScreen();
+						printAllIngredientItemsInTypeNode(ingredientHead);
 						break;
 			case '4':	//printRecipes(); - leads to submenu to ask to search by name, food type, or cuisine 
 						break;
