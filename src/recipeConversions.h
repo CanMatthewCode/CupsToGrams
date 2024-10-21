@@ -42,6 +42,11 @@ struct recipeStruct{
 *********************************************************************************************************************/
 struct recipeStruct *createNewRecipeNode(void);
 
-
+/********************************************************************************************************************
+* 																													*
+*	  			add new ingredientStruct into newRecipe struct. Returns 1 on success, 0 on failure					*
+*																													*
+*********************************************************************************************************************/
+int addNewIngredient(struct recipeStruct *currentRecipe, struct ingredientType *head);
 
 #endif //RECIPECONVERSIONS_H

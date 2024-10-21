@@ -19,3 +19,26 @@ struct recipeStruct *createNewRecipeNode(void){
 	return newRecipe;
 }
 
+/********************************************************************************************************************
+* 																													*
+*	  			add new ingredientStruct into newRecipe struct. Returns 1 on success, 0 on failure					*
+*																													*
+*********************************************************************************************************************/
+int addNewIngredient(struct recipeStruct *currentRecipe, struct ingredientType *head){
+	struct ingredientItem *foundNewIngredient = NULL;
+	char buffer[INGREDIENT_BUFFER_LEN];
+	char cupsInputAmountBuffer[INGREDIENT_BUFFER_LEN] = {'\0'};
+	printf("\t\tWhat Ingredient Would You Like To Add?: ");
+	readUserInputIntoBuffer(buffer);
+	if ((foundNewIngredient = findIngredientItemNode(head, buffer, NULL)) == NULL)
+		return 0;
+	else {
+		puts("\t\tEnter Amount To Add In Cups Notation: ");
+		readUserInputIntoBuffer(cupsInputAmountBuffer);
+		strcpy(currentRecipe->ingredients[currentRecipe->numberOfIngredients].ingredientName, foundNewIngredient->ingredientName);
+		strcpy(currentRecipe->ingredients[currentRecipe->numberOfIngredients].userCupsInput, cupsInputAmountBuffer);
+		currentRecipe->ingredients[currentRecipe->numberOfIngredients].ingredientGrams = cupsToGrams(cupsInputAmountBuffer, foundNewIngredient);
+	}
+	return 1;
+}
+
