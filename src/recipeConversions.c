@@ -100,3 +100,72 @@ void readUserInputIntoRecipe(char directionsBuffer[MAX_INGREDIENT_TEXT]){
 		*(temp+counter) = '\0';  
 }
 
+/************************************************************************************************************
+* 																											*
+*	  	prints a recipe's name surrounded by ***s on top, bottom, and sides									*
+*																											*
+*************************************************************************************************************/
+void printRecipeName(struct recipeStruct *recipe){
+	int nameSize = strlen(recipe->recipeName);
+	puts("\t\t*********************************************************************************");
+	puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
+	printf("\t\t*");
+	for (int i = 0; i < ((79 - nameSize) / 2); i++)
+		printf(" ");
+	printf("%s", recipe->recipeName);
+	for (int i = 0; i < ((79 - nameSize) / 2); i++)
+		printf(" ");
+	if (((79 - nameSize) % 2) == 1)
+		printf(" ");
+	printf("*\n");
+	puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
+	puts("\t\t*********************************************************************************");
+}
+
+/************************************************************************************************************
+* 																											*
+*	  	prints a recipeStruct's ingredients in a listed order												*
+*																											*
+*************************************************************************************************************/
+void printRecipeIngredients(struct recipeStruct *recipe){
+	puts("\n\n\t\tINGREDIENTS:\n\n");
+	for (int i = 0; i < recipe->numberOfIngredients; i++)
+		printf("\t\t%d)  %7.2f grams of %s (%s)\n", i + 1, recipe->ingredients[i].ingredientGrams, recipe->ingredients[i].ingredientName, recipe->ingredients[i].userCupsInput);
+}
+
+/************************************************************************************************************
+* 																											*
+*	  	prints a recipeStruct's instructions in a listed order												*
+*																											*
+*************************************************************************************************************/
+void printRecipeInstructions(struct recipeStruct *recipe){
+	puts("\n\n\t\tINSTRUCTIONS:\n\n");
+	for (int i = 0; i < recipe->numberOfInstructions; i++)
+		printf("\t\t%d)  %s\n", i + 1, recipe->recipeInstructions[i]);
+}
+
+/************************************************************************************************************
+* 																											*
+*	  	prints a recipeStruct's notes in a listed order														*
+*																											*
+*************************************************************************************************************/
+void printRecipeNotes(struct recipeStruct *recipe){
+	puts("\n\n\t\tNOTES:\n\n");
+	for (int i = 0; i < recipe->numberOfNotes; i++)
+		printf("\t\t%d)  %s\n", i + 1, recipe->recipeNotes[i]);
+}
+
+/************************************************************************************************************
+* 																											*
+*	  	prints the entirety of a recipeStruct's contents in a recipe-like manor								*
+*																											*
+*************************************************************************************************************/
+void printFullRecipe(struct recipeStruct *recipe){
+	clearScreen();
+	printRecipeName(recipe);
+	printRecipeIngredients(recipe);
+	if (recipe->numberOfInstructions > 0)
+		printRecipeInstructions(recipe);
+	if (recipe->recipeNotes > 0)
+		printRecipeNotes(recipe);
+}

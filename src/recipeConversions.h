@@ -65,4 +65,39 @@ void setRecipeType(struct recipeStruct *currentRecipe);
 *************************************************************************************************************/
 void readUserInputIntoRecipe(char directionsBuffer[MAX_INGREDIENT_TEXT]);
 
+/************************************************************************************************************
+* 																											*
+*	  	prints a recipe's name surrounded by *** on top, bottom, and sides									*
+*																											*
+*************************************************************************************************************/
+void printRecipeName(struct recipeStruct *recipe);
+
+/************************************************************************************************************
+* 																											*
+*	  	prints a recipeStruct's ingredients in a listed order												*
+*																											*
+*************************************************************************************************************/
+void printRecipeIngredients(struct recipeStruct *recipe);
+
+/************************************************************************************************************
+* 																											*
+*	  	prints a recipeStruct's instructions in a listed order												*
+*																											*
+*************************************************************************************************************/
+void printRecipeInstructions(struct recipeStruct *recipe);
+
+/************************************************************************************************************
+* 																											*
+*	  	prints a recipeStruct's notes in a listed order														*
+*																											*
+*************************************************************************************************************/
+void printRecipeNotes(struct recipeStruct *recipe);
+
+/************************************************************************************************************
+* 																											*
+*	  	prints the entirety of a recipeStruct's contents in a recipe-like manor								*
+*																											*
+*************************************************************************************************************/
+void printFullRecipe(struct recipeStruct *recipe);
+
 #endif //RECIPECONVERSIONS_H
