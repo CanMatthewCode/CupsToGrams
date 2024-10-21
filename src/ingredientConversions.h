@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <ctype.h>
 
-#define INGREDIENT_BUFFER_LEN 30
+#define INGREDIENT_BUFFER_LEN 50
 #define MAX_INGREDIENTS_FOUND 100
 
 #define YESNOCHOICE(choice)												\
@@ -48,13 +48,6 @@ float getCups(char *amountToConvert);
 
 /************************************************************************************************************
 * 																											*
-*	  cupsToGrams Accepts Number of Cups from getCups and Grams Per Cup from ingredientItem->gramsPerCup	*
-*																											*
-*************************************************************************************************************/
-float cupsToGrams(float cups, float gramsPerCup);
-
-/************************************************************************************************************
-* 																											*
 *	 	read input into user buffer. must pass in a buffer[INGREDIENT_BUFFER_LEN]							*
 *		upon completion, buffer will be filled by "Output"													*
 *																											*
@@ -72,9 +65,17 @@ void clearScreen(void);
 * 																											*
 *	  parses user input to determine if they mean cups(c), tablespoons(tbsp) or teaspoons(tsp)				*
 *	  returns the divisor number for the fraction of cups to calculate against								*
+*	  return 0 on failure to get Cups, Tablespoons, or Teaspoons as input									*
 *																											*
 *************************************************************************************************************/
 int typeOfMeasurement(char *typeToConvert);
+
+/************************************************************************************************************
+* 																											*
+*	  parses a readUserInputIntoBuffer input in Cups notation and outputs chosen ingredient amount in grams	*
+*																											*
+*************************************************************************************************************/
+float cupsToGrams(char *cupsInputAmountBuffer, struct ingredientItem *ingredientToConvert);
 
 /************************************************************************************************************
 * 																											*

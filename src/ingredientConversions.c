@@ -13,19 +13,10 @@
 float getCups(char *amountToConvert){
 	char inputBuffer[20] = {'\0'};
 	strcpy(inputBuffer, amountToConvert);
-//	int counter = 0;
-//	char c = '\0';
 	int cups = 0;
 	int cupsNominator = 0;
 	int cupsDenominator = 0;
 	float totalCups = 0;
-	
-//	printf("Enter number of cups: ");
-	//read character input until you fill the buffer or get to new line
-//	while (((c = getchar()) != '\n') && (counter < 20)){
-//		inputBuffer[counter] = c;
-//		counter++;
-//	}
 	//read the inputBuffer for all possible valid and invalid input possibilities: 
 	//"Cups fractionPart/Cups", "fractionPart/Cups", or "Cups.percentCups" - valid
 	//"cups cups", or "other" - invalid
@@ -42,15 +33,6 @@ float getCups(char *amountToConvert){
 		return -1;
 	}
 	return totalCups;
-}
-
-/************************************************************************************************************
-* 																											*
-*	  cupsToGrams Accepts Number of Cups from getCups and Grams Per Cup from ingredientItem->gramsPerCup	*
-*																											*
-*************************************************************************************************************/
-float cupsToGrams(float cups, float gramsPerCup){
-	return cups * gramsPerCup;
 }
 
 /************************************************************************************************************
@@ -88,8 +70,6 @@ void readUserInputIntoBuffer(char buffer[INGREDIENT_BUFFER_LEN]){
 		*(temp+counter) = '\0';  
 }
 
-
-
 /************************************************************************************************************
 * 																											*
 *	  clearScreen prints an escape sequence to clear the terminal											*
@@ -103,6 +83,7 @@ void clearScreen(void){
 * 																											*
 *	  parses user input to determine if they mean cups(c), tablespoons(tbsp) or teaspoons(tsp)				*
 *	  returns the divisor number for the fraction of cups to calculate against								*
+*	  return 0 on failure to get Cups, Tablespoons, or Teaspoons as input									*
 *																											*
 *************************************************************************************************************/
 int typeOfMeasurement(char *typeToConvert){
@@ -114,6 +95,47 @@ int typeOfMeasurement(char *typeToConvert){
 		return 48;
 	} else 
 	    return 0;
+}
+
+/************************************************************************************************************
+* 																											*
+*	  parses a readUserInputIntoBuffer input in Cups notation and returns chosen ingredient amount in grams	*
+*																											*
+*************************************************************************************************************/
+float cupsToGrams(char *cupsInputAmountBuffer, struct ingredientItem *ingredientToConvert){
+	char measurementAmount[20] = {'\0'};
+	char measurementType[12] = {'\0'};
+	int charsRead = 0;
+	float sum = 0;
+	char *currentPosition = NULL;
+	printf("\n\n\t\tEnter Amount To Convert From US Cups Measurements: ");
+	do {
+		memset(cupsInputAmountBuffer, 0, 20);
+		memset(measurementAmount, 0, sizeof(measurementAmount));
+		memset(measurementType, 0, sizeof(measurementType));
+		charsRead = 0;
+		readUserInputIntoBuffer(cupsInputAmountBuffer);
+		currentPosition = cupsInputAmountBuffer;
+		//move through cupsInputAmountBuffer reading the numbers then types in a loop
+		do {
+			if (sscanf(currentPosition, " %19[0-9/ ]%19[A-Za-z]%n", measurementAmount, measurementType, &charsRead) == 2) {
+			//safety for if typeOfMeasurement returns 0 for wrong input
+				if (typeOfMeasurement(measurementType) == 0){
+					break;
+				}
+				sum += ((getCups(measurementAmount)) / (typeOfMeasurement(measurementType)));
+				currentPosition += charsRead; 
+			} else {
+				break; //exit the loop if sscanf() fails to read two input items
+			}
+		} while (*currentPosition != '\0');
+		if (ingredientToConvert->tablespoonFlag == 1)
+			sum *= 16;
+		if (sum == 0){
+			printf("\n\t\t%s: Not Valid Input, Try Again: ", cupsInputAmountBuffer);
+		}
+	} while (sum == 0);
+	return sum*ingredientToConvert->gramsPerCup;
 }
 
 /************************************************************************************************************
