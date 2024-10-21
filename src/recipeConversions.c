@@ -42,3 +42,22 @@ int addNewIngredient(struct recipeStruct *currentRecipe, struct ingredientType *
 	return 1;
 }
 
+/********************************************************************************************************************
+* 																													*
+*	  			set enum recipeType type to: 	APPETIZER, BAKED_GOOD, BREAKFAST, DESSERT, MAINS,					*
+*												SIDES, SNACKS, SOUPS.  												*
+*				return 1 on success 0 on failure																	*
+*																													*
+*********************************************************************************************************************/
+void setRecipeType(struct recipeStruct *currentRecipe){
+	currentRecipe->recipeType = 0;
+	int choice = 0;
+	puts("\t\t(1) APPETIZER\t(2) BAKED GOOD\t(3) BREAKFAST\t(4) DESSERT\n\n\t\t(5) MAINS\t\t(6) SIDES\t\t(7) SNACKS\t\t(8)SOUPS");
+	printf("\n\n\t\tEnter Number(#) Of Food Type: ");
+	do {
+		choice = getNumericChoice();
+		if (choice < 1 || choice > 8)
+			printf("\t\tInvalid Entry, Try Again: ");
+	} while (choice < 1 || choice > 8);
+	currentRecipe->recipeType = choice - 1;
+}

@@ -49,4 +49,15 @@ struct recipeStruct *createNewRecipeNode(void);
 *********************************************************************************************************************/
 int addNewIngredient(struct recipeStruct *currentRecipe, struct ingredientType *head);
 
+/********************************************************************************************************************
+* 																													*
+*	  			set enum recipeType type to: 	APPETIZER, BAKED_GOOD, BREAKFAST, DESSERT, MAINS,					*
+*												SIDES, SNACKS, SOUPS.  												*
+*				return 1 on success 0 on failure																	*
+*																													*
+*********************************************************************************************************************/
+void setRecipeType(struct recipeStruct *currentRecipe);
+
+
+
 #endif //RECIPECONVERSIONS_H
