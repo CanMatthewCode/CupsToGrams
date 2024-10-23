@@ -5,11 +5,11 @@
 #include "ingredientConversions.h"
 
 
-/************************************************************************************************************
-* 																											*
-*	  getCups Converts User Input in the form of Cups, Cups Part/Cups, or Cups.Parts to a float value		*
-*																											*
-*************************************************************************************************************/
+/********************************************************************************************************************
+* 																													*
+*	  			getCups Converts User Input in the form of Cups, Cups Part/Cups, or Cups.Parts to a float value		*
+*																													*
+*********************************************************************************************************************/
 float getCups(char *amountToConvert){
 	char inputBuffer[20] = {'\0'};
 	strcpy(inputBuffer, amountToConvert);
@@ -35,12 +35,12 @@ float getCups(char *amountToConvert){
 	return totalCups;
 }
 
-/************************************************************************************************************
-* 																											*
-*	 	read input into user buffer. must pass in a buffer[INGREDIENT_BUFFER_LEN]							*
-*		upon completion, buffer will be filled by "Capitalized First Letter Syntax"							*
-*																											*
-*************************************************************************************************************/
+/********************************************************************************************************************
+* 																													*
+*	 			read input into user buffer. must pass in a buffer[INGREDIENT_BUFFER_LEN]							*
+*				upon completion, buffer will be filled by "Capitalized First Letter Syntax"							*
+*																													*
+*********************************************************************************************************************/
 void readUserInputIntoBuffer(char buffer[INGREDIENT_BUFFER_LEN]){
 	char *temp = buffer;
 	char ch = '\0';
@@ -70,22 +70,22 @@ void readUserInputIntoBuffer(char buffer[INGREDIENT_BUFFER_LEN]){
 		*(temp+counter) = '\0';  
 }
 
-/************************************************************************************************************
-* 																											*
-*	  clearScreen prints an escape sequence to clear the terminal											*
-*																											*
-*************************************************************************************************************/
+/********************************************************************************************************************
+* 																													*
+*			  clearScreen prints an escape sequence to clear the terminal											*
+*																													*
+*********************************************************************************************************************/
 void clearScreen(void){
 	printf("\033[2J\033[H"); // ANSI escape sequence to clear screen
 }
 
-/************************************************************************************************************
-* 																											*
-*	  parses user input to determine if they mean cups(c), tablespoons(tbsp) or teaspoons(tsp)				*
-*	  returns the divisor number for the fraction of cups to calculate against								*
-*	  return 0 on failure to get Cups, Tablespoons, or Teaspoons as input									*
-*																											*
-*************************************************************************************************************/
+/********************************************************************************************************************
+* 																													*
+*	 		 parses user input to determine if they mean cups(c), tablespoons(tbsp) or teaspoons(tsp)				*
+*			  returns the divisor number for the fraction of cups to calculate against								*
+*			  return 0 on failure to get Cups, Tablespoons, or Teaspoons as input									*
+*																													*
+*********************************************************************************************************************/
 int typeOfMeasurement(char *typeToConvert){
 	if ((strcmp(typeToConvert, "Cups") == 0) || (strcmp(typeToConvert, "Cup") == 0) || (strcmp(typeToConvert, "C") == 0)){
 		return 1;
@@ -97,11 +97,11 @@ int typeOfMeasurement(char *typeToConvert){
 	    return 0;
 }
 
-/************************************************************************************************************
-* 																											*
-*	  parses a readUserInputIntoBuffer input in Cups notation and returns chosen ingredient amount in grams	*
-*																											*
-*************************************************************************************************************/
+/********************************************************************************************************************
+* 																													*
+*			  parses a readUserInputIntoBuffer input in Cups notation and returns chosen ingredient amount in grams	*
+*																													*
+*********************************************************************************************************************/
 float cupsToGrams(char *cupsInputAmountBuffer, struct ingredientItem *ingredientToConvert){
 	char measurementAmount[20] = {'\0'};
 	char measurementType[12] = {'\0'};
@@ -138,12 +138,12 @@ float cupsToGrams(char *cupsInputAmountBuffer, struct ingredientItem *ingredient
 	return sum*ingredientToConvert->gramsPerCup;
 }
 
-/************************************************************************************************************
-* 																											*
-*	  	accepts user input only if it is numeric and within -999 to 999 bounds								*
-*																											*
-*************************************************************************************************************/
-int getNumericChoice(){
+/********************************************************************************************************************
+* 																													*
+*	  			accepts user input only if it is numeric and within -999 to 999 bounds								*
+*																													*
+********************************************************************************************************************/
+int getNumericChoice(void){
     char buffer[5];
     long int number;
     char *endptr;

@@ -16,7 +16,7 @@ struct ingredientType *convertIngredientMenu(struct ingredientType *head){
 	clearScreen();
 	do {
 		clearScreen();
-		puts("\t\t*********************************************************************************");
+		puts("\n\n\t\t*********************************************************************************");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
 		puts("\t\t*\t\t\t      -CONVERT INGREDIENT- \t\t\t\t*");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
@@ -100,7 +100,7 @@ void convertIngredient(struct ingredientType *head){
 		float sum = 0;
 		char *currentPosition = NULL;
 		struct ingredientItem *foundIngredient = NULL;
-		puts("\t\t*********************************************************************************");
+		puts("\n\n\t\t*********************************************************************************");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
 		puts("\t\t*\t\t      -CONVERT INGREDIENT: CUPS TO GRAMS- \t\t\t*");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
@@ -114,6 +114,7 @@ void convertIngredient(struct ingredientType *head){
 		if (foundIngredient){
 			printf("\n\n");
 			printIngredientItemNode(foundIngredient);
+			//make function to do the conversion so it can be used in addNewIngredient to recipeStruct
 			printf("\n\n\t\tEnter Amount To Convert From US Cups Measurements: ");
 			readUserInputIntoBuffer(cupsInputAmountBuffer);
 			currentPosition = cupsInputAmountBuffer;
@@ -156,7 +157,7 @@ struct ingredientType *addIngredientType(struct ingredientType *head){
 		clearScreen();
 		choice = '\0';
 		char buffer[INGREDIENT_BUFFER_LEN] = {'\0'};
-		puts("\t\t*********************************************************************************");
+		puts("\n\n\t\t*********************************************************************************");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
 		puts("\t\t*\t\t\t      -ADD INGREDIENT TYPE- \t\t\t\t*");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
@@ -190,7 +191,7 @@ void addIngredientItem(struct ingredientType *head){
 		struct ingredientType *foundIngredientType = NULL;
 		clearScreen();
 		choice = '\0';
-		puts("\t\t*********************************************************************************");
+		puts("\n\n\t\t*********************************************************************************");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
 		puts("\t\t*\t\t\t      -ADD NEW INGREDIENT- \t\t\t\t*");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
@@ -253,7 +254,7 @@ void findIngredient(struct ingredientType *head){
 		memset(ingredientItemBuffer, 0, sizeof(ingredientItemBuffer)); 
 		clearScreen();
 		choice = '\0';
-		puts("\t\t*********************************************************************************");
+		puts("\n\n\t\t*********************************************************************************");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
 		puts("\t\t*\t\t\t      -FIND INGREDIENT- \t\t\t\t*");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
@@ -321,7 +322,7 @@ void modifyIngredientItem(struct ingredientType *head){
 		memset(ingredientItemBuffer, 0, sizeof(ingredientItemBuffer));
 		clearScreen();
 		choice = '\0';
-		puts("\t\t*********************************************************************************");
+		puts("\n\n\t\t*********************************************************************************");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
 		puts("\t\t*\t\t\t      -MODIFY INGREDIENT- \t\t\t\t*");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
@@ -393,7 +394,7 @@ void deleteIngredientItem (struct ingredientType *head){
 		memset(ingredientItemBuffer, 0, sizeof(ingredientItemBuffer));
 		choice = '\0';
 		clearScreen();
-		puts("\t\txxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+		puts("\n\n\t\txxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 		puts("\t\tx\t\t\t\t\t\t\t\t\t\tx");
 		puts("\t\tx\t\t\t      -DELETE INGREDIENT- \t\t\t\tx");
 		puts("\t\tx\t\t\t\t\t\t\t\t\t\tx");

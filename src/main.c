@@ -41,7 +41,7 @@ int main (int argc, char **argv){
 	char menu = '\0';
 	do {
 		clearScreen();
-		puts("\t\t*********************************************************************************");
+		puts("\n\n\t\t*********************************************************************************");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
 		puts("\t\t*\t\t\t-RECIPE AND INGREDIENT CONVERTER-\t\t\t*");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");

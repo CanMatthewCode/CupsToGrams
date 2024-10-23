@@ -156,7 +156,7 @@ struct ingredientType *addNewIngredientTypeNode(struct ingredientType *head, cha
 void printIngredientTypeList(struct ingredientType *head){
 	struct ingredientType *cur = NULL;
 	int counter = 0;
-	puts("\t\t*********************************************************************************");
+	puts("\n\n\t\t*********************************************************************************");
 	puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
 	puts("\t\t*\t\t\t  -INGREDIENT TYPES AVAILABLE-       \t\t\t*");
 	puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
@@ -219,7 +219,7 @@ struct ingredientType *deleteIngredientTypeNode(struct ingredientType *head){
 	struct ingredientType *prev = NULL;
 	struct ingredientType *next = NULL;
 	struct ingredientType *headPointer = head;
-	puts("\t\txxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+	puts("\n\n\t\txxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 	puts("\t\tx\t\t\t\t\t\t\t\t\t\tx");
 	puts("\t\tx\t\t\t      -DELETE INGREDIENT TYPE- \t\t\t\tx");
 	puts("\t\tx\t\t\t\t\t\t\t\t\t\tx");
