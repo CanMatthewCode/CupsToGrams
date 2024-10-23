@@ -23,4 +23,32 @@ struct recipeStruct *recipeMenus(struct recipeStruct *recipeHead, struct ingredi
 *************************************************************************************************************/
 struct recipeStruct *convertNewRecipe(struct recipeStruct *recipeHead, struct ingredientType *ingredientHead);
 
+/************************************************************************************************************
+* 																											*
+*				menu for editing an already filled in recipeStruct 											*
+*																											*
+*************************************************************************************************************/
+void editRecipeMenu(struct recipeStruct *recipe, struct ingredientType *ingredientHead);
+
+/************************************************************************************************************
+* 																											*
+*				menu for modifying a recipeStruct's ingredients 											*
+*																											*
+*************************************************************************************************************/
+void editRecipeIngredientsMenu(struct recipeStruct *recipe, struct ingredientType *ingredientHead);
+
+/************************************************************************************************************
+* 																											*
+*				menu for modifying a recipeStruct's instructions 											*
+*																											*
+*************************************************************************************************************/
+void editRecipeInstructionsMenu(struct recipeStruct *recipe);
+
+/************************************************************************************************************
+* 																											*
+*				menu for modifying a recipeStruct's notes		 											*
+*																											*
+*************************************************************************************************************/
+void editRecipeNotesMenu(struct recipeStruct *recipe);
+
 #endif //RECIPEMENUS_H
