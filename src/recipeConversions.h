@@ -110,10 +110,44 @@ void printRecipeNotes(struct recipeStruct *recipe);
 
 /********************************************************************************************************************
 * 																													*
+*			  	prints a recipeStruct's recipeType enum as a string													*
+*																													*
+*********************************************************************************************************************/
+void printRecipeType(struct recipeStruct *recipe);
+
+/********************************************************************************************************************
+* 																													*
 *	  			prints the entirety of a recipeStruct's contents in a recipe-like manor								*
 *																													*
 *********************************************************************************************************************/
 void printFullRecipe(struct recipeStruct *recipe);
 
+/********************************************************************************************************************
+* 																													*
+*	  			modifies the recipe's name in a recipeStruct														*
+*																													*
+*********************************************************************************************************************/
+void modifyRecipeName(struct recipeStruct *recipe);
+
+/********************************************************************************************************************
+* 																													*
+*	  			modifies the amount of an ingredient in a recipeStruct's ingredient's array							*
+*																													*
+*********************************************************************************************************************/
+void modifyIngredientAmount(struct recipeStruct *recipe, struct ingredientType *ingredientHead);
+
+/********************************************************************************************************************
+* 																													*
+*	  			reorders the ingredients in a recipeStruct's ingredient's array										*
+*																													*
+*********************************************************************************************************************/
+void modifyIngredientOrder(struct recipeStruct *recipe);
+
+/********************************************************************************************************************
+* 																													*
+*	  			reorders the ingredients in a recipeStruct's ingredient's array										*
+*																													*
+*********************************************************************************************************************/
+void deleteIngredientFromRecipe(struct recipeStruct *recipe);
 
 #endif //RECIPECONVERSIONS_H

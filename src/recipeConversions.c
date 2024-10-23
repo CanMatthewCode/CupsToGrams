@@ -205,6 +205,37 @@ void printRecipeNotes(struct recipeStruct *recipe){
 
 /********************************************************************************************************************
 * 																													*
+*			  	prints a recipeStruct's recipeType enum as a string													*
+*																													*
+*********************************************************************************************************************/
+void printRecipeType(struct recipeStruct *recipe){
+	char enumValue[12] = {'\0'};
+	switch (recipe->recipeType){
+		case 0:		strcpy(enumValue, "APPETIZER");
+					break;
+		case 1:		strcpy(enumValue, "BAKED GOOD");
+					break;
+		case 2:		strcpy(enumValue, "BREAKFAST");
+					break;
+		case 3:		strcpy(enumValue, "DESSERT");
+					break;
+		case 4:		strcpy(enumValue, "LUNCH");
+					break;
+		case 5:		strcpy(enumValue, "ENTREE");
+					break;
+		case 6:		strcpy(enumValue, "SIDE DISH");
+					break;
+		case 7:		strcpy(enumValue, "SNACK");
+					break;
+		case 8:		strcpy(enumValue, "SOUP");
+					break;
+		default:	break;
+	}
+	printf("\t\t%81s", enumValue);
+}
+
+/********************************************************************************************************************
+* 																													*
 *	 		 	prints the entirety of a recipeStruct's contents in a recipe-like manor								*
 *																													*
 *********************************************************************************************************************/
@@ -219,4 +250,124 @@ void printFullRecipe(struct recipeStruct *recipe){
 	puts("\n\n\n\n\n\n");
 	printRecipeType(recipe);
 	puts("\n\n\t\t*********************************************************************************");
+}
+
+/********************************************************************************************************************
+* 																													*
+*	  			modifies the recipe's name in a recipeStruct														*
+*																													*
+*********************************************************************************************************************/
+void modifyRecipeName(struct recipeStruct *recipe){
+	char buffer[INGREDIENT_BUFFER_LEN] = {'\0'};
+	char choice = '\0';
+	printRecipeName(recipe);
+	do {
+		printf("\n\n\t\tEnter Recipe's Modified Name: ");
+		memset(buffer, 0, INGREDIENT_BUFFER_LEN);
+		readUserInputIntoBuffer(buffer);
+		printf("\n\n\t\t\t%s\n\n\n\t\tIs This Correct (y/n)? ", buffer);
+		YESNOCHOICE(choice);
+	} while (choice != 'Y');
+	strcpy(recipe->recipeName, buffer);
+}
+
+/********************************************************************************************************************
+* 																													*
+*	  			modifies the amount of an ingredient in a recipeStruct's ingredient's array							*
+*																													*
+*********************************************************************************************************************/
+void modifyIngredientAmount(struct recipeStruct *recipe, struct ingredientType *ingredientHead){
+	int menu = 0;
+	char choice = '\0';
+	struct ingredientItem *foundNewIngredient = NULL;
+	char buffer[INGREDIENT_BUFFER_LEN] = {'\0'};
+	char cupsInputAmountBuffer[INGREDIENT_BUFFER_LEN] = {'\0'};
+	clearScreen();
+	printRecipeName(recipe);
+	printRecipeIngredients(recipe);
+	printf("\n\n\t\tEnter Ingredient Number Whose Amount You Wish To Modify: ");
+	do {
+		menu = getNumericChoice();
+		if (menu < 1 || menu > recipe->numberOfIngredients)
+			printf("\n\t\tInvalid Entry, Try Again: ");
+	} while (menu < 1 || menu > recipe->numberOfIngredients);
+	strcpy(buffer, recipe->ingredients[menu - 1].ingredientName);
+	if ((foundNewIngredient = findIngredientItemNode(ingredientHead, buffer, NULL)) == NULL){
+		printf("\n\n\t\tIngredient Not Found");
+		return;
+	} else {
+		do {
+			recipe->ingredients[menu - 1].ingredientGrams = cupsToGrams(cupsInputAmountBuffer, foundNewIngredient);
+			strcpy(recipe->ingredients[menu - 1].userCupsInput, cupsInputAmountBuffer);
+			printf("\n\n\t\t  %7.2f grams of %s (%s)\n", recipe->ingredients[menu - 1].ingredientGrams, recipe->ingredients[menu - 1].ingredientName, recipe->ingredients[menu - 1].userCupsInput);
+			printf("\n\n\t\tIs This Correct (y/n)? ");
+			YESNOCHOICE(choice);
+		} while (choice != 'Y');
+	}
+}
+
+/********************************************************************************************************************
+* 																													*
+*	  			reorders the ingredients in a recipeStruct's ingredient's array										*
+*																													*
+*********************************************************************************************************************/
+void modifyIngredientOrder(struct recipeStruct *recipe){
+	int choice = 0;
+	int newChoice = 0;
+	struct ingredientStruct ingredientToMove[1];
+	clearScreen();
+	printRecipeName(recipe);
+	printRecipeIngredients(recipe);
+	printf("\n\n\t\tEnter The Ingredient Number You You Wish To Reorder: ");
+	do {
+		choice = getNumericChoice();
+		if (choice < 1 || choice > recipe->numberOfIngredients)
+			printf("\n\t\tInvalid Entry, Try Again: ");
+	} while (choice < 1 || choice > recipe->numberOfIngredients);
+	ingredientToMove[0] = recipe->ingredients[choice - 1];
+	printf("\n\n\t\tEnter The Ingredient's New Order Number: ");
+	do {
+		newChoice = getNumericChoice();
+		if (newChoice < 1 || newChoice > recipe->numberOfIngredients)
+			printf("\n\t\tInvalid Entry, Try Again: ");
+	} while (newChoice < 1 || newChoice > recipe->numberOfIngredients);
+	if (newChoice > choice){
+		do {
+			recipe->ingredients[choice - 1] = recipe->ingredients[choice];
+			choice++;
+		} while (choice < newChoice);
+		recipe->ingredients[newChoice - 1] = ingredientToMove[0];
+	} else if (newChoice < choice){
+		do {
+			recipe->ingredients[choice - 1] = recipe->ingredients[choice - 2];
+			choice--;
+		} while (choice > newChoice);
+		recipe->ingredients[newChoice - 1] = ingredientToMove[0];
+	}
+}
+
+/********************************************************************************************************************
+* 																													*
+*	  			reorders the ingredients in a recipeStruct's ingredient's array										*
+*																													*
+*********************************************************************************************************************/
+void deleteIngredientFromRecipe(struct recipeStruct *recipe){
+	int choice = 0;
+	clearScreen();
+	printRecipeName(recipe);
+	printRecipeIngredients(recipe);
+	printf("\n\n\t\tEnter The Ingredient Number You You Wish To DELETE: ");
+	do {
+		choice = getNumericChoice();
+		if (choice < 1 || choice > recipe->numberOfIngredients)
+			printf("\n\t\tInvalid Entry, Try Again: ");
+	} while (choice < 1 || choice > recipe->numberOfIngredients);
+	do {
+		recipe->ingredients[choice - 1] = recipe->ingredients[choice];
+		choice++;
+	} while (choice < recipe->numberOfIngredients);
+	memset(recipe->ingredients[recipe->numberOfIngredients].ingredientName, 0, INGREDIENT_BUFFER_LEN);
+	memset(recipe->ingredients[recipe->numberOfIngredients].userCupsInput, 0, INGREDIENT_BUFFER_LEN);
+	recipe->ingredients[recipe->numberOfIngredients].ingredientGrams = 0.0;
+	recipe->numberOfIngredients -= 1;
 }
