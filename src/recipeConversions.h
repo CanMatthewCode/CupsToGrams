@@ -52,6 +52,20 @@ void addNewIngredient(struct recipeStruct *currentRecipe, struct ingredientType 
 
 /********************************************************************************************************************
 * 																													*
+*	  			add new instruction into recipeStruct. increases numberOfInstruction on success						*
+*																													*
+*********************************************************************************************************************/
+void addNewInstruction(struct recipeStruct *currentRecipe);
+
+/********************************************************************************************************************
+* 																													*
+*	  			add new note into recipeStruct. Increases numberOfNotes on success									*
+*																													*
+*********************************************************************************************************************/
+void addNewNote(struct recipeStruct *currentRecipe);
+
+/********************************************************************************************************************
+* 																													*
 *	  			set enum recipeType type to: 	APPETIZER, BAKED_GOOD, BREAKFAST, DESSERT, MAINS,					*
 *												SIDES, SNACKS, SOUPS.  												*
 *				return 1 on success 0 on failure																	*

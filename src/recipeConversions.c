@@ -66,6 +66,28 @@ void addNewIngredient(struct recipeStruct *currentRecipe, struct ingredientType 
 
 /********************************************************************************************************************
 * 																													*
+*	  			add new instruction into recipeStruct. increases numberOfInstruction on success						*
+*																													*
+*********************************************************************************************************************/
+void addNewInstruction(struct recipeStruct *currentRecipe){
+	printf("\n\n\t\tAdd An INSTRUCTION:\n\n\t\t(%i) ", currentRecipe->numberOfInstructions + 1);
+	readUserInputIntoRecipe(currentRecipe->recipeInstructions[currentRecipe->numberOfInstructions]);
+	currentRecipe->numberOfInstructions += 1;
+}
+
+/********************************************************************************************************************
+* 																													*
+*	  			add new note into recipeStruct. increases numberOfNotes on success									*
+*																													*
+*********************************************************************************************************************/
+void addNewNote(struct recipeStruct *currentRecipe){
+	printf("\n\n\t\tAdd a NOTE:\n\n\t\t(%i) ", currentRecipe->numberOfNotes +1);
+	readUserInputIntoRecipe(currentRecipe->recipeNotes[currentRecipe->numberOfNotes]);
+	currentRecipe->numberOfNotes += 1;
+}
+
+/********************************************************************************************************************
+* 																													*
 *	  			set enum recipeType type to: 	APPETIZER, BAKED_GOOD, BREAKFAST, DESSERT, MAINS,					*
 *												SIDES, SNACKS, SOUPS.  												*
 *				return 1 on success 0 on failure																	*
