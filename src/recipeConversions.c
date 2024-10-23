@@ -115,6 +115,7 @@ void readUserInputIntoRecipe(char directionsBuffer[MAX_INGREDIENT_TEXT]){
 	char *temp = directionsBuffer;
 	char ch = '\0';
 	int counter = 0;
+	int lineCounter = 0;
 	do{
 	    ch = getchar();
 	    if ((counter == 0) && (ch == '\n'))
@@ -138,7 +139,15 @@ void readUserInputIntoRecipe(char directionsBuffer[MAX_INGREDIENT_TEXT]){
 		if ((ch == ' ') && (*(temp+counter-1) == 'i') && (*(temp+counter-2) == ' '))
 		    *(temp+counter-1) = 'I';
 		*(temp+counter) = ch;
-		counter++;
+		if (*(temp+counter) == ' ' && lineCounter > 68){
+			*(temp+counter) = '\n';
+			counter++;
+			*(temp+counter) = '\t';
+			counter++;
+			*(temp+counter) = '\t';
+			lineCounter = 0;
+		}
+		counter++, lineCounter++;
 	}
 	if (*(temp+counter) == ' ')
 		*(temp+counter) = '\0';  
@@ -173,7 +182,7 @@ void printRecipeName(struct recipeStruct *recipe){
 *																													*
 *********************************************************************************************************************/
 void printRecipeIngredients(struct recipeStruct *recipe){
-	puts("\n\n\t\tINGREDIENTS:\n");
+	puts("\n\n\t\t\tINGREDIENTS:\n");
 	int i = 0;
 	for (; i < recipe->numberOfIngredients; i++)
 		printf("\t\t%d)  %7.2f grams of %s (%s)\n", i + 1, recipe->ingredients[i].ingredientGrams, recipe->ingredients[i].ingredientName, recipe->ingredients[i].userCupsInput);
@@ -186,7 +195,7 @@ void printRecipeIngredients(struct recipeStruct *recipe){
 *																													*
 *********************************************************************************************************************/
 void printRecipeInstructions(struct recipeStruct *recipe){
-	puts("\n\n\t\tINSTRUCTIONS:\n");
+	puts("\n\n\t\t\tINSTRUCTIONS:\n");
 	for (int i = 0; i < recipe->numberOfInstructions; i++)
 		printf("\t\t%d)  %s\n", i + 1, recipe->recipeInstructions[i]);
 	printf("\n\n");
@@ -198,7 +207,7 @@ void printRecipeInstructions(struct recipeStruct *recipe){
 *																													*
 *********************************************************************************************************************/
 void printRecipeNotes(struct recipeStruct *recipe){
-	puts("\n\n\t\tNOTES:\n");
+	puts("\n\n\t\t\tNOTES:\n");
 	for (int i = 0; i < recipe->numberOfNotes; i++)
 		printf("\t\t%d)  %s\n", i + 1, recipe->recipeNotes[i]);
 }
@@ -348,7 +357,7 @@ void modifyIngredientOrder(struct recipeStruct *recipe){
 
 /********************************************************************************************************************
 * 																													*
-*	  			reorders the ingredients in a recipeStruct's ingredient's array										*
+*	  			deletes an ingredients from a recipeStruct's ingredients array										*
 *																													*
 *********************************************************************************************************************/
 void deleteIngredientFromRecipe(struct recipeStruct *recipe){
@@ -370,4 +379,199 @@ void deleteIngredientFromRecipe(struct recipeStruct *recipe){
 	memset(recipe->ingredients[recipe->numberOfIngredients].userCupsInput, 0, INGREDIENT_BUFFER_LEN);
 	recipe->ingredients[recipe->numberOfIngredients].ingredientGrams = 0.0;
 	recipe->numberOfIngredients -= 1;
+}
+
+/********************************************************************************************************************
+* 																													*
+*	  			modifies an instruction in a recipeStruct's instructions array										*
+*																													*
+*********************************************************************************************************************/
+void modifyInstruction(struct recipeStruct *recipe){
+	int choice = 0;
+	char choice2 = '\0';
+	char buffer[INGREDIENT_BUFFER_LEN] = {'\0'};
+	clearScreen();
+	printRecipeName(recipe);
+	printRecipeIngredients(recipe);
+	printRecipeInstructions(recipe);
+	printf("\n\n\t\tEnter Number Of Instruction You Wish To Modify: ");
+	do {
+		choice = getNumericChoice();
+		if (choice < 1 || choice > recipe->numberOfInstructions)
+			printf("\n\t\tInvalid Entry, Try Again: ");
+	} while (choice < 1 || choice > recipe->numberOfInstructions);
+	printf("\n\n\t\t%s\n\n\t\tEnter New Instruction: ", recipe->recipeInstructions[choice - 1]);
+	do {
+		memset(buffer, 0, INGREDIENT_BUFFER_LEN);
+		readUserInputIntoRecipe(buffer);
+		printf("\n\n\t\t%s\n\n\t\tIs This Correct (y/n)? ", buffer);
+		YESNOCHOICE(choice2);
+	} while (choice2 != 'Y');
+	memset(recipe->recipeInstructions[choice - 1], 0, MAX_INGREDIENT_TEXT);
+	strcpy(recipe->recipeInstructions[choice - 1], buffer);
+}
+
+/********************************************************************************************************************
+* 																													*
+*	  			reorders the instructions in a recipeStruct's instructions array									*
+*																													*
+*********************************************************************************************************************/
+void modifyInstructionOrder(struct recipeStruct *recipe){
+	int choice = 0;
+	int newChoice = 0;
+	char instructionToMove[MAX_INGREDIENT_TEXT] = {'\0'};
+	clearScreen();
+	printRecipeName(recipe);
+	printRecipeIngredients(recipe);
+	printRecipeInstructions(recipe);
+	printf("\n\n\t\tEnter The Instruction Number You You Wish To Reorder: ");
+	do {
+		choice = getNumericChoice();
+		if (choice < 1 || choice > recipe->numberOfInstructions)
+			printf("\n\t\tInvalid Entry, Try Again: ");
+	} while (choice < 1 || choice > recipe->numberOfInstructions);
+	strcpy(instructionToMove, recipe->recipeInstructions[choice - 1]);
+	printf("\n\n\t\tEnter The Instruction's New Order Number: ");
+	do {
+		newChoice = getNumericChoice();
+		if (newChoice < 1 || newChoice > recipe->numberOfInstructions)
+			printf("\n\t\tInvalid Entry, Try Again: ");
+	} while (newChoice < 1 || newChoice > recipe->numberOfInstructions);
+	if (newChoice > choice){
+		do {
+			strcpy(recipe->recipeInstructions[choice - 1], recipe->recipeInstructions[choice]);
+			choice++;
+		} while (choice < newChoice);
+		strcpy(recipe->recipeInstructions[choice - 1], instructionToMove);
+	} else if (newChoice < choice){
+		do {
+			strcpy(recipe->recipeInstructions[choice - 1], recipe->recipeInstructions[choice - 2]);
+			choice--;
+		} while (choice > newChoice);
+		strcpy(recipe->recipeInstructions[choice - 1], instructionToMove);
+	}
+}
+
+/********************************************************************************************************************
+* 																													*
+*	  			deletes an instruction from a recipeStruct's instructions array										*
+*																													*
+*********************************************************************************************************************/
+void deleteInstructionFromRecipe(struct recipeStruct *recipe){
+	int choice = 0;
+	clearScreen();
+	printRecipeName(recipe);
+	printRecipeIngredients(recipe);
+	printRecipeInstructions(recipe);
+	printf("\n\n\t\tEnter The Instruction Number You You Wish To DELETE: ");
+	do {
+		choice = getNumericChoice();
+		if (choice < 1 || choice > recipe->numberOfInstructions)
+			printf("\n\t\tInvalid Entry, Try Again: ");
+	} while (choice < 1 || choice > recipe->numberOfInstructions);
+	do {
+		strcpy(recipe->recipeInstructions[choice - 1], recipe->recipeInstructions[choice]);
+		choice++;
+	} while (choice < recipe->numberOfInstructions);
+	memset(recipe->recipeInstructions[choice], 0, MAX_INGREDIENT_TEXT);
+	recipe->numberOfInstructions -= 1;
+}
+
+/********************************************************************************************************************
+* 																													*
+*	  			modifies an instruction in a recipeStruct's notes array												*
+*																													*
+*********************************************************************************************************************/
+void modifyNote(struct recipeStruct *recipe){
+	int choice = 0;
+	char choice2 = '\0';
+	char buffer[INGREDIENT_BUFFER_LEN] = {'\0'};
+	clearScreen();
+	printRecipeName(recipe);
+	printRecipeIngredients(recipe);
+	printRecipeInstructions(recipe);
+	printRecipeNotes(recipe);
+	printf("\n\n\t\tEnter Number Of Note You Wish To Modify: ");
+	do {
+		choice = getNumericChoice();
+		if (choice < 1 || choice > recipe->numberOfNotes)
+			printf("\n\t\tInvalid Entry, Try Again: ");
+	} while (choice < 1 || choice > recipe->numberOfNotes);
+	printf("\n\n\t\t%s\n\n\t\tEnter New Note: ", recipe->recipeNotes[choice - 1]);
+	do {
+		memset(buffer, 0, INGREDIENT_BUFFER_LEN);
+		readUserInputIntoRecipe(buffer);
+		printf("\n\n\t\t%s\n\n\t\tIs This Correct (y/n)? ", buffer);
+		YESNOCHOICE(choice2);
+	} while (choice2 != 'Y');
+	memset(recipe->recipeNotes[choice - 1], 0, MAX_INGREDIENT_TEXT);
+	strcpy(recipe->recipeNotes[choice - 1], buffer);
+}
+
+/********************************************************************************************************************
+* 																													*
+*	  			reorders the notes in a recipeStruct's notes array													*
+*																													*
+*********************************************************************************************************************/
+void modifyNoteOrder(struct recipeStruct *recipe){
+	int choice = 0;
+	int newChoice = 0;
+	char noteToMove[MAX_INGREDIENT_TEXT] = {'\0'};
+	clearScreen();
+	printRecipeName(recipe);
+	printRecipeIngredients(recipe);
+	printRecipeInstructions(recipe);
+	printRecipeNotes(recipe);
+	printf("\n\n\t\tEnter The Note Number You You Wish To Reorder: ");
+	do {
+		choice = getNumericChoice();
+		if (choice < 1 || choice > recipe->numberOfInstructions)
+			printf("\n\t\tInvalid Entry, Try Again: ");
+	} while (choice < 1 || choice > recipe->numberOfNotes);
+	strcpy(noteToMove, recipe->recipeNotes[choice - 1]);
+	printf("\n\n\t\tEnter The Note's New Order Number: ");
+	do {
+		newChoice = getNumericChoice();
+		if (newChoice < 1 || newChoice > recipe->numberOfNotes)
+			printf("\n\t\tInvalid Entry, Try Again: ");
+	} while (newChoice < 1 || newChoice > recipe->numberOfNotes);
+	if (newChoice > choice){
+		do {
+			strcpy(recipe->recipeNotes[choice - 1], recipe->recipeNotes[choice]);
+			choice++;
+		} while (choice < newChoice);
+		strcpy(recipe->recipeNotes[choice - 1], noteToMove);
+	} else if (newChoice < choice){
+		do {
+			strcpy(recipe->recipeNotes[choice - 1], recipe->recipeNotes[choice - 2]);
+			choice--;
+		} while (choice > newChoice);
+		strcpy(recipe->recipeNotes[choice - 1], noteToMove);
+	}
+}
+
+/********************************************************************************************************************
+* 																													*
+*	  			deletes a note in a recipeStruct's notes array														*
+*																													*
+*********************************************************************************************************************/
+void deleteNoteFromRecipe(struct recipeStruct *recipe){
+	int choice = 0;
+	clearScreen();
+	printRecipeName(recipe);
+	printRecipeIngredients(recipe);
+	printRecipeInstructions(recipe);
+	printRecipeNotes(recipe);
+	printf("\n\n\t\tEnter The Note Number You You Wish To DELETE: ");
+	do {
+		choice = getNumericChoice();
+		if (choice < 1 || choice > recipe->numberOfNotes)
+			printf("\n\t\tInvalid Entry, Try Again: ");
+	} while (choice < 1 || choice > recipe->numberOfNotes);
+	do {
+		strcpy(recipe->recipeNotes[choice - 1], recipe->recipeNotes[choice]);
+		choice++;
+	} while (choice < recipe->numberOfNotes);
+	memset(recipe->recipeNotes[choice], 0, MAX_INGREDIENT_TEXT);
+	recipe->numberOfNotes -= 1;
 }

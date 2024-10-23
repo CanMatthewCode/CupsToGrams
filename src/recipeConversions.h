@@ -145,9 +145,51 @@ void modifyIngredientOrder(struct recipeStruct *recipe);
 
 /********************************************************************************************************************
 * 																													*
-*	  			reorders the ingredients in a recipeStruct's ingredient's array										*
+*	  			deletes an ingredients from a recipeStruct's ingredients array										*
 *																													*
 *********************************************************************************************************************/
 void deleteIngredientFromRecipe(struct recipeStruct *recipe);
+
+/********************************************************************************************************************
+* 																													*
+*	  			modifies an instruction in a recipeStruct's instructions array										*
+*																													*
+*********************************************************************************************************************/
+void modifyInstruction(struct recipeStruct *recipe);
+
+/********************************************************************************************************************
+* 																													*
+*	  			reorders the instructions in a recipeStruct's instructions array									*
+*																													*
+*********************************************************************************************************************/
+void modifyInstructionOrder(struct recipeStruct *recipe);
+
+/********************************************************************************************************************
+* 																													*
+*	  			deletes an instruction from a recipeStruct's instructions array										*
+*																													*
+*********************************************************************************************************************/
+void deleteInstructionFromRecipe(struct recipeStruct *recipe);
+
+/********************************************************************************************************************
+* 																													*
+*	  			modifies an instruction in a recipeStruct's notes array												*
+*																													*
+*********************************************************************************************************************/
+void modifyNote(struct recipeStruct *recipe);
+
+/********************************************************************************************************************
+* 																													*
+*	  			reorders the notes in a recipeStruct's notes array													*
+*																													*
+*********************************************************************************************************************/
+void modifyNoteOrder(struct recipeStruct *recipe);
+
+/********************************************************************************************************************
+* 																													*
+*	  			deletes a note in a recipeStruct's notes array														*
+*																													*
+*********************************************************************************************************************/
+void deleteNoteFromRecipe(struct recipeStruct *recipe);
 
 #endif //RECIPECONVERSIONS_H
