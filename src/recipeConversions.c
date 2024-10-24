@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include "recipeConversions.h"
+#include "recipeLinkedList.h"
 #include "ingredientItemLinkedList.h"
 #include "ingredientConversions.h"
 
@@ -28,19 +29,6 @@ x	Function to display recipe in current state
 
 */
 
-/********************************************************************************************************************
-* 																													*
-*	  			creates new recipeStruct node, returns NULL on failure				 								*
-*																													*
-*********************************************************************************************************************/
-struct recipeStruct *createNewRecipeNode(void){
-	struct recipeStruct *newRecipe = calloc(1, sizeof(struct recipeStruct));
-	if (newRecipe == NULL){
-		perror("Failure to allocate memory for newRecipe node");
-		return NULL;
-	}
-	return newRecipe;
-}
 
 /********************************************************************************************************************
 * 																													*
@@ -133,12 +121,13 @@ void readUserInputIntoRecipe(char directionsBuffer[MAX_INGREDIENT_TEXT]){
 		if (((ch == ' ') || (ch == '\t')) && ((*(temp+counter-1) == ' ')))
 			continue;
 		//capitalize first letter of new sentence
-		if (((*(temp+counter-1) == ' ') && (*(temp+counter-2) == '.')) || ((*(temp+counter-1) == ' ') && (*(temp+counter-2) == '?')))
+		if (((*(temp+counter-1) == ' ') && (*(temp+counter-2) == '.')) || ((*(temp+counter-1) == ' ') && (*(temp+counter-2) == '?')) || ((*(temp+counter-1) == ' ') && (*(temp+counter-2) == '!')))
 			ch = toupper(ch);
-		//capitalize I when it stands alone
-		if ((ch == ' ') && (*(temp+counter-1) == 'i') && (*(temp+counter-2) == ' '))
-		    *(temp+counter-1) = 'I';
+		//capitalize I when it refers to self
+		if ((((ch == ' ') && (*(temp+counter-1) == 'i')) || ((ch == 39) && (*(temp+counter-1) == 'i'))) && ((*(temp+counter-2) == ' ') || (*(temp+counter-2) == '\t') || (*(temp+counter-2) == '\n')))
+			*(temp+counter-1) = 'I';
 		*(temp+counter) = ch;
+		lineCounter++;
 		if (*(temp+counter) == ' ' && lineCounter > 68){
 			*(temp+counter) = '\n';
 			counter++;
@@ -147,7 +136,7 @@ void readUserInputIntoRecipe(char directionsBuffer[MAX_INGREDIENT_TEXT]){
 			*(temp+counter) = '\t';
 			lineCounter = 0;
 		}
-		counter++, lineCounter++;
+		counter++;
 	}
 	if (*(temp+counter) == ' ')
 		*(temp+counter) = '\0';  

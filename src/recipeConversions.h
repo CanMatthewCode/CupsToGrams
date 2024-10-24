@@ -25,23 +25,16 @@ struct ingredientStruct{
 
 struct recipeStruct{
 	char recipeName [INGREDIENT_BUFFER_LEN];
-	struct ingredientStruct ingredients[MAX_INGREDIENT_NUMBER];
 	int numberOfIngredients;
-	char recipeInstructions [MAX_INGREDIENT_NUMBER][MAX_INGREDIENT_TEXT];
+	struct ingredientStruct ingredients[MAX_INGREDIENT_NUMBER];
 	int numberOfInstructions;
-	char recipeNotes [MAX_INGREDIENT_NUMBER][MAX_INGREDIENT_TEXT];
+	char recipeInstructions [MAX_INGREDIENT_NUMBER][MAX_INGREDIENT_TEXT];
 	int numberOfNotes;
+	char recipeNotes [MAX_INGREDIENT_NUMBER][MAX_INGREDIENT_TEXT];
 	enum recipeType recipeType;
 	struct recipeStruct *prev;
 	struct recipeStruct *next;
 };
-
-/********************************************************************************************************************
-* 																													*
-*	  			creates new recipeStruct node, returns NULL on failure				 								*
-*																													*
-*********************************************************************************************************************/
-struct recipeStruct *createNewRecipeNode(void);
 
 /********************************************************************************************************************
 * 																													*
