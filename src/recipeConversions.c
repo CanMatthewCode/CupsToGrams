@@ -2,33 +2,107 @@
 #include <ctype.h>
 #include "recipeConversions.h"
 #include "recipeLinkedList.h"
+#include "recipeMenus.h"
 #include "ingredientItemLinkedList.h"
 #include "ingredientConversions.h"
-
-/********************************************************************************************************************
-* 																													*
-*	  			text 								*
-*																													*
-*********************************************************************************************************************/
 
 /*
 x	Function to add new recipe
 x	Function to add new ingredient
 x	Function to add new note
 x	Function to add new direction
-5	Function to remove each (ingredient, note, direction)
-6	Function to modify each (ingredient, note, direction, order of (ingredient, note, direction))
+x	Function to remove each (ingredient, note, direction)
+x	Function to modify each (ingredient, note, direction, order of (ingredient, note, direction))
 x	Function to display recipe in current state
 8	Function to pretty print recipe to pdf
-9	Function to store recipes in txt files
-10	Function to retrieve recipes from txt files
+x	Function to store recipes in txt files
+x	Function to retrieve recipes from txt files
 11	Function to delete recipe
 12	Function to search for recipe
-13	Function to free all recipes calloc()ed on quite
-
-
+13	Function to free all recipes calloc()ed on quit 
 */
 
+/********************************************************************************************************************
+* 																													*
+*				menu for adding new recipe functions, returns pointer to newly added recipe							*
+*																													*
+*********************************************************************************************************************/
+struct recipeStruct *convertNewRecipe(struct recipeStruct *recipeHead, struct ingredientType *ingredientHead){
+	char choice = '\0';
+	char buffer[INGREDIENT_BUFFER_LEN] = {'\0'};
+	clearScreen();
+	puts("\n\n\t\t*********************************************************************************");
+	puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
+	puts("\t\t*\t\t\t      -CONVERT NEW RECIPE- \t\t\t\t*");
+	puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
+	puts("\t\t*********************************************************************************");
+	struct recipeStruct *recipeHeadPointer = recipeHead;
+	struct recipeStruct *newRecipe = createNewRecipeNode();
+	do {
+		printf("\n\n\t\tEnter New Recipe's Name: ");
+		memset(buffer, 0, INGREDIENT_BUFFER_LEN);
+		readUserInputIntoBuffer(buffer);
+		strcpy(newRecipe->recipeName, buffer);
+		clearScreen();
+		printRecipeName(newRecipe);
+		printf("\n\n\t\tIs The Above Correct (y/n)? ");
+		YESNOCHOICE(choice);
+	} while (choice != 'Y');
+	strcpy(newRecipe->recipeName, buffer);
+	clearScreen();
+	printRecipeName(newRecipe);
+	printRecipeIngredients(newRecipe);
+	choice = '\0';
+	do {
+		addNewIngredient(newRecipe, ingredientHead);
+		clearScreen();
+		printRecipeName(newRecipe);
+		printRecipeIngredients(newRecipe);
+		printf("\n\n\n\t\tWould You Like To Enter Another Ingredient (y/n)? ");
+		YESNOCHOICE(choice);
+	} while (choice != 'N');
+	choice = '\0';
+	clearScreen();
+	printRecipeName(newRecipe);
+	printRecipeIngredients(newRecipe);
+	do {
+		addNewInstruction(newRecipe);
+		clearScreen();
+		printRecipeName(newRecipe);
+		printRecipeIngredients(newRecipe);
+		if (newRecipe->numberOfInstructions > 0)
+			printRecipeInstructions(newRecipe);
+		printf("\n\n\t\tWould You Like To Add Another Step (y/n)? ");
+		YESNOCHOICE(choice);
+	} while (choice != 'N');
+	choice = '\0';
+	printf("\n\n\t\tWould You Like To Add A Recipe NOTE (y/n)? ");
+	YESNOCHOICE(choice);
+	if (choice == 'Y'){
+		clearScreen();
+		printRecipeName(newRecipe);
+		printRecipeIngredients(newRecipe);
+		printRecipeInstructions(newRecipe);
+	}
+	while (choice == 'Y'){
+		addNewNote(newRecipe);
+		clearScreen();
+		printRecipeName(newRecipe);
+		printRecipeIngredients(newRecipe);
+		printRecipeInstructions(newRecipe);
+		printRecipeNotes(newRecipe);
+		printf("\n\n\t\tWould You Like To Add Another Note (y/n)? ");
+		YESNOCHOICE(choice);
+	}
+	setRecipeType(newRecipe);
+	recipeHeadPointer = editRecipeMenu(newRecipe, recipeHeadPointer, ingredientHead);
+	//place recipe in linked-list alphabetically
+	recipeHeadPointer = placeRecipeStructNode(recipeHeadPointer, newRecipe);
+	//dump the list into it's .txt file now that a new recipe was added
+	dumpRecipesFromLinkedList(recipeHeadPointer);
+	//return pointer to head of recipe linked list with new recipe 
+	return recipeHeadPointer;
+}
 
 /********************************************************************************************************************
 * 																													*

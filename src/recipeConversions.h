@@ -38,6 +38,13 @@ struct recipeStruct{
 
 /********************************************************************************************************************
 * 																													*
+*				menu for adding new recipe functions, returns pointer to newly added recipe							*
+*																													*
+*********************************************************************************************************************/
+struct recipeStruct *convertNewRecipe(struct recipeStruct *recipeHead, struct ingredientType *ingredientHead);
+
+/********************************************************************************************************************
+* 																													*
 *	  			add new ingredientStruct into newRecipe struct. increases numberOfIngredients on success			*
 *																													*
 *********************************************************************************************************************/
