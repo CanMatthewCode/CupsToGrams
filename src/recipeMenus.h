@@ -5,6 +5,7 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include "recipeConversions.h"
+#include "recipeLinkedList.h"
 #include "ingredientConversions.h"
 #include "ingredientTypeLinkedList.h"
 #include "ingredientItemLinkedList.h"
@@ -18,17 +19,10 @@ struct recipeStruct *recipeMenus(struct recipeStruct *recipeHead, struct ingredi
 
 /************************************************************************************************************
 * 																											*
-*				menu for adding new recipe functions, returns pointer to newly added recipe					*
-*																											*
-*************************************************************************************************************/
-struct recipeStruct *convertNewRecipe(struct recipeStruct *recipeHead, struct ingredientType *ingredientHead);
-
-/************************************************************************************************************
-* 																											*
 *				menu for editing an already filled in recipeStruct 											*
 *																											*
 *************************************************************************************************************/
-void editRecipeMenu(struct recipeStruct *recipe, struct ingredientType *ingredientHead);
+struct recipeStruct *editRecipeMenu(struct recipeStruct *recipe, struct recipeStruct *recipeHead, struct ingredientType *ingredientHead);
 
 /************************************************************************************************************
 * 																											*
@@ -50,5 +44,12 @@ void editRecipeInstructionsMenu(struct recipeStruct *recipe);
 *																											*
 *************************************************************************************************************/
 void editRecipeNotesMenu(struct recipeStruct *recipe);
+
+/************************************************************************************************************
+* 																											*
+*				menu for modifying or deleting an existing recipe in the recipeStruct linked list			*
+*																											*
+*************************************************************************************************************/
+struct recipeStruct *modifyExistingRecipeMenu(struct recipeStruct *recipeHeadPointer, struct ingredientType *ingredientHead);
 
 #endif //RECIPEMENUS_H
