@@ -36,6 +36,7 @@ int main (int argc, char **argv){
 	struct ingredientType *ingredientHead = NULL;
 	struct recipeStruct *recipeHead = NULL;
 	ingredientHead = loadIngredientTypes();
+	recipeHead = loadRecipesToLinkedList();
 	if (ingredientHead)
 		ingredientHead = loadAllIngredientTypeSubLists(ingredientHead);
 	char menu = '\0';
@@ -50,7 +51,7 @@ int main (int argc, char **argv){
 	
 		puts("\t\t(1) Convert Ingredient\n\t\t(2) Convert Recipe\n\t\t"
 			 "(3) See Ingredient List\n\t\t(4) See Recipe List"
-			 "\n\t\t(Q) Quit");
+			 "\n\n\t\t(Q) Quit");
 		printf("\n\t\tEnter Selection: ");
 		do {
         	menu = toupper(getchar());
@@ -73,7 +74,10 @@ int main (int argc, char **argv){
 			case '3':	clearScreen();
 						printAllIngredientItemsInTypeNode(ingredientHead);
 						break;
-			case '4':	//printRecipes(); - leads to submenu to ask to search by name, food type, or cuisine 
+			case '4':	printAllRecipeNames(recipeHead); 
+						char ch = '\0';
+						while ((ch = getchar()) != '\n');
+						//- leads to submenu to ask to search by name, food type, or cuisine 
 						break;
 			case 'Q':	return 0;
 			default: 	printf("\n\t\t\t\t\t***Invalid Selection***\n\n");
