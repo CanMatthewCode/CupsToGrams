@@ -8,6 +8,14 @@
 #include "recipeLinkedList.h"
 #include "recipeConversions.h"
 
+/*
+	x. placeRecipeStructNode into linked list alphabetically
+	2. deleteRecipe to delete a node from the linked list
+	3. find recipes to find all recipes that have the user's input and display the options like the ingredients find function
+	4. free recipeStruct linked list function
+	5. print out all recipe names
+	6. print recipe names by recipe type
+*/
 /********************************************************************************************************************
 * 																													*
 *	  			creates new recipeStruct node, returns NULL on failure				 								*
@@ -147,8 +155,8 @@ struct recipeStruct *loadRecipesToLinkedList(void){
 	//replace trailing new line character
 			if (newNode->recipeNotes[i][counter - 1] == '\n')
 				newNode->recipeNotes[i][counter - 1] = '\0';
-		fscanf(fp, " *");	
     	}
+    	fscanf(fp, " *\n");
     //place it at the end of the linked list since they are already sorted alphabetically prior to being dumped	
     //if cur is NULL this is the first node in the linked list and is therefore head, otherwise, link backwards
     	if (cur == NULL)
@@ -165,4 +173,129 @@ struct recipeStruct *loadRecipesToLinkedList(void){
     while (cur->prev != NULL)
     	cur = cur->prev;
     return cur;
+}
+
+/********************************************************************************************************************
+* 																													*
+*	 			add a new node into the recipeStruct linked-list alphabetically										*
+*				returns pointer to head on success, NULL on failure													*
+*																													*
+*********************************************************************************************************************/
+struct recipeStruct *placeRecipeStructNode(struct recipeStruct *recipeHead, struct recipeStruct *newRecipe){
+	struct recipeStruct *cur = recipeHead;
+	struct recipeStruct *prev = NULL;
+	struct recipeStruct *newNode = newRecipe;
+	//if cur == NULL it is the first node
+	if (cur == NULL)
+		return newNode;
+	//if buffer is smaller than 1st node, it is new 1st node
+	if (strcmp(newNode->recipeName, cur->recipeName) == 0){
+		printf("\n\t\tRecipe Already Exists\n");
+		//have option here to change name instead of deleting
+		free(newNode);
+		newNode = NULL;
+		return recipeHead;
+	}
+	if ((cur != NULL) && (strcmp(newNode->recipeName, cur->recipeName) < 0)){
+		newNode->next = cur;
+		cur->prev = newNode;
+		return newNode;
+	}
+	//loop to check the rest
+	for ( ; cur->next != NULL && (strcmp(newNode->recipeName, cur->recipeName) > 0); prev = cur, cur = cur->next)
+		;	
+	//final node case
+	if ((strcmp(newNode->recipeName, cur->recipeName) > 0) && cur->next == NULL){
+		newNode->prev = cur;
+		cur->next = newNode;
+	//if the list is 1 long and this is 2nd node added
+		if (prev == NULL)
+			return cur;
+	}
+	//all middle cases
+	if ((strcmp(newNode->recipeName, prev->recipeName) > 0) && 
+	   (strcmp(newNode->recipeName, cur->recipeName) < 0)){
+		newNode->prev = prev;
+		newNode->next = cur;
+		prev->next = newNode;
+		cur->prev = newNode;
+	} 
+
+	if (strcmp(newNode->recipeName, cur->recipeName) == 0){
+		printf("\n\t\tRecipe Already Exists\n");
+		//have option here to change name instead of deleting
+		free(newNode);
+		newNode = NULL;
+	}
+	//resetting file pointer to head
+	while (cur->prev != NULL)
+		cur = cur->prev;
+	return cur;
+}
+
+/********************************************************************************************************************
+* 																													*
+*	 			prints the names of all the nodes in the recipeStruct linked-list alphabetically					*
+*																													*
+*********************************************************************************************************************/
+void printAllRecipeNames(struct recipeStruct *recipeHead){
+	struct recipeStruct *cur = NULL;
+	int counter = 0;
+	clearScreen();
+	puts("\n\n\t\t*********************************************************************************");
+	puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
+	puts("\t\t*\t\t\t  -ALL RECIPES AVAILABLE-       \t\t\t*");
+	puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
+	puts("\t\t*********************************************************************************\n\n");
+	printf("\t\t");
+	for (cur = recipeHead; cur; cur = cur->next){
+		printf("%-32s", cur->recipeName);
+		counter++;
+		if (counter % 3 == 0)
+			printf("\n\n\n\t\t");
+	}
+}
+
+/********************************************************************************************************************
+* 																													*
+*	  			finds a recipe in the recipeStruct linked list by parsing a buffer to find comparable names			*
+*				returns NULL if no recipe with a partially matching name is found									*
+*																													*
+*********************************************************************************************************************/
+struct recipeStruct *findRecipe(struct recipeStruct *recipeHead, char buffer[INGREDIENT_BUFFER_LEN]){
+	//create array of pointers to store possible found ingredients, make sure it is NULL to start
+	struct recipeStruct *foundRecipes[MAX_INGREDIENTS_FOUND] = {NULL};
+	memset(foundRecipes, 0, sizeof(foundRecipes));
+	
+	unsigned int recipeCounter = 0;
+	unsigned int recipeChoice = 0;
+	//iterate through all sub-lists from the head node of the ingredientType linked list searching for partial matches
+	//store partial matches in array to share with user as well as their ingredientTypeNodes which store the matches' head pointers
+	struct recipeStruct *possibleRecipe = NULL;
+	//move through recipeStruct linked-list until NULL on searching for partial matches
+	for (possibleRecipe = recipeHead; possibleRecipe != NULL; possibleRecipe = possibleRecipe->next){
+			if (strstr(possibleRecipe->recipeName, buffer) != NULL)
+				foundRecipes[recipeCounter++] = possibleRecipe;
+	}
+	if (recipeCounter == 0)
+		return NULL;
+	if ((recipeCounter == 1) && (strcmp(foundRecipes[0]->recipeName, buffer) == 0))
+		return foundRecipes[0];
+	int i = 0;
+	for (i = 1; i <= recipeCounter; i++)
+		printf("\t\t%i) %s\n", i, foundRecipes[i-1]->recipeName);
+	printf("\t\t%i) None Of The Above\n", i);
+	while ((recipeChoice == 0) || ((recipeChoice <= 0) || (recipeChoice > (recipeCounter + 1)))){
+        printf("\t\tEnter Recipe Number: ");
+        recipeChoice = getNumericChoice();
+	    if ((recipeChoice <= 0) || (recipeChoice > (recipeCounter + 1))){
+	       		printf("\t\tInvalid Entry: ");
+	       		while (getchar() != '\n');
+	    }
+    }
+    //if none of the above are correct, return NULL
+    if (recipeChoice == (recipeChoice + 1))
+    	return NULL;
+
+	return foundRecipes[recipeChoice - 1];
 }

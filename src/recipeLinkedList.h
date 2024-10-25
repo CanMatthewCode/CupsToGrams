@@ -32,4 +32,27 @@ int dumpRecipesFromLinkedList(struct recipeStruct *recipeHead);
 *********************************************************************************************************************/
 struct recipeStruct *loadRecipesToLinkedList(void);
 
+/********************************************************************************************************************
+* 																													*
+*	 			add a new node into the recipeStruct linked-list alphabetically										*
+*				returns pointer to head on success, NULL on failure													*
+*																													*
+*********************************************************************************************************************/
+struct recipeStruct *placeRecipeStructNode(struct recipeStruct *recipeHead, struct recipeStruct *newRecipe);
+
+/********************************************************************************************************************
+* 																													*
+*	 			prints the names of all the nodes in the recipeStruct linked-list alphabetically					*
+*																													*
+*********************************************************************************************************************/
+void printAllRecipeNames(struct recipeStruct *recipeHead);
+
+/********************************************************************************************************************
+* 																													*
+*	  			finds a recipe in the recipeStruct linked list by parsing a buffer to find comparable names			*
+*				returns NULL if no recipe with a partially matching name is found									*
+*																													*
+*********************************************************************************************************************/
+struct recipeStruct *findRecipe(struct recipeStruct *recipeHead, char buffer[INGREDIENT_BUFFER_LEN]);
+
 #endif //RECIPELINKEDLIST_H
