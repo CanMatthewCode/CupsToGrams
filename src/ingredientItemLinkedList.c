@@ -2,7 +2,6 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdlib.h>
 #include "ingredientConversions.h"
 #include "ingredientTypeLinkedList.h"
 #include "ingredientItemLinkedList.h"
@@ -15,8 +14,8 @@
 *		XPrint ingredient node list
 *		XDump ingredientTypeLinkedList into text file named ingredientType->ingredientName
 *		XPrint All Ingredients by Type ~pretty~
-*		freeIngredientTypeLinkedList function
-*		freeAllIngredientTypeLinkedLists function
+*		XfreeIngredientTypeLinkedList function
+*		XfreeAllIngredientTypeLinkedLists function
 */
 
 /********************************************************************************************************************
@@ -509,3 +508,24 @@ int deleteIngredientItemNode(struct ingredientItem *node, struct ingredientType 
 	return 0;
 }
 
+/********************************************************************************************************************
+* 																													*
+*	 			moves through the ingredientType linked list freeing all attached									*
+*				ingredientItem linked lists from memory and setting the ingredientType member to NULL				*
+*																													*
+*********************************************************************************************************************/
+void freeIngredientItemList(struct ingredientType *head){
+	struct ingredientType *typeNode = head;
+	struct ingredientItem *itemNode = NULL;
+	struct ingredientItem *tempItemNode = NULL;
+	while (typeNode){
+		itemNode = typeNode->head;
+		while (itemNode){
+			tempItemNode = itemNode;
+			itemNode = itemNode->next;
+			free(tempItemNode);
+		}
+		typeNode->head = NULL;
+		typeNode = typeNode->next;
+	}
+}

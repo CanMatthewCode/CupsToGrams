@@ -121,4 +121,12 @@ void printAllIngredientItemNodes(struct ingredientType *node);
 *********************************************************************************************************************/
 int deleteIngredientItemNode(struct ingredientItem *node, struct ingredientType *headNode);
 
+/********************************************************************************************************************
+* 																													*
+*	 			moves through the ingredientType linked list freeing all attached									*
+*				ingredientItem linked lists from memory and setting the ingredientType member to NULL				*
+*																													*
+*********************************************************************************************************************/
+void freeIngredientItemList(struct ingredientType *head);
+
 #endif //INGREDIENTITEMLINKEDLIST_H
