@@ -55,4 +55,26 @@ void printAllRecipeNames(struct recipeStruct *recipeHead);
 *********************************************************************************************************************/
 struct recipeStruct *findRecipe(struct recipeStruct *recipeHead, char buffer[INGREDIENT_BUFFER_LEN]);
 
+/**********************************************************************************************************v*********
+* 																													*
+*	 			delete recipe permanently from recipe linked-list													*
+*				returns recipeType pointer to head on success, NULL on failure or cancel							*
+*																													*
+*********************************************************************************************************************/
+struct recipeStruct *deleteFullRecipeNode(struct recipeStruct *head, struct recipeStruct *recipeToDelete);
+
+/********************************************************************************************************************
+* 																													*
+*	  			prints all recipe nodes of a chosen food type						 								*
+*																													*
+*********************************************************************************************************************/
+void printRecipeByType (struct recipeStruct *headPointer);
+
+/********************************************************************************************************************
+* 																													*
+*	 			free full recipeStruct linked-list from memory														*
+*																													*
+*********************************************************************************************************************/
+void freeRecipeStructList(struct recipeStruct *head);
+
 #endif //RECIPELINKEDLIST_H

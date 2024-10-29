@@ -10,11 +10,11 @@
 
 /*
 	x. placeRecipeStructNode into linked list alphabetically
-	2. deleteRecipe to delete a node from the linked list
-	3. find recipes to find all recipes that have the user's input and display the options like the ingredients find function
-	4. free recipeStruct linked list function
-	5. print out all recipe names
-	6. print recipe names by recipe type
+	x. deleteRecipe to delete a node from the linked list
+	x. find recipes to find all recipes that have the user's input and display the options like the ingredients find function
+	x. free recipeStruct linked list function
+	x. print out all recipe names
+	x. print recipe names by recipe type
 */
 /********************************************************************************************************************
 * 																													*
@@ -254,6 +254,9 @@ void printAllRecipeNames(struct recipeStruct *recipeHead){
 		if (counter % 3 == 0)
 			printf("\n\n\n\t\t");
 	}
+	printf("\n\n\t\tHit Enter To Continue\t");
+	char ch = '\0';
+	while ((ch = getchar()) != '\n');
 }
 
 /********************************************************************************************************************
@@ -298,4 +301,107 @@ struct recipeStruct *findRecipe(struct recipeStruct *recipeHead, char buffer[ING
     	return NULL;
 
 	return foundRecipes[recipeChoice - 1];
+}
+
+/**********************************************************************************************************v*********
+* 																													*
+*	 			delete recipe permanently from recipe linked-list													*
+*				returns recipeType pointer to head on success, NULL on failure or cancel							*
+*																													*
+*********************************************************************************************************************/
+struct recipeStruct *deleteFullRecipeNode(struct recipeStruct *head, struct recipeStruct *recipeToDelete){
+	char confirm = '\0';
+	struct recipeStruct *cur = recipeToDelete;
+	struct recipeStruct *prev = NULL;
+	struct recipeStruct *next = NULL;
+	struct recipeStruct *headPointer = head;
+	puts("\n\n\t\txxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+	puts("\t\tx\t\t\t\t\t\t\t\t\t\tx");
+	puts("\t\tx\t\t      -PERMANENTLY DELETE FULL REICPE- \t\t\t\tx");
+	puts("\t\tx\t\t\t\t\t\t\t\t\t\tx");
+	puts("\t\txxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+	printf("\n\n\t\tConfirm PERMANENTLY DELETING \"%s\" Recipe In Full (y/n): ", recipeToDelete->recipeName);
+	YESNOCHOICE(confirm);
+	if (confirm == 'N')
+		return head;
+	if (headPointer == NULL){
+		printf("\t\tRecipe List is Empty\n");
+		return NULL;
+	} 
+	if (cur == NULL){
+		printf("\t\tRecipe To Delete Is Empty\n");
+		return NULL;
+	} 
+	if (cur && headPointer){
+		prev = cur->prev;
+		next = cur->next;
+	//if prev == NULL, it is the 1st node
+		if (!prev)
+			headPointer = cur->next;
+	//if it is a middle node
+		else if (prev != NULL && next != NULL){
+			prev->next=next;
+			next->prev=prev;
+		}
+	//if it is the final node
+		else if(prev && next == NULL)
+			prev->next = NULL;
+		free(cur);
+		cur = NULL;
+	//dump to .txt file
+		dumpRecipesFromLinkedList(headPointer);
+	}
+	return headPointer;
+}
+
+/********************************************************************************************************************
+* 																													*
+*	  			prints all recipe nodes of a chosen food type						 								*
+*																													*
+*********************************************************************************************************************/
+void printRecipeByType (struct recipeStruct *headPointer){
+	struct recipeStruct *cur = headPointer;
+	int counter = 0;
+	clearScreen();
+	puts("\n\n\t\t*********************************************************************************");
+	puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
+	puts("\t\t*\t\t\t  -SHOW RECIPE NAMES BY FOOD TYPE-       \t\t*");
+	puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
+	puts("\t\t*********************************************************************************\n\n");
+	int choice = 0;
+	puts("\n\n\t\t(1) APPETIZER\t\t(2) BAKED GOOD\t\t(3) BREAKFAST\t\t(4) DESSERT\n\n\t\t(5) LUNCH\t\t(6) ENTREE\t\t(7) SIDE DISH\t\t(8) SNACK\n\n\t\t(9)SOUP");
+	printf("\n\n\t\tEnter Number(#) Of Food Type To Print: ");
+	do {
+		choice = getNumericChoice();
+		if (choice < 1 || choice > 9)
+			printf("\t\tInvalid Entry, Try Again: ");
+	} while (choice < 1 || choice > 9);
+	printf("\n\t\t");
+	for ( ; cur; cur = cur->next){
+		if (cur->recipeType == choice - 1){
+			printf("%-32s", cur->recipeName);
+			counter++;
+			if (counter % 3 == 0)
+				printf("\n\n\n\t\t");
+		}
+	}
+	printf("\n\n\t\tHit Enter To Continue\t");
+	char ch = '\0';
+	while ((ch = getchar()) != '\n');
+}
+
+/********************************************************************************************************************
+* 																													*
+*	 			free full recipeStruct linked-list from memory														*
+*																													*
+*********************************************************************************************************************/
+void freeRecipeStructList(struct recipeStruct *head){
+	struct recipeStruct *cur = head;
+	struct recipeStruct *temp;
+	while (cur){
+		temp = cur;
+		cur = cur->next;
+		free(temp);
+	}
+	temp = NULL;
 }
