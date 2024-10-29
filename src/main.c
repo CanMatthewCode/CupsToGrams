@@ -59,27 +59,26 @@ int main (int argc, char **argv){
             	printf("\t\tInvalid Selection: ");
             	continue;
         	}
-        	while (getchar() != '\n'); // Clear the input buffer
+        	while (getchar() != '\n');
 			if (strchr("1234Q", menu) == NULL)
 				printf("\t\tInvalid Selection: ");
     	} while (strchr("1234Q", menu) == NULL);
 		switch (menu){
 			case '1': 	clearScreen();
-						ingredientHead = convertIngredientMenu(ingredientHead); //- leads to submenu to ask to search by name, by type, or all 
-						//					 			  -- further submenu asks to add type of ingredient or add ingredient
+						ingredientHead = convertIngredientMenu(ingredientHead); 
 						break; 
-			case '2': 	//convertRecipe(); - leads to submenu to ask to convert recipe then to save or not
-						recipeMenus(recipeHead, ingredientHead);
+			case '2': 	recipeMenus(recipeHead, ingredientHead);
 						break;
 			case '3':	clearScreen();
 						printAllIngredientItemsInTypeNode(ingredientHead);
 						break;
 			case '4':	printAllRecipeNames(recipeHead); 
-						char ch = '\0';
-						while ((ch = getchar()) != '\n');
 						//- leads to submenu to ask to search by name, food type, or cuisine 
 						break;
-			case 'Q':	return 0;
+			case 'Q':	freeIngredientItemList(ingredientHead);
+						freeIngredientTypeList(ingredientHead);
+						freeRecipeStructList(recipeHead);
+						return 0;
 			default: 	printf("\n\t\t\t\t\t***Invalid Selection***\n\n");
 		}
 	} while (menu != 'Q');
