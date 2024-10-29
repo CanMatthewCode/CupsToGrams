@@ -16,7 +16,6 @@
 struct recipeStruct *recipeMenus(struct recipeStruct *recipeHead, struct ingredientType *ingredientHead){
 	char menu = '\0';
 	struct recipeStruct *recipeHeadPointer = recipeHead;
-//	struct ingredientType *ingredientHeadPointer = ingredientHead;
 	clearScreen();
 	do {
 		clearScreen();
@@ -27,8 +26,8 @@ struct recipeStruct *recipeMenus(struct recipeStruct *recipeHead, struct ingredi
 		puts("\t\t*********************************************************************************");
 		puts("\n\t\tMenu Options:\n");
 	
-		puts("\t\t(1) Convert New Recipe\n\t\t(2) Modify Recipe\n\t\t"
-			 "(3) See Recipes By Type\n\t\t(4) Save Recipe As PDF\n\n\t\t"
+		puts("\t\t(1) Convert New Recipe\n\t\t(2) Modify Recipe\n\t\t(3) See All Recipes\n\t\t"
+			 "(4) See Recipes By Type\n\t\t(5) Save Recipe As PDF\n\n\t\t"
 			 "(B) Back");
 		printf("\n\t\tEnter Selection: ");
 		do {
@@ -47,11 +46,10 @@ struct recipeStruct *recipeMenus(struct recipeStruct *recipeHead, struct ingredi
 			case '2':	recipeHeadPointer = modifyExistingRecipeMenu(recipeHeadPointer, ingredientHead);
 						break;
 			case '3':	printAllRecipeNames(recipeHeadPointer);
-						char ch = '\0';
-						while ((ch = getchar()) != '\n');
-						//seeRecipesByType()
 						break;
-			case '4':	//saveRecipeToPDF()
+			case '4':	printRecipeByType(recipeHeadPointer);
+						break;
+			case '5':	//saveRecipeToPDF()
 						break;
 			case 'B':	return recipeHeadPointer;
 			default:	clearScreen();
@@ -99,11 +97,10 @@ struct recipeStruct *editRecipeMenu(struct recipeStruct *recipe, struct recipeSt
 							break;
 			case '5':		setRecipeType(recipe);
 							break;
-			case 'D':		//recipeHeadPointer = deleteRecipe(recipe, recipeHeadPointer);
-							break;
-			case 'S':		//dumpRecipesFromLinkedList(recipeHeadPointer);
+			case 'D':		recipeHeadPointer = deleteFullRecipeNode(recipeHeadPointer, recipe);
 							return recipeHeadPointer;
-							break;
+			case 'S':		dumpRecipesFromLinkedList(recipeHeadPointer);
+							return recipeHeadPointer;
 			default:		break;
 		}
 	} while (menu != 'S');
@@ -240,28 +237,22 @@ void editRecipeNotesMenu(struct recipeStruct *recipe){
 *																											*
 *************************************************************************************************************/
 struct recipeStruct *modifyExistingRecipeMenu(struct recipeStruct *recipeHeadPointer, struct ingredientType *ingredientHead){
-	char choice = '\0';
 	struct recipeStruct *foundRecipe = NULL;
 	struct recipeStruct *recipeHead = recipeHeadPointer;
 	char buffer[INGREDIENT_BUFFER_LEN] = {'\0'};
-	do {
-
-		clearScreen();
-		puts("\n\n\t\t*********************************************************************************");
-		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
-		puts("\t\t*\t\t\t      -MODIFY RECIPE- \t\t\t\t\t*");
-		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
-		puts("\t\t*********************************************************************************");
-		printf("\n\t\tEnter Recipe Name: ");
-		readUserInputIntoBuffer(buffer);
-		foundRecipe = findRecipe(recipeHeadPointer, buffer);
-		if (foundRecipe){
-				printFullRecipe(foundRecipe);
-					recipeHead = editRecipeMenu(foundRecipe, recipeHead, ingredientHead);
-		} else
-			printf("\t\tRecipe Not Found");
-		printf("\n\n\t\tModify A Different Recipe (y/n)? ");
-		YESNOCHOICE(choice);
-	} while (choice != 'N');
+	clearScreen();
+	puts("\n\n\t\t*********************************************************************************");
+	puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
+	puts("\t\t*\t\t\t      -MODIFY RECIPE- \t\t\t\t\t*");
+	puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
+	puts("\t\t*********************************************************************************");
+	printf("\n\t\tEnter Recipe Name: ");
+	readUserInputIntoBuffer(buffer);
+	foundRecipe = findRecipe(recipeHeadPointer, buffer);
+	if (foundRecipe){
+			printFullRecipe(foundRecipe);
+				recipeHead = editRecipeMenu(foundRecipe, recipeHead, ingredientHead);
+	} else
+		printf("\t\tRecipe Not Found");
 	return recipeHead;
 }
