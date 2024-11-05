@@ -112,16 +112,19 @@ void addNewIngredient(struct recipeStruct *currentRecipe, struct ingredientType 
 	struct ingredientItem *foundNewIngredient = NULL;
 	char buffer[INGREDIENT_BUFFER_LEN] = {'\0'};
 	char cupsInputAmountBuffer[INGREDIENT_BUFFER_LEN] = {'\0'};
-	printf("\n\n\n\t\tWhat INGREDIENT Would You Like To Add? : ");
-	readUserInputIntoBuffer(buffer);
-	if ((foundNewIngredient = findIngredientItemNode(head, buffer, NULL)) == NULL){
-		printf("\n\n\t\tIngredient Not Found");
-		return;
-	} else {
-		strcpy(currentRecipe->ingredients[currentRecipe->numberOfIngredients].ingredientName, foundNewIngredient->ingredientName);
-		currentRecipe->ingredients[currentRecipe->numberOfIngredients].ingredientGrams = cupsToGrams(cupsInputAmountBuffer, foundNewIngredient);
-		strcpy(currentRecipe->ingredients[currentRecipe->numberOfIngredients].userCupsInput, cupsInputAmountBuffer);
-	}
+	char foundIngredient = 'N';
+	printf("\n\n\n\t\t");
+	do {
+		memset(buffer, 0, sizeof(buffer));
+		printf("What INGREDIENT Would You Like To Add? : ");
+		readUserInputIntoBuffer(buffer);
+		if ((foundNewIngredient = findIngredientItemNode(head, buffer, NULL)) == NULL){
+			printf("\n\n\t\tIngredient Not Found, Try Again\n\t\t");
+		} else (foundIngredient = 'Y');
+	} while (foundIngredient != 'Y');
+	strcpy(currentRecipe->ingredients[currentRecipe->numberOfIngredients].ingredientName, foundNewIngredient->ingredientName);
+	currentRecipe->ingredients[currentRecipe->numberOfIngredients].ingredientGrams = cupsToGrams(cupsInputAmountBuffer, foundNewIngredient);
+	strcpy(currentRecipe->ingredients[currentRecipe->numberOfIngredients].userCupsInput, cupsInputAmountBuffer);
 	currentRecipe->numberOfIngredients += 1;
 }
 
