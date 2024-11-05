@@ -24,7 +24,7 @@ struct recipeStruct *recipeMenus(struct recipeStruct *recipeHead, struct ingredi
 		puts("\t\t*\t\t\t      -CONVERT RECIPE- \t\t\t\t\t*");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
 		puts("\t\t*********************************************************************************");
-		puts("\n\t\tMenu Options:\n");
+		puts("\n\t\tMenu Options:\n\n");
 	
 		puts("\t\t(1) Convert New Recipe\n\t\t(2) Modify Recipe\n\t\t(3) See All Recipes\n\t\t"
 			 "(4) See Recipes By Type\n\t\t(5) Save Recipe As PDF\n\n\t\t"
@@ -37,9 +37,9 @@ struct recipeStruct *recipeMenus(struct recipeStruct *recipeHead, struct ingredi
             	continue;
         	}
         	while (getchar() != '\n');
-			if (strchr("1234B", menu) == NULL)
+			if (strchr("12345B", menu) == NULL)
 				printf("\t\tInvalid Selection: ");
-		} while (strchr("1234B", menu) == NULL);
+		} while (strchr("12345B", menu) == NULL);
 		switch (menu){
 			case '1':	recipeHeadPointer = convertNewRecipe(recipeHeadPointer, ingredientHead);
 						break;
@@ -49,7 +49,7 @@ struct recipeStruct *recipeMenus(struct recipeStruct *recipeHead, struct ingredi
 						break;
 			case '4':	printRecipeByType(recipeHeadPointer);
 						break;
-			case '5':	//saveRecipeToPDF()
+			case '5':	printRecipeToPDFMenu(recipeHeadPointer);
 						break;
 			case 'B':	return recipeHeadPointer;
 			default:	clearScreen();
@@ -98,12 +98,12 @@ struct recipeStruct *editRecipeMenu(struct recipeStruct *recipe, struct recipeSt
 			case '5':		setRecipeType(recipe);
 							break;
 			case 'D':		recipeHeadPointer = deleteFullRecipeNode(recipeHeadPointer, recipe);
-							return recipeHeadPointer;
+							break;
 			case 'S':		dumpRecipesFromLinkedList(recipeHeadPointer);
 							return recipeHeadPointer;
 			default:		break;
 		}
-	} while (menu != 'S');
+	} while ((menu != 'S') && (menu != 'D'));
 	return recipeHeadPointer;
 }
 
@@ -255,4 +255,33 @@ struct recipeStruct *modifyExistingRecipeMenu(struct recipeStruct *recipeHeadPoi
 	} else
 		printf("\t\tRecipe Not Found");
 	return recipeHead;
+}
+
+/************************************************************************************************************
+* 																											*
+*				menu for finding recipe from the recipeStruct headPointer									*
+*				and then printing chosen recipe out as a PDF document										*
+*																											*
+*************************************************************************************************************/
+void printRecipeToPDFMenu(struct recipeStruct *recipeHeadPointer){
+	struct recipeStruct *foundRecipe = NULL;
+	char buffer[INGREDIENT_BUFFER_LEN] = {'\0'};
+	clearScreen();
+	puts("\n\n\t\t*********************************************************************************");
+	puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
+	puts("\t\t*\t\t\t      -PRINT RECIPE TO PDF- \t\t\t\t*");
+	puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
+	puts("\t\t*********************************************************************************");
+	printf("\n\t\tEnter Recipe Name To Save As A PDF Document: ");
+	readUserInputIntoBuffer(buffer);
+	foundRecipe = findRecipe(recipeHeadPointer, buffer);
+	if (foundRecipe)
+			printFullRecipe(foundRecipe);
+	char choice = '\0';
+	printf("\n\t\tPrint To PDF (y/n)? ");
+	YESNOCHOICE(choice);
+	if (choice == 'N')
+		return;
+	else 
+		printRecipeToPDF(foundRecipe);
 }
