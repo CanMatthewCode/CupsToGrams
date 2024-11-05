@@ -27,7 +27,7 @@ struct ingredientType *convertIngredientMenu(struct ingredientType *head){
 			 "(3) See Ingredients By Type\n\t\t(4) See Ingredient Types\n\t\t"
 			 "(5) Add Ingredient\n\t\t(6) Modify Ingredient\n\t\t"
 			 "(7) Delete Ingredient\n\t\t"
-			 "(8) Add Ingredient Type\n\t\t(9) Delete Ingredient Type\n\t\t"
+			 "(8) Add Ingredient Type\n\t\t(9) Delete Ingredient Type\n\n\t\t"
 			 "(B) Back");
 		printf("\n\t\tEnter Selection: ");
 		do {
@@ -36,8 +36,7 @@ struct ingredientType *convertIngredientMenu(struct ingredientType *head){
             	printf("\t\tInvalid Selection: ");
             	continue;
         	}
-        	while (getchar() != '\n')
-        		; // Clear the input buffer
+        	while (getchar() != '\n');
 			if (strchr("123456789B", menu) == NULL)
 				printf("\t\tInvalid Selection: ");
     	} while (strchr("123456789B", menu) == NULL);
@@ -114,6 +113,7 @@ void convertIngredient(struct ingredientType *head){
 		if (foundIngredient){
 			printf("\n\n");
 			printIngredientItemNode(foundIngredient);
+			//cupsToGrams(cupsInputAmountBuffer, foundIngredient);
 			//make function to do the conversion so it can be used in addNewIngredient to recipeStruct
 			printf("\n\n\t\tEnter Amount To Convert From US Cups Measurements: ");
 			readUserInputIntoBuffer(cupsInputAmountBuffer);

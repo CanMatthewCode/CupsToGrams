@@ -246,23 +246,26 @@ struct ingredientType *deleteIngredientTypeNode(struct ingredientType *head){
 			case 'Y': break; 
 			case 'N': return headPointer;
 			default : printf("\n\t\tInvalid Entry, Try Again\n\t\t"); 	
-					  while (getchar() != '\n')
-					  	;
+					  while (getchar() != '\n');
 		}
 	}
 	prev = cur->prev;
 	next = cur->next;
-	//if prev == NULL, it is the 1st node
-	if (!prev)
-		headPointer = cur->next;
-	//if it is a middle node
-	else if (prev != NULL && next != NULL){
-		prev->next=next;
-		next->prev=prev;
-	}
+	//if it is the only node
+	if ((!prev) && (!next)){
+		headPointer = NULL;
+	//if prev == NULL, it is the first node;
+	} else if ((!prev) && (next)){
+		headPointer = next;
+		next->prev = NULL;
+	//if it is a middle node	
+	} else if ((prev) && (next)){
+		prev->next = next;
+		next->prev = prev;
 	//if it is the final node
-	else if(prev && next == NULL)
-		prev->next = NULL;
+	} else if (prev && (!next))
+		prev->next = NULL; 
+
 	free(cur);
 	cur = NULL;
 	//dump to .txt file

@@ -21,7 +21,7 @@ do {								    								\
 	}																	\
 } while (((choice) != 'Y') && ((choice) != 'N'))
 
-//#define clearScreen														\
+//#define CLEARSCREEN													\
 //	printf("\033[2J\033[H");
 
 struct ingredientItem{
