@@ -47,12 +47,12 @@ int main (int argc, char **argv){
 		puts("\t\t*\t\t\t-RECIPE AND INGREDIENT CONVERTER-\t\t\t*");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
 		puts("\t\t*********************************************************************************");
-		puts("\n\t\tMain Menu Options:\n");
+		puts("\n\t\tMain Menu Options:\n\n");
 	
-		puts("\t\t(1) Convert Ingredient\n\t\t(2) Convert Recipe\n\t\t"
-			 "(3) See Ingredient List\n\t\t(4) See Recipe List"
+		puts("\t\t(1) Convert Recipe\n\t\t(2) See Recipes"
+			 "\n\t\t(3) Convert Ingredient\n\t\t(4) See Ingredient List"
 			 "\n\n\t\t(Q) Quit");
-		printf("\n\t\tEnter Selection: ");
+		printf("\n\n\t\tEnter Selection: ");
 		do {
         	menu = toupper(getchar());
         	if (menu == '\n'){
@@ -64,20 +64,23 @@ int main (int argc, char **argv){
 				printf("\t\tInvalid Selection: ");
     	} while (strchr("1234Q", menu) == NULL);
 		switch (menu){
-			case '1': 	clearScreen();
+			case '1': 	recipeMenus(recipeHead, ingredientHead);
+						break;
+			case '2':	printAllRecipeNames(recipeHead);
+						break;
+						//- leads to submenu to ask to search by name, food type, or cuisine 
+			case '3': 	clearScreen();
 						ingredientHead = convertIngredientMenu(ingredientHead); 
 						break; 
-			case '2': 	recipeMenus(recipeHead, ingredientHead);
-						break;
-			case '3':	clearScreen();
+			case '4':	clearScreen();
 						printAllIngredientItemsInTypeNode(ingredientHead);
 						break;
-			case '4':	printAllRecipeNames(recipeHead); 
-						//- leads to submenu to ask to search by name, food type, or cuisine 
-						break;
-			case 'Q':	freeIngredientItemList(ingredientHead);
-						freeIngredientTypeList(ingredientHead);
-						freeRecipeStructList(recipeHead);
+			case 'Q':	if (ingredientHead)
+							freeIngredientItemList(ingredientHead);
+						if (ingredientHead)
+							freeIngredientTypeList(ingredientHead);
+						if (recipeHead)
+							freeRecipeStructList(recipeHead);
 						return 0;
 			default: 	printf("\n\t\t\t\t\t***Invalid Selection***\n\n");
 		}
