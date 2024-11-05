@@ -4,6 +4,17 @@
 #include "ingredientConversions.h"
 #define MAX_INGREDIENT_NUMBER 60
 #define MAX_INGREDIENT_TEXT 1000
+#define SCREEN_SIZE 65
+
+#define TOTAL_VERTICAL_POINTS 792
+#define TOTAL_HORIZONTAL_POINTS 612
+#define H_FONT_POINTS 6
+#define V_FONT_POINTS 12
+#define SIDE_MARGIN 36
+#define TOP_BOTTOM_MARGIN 90
+#define TOP_OF_PAGE_LINE 720
+#define BOTTOM_OF_PAGE_LINE 90
+#define SPACE_POINTS 5
 
 enum recipeType{
 	APPETIZER,
@@ -191,5 +202,20 @@ void modifyNoteOrder(struct recipeStruct *recipe);
 *																													*
 *********************************************************************************************************************/
 void deleteNoteFromRecipe(struct recipeStruct *recipe);
+
+/********************************************************************************************************************
+* 																													*
+*	  			accepts a recipeInstructions or recipeNotes formatted buffer and a buffer to store the PDF text		*
+*				and returns the number of characters successfully copied into the PDF format buffer					*
+*																													*
+*********************************************************************************************************************/
+int recipeBufferToPDFOutput (char *recipeToPDFBuffer, char *recipeNodeText);
+
+/********************************************************************************************************************
+* 																													*
+*	  			saves a recipe to as a pdf document in a visually pleasing uniform style							*
+*																													*
+*********************************************************************************************************************/
+void printRecipeToPDF(struct recipeStruct *recipeToPrint);
 
 #endif //RECIPECONVERSIONS_H
