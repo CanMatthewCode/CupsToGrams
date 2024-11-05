@@ -5,6 +5,7 @@
 #include "recipeMenus.h"
 #include "ingredientItemLinkedList.h"
 #include "ingredientConversions.h"
+#include "pdfgen.h"
 
 /*
 x	Function to add new recipe
@@ -14,12 +15,12 @@ x	Function to add new direction
 x	Function to remove each (ingredient, note, direction)
 x	Function to modify each (ingredient, note, direction, order of (ingredient, note, direction))
 x	Function to display recipe in current state
-8	Function to pretty print recipe to pdf
+x	Function to pretty print recipe to pdf
 x	Function to store recipes in txt files
 x	Function to retrieve recipes from txt files
-11	Function to delete recipe
-12	Function to search for recipe
-13	Function to free all recipes calloc()ed on quit 
+x	Function to delete recipe
+x	Function to search for recipe
+x	Function to free all recipes calloc()ed on quit 
 */
 
 /********************************************************************************************************************
@@ -95,11 +96,9 @@ struct recipeStruct *convertNewRecipe(struct recipeStruct *recipeHead, struct in
 		YESNOCHOICE(choice);
 	}
 	setRecipeType(newRecipe);
-	recipeHeadPointer = editRecipeMenu(newRecipe, recipeHeadPointer, ingredientHead);
 	//place recipe in linked-list alphabetically
 	recipeHeadPointer = placeRecipeStructNode(recipeHeadPointer, newRecipe);
-	//dump the list into it's .txt file now that a new recipe was added
-	dumpRecipesFromLinkedList(recipeHeadPointer);
+	recipeHeadPointer = editRecipeMenu(newRecipe, recipeHeadPointer, ingredientHead);
 	//return pointer to head of recipe linked list with new recipe 
 	return recipeHeadPointer;
 }
@@ -246,8 +245,7 @@ void printRecipeName(struct recipeStruct *recipe){
 *********************************************************************************************************************/
 void printRecipeIngredients(struct recipeStruct *recipe){
 	puts("\n\n\t\t\tINGREDIENTS:\n");
-	int i = 0;
-	for (; i < recipe->numberOfIngredients; i++)
+	for (int i = 0; i < recipe->numberOfIngredients; i++)
 		printf("\t\t%d)  %7.2f grams of %s (%s)\n", i + 1, recipe->ingredients[i].ingredientGrams, recipe->ingredients[i].ingredientName, recipe->ingredients[i].userCupsInput);
 	printf("\n\n");
 }
@@ -452,7 +450,7 @@ void deleteIngredientFromRecipe(struct recipeStruct *recipe){
 void modifyInstruction(struct recipeStruct *recipe){
 	int choice = 0;
 	char choice2 = '\0';
-	char buffer[INGREDIENT_BUFFER_LEN] = {'\0'};
+	char buffer[MAX_INGREDIENT_TEXT] = {'\0'};
 	clearScreen();
 	printRecipeName(recipe);
 	printRecipeIngredients(recipe);
@@ -465,7 +463,7 @@ void modifyInstruction(struct recipeStruct *recipe){
 	} while (choice < 1 || choice > recipe->numberOfInstructions);
 	printf("\n\n\t\t%s\n\n\t\tEnter New Instruction: ", recipe->recipeInstructions[choice - 1]);
 	do {
-		memset(buffer, 0, INGREDIENT_BUFFER_LEN);
+		memset(buffer, 0, MAX_INGREDIENT_TEXT);
 		readUserInputIntoRecipe(buffer);
 		printf("\n\n\t\t%s\n\n\t\tIs This Correct (y/n)? ", buffer);
 		YESNOCHOICE(choice2);
@@ -548,7 +546,7 @@ void deleteInstructionFromRecipe(struct recipeStruct *recipe){
 void modifyNote(struct recipeStruct *recipe){
 	int choice = 0;
 	char choice2 = '\0';
-	char buffer[INGREDIENT_BUFFER_LEN] = {'\0'};
+	char buffer[MAX_INGREDIENT_TEXT] = {'\0'};
 	clearScreen();
 	printRecipeName(recipe);
 	printRecipeIngredients(recipe);
@@ -562,7 +560,7 @@ void modifyNote(struct recipeStruct *recipe){
 	} while (choice < 1 || choice > recipe->numberOfNotes);
 	printf("\n\n\t\t%s\n\n\t\tEnter New Note: ", recipe->recipeNotes[choice - 1]);
 	do {
-		memset(buffer, 0, INGREDIENT_BUFFER_LEN);
+		memset(buffer, 0, MAX_INGREDIENT_TEXT);
 		readUserInputIntoRecipe(buffer);
 		printf("\n\n\t\t%s\n\n\t\tIs This Correct (y/n)? ", buffer);
 		YESNOCHOICE(choice2);
@@ -637,4 +635,160 @@ void deleteNoteFromRecipe(struct recipeStruct *recipe){
 	} while (choice < recipe->numberOfNotes);
 	memset(recipe->recipeNotes[choice], 0, MAX_INGREDIENT_TEXT);
 	recipe->numberOfNotes -= 1;
+}
+
+/********************************************************************************************************************
+* 																													*
+*	  			accepts a recipeInstructions or recipeNotes formatted buffer and a buffer to store the PDF text		*
+*				and returns the number of characters successfully copied into the PDF format buffer					*
+*																													*
+*********************************************************************************************************************/
+int recipeBufferToPDFOutput (char *recipeToPDFBuffer, char *recipeNodeText){
+	char *recipeToPDFBufferPointer = recipeToPDFBuffer;
+	char *recipeNodeTextPointer = recipeNodeText;
+	int recipeNodeBufferCounter = 0;
+	int pdfBufferCounter = 0;
+	while (*(recipeNodeTextPointer + recipeNodeBufferCounter) != '\0'){
+		if ((*(recipeNodeTextPointer + recipeNodeBufferCounter) == '\t') || (*(recipeNodeTextPointer + recipeNodeBufferCounter) == '\n'))
+			recipeNodeBufferCounter++;
+		else {
+			*(recipeToPDFBufferPointer + pdfBufferCounter++) = *(recipeNodeTextPointer + recipeNodeBufferCounter++);
+		}
+	}
+	return pdfBufferCounter;
+}
+
+/********************************************************************************************************************
+* 																													*
+*	  			saves a recipe to as a pdf document in a visually pleasing uniform style							*
+*																													*
+*********************************************************************************************************************/
+void printRecipeToPDF(struct recipeStruct *recipeToPrint){
+	FILE *fp = NULL;
+	char openFileBuffer[INGREDIENT_BUFFER_LEN+15] ={'\0'};
+	//add path to fopen() variable in openFileBuffer
+	strcpy(openFileBuffer, "./recipePDFs/");
+	//copy name from recipeStruct node into openFileBuffer
+	strcat(openFileBuffer, recipeToPrint->recipeName);
+	//append .PDF to recipeStruct name
+	strcat(openFileBuffer, ".PDF");
+	if ((fp = fopen(openFileBuffer, "wb")) == NULL){
+		printf("Unable to open %s file\n", openFileBuffer);
+		return;
+	}
+	struct pdf_info info = {
+        .creator = "Recipe Conversions",
+        .producer = "PDFgen",
+        .author = "M. Freedman",
+        .subject = "Cups To Grams Conversions",
+        .date = "Today"
+    };
+    strcpy(info.title, recipeToPrint->recipeName);
+    //create my pdf pointer for pdfgen.h
+	struct pdf_doc *pdf = pdf_create(PDF_LETTER_WIDTH, PDF_LETTER_HEIGHT, &info);
+	//set the pdf's font to Helvetica
+	pdf_set_font(pdf, "Helvetica");
+	//add a new page to the PDF
+	pdf_append_page(pdf);
+	int linePointCounter = 0; //number to deduct from top line of page
+	//Add top line of text to top line **s 90 chars per line at 12 pt font in 8.5" x 11" paper at 6 pts per character average
+	int recipeNamePtLength = strlen(recipeToPrint->recipeName) * H_FONT_POINTS;
+	int centerNameOffset = ((TOTAL_HORIZONTAL_POINTS - recipeNamePtLength )/ 2);
+	//Add recipe name box
+	pdf_add_text(pdf, NULL, "********************************************************************************************************************", 12, SIDE_MARGIN, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, PDF_BLACK); //100 * chars
+	linePointCounter += (.5 *V_FONT_POINTS);
+	pdf_add_text(pdf, NULL, "*                                                                                                                                                                *", 12, SIDE_MARGIN, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, PDF_BLACK);
+	linePointCounter += (.5 *V_FONT_POINTS);
+	pdf_add_text(pdf, NULL, "*                                                                                                                                                                *", 12, SIDE_MARGIN, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, PDF_BLACK);
+	linePointCounter += (.5 *V_FONT_POINTS);
+	pdf_add_text(pdf, NULL, "*                                                                                                                                                                *", 12, SIDE_MARGIN, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, PDF_BLACK);
+	//overlay centered recipe name on same center box line
+	pdf_add_text(pdf, NULL, recipeToPrint->recipeName, 12, centerNameOffset, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, PDF_BLACK);
+	linePointCounter += (.5 *V_FONT_POINTS);
+	pdf_add_text(pdf, NULL, "*                                                                                                                                                                *", 12, SIDE_MARGIN, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, PDF_BLACK);
+	linePointCounter += (.5 *V_FONT_POINTS);
+	pdf_add_text(pdf, NULL, "*                                                                                                                                                                *", 12, SIDE_MARGIN, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, PDF_BLACK);
+	linePointCounter += (.5 *V_FONT_POINTS);
+	pdf_add_text(pdf, NULL, "*                                                                                                                                                                *", 12, SIDE_MARGIN, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, PDF_BLACK);
+	linePointCounter += (.5 *V_FONT_POINTS);
+	pdf_add_text(pdf, NULL, "********************************************************************************************************************", 12, SIDE_MARGIN, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, PDF_BLACK);
+	linePointCounter += (3 * V_FONT_POINTS);
+	//add ingredients
+	pdf_add_text(pdf, NULL, "        INGREDIENTS:", 12, SIDE_MARGIN, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, PDF_BLACK);
+	linePointCounter += (1.5 * V_FONT_POINTS);
+	char ingredientBuffer[INGREDIENT_BUFFER_LEN] = {'\0'};
+	//lineCounter so you don't get page overflow
+	int lineCounter = 0;
+	//int ;
+	for (int i = 0; i < recipeToPrint->numberOfIngredients; i++){
+		memset(ingredientBuffer, 0, sizeof(ingredientBuffer));
+		sprintf(ingredientBuffer, "%d) %7.2f grams of %s (%s)", i + 1, recipeToPrint->ingredients[i].ingredientGrams, recipeToPrint->ingredients[i].ingredientName, recipeToPrint->ingredients[i].userCupsInput);
+		pdf_add_text(pdf, NULL, ingredientBuffer, 12, SIDE_MARGIN, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, PDF_BLACK);
+		linePointCounter += V_FONT_POINTS;
+		lineCounter++;
+	}
+	//add instructions
+	linePointCounter += (2 * V_FONT_POINTS);
+	pdf_add_text(pdf, NULL, "        INSTRUCTIONS:", 12, SIDE_MARGIN, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, PDF_BLACK);
+		linePointCounter += (1.5 * V_FONT_POINTS);
+	char recipeToPDFBuffer[MAX_INGREDIENT_TEXT] = {'\0'};
+	char recipeToPDFBufferNumbered[MAX_INGREDIENT_TEXT + 3] = {'\0'};
+	for (int i = 0; i < recipeToPrint->numberOfInstructions; i++){
+		int subCounter = 0;
+		memset(recipeToPDFBuffer, 0, sizeof(recipeToPDFBuffer));
+		memset(recipeToPDFBufferNumbered, 0, sizeof(recipeToPDFBufferNumbered));
+		subCounter = recipeBufferToPDFOutput(recipeToPDFBuffer, recipeToPrint->recipeInstructions[i]);
+		sprintf(recipeToPDFBufferNumbered, "%d)  ", i + 1);
+		strcat(recipeToPDFBufferNumbered, recipeToPDFBuffer);
+		pdf_add_text_wrap(pdf, NULL, recipeToPDFBufferNumbered, 12, SIDE_MARGIN, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, 0, PDF_BLACK, TOTAL_HORIZONTAL_POINTS - (2 * SIDE_MARGIN), PDF_ALIGN_LEFT, NULL);
+		lineCounter = ((subCounter * H_FONT_POINTS) / (TOTAL_HORIZONTAL_POINTS - (SIDE_MARGIN * 2)) + 1);
+		linePointCounter += (lineCounter * V_FONT_POINTS);
+	}
+	//add notes
+	if (recipeToPrint->numberOfNotes > 0){
+		linePointCounter += (2 * V_FONT_POINTS);
+		pdf_add_text(pdf, NULL, "        NOTES:", 12, SIDE_MARGIN, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, PDF_BLACK);
+		linePointCounter += (1.5 * V_FONT_POINTS);
+		for (int i = 0; i < recipeToPrint->numberOfNotes; i++){
+			int subCounter = 0;
+			memset(recipeToPDFBuffer, 0, sizeof(recipeToPDFBuffer));
+			memset(recipeToPDFBufferNumbered, 0, sizeof(recipeToPDFBufferNumbered));
+			subCounter = recipeBufferToPDFOutput(recipeToPDFBuffer, recipeToPrint->recipeNotes[i]);
+			sprintf(recipeToPDFBufferNumbered, "%d)  ", i + 1);
+			strcat(recipeToPDFBufferNumbered, recipeToPDFBuffer);
+			pdf_add_text_wrap(pdf, NULL, recipeToPDFBufferNumbered, 12, SIDE_MARGIN, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, 0, PDF_BLACK, TOTAL_HORIZONTAL_POINTS - (2 * SIDE_MARGIN), PDF_ALIGN_LEFT, NULL);
+			lineCounter = ((subCounter * H_FONT_POINTS) / (TOTAL_HORIZONTAL_POINTS - (SIDE_MARGIN * 2)) + 1);
+			linePointCounter += (lineCounter * H_FONT_POINTS);
+		}
+	}
+	//print enum type on right side of screen
+	char enumValue[12] = {'\0'};
+	switch (recipeToPrint->recipeType){
+		case 0:		strcpy(enumValue, "APPETIZER");
+					break;
+		case 1:		strcpy(enumValue, "BAKED GOOD");
+					break;
+		case 2:		strcpy(enumValue, "BREAKFAST");
+					break;
+		case 3:		strcpy(enumValue, "DESSERT");
+					break;
+		case 4:		strcpy(enumValue, "LUNCH");
+					break;
+		case 5:		strcpy(enumValue, "ENTREE");
+					break;
+		case 6:		strcpy(enumValue, "SIDE DISH");
+					break;
+		case 7:		strcpy(enumValue, "SNACK");
+					break;
+		case 8:		strcpy(enumValue, "SOUP");
+					break;
+		default:	break;
+	}
+	int recipeTypeLengthPt = strlen(enumValue) * H_FONT_POINTS * 1.3;
+	pdf_add_text(pdf, NULL, enumValue, 12, TOTAL_HORIZONTAL_POINTS - SIDE_MARGIN - recipeTypeLengthPt, 104, PDF_BLACK); //104 is 2nd to bottom line
+	pdf_add_text(pdf, NULL, "********************************************************************************************************************", 12, SIDE_MARGIN, 90, PDF_BLACK); //90 is bottom of page
+	
+	pdf_save_file(pdf, fp);
+	pdf_destroy(pdf);
+	fclose(fp);
 }
