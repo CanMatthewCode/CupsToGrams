@@ -83,7 +83,6 @@ struct ingredientType *convertIngredientMenu(struct ingredientType *head){
 *************************************************************************************************************/
 void convertIngredient(struct ingredientType *head){
 	char choice = '\0';
-//	struct ingredientType *headPointer = head;
 	do {
 		choice = '\0';
 		clearScreen();
@@ -91,13 +90,7 @@ void convertIngredient(struct ingredientType *head){
 		memset(ingredientBuffer, 0, sizeof(ingredientBuffer));
 		char cupsInputAmountBuffer[50] = {'\0'};
 		memset(cupsInputAmountBuffer, 0, sizeof(cupsInputAmountBuffer));
-		char measurementAmount[20] = {'\0'};
-		memset(measurementAmount, 0, sizeof(measurementAmount));
-		char measurementType[12] = {'\0'};
-		memset(measurementType, 0, sizeof(measurementType));
-		int charsRead = 0;
-		float sum = 0;
-		char *currentPosition = NULL;
+		float convertedAmount = 0.0;
 		struct ingredientItem *foundIngredient = NULL;
 		puts("\n\n\t\t*********************************************************************************");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
@@ -113,31 +106,8 @@ void convertIngredient(struct ingredientType *head){
 		if (foundIngredient){
 			printf("\n\n");
 			printIngredientItemNode(foundIngredient);
-			//cupsToGrams(cupsInputAmountBuffer, foundIngredient);
-			//make function to do the conversion so it can be used in addNewIngredient to recipeStruct
-			printf("\n\n\t\tEnter Amount To Convert From US Cups Measurements: ");
-			readUserInputIntoBuffer(cupsInputAmountBuffer);
-			currentPosition = cupsInputAmountBuffer;
-			//move through cupsInputAmountBuffer reading the numbers then types in a loop
-			do {
-				if (sscanf(currentPosition, " %19[0-9/ ]%19[A-Za-z]%n", measurementAmount, measurementType, &charsRead) == 2) {
-				//safety for if typeOfMeasurement returns 0 for wrong input
-					if (typeOfMeasurement(measurementType) == 0){
-						printf("\n\t\t%s: Invalid Entry", measurementType);
-						break;
-					}
-					sum += ((getCups(measurementAmount)) / (typeOfMeasurement(measurementType)));
-					currentPosition += charsRead; 
-				} else {
-					break; //exit the loop if sscanf() fails to read two input items
-				}
-			} while (*currentPosition != '\0');
-			if (foundIngredient->tablespoonFlag == 1)
-				sum *= 16;
-			if (sum == 0)
-				printf("\n\t\t%s: Not Valid Input", cupsInputAmountBuffer);
-			if (sum != 0)
-				printf("\n\t\t%s of %s is: %.2f grams", cupsInputAmountBuffer, foundIngredient->ingredientName, sum*foundIngredient->gramsPerCup);
+			convertedAmount = cupsToGrams(cupsInputAmountBuffer, foundIngredient);
+			printf("\n\t\t%s of %s is: %.2f grams", cupsInputAmountBuffer, foundIngredient->ingredientName, convertedAmount); //sum*foundIngredient->gramsPerCup);
 			printf("\n\n\n\n\t\tConvert Another Ingredient (y/n): ");
 			YESNOCHOICE(choice);
 		}
