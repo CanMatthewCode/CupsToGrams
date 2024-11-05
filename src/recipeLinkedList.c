@@ -66,7 +66,7 @@ int dumpRecipesFromLinkedList(struct recipeStruct *recipeHead){
 			counter++;
 		}
 	//print * character to distinguish between recipes and to scan later to get a count of number of recipes
-		fprintf(fp, "\n*\n");
+		fprintf(fp, "\n\a\n");
 	//move on to the next recipe in the linked list alphabetically
 		recipe = recipe->next;
 	}
@@ -96,7 +96,7 @@ struct recipeStruct *loadRecipesToLinkedList(void){
     char ch;
 	//scan for * characters, ++numNodes for each one found to find the number or stored recipes
     while ((ch = fgetc(fp)) != EOF){
-    	if (ch == '*')
+    	if (ch == '\a')
     		numNodes++;
     }
     if (numNodes == 0)
@@ -156,7 +156,7 @@ struct recipeStruct *loadRecipesToLinkedList(void){
 			if (newNode->recipeNotes[i][counter - 1] == '\n')
 				newNode->recipeNotes[i][counter - 1] = '\0';
     	}
-    	fscanf(fp, " *\n");
+    	fscanf(fp, " \a\n");
     //place it at the end of the linked list since they are already sorted alphabetically prior to being dumped	
     //if cur is NULL this is the first node in the linked list and is therefore head, otherwise, link backwards
     	if (cur == NULL)
@@ -331,7 +331,29 @@ struct recipeStruct *deleteFullRecipeNode(struct recipeStruct *head, struct reci
 	if (cur == NULL){
 		printf("\t\tRecipe To Delete Is Empty\n");
 		return NULL;
-	} 
+	}
+	if (cur && headPointer){
+		prev = cur->prev;
+		next = cur->next;
+	}
+	//if it is the only node
+	if ((!prev) && (!next)){
+		headPointer = NULL;
+	//if prev == NULL, it is the first node;
+	} else if ((!prev) && (next)){
+		headPointer = next;
+		next->prev = NULL;
+	//if it is a middle node	
+	} else if ((prev) && (next)){
+		prev->next = next;
+		next->prev = prev;
+	//if it is the final node
+	} else if (prev && (!next))
+		prev->next = NULL; 
+	dumpRecipesFromLinkedList(headPointer);
+	return headPointer;
+}
+/*
 	if (cur && headPointer){
 		prev = cur->prev;
 		next = cur->next;
@@ -348,11 +370,8 @@ struct recipeStruct *deleteFullRecipeNode(struct recipeStruct *head, struct reci
 			prev->next = NULL;
 		free(cur);
 		cur = NULL;
-	//dump to .txt file
-		dumpRecipesFromLinkedList(headPointer);
-	}
-	return headPointer;
-}
+*/
+
 
 /********************************************************************************************************************
 * 																													*
