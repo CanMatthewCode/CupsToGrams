@@ -65,6 +65,12 @@ void readUserInputIntoBuffer(char buffer[INGREDIENT_BUFFER_LEN]){
 			ch = toupper(ch);
 		*(temp+counter) = ch;
 		counter++;
+		if (counter == (INGREDIENT_BUFFER_LEN - 1)){
+			printf("\n\n\t\tUser Input Is Too Long, Unusable Extra Was Removed\n\t\tHit Enter To Continue: ");
+			while ((ch = getchar()) != '\n');
+			while ((ch = getchar()) != '\n');
+			break;
+		}
 	}
 	if (*(temp+counter) == ' ')
 		*(temp+counter) = '\0';  
