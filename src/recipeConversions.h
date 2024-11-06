@@ -135,10 +135,11 @@ void printFullRecipe(struct recipeStruct *recipe);
 
 /********************************************************************************************************************
 * 																													*
-*	  			modifies the recipe's name in a recipeStruct														*
+*	  			modifies the recipe's name in a recipeStruct, returns a pointer to recipeStruct head				*
+*				for when recipe name change moves position in linked list											*
 *																													*
 *********************************************************************************************************************/
-void modifyRecipeName(struct recipeStruct *recipe);
+struct recipeStruct *modifyRecipeName(struct recipeStruct *recipeHead, struct recipeStruct *recipe);
 
 /********************************************************************************************************************
 * 																													*

@@ -97,8 +97,12 @@ struct recipeStruct *convertNewRecipe(struct recipeStruct *recipeHead, struct in
 	}
 	setRecipeType(newRecipe);
 	//place recipe in linked-list alphabetically
-	recipeHeadPointer = placeRecipeStructNode(recipeHeadPointer, newRecipe);
-	recipeHeadPointer = editRecipeMenu(newRecipe, recipeHeadPointer, ingredientHead);
+	struct recipeStruct *temp = placeRecipeStructNode(recipeHeadPointer, newRecipe);
+	//if temp == NULL then the recipe was deleted b/c of conflicting name rather than renamed
+	if (temp){
+		recipeHeadPointer = temp;
+		recipeHeadPointer = editRecipeMenu(newRecipe, recipeHeadPointer, ingredientHead);
+	}
 	//return pointer to head of recipe linked list with new recipe 
 	return recipeHeadPointer;
 }
@@ -113,13 +117,17 @@ void addNewIngredient(struct recipeStruct *currentRecipe, struct ingredientType 
 	char buffer[INGREDIENT_BUFFER_LEN] = {'\0'};
 	char cupsInputAmountBuffer[INGREDIENT_BUFFER_LEN] = {'\0'};
 	char foundIngredient = 'N';
-	printf("\n\n\n\t\t");
+	printf("\n\n\n");
 	do {
 		memset(buffer, 0, sizeof(buffer));
-		printf("What INGREDIENT Would You Like To Add? : ");
+		printf("\t\tWhat INGREDIENT Would You Like To Add? : ");
 		readUserInputIntoBuffer(buffer);
 		if ((foundNewIngredient = findIngredientItemNode(head, buffer, NULL)) == NULL){
-			printf("\n\n\t\tIngredient Not Found, Try Again\n\t\t");
+			printf("\n\n\t\tIngredient Not Found, Try Again (y/n)? ");
+			char choice = '\0';
+			YESNOCHOICE(choice);
+			if (choice == 'N')
+				return;
 		} else (foundIngredient = 'Y');
 	} while (foundIngredient != 'Y');
 	strcpy(currentRecipe->ingredients[currentRecipe->numberOfIngredients].ingredientName, foundNewIngredient->ingredientName);
@@ -327,12 +335,16 @@ void printFullRecipe(struct recipeStruct *recipe){
 
 /********************************************************************************************************************
 * 																													*
-*	  			modifies the recipe's name in a recipeStruct														*
+*	  			modifies the recipe's name in a recipeStruct, returns a pointer to recipeStruct head				*
+*				for when recipe name change moves position in linked list											*
 *																													*
 *********************************************************************************************************************/
-void modifyRecipeName(struct recipeStruct *recipe){
+struct recipeStruct *modifyRecipeName(struct recipeStruct *recipeHead, struct recipeStruct *recipe){
 	char buffer[INGREDIENT_BUFFER_LEN] = {'\0'};
 	char choice = '\0';
+	struct recipeStruct *prev = recipe->prev;
+	struct recipeStruct *next = recipe->next;
+	struct recipeStruct *head = recipeHead;
 	printRecipeName(recipe);
 	do {
 		printf("\n\n\t\tEnter Recipe's Modified Name: ");
@@ -342,6 +354,31 @@ void modifyRecipeName(struct recipeStruct *recipe){
 		YESNOCHOICE(choice);
 	} while (choice != 'Y');
 	strcpy(recipe->recipeName, buffer);
+	//if it is still in the right place alphabetically:
+	if (((prev && next) && ((strcmp(recipe->recipeName, prev->recipeName) > 0) && (strcmp(recipe->recipeName, next->recipeName) < 0)))
+		|| ((!prev && next) && (strcmp(recipe->recipeName, next->recipeName) < 0)) || ((prev && !next) && (strcmp(recipe->recipeName, prev->recipeName) > 0))){
+		return recipeHead;
+	//if not and it is the first node: 
+	} else {
+		recipe->prev = NULL;
+		recipe->next = NULL;
+	 	if (!prev && next){
+			next->prev = NULL;
+			head = next;
+		//if it is a middle node:
+		} else if (prev && next){
+			prev->next = next;
+			next->prev = prev;
+		//if it is the final node:
+		} else if (prev && !next){
+			prev->next = NULL;
+		}
+	}
+	//check for NULL if name conflicted and recipe node was free'd instead of renamed
+	struct recipeStruct *temp = placeRecipeStructNode(head, recipe);
+	if (temp)
+		head = temp;
+	return head;
 }
 
 /********************************************************************************************************************
@@ -464,8 +501,8 @@ void modifyInstruction(struct recipeStruct *recipe){
 		if (choice < 1 || choice > recipe->numberOfInstructions)
 			printf("\n\t\tInvalid Entry, Try Again: ");
 	} while (choice < 1 || choice > recipe->numberOfInstructions);
-	printf("\n\n\t\t%s\n\n\t\tEnter New Instruction: ", recipe->recipeInstructions[choice - 1]);
 	do {
+		printf("\n\n\t\t%s\n\n\t\tEnter New Instruction: ", recipe->recipeInstructions[choice - 1]);
 		memset(buffer, 0, MAX_INGREDIENT_TEXT);
 		readUserInputIntoRecipe(buffer);
 		printf("\n\n\t\t%s\n\n\t\tIs This Correct (y/n)? ", buffer);
@@ -561,8 +598,8 @@ void modifyNote(struct recipeStruct *recipe){
 		if (choice < 1 || choice > recipe->numberOfNotes)
 			printf("\n\t\tInvalid Entry, Try Again: ");
 	} while (choice < 1 || choice > recipe->numberOfNotes);
-	printf("\n\n\t\t%s\n\n\t\tEnter New Note: ", recipe->recipeNotes[choice - 1]);
 	do {
+		printf("\n\n\t\t%s\n\n\t\tEnter New Note: ", recipe->recipeNotes[choice - 1]);
 		memset(buffer, 0, MAX_INGREDIENT_TEXT);
 		readUserInputIntoRecipe(buffer);
 		printf("\n\n\t\t%s\n\n\t\tIs This Correct (y/n)? ", buffer);
@@ -719,10 +756,9 @@ void printRecipeToPDF(struct recipeStruct *recipeToPrint){
 	//add ingredients
 	pdf_add_text(pdf, NULL, "        INGREDIENTS:", 12, SIDE_MARGIN, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, PDF_BLACK);
 	linePointCounter += (1.5 * V_FONT_POINTS);
-	char ingredientBuffer[INGREDIENT_BUFFER_LEN] = {'\0'};
+	char ingredientBuffer[INGREDIENT_BUFFER_LEN * 2] = {'\0'};
 	//lineCounter so you don't get page overflow
 	int lineCounter = 0;
-	//int ;
 	for (int i = 0; i < recipeToPrint->numberOfIngredients; i++){
 		memset(ingredientBuffer, 0, sizeof(ingredientBuffer));
 		sprintf(ingredientBuffer, "%d) %7.2f grams of %s (%s)", i + 1, recipeToPrint->ingredients[i].ingredientGrams, recipeToPrint->ingredients[i].ingredientName, recipeToPrint->ingredients[i].userCupsInput);
