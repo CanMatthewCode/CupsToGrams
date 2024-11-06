@@ -6,6 +6,7 @@
 
 #define INGREDIENT_BUFFER_LEN 50
 #define MAX_INGREDIENTS_FOUND 100
+#define NUMBER_OF_CHARS_ON_SCREEN 81
 
 #define YESNOCHOICE(choice)												\
 do {								    								\
