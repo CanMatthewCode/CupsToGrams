@@ -87,7 +87,7 @@ struct recipeStruct *editRecipeMenu(struct recipeStruct *recipe, struct recipeSt
 				printf("\t\tInvalid Selection: ");
 		} while (strchr("12345SD", menu) == NULL);
 		switch (menu){
-			case '1':		modifyRecipeName(recipe);
+			case '1':		recipeHeadPointer = modifyRecipeName(recipeHeadPointer, recipe);
 							break;
 			case '2':		editRecipeIngredientsMenu(recipe, ingredientHead);
 							break;
@@ -250,8 +250,7 @@ struct recipeStruct *modifyExistingRecipeMenu(struct recipeStruct *recipeHeadPoi
 	readUserInputIntoBuffer(buffer);
 	foundRecipe = findRecipe(recipeHeadPointer, buffer);
 	if (foundRecipe){
-			printFullRecipe(foundRecipe);
-				recipeHead = editRecipeMenu(foundRecipe, recipeHead, ingredientHead);
+			recipeHead = editRecipeMenu(foundRecipe, recipeHead, ingredientHead);
 	} else
 		printf("\t\tRecipe Not Found");
 	return recipeHead;
