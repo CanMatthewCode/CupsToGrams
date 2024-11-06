@@ -185,17 +185,24 @@ struct recipeStruct *placeRecipeStructNode(struct recipeStruct *recipeHead, stru
 	struct recipeStruct *cur = recipeHead;
 	struct recipeStruct *prev = NULL;
 	struct recipeStruct *newNode = newRecipe;
+	struct recipeStruct *head = NULL;
 	//if cur == NULL it is the first node
 	if (cur == NULL)
 		return newNode;
-	//if buffer is smaller than 1st node, it is new 1st node
 	if (strcmp(newNode->recipeName, cur->recipeName) == 0){
-		printf("\n\t\tRecipe Already Exists\n");
-		//have option here to change name instead of deleting
-		free(newNode);
-		newNode = NULL;
-		return recipeHead;
+		printf("\n\t\tRecipe Already Exists, Change Recipe Name (y) or Delete Recipe(n)? ");
+		char choice = '\0';
+		YESNOCHOICE(choice);
+		if (choice == 'Y'){
+			head = modifyRecipeName(recipeHead, newNode);
+			return head;
+		} else {
+			free(newNode);
+			newNode = NULL;
+			return NULL;
+		}
 	}
+	//if buffer is smaller than 1st node, it is new 1st node
 	if ((cur != NULL) && (strcmp(newNode->recipeName, cur->recipeName) < 0)){
 		newNode->next = cur;
 		cur->prev = newNode;
@@ -203,7 +210,21 @@ struct recipeStruct *placeRecipeStructNode(struct recipeStruct *recipeHead, stru
 	}
 	//loop to check the rest
 	for ( ; cur->next != NULL && (strcmp(newNode->recipeName, cur->recipeName) > 0); prev = cur, cur = cur->next)
-		;	
+		;
+	//check if it is an existing node already
+	if (strcmp(newNode->recipeName, cur->recipeName) == 0){
+		printf("\n\t\tRecipe Already Exists, Change Recipe Name (y) or Delete Recipe(n)? ");
+		char choice = '\0';
+		YESNOCHOICE(choice);
+		if (choice == 'Y'){
+			head = modifyRecipeName(recipeHead, newNode);
+			return head;
+		} else {
+			free(newNode);
+			newNode = NULL;
+			return NULL;
+		}
+	}
 	//final node case
 	if ((strcmp(newNode->recipeName, cur->recipeName) > 0) && cur->next == NULL){
 		newNode->prev = cur;
@@ -221,12 +242,6 @@ struct recipeStruct *placeRecipeStructNode(struct recipeStruct *recipeHead, stru
 		cur->prev = newNode;
 	} 
 
-	if (strcmp(newNode->recipeName, cur->recipeName) == 0){
-		printf("\n\t\tRecipe Already Exists\n");
-		//have option here to change name instead of deleting
-		free(newNode);
-		newNode = NULL;
-	}
 	//resetting file pointer to head
 	while (cur->prev != NULL)
 		cur = cur->prev;
@@ -240,7 +255,6 @@ struct recipeStruct *placeRecipeStructNode(struct recipeStruct *recipeHead, stru
 *********************************************************************************************************************/
 void printAllRecipeNames(struct recipeStruct *recipeHead){
 	struct recipeStruct *cur = NULL;
-	int counter = 0;
 	clearScreen();
 	puts("\n\n\t\t*********************************************************************************");
 	puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
@@ -248,13 +262,21 @@ void printAllRecipeNames(struct recipeStruct *recipeHead){
 	puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
 	puts("\t\t*********************************************************************************\n\n");
 	printf("\t\t");
+	int numberOfCharactersOnLine = NUMBER_OF_CHARS_ON_SCREEN;
+	int curNameLength = 0;
+	int nextNameLength = 0;
 	for (cur = recipeHead; cur; cur = cur->next){
-		printf("%-32s", cur->recipeName);
-		counter++;
-		if (counter % 3 == 0)
+		curNameLength = strlen(cur->recipeName);
+		printf("%s        ", cur->recipeName);
+		numberOfCharactersOnLine -= (curNameLength + 8);
+		if (cur->next)
+			nextNameLength = strlen(cur->next->recipeName);
+		if (numberOfCharactersOnLine - nextNameLength < 1){
 			printf("\n\n\n\t\t");
+			numberOfCharactersOnLine = NUMBER_OF_CHARS_ON_SCREEN;
+		}
 	}
-	printf("\n\n\t\tHit Enter To Continue\t");
+	printf("\n\n\n\n\n\t\tHit Enter To Continue\t");
 	char ch = '\0';
 	while ((ch = getchar()) != '\n');
 }
