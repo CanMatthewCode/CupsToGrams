@@ -56,10 +56,18 @@ struct recipeStruct *convertNewRecipe(struct recipeStruct *recipeHead, struct in
 
 /********************************************************************************************************************
 * 																													*
-*	  			add new ingredientStruct into newRecipe struct. increases numberOfIngredients on success			*
+*	  			add new ingredientStruct into currentRecipe struct. increases numberOfIngredients on success		*
 *																													*
 *********************************************************************************************************************/
 void addNewIngredient(struct recipeStruct *currentRecipe, struct ingredientType *head);
+
+/********************************************************************************************************************
+* 																													*
+*	  			add a new unmeasured ingredient into an ingredientStruct in currentRecipe struct. 					*
+*				increases numberOfIngredients on success															*
+*																													*
+*********************************************************************************************************************/
+void addNewNonMeasuredIngredient(struct recipeStruct *currentRecipe);
 
 /********************************************************************************************************************
 * 																													*
@@ -87,9 +95,10 @@ void setRecipeType(struct recipeStruct *currentRecipe);
 /********************************************************************************************************************
 * 																													*
 *	  			used to fill in a recipeDirection or recipeNote field of a recipeStruct								*
+*				returns the number of succesfull characters placed into the directionsBuffer						*
 *																													*
 ********************************************************************************************************************/
-void readUserInputIntoRecipe(char directionsBuffer[MAX_INGREDIENT_TEXT]);
+int readUserInputIntoRecipe(char directionsBuffer[MAX_INGREDIENT_TEXT]);
 
 /********************************************************************************************************************
 * 																													*

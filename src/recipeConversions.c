@@ -53,15 +53,37 @@ struct recipeStruct *convertNewRecipe(struct recipeStruct *recipeHead, struct in
 	clearScreen();
 	printRecipeName(newRecipe);
 	printRecipeIngredients(newRecipe);
-	choice = '\0';
+	//loop option for adding measured or non-measured ingredient
+	int numericChoice = 0;
 	do {
-		addNewIngredient(newRecipe, ingredientHead);
-		clearScreen();
-		printRecipeName(newRecipe);
-		printRecipeIngredients(newRecipe);
-		printf("\n\n\n\t\tWould You Like To Enter Another Ingredient (y/n)? ");
-		YESNOCHOICE(choice);
-	} while (choice != 'N');
+		choice = '\0';
+		do {
+			printf("\n\t\t(1) Add New Measured Ingredient\n\t\t(2) Add New Non-Measured Ingredient\n\t\t(3) Continue To Instructions\n\n\t\tEnter Selection: ");
+			numericChoice = getNumericChoice();
+			if (numericChoice != 1 && numericChoice != 2 && numericChoice != 3)
+            	printf("\t\tInvalid Selection, Try Again");
+		} while (numericChoice != 1 && numericChoice != 2 && numericChoice != 3);
+		if (numericChoice == 1){
+			do {
+				addNewIngredient(newRecipe, ingredientHead);
+				clearScreen();
+				printRecipeName(newRecipe);
+				printRecipeIngredients(newRecipe);
+				printf("\n\n\n\t\tWould You Like To Enter Another Measured Ingredient (y/n)? ");
+				YESNOCHOICE(choice);
+			} while (choice != 'N');
+		} else if (numericChoice == 2){
+			do {
+				addNewNonMeasuredIngredient(newRecipe);
+				clearScreen();
+				printRecipeName(newRecipe);
+				printRecipeIngredients(newRecipe);
+				printf("\n\n\n\t\tWould You Like To Enter Another Non-Measured Ingredient (y/n)? ");
+				YESNOCHOICE(choice);
+			} while (choice != 'N');
+		}
+	} while (numericChoice != 3);
+	
 	choice = '\0';
 	clearScreen();
 	printRecipeName(newRecipe);
@@ -109,7 +131,7 @@ struct recipeStruct *convertNewRecipe(struct recipeStruct *recipeHead, struct in
 
 /********************************************************************************************************************
 * 																													*
-*	  			add new ingredientStruct into newRecipe struct. increases numberOfIngredients on success			*
+*	  			add new ingredientStruct into currentRecipe struct. increases numberOfIngredients on success		*
 *																													*
 *********************************************************************************************************************/
 void addNewIngredient(struct recipeStruct *currentRecipe, struct ingredientType *head){
@@ -133,6 +155,56 @@ void addNewIngredient(struct recipeStruct *currentRecipe, struct ingredientType 
 	strcpy(currentRecipe->ingredients[currentRecipe->numberOfIngredients].ingredientName, foundNewIngredient->ingredientName);
 	currentRecipe->ingredients[currentRecipe->numberOfIngredients].ingredientGrams = cupsToGrams(cupsInputAmountBuffer, foundNewIngredient);
 	strcpy(currentRecipe->ingredients[currentRecipe->numberOfIngredients].userCupsInput, cupsInputAmountBuffer);
+	currentRecipe->numberOfIngredients += 1;
+}
+
+/********************************************************************************************************************
+* 																													*
+*	  			add a new unmeasured ingredient into an ingredientStruct in currentRecipe struct. 					*
+*				increases numberOfIngredients on success															*
+*																													*
+*********************************************************************************************************************/
+void addNewNonMeasuredIngredient(struct recipeStruct *currentRecipe){
+	char buffer[INGREDIENT_BUFFER_LEN] = {'\0'};
+	char ingredientNotes[INGREDIENT_BUFFER_LEN] = {'\0'};
+	char choice = '\0';
+	printf("\n\n\n");
+	do {
+		memset(buffer, 0, sizeof(buffer));
+		printf("\t\tWhat Non-Measured INGREDIENT Would You Like To Add? : ");
+		readUserInputIntoBuffer(buffer);
+		printf("\n\t\t%s\n\n\t\tIs This Correct (y/n)? ", buffer);
+		YESNOCHOICE(choice);
+	} while (choice != 'Y');
+	strcpy(currentRecipe->ingredients[currentRecipe->numberOfIngredients].ingredientName, buffer);
+	printf("\n\n\t\tEnter The Number of %s In Your Recipe: ", buffer);
+	float inputCheck = 0.0;
+	char amountBuffer[INGREDIENT_BUFFER_LEN] = {'\0'};
+	do {
+		readUserInputIntoBuffer(amountBuffer);
+		inputCheck = getCups(amountBuffer);
+		if (inputCheck == -1.0){
+			printf("\n\n\t\tInvalid Entry, Please Enter The Number Of %s In Your Recipe: ", buffer);
+			memset(amountBuffer, 0, sizeof(amountBuffer));
+		}
+	} while (inputCheck == -1.0);
+	currentRecipe->ingredients[currentRecipe->numberOfIngredients].ingredientGrams = inputCheck;
+	choice = '\0';
+	do {
+		memset(ingredientNotes, 0, sizeof(ingredientNotes));
+		printf("\t\tEnter Notes For This Ingredient (Size, Weight, How To Prepare, etc): ");
+		int charCounter = readUserInputIntoBuffer(ingredientNotes);
+		//safety for buffer overflow using readUserInputIntoRecipe as it has a longer input allowed than the buffer can take
+		if (charCounter > INGREDIENT_BUFFER_LEN){
+			char ch = '\0';
+			while ((ch = getchar()) != '\n');
+			printf("\n\t\tInput Too Long, Try Again: ");
+			continue;
+		}
+		printf("\t\t%s\n\n\t\tIs This Correct (y/n)? ", ingredientNotes);
+		YESNOCHOICE(choice);
+	} while (choice != 'Y');
+	strcpy(currentRecipe->ingredients[currentRecipe->numberOfIngredients].userCupsInput, ingredientNotes);
 	currentRecipe->numberOfIngredients += 1;
 }
 
@@ -181,9 +253,10 @@ void setRecipeType(struct recipeStruct *currentRecipe){
 /********************************************************************************************************************
 * 																													*
 *	  			used to fill in a recipeDirection or recipeNote field of a recipeStruct								*
+*				returns the number of succesfull characters placed into the directionsBuffer						*
 *																													*
-*********************************************************************************************************************/
-void readUserInputIntoRecipe(char directionsBuffer[MAX_INGREDIENT_TEXT]){
+********************************************************************************************************************/
+int readUserInputIntoRecipe(char directionsBuffer[MAX_INGREDIENT_TEXT]){
 	char *temp = directionsBuffer;
 	char ch = '\0';
 	int counter = 0;
@@ -223,7 +296,8 @@ void readUserInputIntoRecipe(char directionsBuffer[MAX_INGREDIENT_TEXT]){
 		counter++;
 	}
 	if (*(temp+counter) == ' ')
-		*(temp+counter) = '\0';  
+		*(temp+counter) = '\0';
+	return counter;
 }
 
 /********************************************************************************************************************
