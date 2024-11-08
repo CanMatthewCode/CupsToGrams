@@ -24,12 +24,10 @@ float getCups(char *amountToConvert){
 		totalCups = cups + (float)(cupsNominator/(float)cupsDenominator);
 	} else if (sscanf(inputBuffer, " %i/%i", &cupsNominator, &cupsDenominator) == 2){
 		totalCups = (float)cupsNominator/(float)cupsDenominator;
+	} else if (sscanf(inputBuffer, " %f", &totalCups) == 1){
 	} else if (sscanf(inputBuffer, "%i %i", &cups, &cupsNominator) == 2){
-		printf("Invalid input\n");
 		return -1;
-	} else if (sscanf(inputBuffer, "%f", &totalCups) == 1){
 	} else {
-		printf("Invalid input\n");
 		return -1;
 	}
 	return totalCups;
@@ -39,9 +37,10 @@ float getCups(char *amountToConvert){
 * 																													*
 *	 			read input into user buffer. must pass in a buffer[INGREDIENT_BUFFER_LEN]							*
 *				upon completion, buffer will be filled by "Capitalized First Letter Syntax"							*
+*				Returns the number of chars read into buffer														*
 *																													*
 *********************************************************************************************************************/
-void readUserInputIntoBuffer(char buffer[INGREDIENT_BUFFER_LEN]){
+int readUserInputIntoBuffer(char buffer[INGREDIENT_BUFFER_LEN]){
 	char *temp = buffer;
 	char ch = '\0';
 	int counter = 0;
@@ -73,7 +72,8 @@ void readUserInputIntoBuffer(char buffer[INGREDIENT_BUFFER_LEN]){
 		}
 	}
 	if (*(temp+counter) == ' ')
-		*(temp+counter) = '\0';  
+		*(temp+counter) = '\0';
+	return counter;  
 }
 
 /********************************************************************************************************************
@@ -89,16 +89,24 @@ void clearScreen(void){
 * 																													*
 *	 		 parses user input to determine if they mean cups(c), tablespoons(tbsp) or teaspoons(tsp)				*
 *			  returns the divisor number for the fraction of cups to calculate against								*
-*			  return 0 on failure to get Cups, Tablespoons, or Teaspoons as input									*
+*			  return 0 on failure to get Cups, Tablespoons, Teaspoons, Pounds, or Ozs as input						*
+*			use the weightedInputFlag set to 1 when converting weight rather than volume measurements				*
+*			  and set to 2 if grams are inputted directly															*
 *																													*
 *********************************************************************************************************************/
-int typeOfMeasurement(char *typeToConvert){
+float typeOfMeasurement(char *typeToConvert, int *weightedInputFlag){
 	if ((strcmp(typeToConvert, "Cups") == 0) || (strcmp(typeToConvert, "Cup") == 0) || (strcmp(typeToConvert, "C") == 0)){
 		return 1;
 	} else if ((strcmp(typeToConvert, "Tablespoons") == 0) || (strcmp(typeToConvert, "Tablespoon") == 0) || (strcmp(typeToConvert, "Tbsp") == 0) || (strcmp(typeToConvert, "Table") == 0)) {
 		return 16;
     } else if ((strcmp(typeToConvert, "Teaspoons") == 0) || (strcmp(typeToConvert, "Teaspoon") == 0) || (strcmp(typeToConvert, "Tsp") == 0) || (strcmp(typeToConvert, "Tea") == 0)){
 		return 48;
+	} else if ((strcmp(typeToConvert, "Ounces") == 0) || (strcmp(typeToConvert, "Ounce") == 0) || (strcmp(typeToConvert, "Ozs") == 0) || (strcmp(typeToConvert, "Oz") == 0)) {
+		*weightedInputFlag = 1;
+		return (1 / 28.34952); //28.34962 is the number of grams per oz - return 1 divided by it so the input is multiplied in the returning function
+	} else if ((strcmp(typeToConvert, "Pounds") == 0) || (strcmp(typeToConvert, "Pound") == 0) || (strcmp(typeToConvert, "Lbs") == 0) || (strcmp(typeToConvert, "Lb") == 0)) {
+		*weightedInputFlag = 1;
+		return (1 / 453.59237); //453.59237 is the number of grams per pound - return 1 divided by it so the input is multiplied in the returning function 
 	} else 
 	    return 0;
 }
@@ -112,6 +120,7 @@ float cupsToGrams(char *cupsInputAmountBuffer, struct ingredientItem *ingredient
 	char measurementAmount[20] = {'\0'};
 	char measurementType[12] = {'\0'};
 	int charsRead = 0;
+	int weightedInputFlag = 0;
 	float sum = 0;
 	char *currentPosition = NULL;
 	printf("\n\n\t\tEnter Amount Of \'%s\' To Convert From US Cups Measurements: ", ingredientToConvert->ingredientName);
@@ -124,12 +133,12 @@ float cupsToGrams(char *cupsInputAmountBuffer, struct ingredientItem *ingredient
 		currentPosition = cupsInputAmountBuffer;
 		//move through cupsInputAmountBuffer reading the numbers then types in a loop
 		do {
-			if (sscanf(currentPosition, " %19[0-9/ ]%19[A-Za-z]%n", measurementAmount, measurementType, &charsRead) == 2) {
+			if (sscanf(currentPosition, " %19[0-9/. ]%19[A-Za-z]%n", measurementAmount, measurementType, &charsRead) == 2) {
 			//safety for if typeOfMeasurement returns 0 for wrong input
-				if (typeOfMeasurement(measurementType) == 0){
+				if (typeOfMeasurement(measurementType, &weightedInputFlag) == 0){
 					break;
 				}
-				sum += ((getCups(measurementAmount)) / (typeOfMeasurement(measurementType)));
+				sum += ((getCups(measurementAmount)) / (typeOfMeasurement(measurementType, &weightedInputFlag)));
 				currentPosition += charsRead; 
 			} else {
 				break; //exit the loop if sscanf() fails to read two input items
@@ -141,7 +150,10 @@ float cupsToGrams(char *cupsInputAmountBuffer, struct ingredientItem *ingredient
 			printf("\n\t\t%s: Not Valid Input, Try Again: ", cupsInputAmountBuffer);
 		}
 	} while (sum == 0);
-	return sum*ingredientToConvert->gramsPerCup;
+	if (weightedInputFlag == 0)
+		return sum*ingredientToConvert->gramsPerCup;
+	else
+		return sum;
 }
 
 /********************************************************************************************************************

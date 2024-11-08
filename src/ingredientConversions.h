@@ -50,10 +50,11 @@ float getCups(char *amountToConvert);
 /********************************************************************************************************************
 * 																													*
 *	 			read input into user buffer. must pass in a buffer[INGREDIENT_BUFFER_LEN]							*
-*				upon completion, buffer will be filled by "Output"													*
+*				upon completion, buffer will be filled by "Capitalized First Letter Syntax"							*
+*				Returns the number of chars read into buffer														*
 *																													*
 *********************************************************************************************************************/
-void readUserInputIntoBuffer(char buffer[INGREDIENT_BUFFER_LEN]);
+int readUserInputIntoBuffer(char buffer[INGREDIENT_BUFFER_LEN]);
 
 /********************************************************************************************************************
 * 																													*
@@ -64,12 +65,14 @@ void clearScreen(void);
 
 /********************************************************************************************************************
 * 																													*
-*	  		parses user input to determine if they mean cups(c), tablespoons(tbsp) or teaspoons(tsp)				*
-*	  		returns the divisor number for the fraction of cups to calculate against								*
-*	  		return 0 on failure to get Cups, Tablespoons, or Teaspoons as input										*
+*	 		 parses user input to determine if they mean cups(c), tablespoons(tbsp) or teaspoons(tsp)				*
+*			  returns the divisor number for the fraction of cups to calculate against								*
+*			  return 0 on failure to get Cups, Tablespoons, Teaspoons, Pounds, or Ozs as input						*
+*			use the weightedInputFlag set to 1 when converting weight rather than volume measurements				*
+*			  and set to 2 if grams are inputted directly															*
 *																													*
 *********************************************************************************************************************/
-int typeOfMeasurement(char *typeToConvert);
+float typeOfMeasurement(char *typeToConvert, int *weightedInputFlag);
 
 /********************************************************************************************************************
 * 																													*
