@@ -123,7 +123,8 @@ float cupsToGrams(char *cupsInputAmountBuffer, struct ingredientItem *ingredient
 	int weightedInputFlag = 0;
 	float sum = 0;
 	char *currentPosition = NULL;
-	printf("\n\n\t\tEnter Amount Of \'%s\' To Convert From US Cups Measurements: ", ingredientToConvert->ingredientName);
+	printf("\n\n\n\t\t\"Cups, Tablespoons, Teaspoons, Pounds, Oz\"");
+	printf("\n\n\t\tEnter Amount Of \'%s\' To Convert: ", ingredientToConvert->ingredientName);
 	do {
 		memset(cupsInputAmountBuffer, 0, 20);
 		memset(measurementAmount, 0, sizeof(measurementAmount));
