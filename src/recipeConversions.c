@@ -7,22 +7,6 @@
 #include "ingredientConversions.h"
 #include "pdfgen.h"
 
-/*
-x	Function to add new recipe
-x	Function to add new ingredient
-x	Function to add new note
-x	Function to add new direction
-x	Function to remove each (ingredient, note, direction)
-x	Function to modify each (ingredient, note, direction, order of (ingredient, note, direction))
-x	Function to display recipe in current state
-x	Function to pretty print recipe to pdf
-x	Function to store recipes in txt files
-x	Function to retrieve recipes from txt files
-x	Function to delete recipe
-x	Function to search for recipe
-x	Function to free all recipes calloc()ed on quit 
-*/
-
 /********************************************************************************************************************
 * 																													*
 *				menu for adding new recipe functions, returns pointer to newly added recipe							*
@@ -193,6 +177,11 @@ void addNewNonMeasuredIngredient(struct recipeStruct *currentRecipe){
 	do {
 		memset(ingredientNotes, 0, sizeof(ingredientNotes));
 		printf("\t\tEnter Notes For This Ingredient (Size, Weight, How To Prepare, etc): ");
+		char ch = '\0';
+		if ((ch = getchar()) == '\n'){
+			break;
+		} else
+			ungetc(ch, stdin);
 		int charCounter = readUserInputIntoBuffer(ingredientNotes);
 		//safety for buffer overflow using readUserInputIntoRecipe as it has a longer input allowed than the buffer can take
 		if (charCounter > INGREDIENT_BUFFER_LEN){
@@ -205,6 +194,7 @@ void addNewNonMeasuredIngredient(struct recipeStruct *currentRecipe){
 		YESNOCHOICE(choice);
 	} while (choice != 'Y');
 	strcpy(currentRecipe->ingredients[currentRecipe->numberOfIngredients].userCupsInput, ingredientNotes);
+	currentRecipe->ingredients[currentRecipe->numberOfIngredients].nonWeightedIngredientFlag = 1;
 	currentRecipe->numberOfIngredients += 1;
 }
 
@@ -329,9 +319,20 @@ void printRecipeName(struct recipeStruct *recipe){
 *																													*
 *********************************************************************************************************************/
 void printRecipeIngredients(struct recipeStruct *recipe){
+	char ingredientGramsPrintBuffer[10] = {'\0'};
 	puts("\n\n\t\t\tINGREDIENTS:\n");
-	for (int i = 0; i < recipe->numberOfIngredients; i++)
-		printf("\t\t%d)  %7.2f grams of %s (%s)\n", i + 1, recipe->ingredients[i].ingredientGrams, recipe->ingredients[i].ingredientName, recipe->ingredients[i].userCupsInput);
+	for (int i = 0; i < recipe->numberOfIngredients; i++){
+		memset(ingredientGramsPrintBuffer, 0, sizeof(ingredientGramsPrintBuffer));
+		decimalPlaceCheck(recipe->ingredients[i].ingredientGrams, ingredientGramsPrintBuffer);
+		if (recipe->ingredients[i].nonWeightedIngredientFlag == 1){
+			printf("\t\t%d)  %s %s ", i + 1, ingredientGramsPrintBuffer, recipe->ingredients[i].ingredientName);
+			if (strlen(recipe->ingredients[i].userCupsInput) > 0)
+				printf("(%s)\n", recipe->ingredients[i].userCupsInput);
+			else (printf("\n"));
+		} else {
+			printf("\t\t%d)  %s grams of %s (%s)\n", i + 1, ingredientGramsPrintBuffer, recipe->ingredients[i].ingredientName, recipe->ingredients[i].userCupsInput);
+		}
+	}
 	printf("\n\n");
 }
 
@@ -475,18 +476,58 @@ void modifyIngredientAmount(struct recipeStruct *recipe, struct ingredientType *
 		if (menu < 1 || menu > recipe->numberOfIngredients)
 			printf("\n\t\tInvalid Entry, Try Again: ");
 	} while (menu < 1 || menu > recipe->numberOfIngredients);
-	strcpy(buffer, recipe->ingredients[menu - 1].ingredientName);
-	if ((foundNewIngredient = findIngredientItemNode(ingredientHead, buffer, NULL)) == NULL){
-		printf("\n\n\t\tIngredient Not Found");
-		return;
+	//choice between if it's a measured or non-measured ingredient
+	if (recipe->ingredients[menu - 1].nonWeightedIngredientFlag == 0){
+		strcpy(buffer, recipe->ingredients[menu - 1].ingredientName);
+		if ((foundNewIngredient = findIngredientItemNode(ingredientHead, buffer, NULL)) == NULL){
+			printf("\n\n\t\tIngredient Not Found");
+			return;
+		} else {
+			do {
+				recipe->ingredients[menu - 1].ingredientGrams = cupsToGrams(cupsInputAmountBuffer, foundNewIngredient);
+				strcpy(recipe->ingredients[menu - 1].userCupsInput, cupsInputAmountBuffer);
+				printf("\n\n\t\t  %7.2f grams of %s (%s)\n", recipe->ingredients[menu - 1].ingredientGrams, recipe->ingredients[menu - 1].ingredientName, recipe->ingredients[menu - 1].userCupsInput);
+				printf("\n\n\t\tIs This Correct (y/n)? ");
+				YESNOCHOICE(choice);
+			} while (choice != 'Y');
+		}
 	} else {
+		printf("\n\n\t\tEnter The Number of %s In Your Recipe: ", recipe->ingredients[menu - 1].ingredientName);
+		float inputCheck = 0.0;
+		char amountBuffer[INGREDIENT_BUFFER_LEN] = {'\0'};
 		do {
-			recipe->ingredients[menu - 1].ingredientGrams = cupsToGrams(cupsInputAmountBuffer, foundNewIngredient);
-			strcpy(recipe->ingredients[menu - 1].userCupsInput, cupsInputAmountBuffer);
-			printf("\n\n\t\t  %7.2f grams of %s (%s)\n", recipe->ingredients[menu - 1].ingredientGrams, recipe->ingredients[menu - 1].ingredientName, recipe->ingredients[menu - 1].userCupsInput);
-			printf("\n\n\t\tIs This Correct (y/n)? ");
-			YESNOCHOICE(choice);
-		} while (choice != 'Y');
+			readUserInputIntoBuffer(amountBuffer);
+			inputCheck = getCups(amountBuffer);
+			if (inputCheck == -1.0){
+				printf("\n\n\t\tInvalid Entry, Please Enter The Number Of %s In Your Recipe: ", recipe->ingredients[menu - 1].ingredientName);
+				memset(amountBuffer, 0, sizeof(amountBuffer));
+			} else
+				recipe->ingredients[menu - 1].ingredientGrams = inputCheck;
+		} while (inputCheck == -1.0);
+		printf("\n\n\t\tModify Note For This Ingredient (y/n)? ");
+		char choice = '\0';
+		YESNOCHOICE(choice);
+		if (choice == 'Y'){
+			char ingredientNotes[INGREDIENT_BUFFER_LEN] = {'\0'};
+			do {
+				choice = '\0';
+				memset(ingredientNotes, 0, sizeof(ingredientNotes));
+				printf("\t\tEnter Notes For This Ingredient (Size, Weight, How To Prepare, etc): ");
+				int charCounter = readUserInputIntoBuffer(ingredientNotes);
+				//safety for buffer overflow using readUserInputIntoRecipe as it has a longer input allowed than the buffer can take
+				if (charCounter > INGREDIENT_BUFFER_LEN){
+					char ch = '\0';
+					while ((ch = getchar()) != '\n')
+						;
+					printf("\n\t\tInput Too Long, Try Again: ");
+					continue;
+				}
+				printf("\t\t%s\n\n\t\tIs This Correct (y/n)? ", ingredientNotes);
+				YESNOCHOICE(choice);
+			} while (choice == 'N');
+			memset(recipe->ingredients[menu - 1].userCupsInput, 0, sizeof(recipe->ingredients[menu - 1].userCupsInput));
+			strcpy(recipe->ingredients[menu - 1].userCupsInput, ingredientNotes);
+		}
 	}
 }
 
@@ -826,24 +867,51 @@ void printRecipeToPDF(struct recipeStruct *recipeToPrint){
 	pdf_add_text(pdf, NULL, "*                                                                                                                                                                *", 12, SIDE_MARGIN, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, PDF_BLACK);
 	linePointCounter += (.5 *V_FONT_POINTS);
 	pdf_add_text(pdf, NULL, "********************************************************************************************************************", 12, SIDE_MARGIN, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, PDF_BLACK);
-	linePointCounter += (3 * V_FONT_POINTS);
+	linePointCounter += (4 * V_FONT_POINTS);
 	//add ingredients
 	pdf_add_text(pdf, NULL, "        INGREDIENTS:", 12, SIDE_MARGIN, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, PDF_BLACK);
-	linePointCounter += (1.5 * V_FONT_POINTS);
+	linePointCounter += (2 * V_FONT_POINTS);
 	char ingredientBuffer[INGREDIENT_BUFFER_LEN * 2] = {'\0'};
 	//lineCounter so you don't get page overflow
 	int lineCounter = 0;
+	int largestIngredientSize = 0;
+	int temp = 0;
+	//check every ingredient's decimal place amount in the total grams to get the largest number of printed digits of every ingredients' grams size
+	char ingredientGramsPrintBuffer[11] = {'\0'};
 	for (int i = 0; i < recipeToPrint->numberOfIngredients; i++){
-		memset(ingredientBuffer, 0, sizeof(ingredientBuffer));
-		sprintf(ingredientBuffer, "%d) %7.2f grams of %s (%s)", i + 1, recipeToPrint->ingredients[i].ingredientGrams, recipeToPrint->ingredients[i].ingredientName, recipeToPrint->ingredients[i].userCupsInput);
+		memset(ingredientGramsPrintBuffer, 0, sizeof(ingredientGramsPrintBuffer));
+		decimalPlaceCheck(recipeToPrint->ingredients[i].ingredientGrams, ingredientGramsPrintBuffer);
+		temp = strlen(ingredientGramsPrintBuffer);
+		if (temp > largestIngredientSize)
+			largestIngredientSize = temp;
+	}
+	//ingredientSizeOffset offset is to print all the ingredient names along the same vertical line regardless of the number of grams or individual items used of each ingredient
+	int ingredientSizeOffset = (largestIngredientSize + 2) * H_FONT_POINTS; //+2 for the #) chars
+	for (int i = 0; i < recipeToPrint->numberOfIngredients; i++){
+		memset(ingredientGramsPrintBuffer, 0, sizeof(ingredientGramsPrintBuffer));
+		char ingredientGramsPrintBuffer[11] = {'\0'}; //11 is the max size you could find in the %7.2f buffer input plus a nul character at the end
+		decimalPlaceCheck(recipeToPrint->ingredients[i].ingredientGrams, ingredientGramsPrintBuffer);
+		sprintf(ingredientBuffer, "%d)", i + 1);
 		pdf_add_text(pdf, NULL, ingredientBuffer, 12, SIDE_MARGIN, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, PDF_BLACK);
-		linePointCounter += V_FONT_POINTS;
+		//add the size in grams aligned right to the size of the largestIngredientSize buffer
+		pdf_add_text_wrap(pdf, NULL, ingredientGramsPrintBuffer, 12, SIDE_MARGIN, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, 0, PDF_BLACK, ingredientSizeOffset, PDF_ALIGN_RIGHT, NULL);
+		memset(ingredientBuffer, 0, sizeof(ingredientBuffer));
+		//print the ingredient w/ the () bracket info, if there is no info, print the recipe to buffer with out
+		if (recipeToPrint->ingredients[i].nonWeightedIngredientFlag == 1){
+			if (strlen(recipeToPrint->ingredients[i].userCupsInput) > 0)
+				sprintf(ingredientBuffer, "  %s (%s)", recipeToPrint->ingredients[i].ingredientName, recipeToPrint->ingredients[i].userCupsInput);
+			else (sprintf(ingredientBuffer, "  %s", recipeToPrint->ingredients[i].ingredientName));
+		} else {
+			sprintf(ingredientBuffer, "  grams of %s (%s)", recipeToPrint->ingredients[i].ingredientName, recipeToPrint->ingredients[i].userCupsInput);
+		}
+		pdf_add_text(pdf, NULL, ingredientBuffer, 12, SIDE_MARGIN + ingredientSizeOffset, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, PDF_BLACK);
+		linePointCounter += 1.5 * V_FONT_POINTS;
 		lineCounter++;
 	}
 	//add instructions
-	linePointCounter += (2 * V_FONT_POINTS);
+	linePointCounter += (3 * V_FONT_POINTS);
 	pdf_add_text(pdf, NULL, "        INSTRUCTIONS:", 12, SIDE_MARGIN, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, PDF_BLACK);
-		linePointCounter += (1.5 * V_FONT_POINTS);
+		linePointCounter += (2 * V_FONT_POINTS);
 	char recipeToPDFBuffer[MAX_INGREDIENT_TEXT] = {'\0'};
 	char recipeToPDFBufferNumbered[MAX_INGREDIENT_TEXT + 3] = {'\0'};
 	for (int i = 0; i < recipeToPrint->numberOfInstructions; i++){
@@ -859,9 +927,9 @@ void printRecipeToPDF(struct recipeStruct *recipeToPrint){
 	}
 	//add notes
 	if (recipeToPrint->numberOfNotes > 0){
-		linePointCounter += (2 * V_FONT_POINTS);
+		linePointCounter += (3 * V_FONT_POINTS);
 		pdf_add_text(pdf, NULL, "        NOTES:", 12, SIDE_MARGIN, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, PDF_BLACK);
-		linePointCounter += (1.5 * V_FONT_POINTS);
+		linePointCounter += (2 * V_FONT_POINTS);
 		for (int i = 0; i < recipeToPrint->numberOfNotes; i++){
 			int subCounter = 0;
 			memset(recipeToPDFBuffer, 0, sizeof(recipeToPDFBuffer));
