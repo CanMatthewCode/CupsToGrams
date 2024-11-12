@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <ctype.h>
+#include <string.h>
 #include "ingredientConversions.h"
 #include "ingredientTypeLinkedList.h"
 #include "ingredientItemLinkedList.h"
@@ -10,6 +11,10 @@ int main (int argc, char **argv){
 	//create head pointer and load ingredientType linked-list then sub linked-lists
 	struct ingredientType *ingredientHead = NULL;
 	struct recipeStruct *recipeHead = NULL;
+	int adminFlag = 0;
+	if (argc > 1 && strcmp(argv[1], "ADMIN") == 0){
+		adminFlag = 1;
+	}
 	ingredientHead = loadIngredientTypes();
 	recipeHead = loadRecipesToLinkedList();
 	if (ingredientHead)
@@ -22,7 +27,7 @@ int main (int argc, char **argv){
 		puts("\t\t*\t\t\t-RECIPE AND INGREDIENT CONVERTER-\t\t\t*");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
 		puts("\t\t*********************************************************************************");
-		puts("\n\t\tMain Menu Options:\n\n");
+		puts("\n\n\t\tMain Menu Options:\n");
 	
 		puts("\t\t(1) Recipe Conversions\n\t\t(2) See Saved Recipes"
 			 "\n\t\t(3) Convert An Ingredient\n\t\t(4) See Ingredient Lists"
@@ -44,7 +49,7 @@ int main (int argc, char **argv){
 			case '2':	printSavedRecipeMenus(recipeHead);
 						break;
 			case '3': 	clearScreen();
-						ingredientHead = convertIngredientMenu(ingredientHead); 
+						ingredientHead = convertIngredientMenu(ingredientHead, adminFlag); 
 						break; 
 			case '4':	clearScreen();
 						printAllIngredientItemsInTypeNode(ingredientHead);
