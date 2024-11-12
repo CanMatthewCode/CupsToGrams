@@ -283,9 +283,8 @@ void printAllRecipeNames(struct recipeStruct *recipeHead){
 		readUserInputIntoBuffer(recipeNameBuffer);
 		foundRecipe = findRecipe(recipeHead, recipeNameBuffer);
 		if (foundRecipe)
-			printFullRecipe(foundRecipe);
-			printf("\n\n\n\n\n\n\n\n\n\n\n\t\tHit Enter To Exit");
-			while ((ch = getchar()) != '\n');
+			printFullRecipeWithPDFOption(foundRecipe);
+//			while ((ch = getchar()) != '\n');
 	}
 }
 
@@ -415,9 +414,23 @@ void printRecipeByType (struct recipeStruct *headPointer){
 				printf("\n\n\n\t\t");
 		}
 	}
-	printf("\n\n\t\tHit Enter To Continue\t");
+	printf("\n\n\n\n\n\t\tEnter Name To View Recipe, Or Hit Enter To Continue: ");
+	struct recipeStruct *foundRecipe = NULL;
 	char ch = '\0';
-	while ((ch = getchar()) != '\n');
+	if  ((ch = getchar()) == '\n') {
+		return;
+	} else {
+		ungetc(ch, stdin);
+		char recipeNameBuffer[INGREDIENT_BUFFER_LEN] = {'\0'};
+		readUserInputIntoBuffer(recipeNameBuffer);
+		foundRecipe = findRecipe(headPointer, recipeNameBuffer);
+		if (foundRecipe)
+			printFullRecipeWithPDFOption(foundRecipe);
+
+	}
+//	printf("\n\n\t\tHit Enter To Continue\t");
+//	char ch = '\0';
+//	while ((ch = getchar()) != '\n');
 }
 
 /********************************************************************************************************************
