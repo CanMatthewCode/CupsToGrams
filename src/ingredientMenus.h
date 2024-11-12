@@ -13,7 +13,7 @@
 *				functionality for the ingredientType linked-list from the main menu option					*
 *																											*
 *************************************************************************************************************/
-struct ingredientType *convertIngredientMenu(struct ingredientType *head);
+struct ingredientType *convertIngredientMenu(struct ingredientType *head, int adminFlag);
 
 /************************************************************************************************************
 * 																											*

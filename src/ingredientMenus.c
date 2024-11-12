@@ -10,7 +10,7 @@
 *				functionality for the ingredientType linked-list from the main menu option					*
 *																											*
 *************************************************************************************************************/
-struct ingredientType *convertIngredientMenu(struct ingredientType *head){
+struct ingredientType *convertIngredientMenu(struct ingredientType *head, int adminFlag){
 	char menu = '\0';
 	struct ingredientType *headPointer = head;
 	clearScreen();
@@ -21,15 +21,18 @@ struct ingredientType *convertIngredientMenu(struct ingredientType *head){
 		puts("\t\t*\t\t\t      -CONVERT INGREDIENT- \t\t\t\t*");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
 		puts("\t\t*********************************************************************************");
-		puts("\n\t\tMenu Options:\n");
+		puts("\n\n\t\tMenu Options:\n");
 	
-		puts("\t\t(1) Convert Ingredient\n\t\t(2) Search For Ingredient\n\t\t"
-			 "(3) See Ingredients By Type\n\t\t(4) See Ingredient Types\n\t\t"
-			 "(5) Add Ingredient\n\t\t(6) Modify Ingredient\n\t\t"
-			 "(7) Delete Ingredient\n\t\t"
-			 "(8) Add Ingredient Type\n\t\t(9) Delete Ingredient Type\n\n\t\t"
-			 "(B) Back");
+		puts("\t\t(1) Convert A Measured Ingredient\n\t\t(2) See An Ingredient’s Grams/Cup Ratio\n\t\t"
+			 "(3) See Ingredients By Type\n");
+	 	if (adminFlag == 1){
+			puts("\t\t(4) Add Ingredient\n\t\t(5) Modify Ingredient\n\t\t"
+				"(6) Delete Ingredient\n\t\t"
+			 	"(7) Add Ingredient Type\n\t\t(8) Delete Ingredient Type\n");
+	 	}
+		puts("\t\t(B) Back");
 		printf("\n\t\tEnter Selection: ");
+		char adminBuffer[10] = {'\0'};
 		do {
         	menu = toupper(getchar());
         	if (menu == '\n'){
@@ -37,9 +40,13 @@ struct ingredientType *convertIngredientMenu(struct ingredientType *head){
             	continue;
         	}
         	while (getchar() != '\n');
-			if (strchr("123456789B", menu) == NULL)
-				printf("\t\tInvalid Selection: ");
-    	} while (strchr("123456789B", menu) == NULL);
+        	if (adminFlag == 1)
+        		strcpy(adminBuffer, "12345678B");
+        	else 
+        		strcpy(adminBuffer, "123B");
+			if (strchr(adminBuffer, menu) == NULL)
+					printf("\t\tInvalid Selection: ");
+    	} while (strchr(adminBuffer, menu) == NULL);
 		switch (menu){
 			case '1':	convertIngredient(headPointer);
 						break;
@@ -48,24 +55,20 @@ struct ingredientType *convertIngredientMenu(struct ingredientType *head){
 			case '3': 	clearScreen();
 						printAllIngredientItemsInTypeNode(headPointer);
 						break;
-			case '4': 	clearScreen();
-						printIngredientTypeList(headPointer);
-						printf("\n\n\n\n\n\n\n\n\n\n\n\n\t\t(Press Enter to Continue)");
-						while (getchar() !='\n');
-						break; 
-			case '5':	clearScreen();
+						
+			case '4':	clearScreen();
 						addIngredientItem(headPointer);
 						break;
-			case '6':	clearScreen();
+			case '5':	clearScreen();
 						modifyIngredientItem(headPointer);
 						break;
-			case '7':	clearScreen();
+			case '6':	clearScreen();
 						deleteIngredientItem(headPointer);
 						break;
-			case '8':	clearScreen();
+			case '7':	clearScreen();
 						headPointer = addIngredientType(headPointer);
 						break;
-			case '9':	clearScreen();
+			case '8':	clearScreen();
 						headPointer = deleteIngredientTypeNode(headPointer);
 						break;
 			case 'B':	return headPointer;
@@ -97,7 +100,7 @@ void convertIngredient(struct ingredientType *head){
 		puts("\t\t*\t\t      -CONVERT INGREDIENT: CUPS TO GRAMS- \t\t\t*");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
 		puts("\t\t*********************************************************************************");
-		printf("\n\t\tEnter Ingredient Name To Convert: ");
+		printf("\n\n\n\t\tEnter Ingredient's Name To Convert: ");
 		readUserInputIntoBuffer(ingredientBuffer);
 		if ((foundIngredient = findIngredientItemNode(head, ingredientBuffer, NULL)) == NULL){
 			printf("\n\t\t%s Not Found, Convert Another (y/n): ", ingredientBuffer);
@@ -226,7 +229,7 @@ void findIngredient(struct ingredientType *head){
 		choice = '\0';
 		puts("\n\n\t\t*********************************************************************************");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
-		puts("\t\t*\t\t\t      -FIND INGREDIENT- \t\t\t\t*");
+		puts("\t\t*\t\t\t      -SEE INGREDIENT RATIOS- \t\t\t\t*");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
 		puts("\t\t*********************************************************************************");
 		printf("\n\n\t\tEnter Ingredient Name: ");
@@ -239,7 +242,7 @@ void findIngredient(struct ingredientType *head){
 		}
 		if (!foundIngredient)
 			printf("\n\n\t\tIngredient Not Found");
-		printf("\n\n\n\t\tFind Another Ingredient (y/n)? ");
+		printf("\n\n\n\t\tSee Another Ingredient (y/n)? ");
 		YESNOCHOICE(choice);
 	} while (choice != 'N');
 }
@@ -260,7 +263,7 @@ void printAllIngredientItemsInTypeNode(struct ingredientType *head){
 		printIngredientTypeList(head);
 		printf("\n\n\n\n\t\t");
 		do {
-			printf("Enter Desired Type Of Ingredient For Full List: ");
+			printf("Enter A Type Of Ingredient To See Full List: ");
 			readUserInputIntoBuffer(ingredientTypeBuffer);
 			foundIngredientType = findIngredientType(head, ingredientTypeBuffer);
 	 		if (!foundIngredientType){
