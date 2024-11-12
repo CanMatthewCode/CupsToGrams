@@ -49,8 +49,8 @@ int main (int argc, char **argv){
 		puts("\t\t*********************************************************************************");
 		puts("\n\t\tMain Menu Options:\n\n");
 	
-		puts("\t\t(1) Convert Recipe\n\t\t(2) See Recipes"
-			 "\n\t\t(3) Convert Ingredient\n\t\t(4) See Ingredient List"
+		puts("\t\t(1) Recipe Conversions\n\t\t(2) See Saved Recipes"
+			 "\n\t\t(3) Convert An Ingredient\n\t\t(4) See Ingredient Lists"
 			 "\n\n\t\t(Q) Quit");
 		printf("\n\n\t\tEnter Selection: ");
 		do {
