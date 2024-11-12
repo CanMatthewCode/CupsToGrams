@@ -1,0 +1,13 @@
+Apple Pie	1
+5
+1	Medium Apples	Cut Into Chunks	3.20
+1	Cinnemon Sticks	Extra Large	3.00
+0	Amaranth Flour	2.25 Cups	231.75
+1	Butter	Stick	1.00
+1	Cloves		3.00
+1
+Boil all together
+
+0
+
+
