@@ -88,5 +88,12 @@ float cupsToGrams(char *cupsInputAmountBuffer, struct ingredientItem *ingredient
 *********************************************************************************************************************/
 int getNumericChoice();
 
+/********************************************************************************************************************
+* 																													*
+*	  			takes a recipeStruct's ingredientStruct member and checks to see if it's ingredientGrams			*
+*				member has trailing zeros and removes all for printing if so										*
+*																													*
+*********************************************************************************************************************/
+void decimalPlaceCheck(float ingredientGrams, char *bufferToFill);
 
 #endif //INGREDIENTCONVERSIONS_H

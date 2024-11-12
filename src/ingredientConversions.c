@@ -201,3 +201,19 @@ int getNumericChoice(void){
         return (int)number;
     }
 }
+
+/********************************************************************************************************************
+* 																													*
+*	  			takes a recipeStruct's ingredientStruct member and checks to see if it's ingredientGrams			*
+*				member has trailing zeros and removes all for printing if so										*
+*																													*
+*********************************************************************************************************************/
+void decimalPlaceCheck(float ingredientGrams, char *bufferToFill){
+	float check = ingredientGrams - (int)ingredientGrams;
+	if (check == 0)
+		sprintf(bufferToFill, "%7d", (int)ingredientGrams);
+	else if (((int)(check * 100) % 10 )== 0)
+		sprintf(bufferToFill, "%7.1f", ingredientGrams);
+	else
+		sprintf(bufferToFill, "%7.2f", ingredientGrams);
+}
