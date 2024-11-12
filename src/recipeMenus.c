@@ -26,9 +26,7 @@ struct recipeStruct *recipeMenus(struct recipeStruct *recipeHead, struct ingredi
 		puts("\t\t*********************************************************************************");
 		puts("\n\t\tMenu Options:\n\n");
 	
-		puts("\t\t(1) Convert New Recipe\n\t\t(2) Modify Recipe\n\t\t(3) See All Recipes\n\t\t"
-			 "(4) See Recipes By Type\n\t\t(5) Save Recipe As PDF\n\n\t\t"
-			 "(B) Back");
+		puts("\t\t(1) Convert New Recipe\n\t\t(2) Modify Recipe\n\n\t\t(B) Back");
 		printf("\n\t\tEnter Selection: ");
 		do {
         	menu = toupper(getchar());
@@ -37,19 +35,13 @@ struct recipeStruct *recipeMenus(struct recipeStruct *recipeHead, struct ingredi
             	continue;
         	}
         	while (getchar() != '\n');
-			if (strchr("12345B", menu) == NULL)
+			if (strchr("12B", menu) == NULL)
 				printf("\t\tInvalid Selection: ");
-		} while (strchr("12345B", menu) == NULL);
+		} while (strchr("12B", menu) == NULL);
 		switch (menu){
 			case '1':	recipeHeadPointer = convertNewRecipe(recipeHeadPointer, ingredientHead);
 						break;
 			case '2':	recipeHeadPointer = modifyExistingRecipeMenu(recipeHeadPointer, ingredientHead);
-						break;
-			case '3':	printAllRecipeNames(recipeHeadPointer);
-						break;
-			case '4':	printRecipeByType(recipeHeadPointer);
-						break;
-			case '5':	printRecipeToPDFMenu(recipeHeadPointer);
 						break;
 			case 'B':	return recipeHeadPointer;
 			default:	clearScreen();
@@ -74,7 +66,7 @@ struct recipeStruct *editRecipeMenu(struct recipeStruct *recipe, struct recipeSt
 		printFullRecipe(recipe);
 		puts("\n\n\t\tEdit Recipe Menu Options:");
 		puts("\n\t\t(1) Edit Recipe Name\t\t\t(D) DELETE RECIPE\n\t\t(2) Edit Ingredients\n\t\t(3) Edit Instructions");
-		puts("\t\t(4) Edit Notes\n\t\t(5) Edit Recipe Type\t\t\t(S) Save and Exit");
+		puts("\t\t(4) Edit Notes\t\t\t\t(P) Print Recipe To PDF\n\t\t(5) Edit Recipe Type\t\t\t(S) Save and Exit");
 		printf("\n\n\t\tEnter Selection: ");
 		do {
   	      menu = toupper(getchar());
@@ -83,9 +75,9 @@ struct recipeStruct *editRecipeMenu(struct recipeStruct *recipe, struct recipeSt
            		continue;
         	}
         	while (getchar() != '\n');
-			if (strchr("12345SD", menu) == NULL)
+			if (strchr("12345SPD", menu) == NULL)
 				printf("\t\tInvalid Selection: ");
-		} while (strchr("12345SD", menu) == NULL);
+		} while (strchr("12345SPD", menu) == NULL);
 		switch (menu){
 			case '1':		recipeHeadPointer = modifyRecipeName(recipeHeadPointer, recipe);
 							break;
@@ -98,6 +90,8 @@ struct recipeStruct *editRecipeMenu(struct recipeStruct *recipe, struct recipeSt
 			case '5':		setRecipeType(recipe);
 							break;
 			case 'D':		recipeHeadPointer = deleteFullRecipeNode(recipeHeadPointer, recipe);
+							break;
+			case 'P':		printRecipeToPDF(recipe);
 							break;
 			case 'S':		dumpRecipesFromLinkedList(recipeHeadPointer);
 							return recipeHeadPointer;
@@ -256,6 +250,60 @@ struct recipeStruct *modifyExistingRecipeMenu(struct recipeStruct *recipeHeadPoi
 	} else
 		printf("\t\tRecipe Not Found");
 	return recipeHead;
+}
+
+/************************************************************************************************************
+* 																											*
+*				menu function for printing all recipes, printing by type, or find recipe to print			*
+*																											*
+*************************************************************************************************************/
+void printSavedRecipeMenus(struct recipeStruct *recipeHead){
+	char menu = '\0';
+	char recipeBuffer[INGREDIENT_BUFFER_LEN] = {'\0'};
+	clearScreen();
+	struct recipeStruct *foundRecipe = NULL;
+	do {
+		clearScreen();
+		puts("\n\n\t\t*********************************************************************************");
+		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
+		puts("\t\t*\t\t\t      -PRINT SAVED RECIPES- \t\t\t\t*");
+		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
+		puts("\t\t*********************************************************************************");
+		puts("\n\t\tMenu Options:\n\n");
+	
+		puts("\t\t(1) Find Recipe By Name\n\t\t(2) See All Recipes\n\t\t(3) See Recipes By Type\n\n\t\t"
+			 "(B) Back");
+		printf("\n\t\tEnter Selection: ");
+		do {
+        	menu = toupper(getchar());
+        	if (menu == '\n'){
+            	printf("\t\tInvalid Selection: ");
+            	continue;
+        	}
+        	while (getchar() != '\n');
+			if (strchr("123B", menu) == NULL)
+				printf("\t\tInvalid Selection: ");
+		} while (strchr("123B", menu) == NULL);
+		switch (menu){
+			case '1':	printf("\n\n\t\tEnter Recipe Name: ");
+						readUserInputIntoBuffer(recipeBuffer);
+						foundRecipe = findRecipe(recipeHead, recipeBuffer);
+						if (!foundRecipe)
+							printf("\n\n\t\tRecipe Not Found (Hit Enter To Continue)");
+						else {
+							printFullRecipeWithPDFOption(foundRecipe);
+						}
+						break;
+			case '2':	printAllRecipeNames(recipeHead);
+						break;
+			case '3':	printRecipeByType(recipeHead);
+						break;
+			case 'B':	return;
+			default:	clearScreen();
+						printf("\n\t\tInvalid Selection, Try Again\n");
+		}
+	} while (menu != 'B');
+	return;
 }
 
 /************************************************************************************************************

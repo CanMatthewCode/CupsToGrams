@@ -54,6 +54,13 @@ struct recipeStruct *modifyExistingRecipeMenu(struct recipeStruct *recipeHeadPoi
 
 /************************************************************************************************************
 * 																											*
+*				menu function for printing all recipes, printing by type, or find recipe to print			*
+*																											*
+*************************************************************************************************************/
+void printSavedRecipeMenus(struct recipeStruct *recipeHead);
+
+/************************************************************************************************************
+* 																											*
 *				menu for finding recipe from the recipeStruct headPointer									*
 *				and then printing chosen recipe out as a PDF document										*
 *																											*
