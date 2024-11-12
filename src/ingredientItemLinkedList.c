@@ -6,17 +6,6 @@
 #include "ingredientTypeLinkedList.h"
 #include "ingredientItemLinkedList.h"
 
-/*		XLoad from text file sub-ingredientItemLinkedList for each opened ingredientTypeNode->typeName.txt
-*		XCheck if wanted ingredientType exists already in node
-*		XCreate new node for ingredientTypeLinkedList
-*		XPopulate and Add new node to ingredientItemLinkedList
-*		XDelete selected node
-*		XPrint ingredient node list
-*		XDump ingredientTypeLinkedList into text file named ingredientType->ingredientName
-*		XPrint All Ingredients by Type ~pretty~
-*		XfreeIngredientTypeLinkedList function
-*		XfreeAllIngredientTypeLinkedLists function
-*/
 
 /********************************************************************************************************************
 * 																													*

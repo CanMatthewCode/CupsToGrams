@@ -24,9 +24,9 @@ struct recipeStruct *recipeMenus(struct recipeStruct *recipeHead, struct ingredi
 		puts("\t\t*\t\t\t      -CONVERT RECIPE- \t\t\t\t\t*");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
 		puts("\t\t*********************************************************************************");
-		puts("\n\t\tMenu Options:\n\n");
+		puts("\n\n\t\tMenu Options:\n");
 	
-		puts("\t\t(1) Convert New Recipe\n\t\t(2) Modify Recipe\n\n\t\t(B) Back");
+		puts("\t\t(1) Convert New Recipe\n\t\t(2) Modify Existing Recipe\n\n\t\t(B) Back");
 		printf("\n\t\tEnter Selection: ");
 		do {
         	menu = toupper(getchar());
@@ -269,7 +269,7 @@ void printSavedRecipeMenus(struct recipeStruct *recipeHead){
 		puts("\t\t*\t\t\t      -PRINT SAVED RECIPES- \t\t\t\t*");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
 		puts("\t\t*********************************************************************************");
-		puts("\n\t\tMenu Options:\n\n");
+		puts("\n\n\t\tMenu Options:\n");
 	
 		puts("\t\t(1) Find Recipe By Name\n\t\t(2) See All Recipes\n\t\t(3) See Recipes By Type\n\n\t\t"
 			 "(B) Back");
