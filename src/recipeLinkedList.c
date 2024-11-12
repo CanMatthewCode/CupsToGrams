@@ -8,14 +8,7 @@
 #include "recipeLinkedList.h"
 #include "recipeConversions.h"
 
-/*
-	x. placeRecipeStructNode into linked list alphabetically
-	x. deleteRecipe to delete a node from the linked list
-	x. find recipes to find all recipes that have the user's input and display the options like the ingredients find function
-	x. free recipeStruct linked list function
-	x. print out all recipe names
-	x. print recipe names by recipe type
-*/
+
 /********************************************************************************************************************
 * 																													*
 *	  			creates new recipeStruct node, returns NULL on failure				 								*
@@ -48,7 +41,7 @@ int dumpRecipesFromLinkedList(struct recipeStruct *recipeHead){
 		fprintf(fp, "%s\t%d\n%d", recipe->recipeName, recipe->recipeType, recipe->numberOfIngredients);
 	//loop to dump each ingredient's name, user entered cups, and float value of entered value separated by new lines
 		while (counter < recipe->numberOfIngredients){
-			fprintf(fp, "\n%s\t%s\t%.2f", recipe->ingredients[counter].ingredientName, recipe->ingredients[counter].userCupsInput, recipe->ingredients[counter].ingredientGrams);
+			fprintf(fp, "\n%d\t%s\t%s\t%.2f", recipe->ingredients[counter].nonWeightedIngredientFlag, recipe->ingredients[counter].ingredientName, recipe->ingredients[counter].userCupsInput, recipe->ingredients[counter].ingredientGrams);
 			counter++;
 		}
 	//loop to dump each instruction, followed by two new lines to distinguish each instruction which may have its own internal new line character
@@ -117,7 +110,10 @@ struct recipeStruct *loadRecipesToLinkedList(void){
     		newNode->recipeName[counter++] = ch;
     	fscanf(fp, " %u %d ", &newNode->recipeType, &newNode->numberOfIngredients);
     //loop to load each ingredient's name, user entered cups, and float value of entered value separated by new lines
-    	for (int i = 0; i < newNode->numberOfIngredients; ++i){
+    	for (int i = 0; i < newNode->numberOfIngredients; i++){
+    		fscanf(fp, " %d", &newNode->ingredients[i].nonWeightedIngredientFlag);
+			while ((ch = fgetc(fp)) != '\t')
+				;
     		int counter = 0;
     		while ((ch = fgetc(fp)) != '\t')
     			newNode->ingredients[i].ingredientName[counter++] = ch;
@@ -255,6 +251,7 @@ struct recipeStruct *placeRecipeStructNode(struct recipeStruct *recipeHead, stru
 *********************************************************************************************************************/
 void printAllRecipeNames(struct recipeStruct *recipeHead){
 	struct recipeStruct *cur = NULL;
+	struct recipeStruct *foundRecipe = NULL;
 	clearScreen();
 	puts("\n\n\t\t*********************************************************************************");
 	puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
@@ -276,9 +273,20 @@ void printAllRecipeNames(struct recipeStruct *recipeHead){
 			numberOfCharactersOnLine = NUMBER_OF_CHARS_ON_SCREEN;
 		}
 	}
-	printf("\n\n\n\n\n\t\tHit Enter To Continue\t");
+	printf("\n\n\n\n\n\t\tEnter Name To View Recipe, Or Hit Enter To Continue: ");
 	char ch = '\0';
-	while ((ch = getchar()) != '\n');
+	if  ((ch = getchar()) == '\n') {
+		return;
+	} else {
+		ungetc(ch, stdin);
+		char recipeNameBuffer[INGREDIENT_BUFFER_LEN] = {'\0'};
+		readUserInputIntoBuffer(recipeNameBuffer);
+		foundRecipe = findRecipe(recipeHead, recipeNameBuffer);
+		if (foundRecipe)
+			printFullRecipe(foundRecipe);
+			printf("\n\n\n\n\n\n\n\n\n\n\n\t\tHit Enter To Exit");
+			while ((ch = getchar()) != '\n');
+	}
 }
 
 /********************************************************************************************************************
@@ -375,25 +383,6 @@ struct recipeStruct *deleteFullRecipeNode(struct recipeStruct *head, struct reci
 	dumpRecipesFromLinkedList(headPointer);
 	return headPointer;
 }
-/*
-	if (cur && headPointer){
-		prev = cur->prev;
-		next = cur->next;
-	//if prev == NULL, it is the 1st node
-		if (!prev)
-			headPointer = cur->next;
-	//if it is a middle node
-		else if (prev != NULL && next != NULL){
-			prev->next=next;
-			next->prev=prev;
-		}
-	//if it is the final node
-		else if(prev && next == NULL)
-			prev->next = NULL;
-		free(cur);
-		cur = NULL;
-*/
-
 
 /********************************************************************************************************************
 * 																													*
