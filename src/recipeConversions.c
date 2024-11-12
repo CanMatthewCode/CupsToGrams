@@ -410,6 +410,28 @@ void printFullRecipe(struct recipeStruct *recipe){
 
 /********************************************************************************************************************
 * 																													*
+*	 		 	prints the entirety of a recipeStruct's contents in a recipe-like manor								*
+*				with the option to print the recipe to PDF															*
+*																													*
+*********************************************************************************************************************/
+void printFullRecipeWithPDFOption(struct recipeStruct *recipe){
+	char ch = '\0';
+	printFullRecipe(recipe);
+	printf("\n\n\n\n\n\t\t(P) Print To PDF\t\t\t\tOr Press Enter To Continue ");
+	do {
+		ch = toupper(getchar());
+		if (ch == 'P'){
+			printRecipeToPDF(recipe);
+			printFullRecipe(recipe);
+			printf("\n\n\n\n\n\t\tPress Enter To Continue ");
+			while ((ch = getchar()) != '\n');
+			ch = '\0';
+		}
+	} while (ch != '\n');
+}
+
+/********************************************************************************************************************
+* 																													*
 *	  			modifies the recipe's name in a recipeStruct, returns a pointer to recipeStruct head				*
 *				for when recipe name change moves position in linked list											*
 *																													*

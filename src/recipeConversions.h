@@ -145,6 +145,14 @@ void printFullRecipe(struct recipeStruct *recipe);
 
 /********************************************************************************************************************
 * 																													*
+*	 		 	prints the entirety of a recipeStruct's contents in a recipe-like manor								*
+*				with the option to print the recipe to PDF															*
+*																													*
+*********************************************************************************************************************/
+void printFullRecipeWithPDFOption(struct recipeStruct *recipe);
+
+/********************************************************************************************************************
+* 																													*
 *	  			modifies the recipe's name in a recipeStruct, returns a pointer to recipeStruct head				*
 *				for when recipe name change moves position in linked list											*
 *																													*
