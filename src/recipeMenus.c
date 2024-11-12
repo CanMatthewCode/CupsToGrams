@@ -120,8 +120,8 @@ void editRecipeIngredientsMenu(struct recipeStruct *recipe, struct ingredientTyp
 		printRecipeName(recipe);
 		printRecipeIngredients(recipe);
 		puts("\n\n\t\tModify Ingredient Menu Options: ");
-		puts("\n\t\t(1) Add Another Ingredient\n\t\t(2) Modify Ingredient's Amount");
-		puts("\t\t(3) Change Ingredient's Order\n\t\t(4) Delete Ingredient\n\n\t\t(B) Back To Edit Recipe Menu");
+		puts("\n\t\t(1) Add Another Measured Ingredient\n\t\t(2) Add Another Non-Measured Ingredient\n\t\t(3) Modify An Ingredient's Amount");
+		puts("\t\t(4) Change The Ingredients' Order\n\t\t(5) Delete An Ingredient\n\n\t\t(B) Back To Edit Recipe Menu");
 		printf("\n\n\t\tEnter Selection: ");
 		do {
 			menu = toupper(getchar());
@@ -130,17 +130,19 @@ void editRecipeIngredientsMenu(struct recipeStruct *recipe, struct ingredientTyp
 					continue;
 			}
 			while (getchar() != '\n');
-			if (strchr("1234B", menu) == NULL)
+			if (strchr("12345B", menu) == NULL)
 				printf("\t\tInvalid Selection: ");
-		} while (strchr("1234B", menu) == NULL);
+		} while (strchr("12345B", menu) == NULL);
 		switch (menu){
 			case '1':		addNewIngredient(recipe, ingredientHead);
 							break;
-			case '2':		modifyIngredientAmount(recipe, ingredientHead);
+			case '2':		addNewNonMeasuredIngredient(recipe);
 							break;
-			case '3':		modifyIngredientOrder(recipe);
+			case '3':		modifyIngredientAmount(recipe, ingredientHead);
 							break;
-			case '4':		deleteIngredientFromRecipe(recipe);
+			case '4':		modifyIngredientOrder(recipe);
+							break;
+			case '5':		deleteIngredientFromRecipe(recipe);
 							break;
 			case 'B':		return;
 			default:		break;
