@@ -2,9 +2,11 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
+#include <limits.h>
 #include "ingredientConversions.h"
 #include "ingredientTypeLinkedList.h"
 #include "ingredientItemLinkedList.h"
+#include "recipeSystemCheck.h"
 
 
 /********************************************************************************************************************
@@ -34,13 +36,12 @@ struct ingredientItem *loadIngredientItem(struct ingredientType *node){
 	struct ingredientType *ingredientType = node;
 	struct ingredientItem *cur = NULL;
 
-	char openFileBuffer[INGREDIENT_BUFFER_LEN+15] = {'\0'};
-	//add path to fopen() variable in openFileBuffer
-	strcpy(openFileBuffer, "./textFiles/");
-	//copy name from struct IngredientType node into openFileBuffer
-	strcat(openFileBuffer, ingredientType->typeName);
-	//append .txt to ingredientType names
-	strcat(openFileBuffer, ".txt");
+	char openFileBuffer[PATH_MAX] = {'\0'};
+	#ifdef _WIN32
+		snprintf(openFileBuffer, sizeof(openFileBuffer), "%s\\textFiles\\%s.txt", pathwayBuffer, ingredientType->typeName);
+	#else
+		snprintf(openFileBuffer, sizeof(openFileBuffer), "%s/textFiles/%s.txt", pathwayBuffer, ingredientType->typeName);
+	#endif
 	if ((fp = fopen(openFileBuffer, "r+")) == NULL){
 		if ((fp = fopen(openFileBuffer, "w+")) == NULL)
 			return NULL;
@@ -106,8 +107,8 @@ struct ingredientItem *loadIngredientItem(struct ingredientType *node){
 *		returns a pointer to ingredientItem link-list head on success, NULL on failure						*
 *																											*
 *************************************************************************************************************/
-struct ingredientType *loadAllIngredientTypeSubLists(struct ingredientType *head){
-	struct ingredientType *cur = head;
+struct ingredientType *loadAllIngredientTypeSubLists(struct ingredientType *typeHead){
+	struct ingredientType *cur = typeHead;
 	struct ingredientType *prev = NULL;
 	while (cur){
 		cur->head = loadIngredientItem(cur);
@@ -130,15 +131,12 @@ struct ingredientType *loadAllIngredientTypeSubLists(struct ingredientType *head
 int dumpIngredientItemList(struct ingredientType *typeNode){
 	FILE *fp = NULL;
 	struct ingredientType *ingredientTypeNode = typeNode;
-
-	char openFileBuffer[INGREDIENT_BUFFER_LEN+15] ={'\0'};
-	//add path to fopen() variable in openFileBuffer
-	strcpy(openFileBuffer, "./textFiles/");
-	//copy name from struct IngredientType node into openFileBuffer
-	strcat(openFileBuffer, ingredientTypeNode->typeName);
-	//append .txt to ingredientType names
-	strcat(openFileBuffer, ".txt");
-
+	char openFileBuffer[PATH_MAX] = {'\0'};
+	#ifdef _WIN32
+		snprintf(openFileBuffer, sizeof(openFileBuffer), "%s\\textFiles\\%s.txt", pathwayBuffer, ingredientTypeNode->typeName);
+	#else
+		snprintf(openFileBuffer, sizeof(openFileBuffer), "%s/textFiles/%s.txt", pathwayBuffer, ingredientTypeNode->typeName);
+	#endif
 	if ((fp = fopen(openFileBuffer, "w+")) == NULL){
 		printf("Unable to open %s file\n", openFileBuffer);
 		return -1;
