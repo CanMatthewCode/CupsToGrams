@@ -27,7 +27,7 @@ struct ingredientType *convertIngredientMenu(struct ingredientType *head, int ad
 			 "(3) See Ingredients By Type\n");
 	 	if (adminFlag == 1){
 			puts("\t\t(4) Add Ingredient\n\t\t(5) Modify Ingredient\n\t\t"
-				"(6) Delete Ingredient\n\t\t"
+				"(6) Delete Ingredient\n\n\t\t"
 			 	"(7) Add Ingredient Type\n\t\t(8) Delete Ingredient Type\n");
 	 	}
 		puts("\t\t(B) Back");
@@ -55,7 +55,6 @@ struct ingredientType *convertIngredientMenu(struct ingredientType *head, int ad
 			case '3': 	clearScreen();
 						printAllIngredientItemsInTypeNode(headPointer);
 						break;
-						
 			case '4':	clearScreen();
 						addIngredientItem(headPointer);
 						break;
@@ -156,7 +155,8 @@ struct ingredientType *addIngredientType(struct ingredientType *head){
 
 void addIngredientItem(struct ingredientType *head){
 	char choice = '\0';
-	char innerChoice = '\0';
+	struct ingredientType *cur = NULL;
+	int counter = 0;
 	char ingredientTypeBuffer[INGREDIENT_BUFFER_LEN] = {'\0'};
 	char ingredientItemBuffer[INGREDIENT_BUFFER_LEN] = {'\0'};
 	do {
@@ -169,23 +169,20 @@ void addIngredientItem(struct ingredientType *head){
 		puts("\t\t*\t\t\t      -ADD NEW INGREDIENT- \t\t\t\t*");
 		puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
 		puts("\t\t*********************************************************************************");
+		printf ("\n\n\t\t");
+		for (cur = head; cur; cur = cur->next){
+		printf("%-32s", cur->typeName);
+		counter++;
+		if (counter % 3 == 0)
+			printf("\n\n\n\t\t");
+		}
 		do {
 			memset(ingredientTypeBuffer, 0, sizeof(ingredientTypeBuffer));
-			printf("\n\n\t\tEnter The Food Type Of The Ingredient You Wish To Add: ");
+			printf("\n\n\n\t\tEnter The Food Type For The Ingredient You Wish To Add: ");
 	 		readUserInputIntoBuffer(ingredientTypeBuffer);
 	 		foundIngredientType = (findIngredientType(headPointer, ingredientTypeBuffer));
-	 		if (foundIngredientType == NULL){
-	 			printf("\n\t\tFood Type Not Found, Print Full Food Types List (y/n)? ");
-	 			do{
-	 				innerChoice = '\0';
-	 				YESNOCHOICE(innerChoice);
-					if (innerChoice == 'Y'){
-						printf("\n\n\n");
-						printIngredientTypeList(head);
-						printf("\n\n");
-					}
-				} while ((innerChoice != 'N') && (innerChoice != 'Y'));	
-			}
+	 		if (foundIngredientType == NULL)
+	 			printf("\n\t\tItem Not Found - Chose One From The Above List: ");
 		} while (foundIngredientType == NULL);
 		//loop of inputting ingredients in this type of item, when they say no more of this type, dump this type into .txt file
 		do {
@@ -383,4 +380,4 @@ void deleteIngredientItem (struct ingredientType *head){
 		printf("\n\n\t\tWould You Like To Delete Another Ingredient (y/n)? ");
 		YESNOCHOICE(choice);
 	} while (choice != 'N');
-} 
+}
