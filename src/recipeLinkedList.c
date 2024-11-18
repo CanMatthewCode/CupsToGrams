@@ -2,11 +2,13 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
+#include <limits.h>
 #include "ingredientConversions.h"
 #include "ingredientTypeLinkedList.h"
 #include "ingredientItemLinkedList.h"
 #include "recipeLinkedList.h"
 #include "recipeConversions.h"
+#include "recipeSystemCheck.h"
 
 
 /********************************************************************************************************************
@@ -31,7 +33,13 @@ struct recipeStruct *createNewRecipeNode(void){
 int dumpRecipesFromLinkedList(struct recipeStruct *recipeHead){
 	FILE *fp = NULL;
 	struct recipeStruct *recipe = recipeHead;
-	if ((fp = fopen("./recipeFiles/recipes.txt", "w+")) == NULL){
+	char openFileBuffer[PATH_MAX] = {'\0'};
+	#ifdef _WIN32
+		snprintf(openFileBuffer, sizeof(openFileBuffer), "%s\\recipeFiles\\recipes.txt", pathwayBuffer);
+	#else
+		snprintf(openFileBuffer, sizeof(openFileBuffer), "%s/recipeFiles/recipes.txt", pathwayBuffer);
+	#endif
+	if ((fp = fopen(openFileBuffer, "w+")) == NULL){
 		printf("Unable to open recipes.txt file\n");
 		return -1;
 	}
@@ -78,8 +86,14 @@ struct recipeStruct *loadRecipesToLinkedList(void){
 	FILE *fp = NULL;
 	struct recipeStruct *cur = NULL;
 	//open linked list of ingredient types which each have their own linked list inside
-	if((fp = fopen("./recipeFiles/recipes.txt", "r+")) == NULL){
-		if((fp = fopen("./recipeFiles/recipes.txt", "w+")) == NULL){
+	char openFileBuffer[PATH_MAX] = {'\0'};
+	#ifdef _WIN32
+		snprintf(openFileBuffer, sizeof(openFileBuffer), "%s\\recipeFiles\\recipes.txt", pathwayBuffer);
+	#else
+		snprintf(openFileBuffer, sizeof(openFileBuffer), "%s/recipeFiles/recipes.txt", pathwayBuffer);
+	#endif
+	if((fp = fopen(openFileBuffer, "r+")) == NULL){//"./recipeFiles/recipes.txt"
+		if((fp = fopen(openFileBuffer, "w+")) == NULL){//"./recipeFiles/recipes.txt"
 			fp = NULL;
 			return NULL;
 		}
@@ -390,7 +404,6 @@ struct recipeStruct *deleteFullRecipeNode(struct recipeStruct *head, struct reci
 *********************************************************************************************************************/
 void printRecipeByType (struct recipeStruct *headPointer){
 	struct recipeStruct *cur = headPointer;
-	int counter = 0;
 	clearScreen();
 	puts("\n\n\t\t*********************************************************************************");
 	puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
@@ -406,12 +419,18 @@ void printRecipeByType (struct recipeStruct *headPointer){
 			printf("\t\tInvalid Entry, Try Again: ");
 	} while (choice < 1 || choice > 9);
 	printf("\n\t\t");
-	for ( ; cur; cur = cur->next){
-		if (cur->recipeType == choice - 1){
-			printf("%-32s", cur->recipeName);
-			counter++;
-			if (counter % 3 == 0)
-				printf("\n\n\n\t\t");
+	int numberOfCharactersOnLine = NUMBER_OF_CHARS_ON_SCREEN;
+	int curNameLength = 0;
+	int nextNameLength = 0;
+	for (; cur; cur = cur->next){
+		curNameLength = strlen(cur->recipeName);
+		printf("%s        ", cur->recipeName);
+		numberOfCharactersOnLine -= (curNameLength + 8);
+		if (cur->next)
+			nextNameLength = strlen(cur->next->recipeName);
+		if (numberOfCharactersOnLine - nextNameLength < 1){
+			printf("\n\n\n\t\t");
+			numberOfCharactersOnLine = NUMBER_OF_CHARS_ON_SCREEN;
 		}
 	}
 	printf("\n\n\n\n\n\t\tEnter Name To View Recipe, Or Hit Enter To Continue: ");
