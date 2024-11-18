@@ -6,6 +6,7 @@
 #include "ingredientItemLinkedList.h"
 #include "ingredientMenus.h"
 #include "recipeMenus.h"
+#include "recipeSystemCheck.h"
  
 int main (int argc, char **argv){
 	//create head pointer and load ingredientType linked-list then sub linked-lists
@@ -15,6 +16,7 @@ int main (int argc, char **argv){
 	if (argc > 1 && strcmp(argv[1], "ADMIN") == 0){
 		adminFlag = 1;
 	}
+	setExePath();
 	ingredientHead = loadIngredientTypes();
 	recipeHead = loadRecipesToLinkedList();
 	if (ingredientHead)
