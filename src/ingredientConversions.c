@@ -60,7 +60,7 @@ int readUserInputIntoBuffer(char buffer[INGREDIENT_BUFFER_LEN]){
 		    ch = ' ';
 		if (((ch == ' ') || (ch == '\t')) && ((*(temp+counter-1) == ' ')))
 			continue;
-		if (*(temp+counter-1) == ' ')
+		if ((*(temp+counter-1) == ' ') || (*(temp+counter-1) == '-'))
 			ch = toupper(ch);
 		*(temp+counter) = ch;
 		counter++;
@@ -71,8 +71,8 @@ int readUserInputIntoBuffer(char buffer[INGREDIENT_BUFFER_LEN]){
 			break;
 		}
 	}
-	if (*(temp+counter) == ' ')
-		*(temp+counter) = '\0';
+	if (*(temp+counter - 1) == ' ')
+		*(temp+counter - 1) = '\0';
 	return counter;  
 }
 
@@ -97,7 +97,7 @@ void clearScreen(void){
 float typeOfMeasurement(char *typeToConvert, int *weightedInputFlag){
 	if ((strcmp(typeToConvert, "Cups") == 0) || (strcmp(typeToConvert, "Cup") == 0) || (strcmp(typeToConvert, "C") == 0)){
 		return 1;
-	} else if ((strcmp(typeToConvert, "Tablespoons") == 0) || (strcmp(typeToConvert, "Tablespoon") == 0) || (strcmp(typeToConvert, "Tbsp") == 0) || (strcmp(typeToConvert, "Table") == 0)) {
+	} else if ((strcmp(typeToConvert, "Tablespoons") == 0) || (strcmp(typeToConvert, "Tablespoon") == 0) || (strcmp(typeToConvert, "Tbsp") == 0) || (strcmp(typeToConvert, "Tbl") == 0)) {
 		return 16;
     } else if ((strcmp(typeToConvert, "Teaspoons") == 0) || (strcmp(typeToConvert, "Teaspoon") == 0) || (strcmp(typeToConvert, "Tsp") == 0) || (strcmp(typeToConvert, "Tea") == 0)){
 		return 48;
