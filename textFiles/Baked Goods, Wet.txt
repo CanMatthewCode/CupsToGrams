@@ -10,10 +10,18 @@ Egg, Large White	38.000000 g/cup
 Egg, Large Whole	56.000000 g/cup
 Egg, Large Yolk	18.000000 g/cup
 Evaporated Milk	240.000000 g/cup
+Ghee	224.000000 g/cup
+Lard	227.000000 g/cup
 Lemon Extract	12.600000 g/tbsp
 Oat Milk	241.199997 g/cup
+Pumpkin Pie Mix	270.000000 g/cup
 Rice Milk	240.000000 g/cup
 Soy Milk	243.000000 g/cup
 Sweetened Condensed Milk	306.000000 g/cup
 Vanilla Extract	14.000000 g/tbsp
+Vegetable Shortening	184.000000 g/cup
 Water	236.587997 g/cup
+Water, Cold	236.587997 g/cup
+Water, Hot	236.587997 g/cup
+Water, Ice	236.587997 g/cup
+Water, Warm	236.587997 g/cup

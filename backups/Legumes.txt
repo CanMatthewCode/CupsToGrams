@@ -1,0 +1,29 @@
+Adzuki Beans	197.000000 g/cup
+Anasazi Beans	140.000000 g/cup
+Black Beans, Dry	194.000000 g/cup
+Black Beans, Raw	172.000000 g/cup
+Cannellini Beans, Dry	202.000000 g/cup
+Cannellini Beans, Raw	179.000000 g/cup
+Chickpeas, Dry	200.000000 g/cup
+Chickpeas, Raw	164.000000 g/cup
+Edamame	155.000000 g/cup
+Fava Beans, In Pod	150.000000 g/cup
+Fava Beans, Raw	150.000000 g/cup
+Garbanzo Beans, Dry	200.000000 g/cup
+Garbanzo Beans, Raw	164.000000 g/cup
+Green Peas	160.000000 g/cup
+Kidney Beans, Dry	184.000000 g/cup
+Kidney Beans, Raw	177.000000 g/cup
+Lentils, Dry	195.000000 g/cup
+Lentils, Raw	198.000000 g/cup
+Lima Beans, Dry	178.000000 g/cup
+Lima Beans, Raw	188.000000 g/cup
+Mung Beans	207.000000 g/cup
+Mung Beans, Sprouted	104.000000 g/cup
+Navy Beans	208.000000 g/cup
+Pinto Beans, Dry	193.000000 g/cup
+Pinto Beans, Raw	171.000000 g/cup
+Runner Beans	150.000000 g/cup
+Soybeans	256.000000 g/cup
+Split Peas	197.000000 g/cup
+Tepary Beans	105.000000 g/cup

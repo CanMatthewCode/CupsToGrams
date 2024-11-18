@@ -16,6 +16,7 @@ Lime Juice	15.000000 g/tbsp
 Mayonnaise	13.800000 g/tbsp
 Miso Paste	15.000000 g/tbsp
 Mustard	15.000000 g/tbsp
+Mustard, Dijon	15.000000 g/tbsp
 Oyster Sauce	18.000000 g/tbsp
 Pesto	15.250000 g/tbsp
 Ranch Dressing	15.000000 g/tbsp
@@ -31,7 +32,9 @@ Tzatziki	15.000000 g/tbsp
 Vinegar	14.900000 g/tbsp
 Vinegar, Apple Cider	14.938000 g/tbsp
 Vinegar, Balsamic	15.938000 g/tbsp
+Vinegar, Champaign	14.000000 g/tbsp
 Vinegar, Red Wine	14.938000 g/tbsp
 Vinegar, Rice	14.938000 g/tbsp
+Vinegar, White	15.000000 g/tbsp
 Worcestershire Sauce	17.118000 g/tbsp
 Xo Sauce	18.000000 g/tbsp

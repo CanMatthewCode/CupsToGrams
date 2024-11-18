@@ -1,7 +1,8 @@
 Asiago, Shredded	112.000000 g/cup
 Blue Cheese	245.438004 g/cup
 Boursin	232.000000 g/cup
-Butter	226.000000 g/cup
+Butter, Salted	226.000000 g/cup
+Butter, Unsalted	226.000000 g/cup
 Buttermilk	244.000000 g/cup
 Cheddar	113.000000 g/cup
 Clotted Cream	226.667007 g/cup

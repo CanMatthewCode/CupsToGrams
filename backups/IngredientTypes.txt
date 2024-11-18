@@ -6,11 +6,9 @@ Fruit
 Grains & Cereals
 Herbs & Spices
 Legumes
-Meat & Poultry
-Milks
-Miscellaneous 
+Miscellaneous
 Nuts & Seeds
 Oils & Syrups
+Pasta
 Sauces & Condiments
-Seafood
 Vegetables

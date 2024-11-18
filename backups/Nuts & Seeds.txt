@@ -1,0 +1,33 @@
+Almond Butter	256.000000 g/cup
+Almonds	138.000000 g/cup
+Almonds, Chopped	120.000000 g/cup
+Brazil Nuts, Whole	133.000000 g/cup
+Cashew Butter	256.000000 g/cup
+Cashews	137.000000 g/cup
+Chia Seeds	192.000000 g/cup
+Flax Seeds	168.000000 g/cup
+Hazelnut Butter	224.000000 g/cup
+Hazelnuts	135.000000 g/cup
+Hazelnuts, Chopped	115.000000 g/cup
+Hemp Seeds	160.000000 g/cup
+Lotus Seeds	32.000000 g/cup
+Macadamia Nuts	134.000000 g/cup
+Macadamia Nuts, Chopped	120.000000 g/cup
+Peanut Butter	256.000000 g/cup
+Peanuts	146.000000 g/cup
+Peanuts, Boiled	180.000000 g/cup
+Peanuts, Chopped	144.000000 g/cup
+Pecans	99.000000 g/cup
+Pecans, Chopped	109.000000 g/cup
+Pine Nuts	135.000000 g/cup
+Pistachios	123.000000 g/cup
+Pistachios, Chopped	133.000000 g/cup
+Poppy Seeds	140.800003 g/cup
+Pumpkin Seeds	122.000000 g/cup
+Sacha Inchi Seeds	112.000000 g/cup
+Sesame Seeds	128.000000 g/cup
+Sunflower Butter	256.000000 g/cup
+Sunflower Seeds	46.000000 g/cup
+Walnuts	120.000000 g/cup
+Walnuts, Chopped	120.000000 g/cup
+Wasabi Peas	62.000000 g/cup

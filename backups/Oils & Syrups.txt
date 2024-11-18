@@ -1,0 +1,30 @@
+Agave Syrup	13.750000 g/tbsp
+Almond Oil	13.625000 g/tbsp
+Avocado Oil	13.625000 g/tbsp
+Canola Oil	13.456000 g/tbsp
+Chocolate Syrup	17.625000 g/tbsp
+Coconut Oil	13.625000 g/tbsp
+Corn Oil	13.500000 g/tbsp
+Corn Syrup	20.500000 g/tbsp
+Cottonseed Oil	13.625000 g/tbsp
+Fish Oil	13.625000 g/tbsp
+Flaxseed Oil	13.625000 g/tbsp
+Grapeseed Oil	13.625000 g/tbsp
+Hazelnut Oil	13.625000 g/tbsp
+Honey	21.118000 g/tbsp
+Macadamia Oil	14.000000 g/tbsp
+Malt Extract	20.700001 g/tbsp
+Maple Syrup	19.667999 g/tbsp
+Margarine	14.000000 g/tbsp
+Molasses	21.063000 g/tbsp
+Olive Oil	13.500000 g/tbsp
+Palm Oil	13.500000 g/tbsp
+Pecan Oil	14.813000 g/tbsp
+Pistachio Oil	13.530000 g/tbsp
+Poppyseed Oil	13.625000 g/tbsp
+Sesame Oil	13.625000 g/tbsp
+Soybean Oil	13.500000 g/tbsp
+Sunflower Oil	14.000000 g/tbsp
+Truffle Oil	13.500000 g/tbsp
+Vegetable Oil	13.625000 g/tbsp
+Walnut Oil	13.625000 g/tbsp

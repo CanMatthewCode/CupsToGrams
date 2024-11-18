@@ -1,4 +1,4 @@
-All-purpose Flour	130.000000 g/cup
+All-Purpose Flour	130.000000 g/cup
 Almond Flour	96.000000 g/cup
 Amaranth Flour	103.000000 g/cup
 Arrowroot Flour	128.000000 g/cup
@@ -9,7 +9,7 @@ Cake Flour	137.000000 g/cup
 Chickpea Flour	92.000000 g/cup
 Coconut Flour	144.000000 g/cup
 Corn Flour	114.000000 g/cup
-Gluten-free Flour	148.000000 g/cup
+Gluten-Free Flour	148.000000 g/cup
 Graham Flour	122.000000 g/cup
 Masa Flour	114.000000 g/cup
 Millet Flour	119.000000 g/cup
