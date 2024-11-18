@@ -2,8 +2,10 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
+#include <limits.h>
 #include "ingredientConversions.h"
 #include "ingredientTypeLinkedList.h"
+#include "recipeSystemCheck.h"
 
 /********************************************************************************************************************
 * 																													*
@@ -14,9 +16,16 @@
 struct ingredientType *loadIngredientTypes(void){
 	FILE *fp = NULL;
 	struct ingredientType *cur = NULL;
+	char openFileBuffer[PATH_MAX] = {'\0'};
+	//	strncpy(openFileBuffer, pathwayBuffer, sizeof(openFileBuffer));
+	#ifdef _WIN32
+		snprintf(openFileBuffer, sizeof(openFileBuffer), "%s\\textFiles\\IngredientTypes.txt", pathwayBuffer);
+	#else
+		snprintf(openFileBuffer, sizeof(openFileBuffer), "%s/textFiles/IngredientTypes.txt", pathwayBuffer);
+	#endif
 	//open linked list of ingredient types which each have their own linked list inside
-	if((fp = fopen("./textFiles/IngredientTypes.txt", "r+")) == NULL){
-		if((fp = fopen("./textFiles/IngredientTypes.txt", "w+")) == NULL){
+	if((fp = fopen(openFileBuffer, "r+")) == NULL){//"./textFiles/IngredientTypes.txt"
+		if((fp = fopen(openFileBuffer, "w+")) == NULL){//"./textFiles/IngredientTypes.txt"
 			fp = NULL;
 			return NULL;
 		}
@@ -179,7 +188,13 @@ void printIngredientTypeList(struct ingredientType *head){
 int dumpIngredientTypeList(struct ingredientType *head){
 	FILE *fp = NULL;
 	struct ingredientType *cur = head;
-	if ((fp = fopen ("./textFiles/IngredientTypes.txt", "w+")) == NULL){
+	char openFileBuffer[PATH_MAX] = {'\0'};
+	#ifdef _WIN32
+		snprintf(openFileBuffer, sizeof(openFileBuffer), "%s\\textFiles\\IngredientTypes.txt", pathwayBuffer);
+	#else
+		snprintf(openFileBuffer, sizeof(openFileBuffer), "%s/textFiles/IngredientTypes.txt", pathwayBuffer);
+	#endif
+	if ((fp = fopen (openFileBuffer, "w+")) == NULL){
 		printf("Unable to open ingredientTypes.txt file\n");
 		return -1;
 	}
