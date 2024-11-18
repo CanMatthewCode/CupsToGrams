@@ -33,7 +33,7 @@ struct ingredientItem *loadIngredientItem(struct ingredientType *node);
 *				returns a pointer to ingredientItem link-list head on success, NULL on failure						*
 *																													*
 *********************************************************************************************************************/
-struct ingredientType *loadAllIngredientTypeSubLists(struct ingredientType *head);
+struct ingredientType *loadAllIngredientTypeSubLists(struct ingredientType *typeHead);
 
 /********************************************************************************************************************
 * 																													*
