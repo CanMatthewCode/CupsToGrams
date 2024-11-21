@@ -298,10 +298,6 @@ void printAllRecipeNames(struct recipeStruct *recipeHead){
 		foundRecipe = findRecipe(recipeHead, recipeNameBuffer);
 		if (foundRecipe)
 			printFullRecipeWithPDFOption(foundRecipe);
-		else {
-			printf("\n\n\t\tRecipe Not Found (Hit Enter To Continue) ");
-			while ((ch = getchar()) != '\n');
-		}
 	}
 }
 
@@ -326,8 +322,12 @@ struct recipeStruct *findRecipe(struct recipeStruct *recipeHead, char buffer[ING
 			if (strstr(possibleRecipe->recipeName, buffer) != NULL)
 				foundRecipes[recipeCounter++] = possibleRecipe;
 	}
-	if (recipeCounter == 0)
+	if (recipeCounter == 0){
+		printf("\n\n\t\tRecipe Not Found (Hit Enter To Continue)");
+		char ch = '\0';
+		while ((ch = getchar()) != '\n');
 		return NULL;
+	}
 	if ((recipeCounter == 1) && (strcmp(foundRecipes[0]->recipeName, buffer) == 0))
 		return foundRecipes[0];
 	int i = 0;
@@ -343,7 +343,7 @@ struct recipeStruct *findRecipe(struct recipeStruct *recipeHead, char buffer[ING
 	    }
     }
     //if none of the above are correct, return NULL
-    if (recipeChoice == (recipeChoice + 1))
+    if (recipeChoice == (recipeCounter + 1))
     	return NULL;
 
 	return foundRecipes[recipeChoice - 1];
@@ -450,10 +450,6 @@ void printRecipeByType (struct recipeStruct *headPointer){
 		foundRecipe = findRecipe(headPointer, recipeNameBuffer);
 		if (foundRecipe)
 			printFullRecipeWithPDFOption(foundRecipe);
-		else {
-			printf("\n\n\t\tRecipe Not Found (Hit Enter To Continue) ");
-			while ((ch = getchar()) != '\n');
-		}
 	}
 }
 
