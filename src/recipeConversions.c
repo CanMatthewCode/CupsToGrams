@@ -858,14 +858,6 @@ void printRecipeToPDF(struct recipeStruct *recipeToPrint){
 	#else
 		snprintf(openFileBuffer, sizeof(openFileBuffer), "%s/recipePDFs/%s.pdf", pathwayBuffer, recipeToPrint->recipeName);
 	#endif
-	/*
-	//add path to fopen() variable in openFileBuffer
-	strcpy(openFileBuffer, "./recipePDFs/");
-	//copy name from recipeStruct node into openFileBuffer
-	strcat(openFileBuffer, recipeToPrint->recipeName);
-	//append .PDF to recipeStruct name
-	strcat(openFileBuffer, ".PDF");
-	*/
 	if ((fp = fopen(openFileBuffer, "wb")) == NULL){
 		printf("Unable to open %s file\n", openFileBuffer);
 		return;

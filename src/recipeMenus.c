@@ -247,8 +247,11 @@ struct recipeStruct *modifyExistingRecipeMenu(struct recipeStruct *recipeHeadPoi
 	foundRecipe = findRecipe(recipeHeadPointer, buffer);
 	if (foundRecipe){
 			recipeHead = editRecipeMenu(foundRecipe, recipeHead, ingredientHead);
-	} else
-		printf("\t\tRecipe Not Found");
+	} else{
+		printf("\t\tRecipe Not Found, Hit Enter To Continue ");
+		char ch = '\0';
+		while ((ch = getchar()) != '\n');
+	}
 	return recipeHead;
 }
 
@@ -288,8 +291,11 @@ void printSavedRecipeMenus(struct recipeStruct *recipeHead){
 			case '1':	printf("\n\n\t\tEnter Recipe Name: ");
 						readUserInputIntoBuffer(recipeBuffer);
 						foundRecipe = findRecipe(recipeHead, recipeBuffer);
-						if (!foundRecipe)
+						if (!foundRecipe){
 							printf("\n\n\t\tRecipe Not Found (Hit Enter To Continue)");
+							char ch = '\0';
+							while ((ch = getchar()) != '\n');
+						}
 						else {
 							printFullRecipeWithPDFOption(foundRecipe);
 						}

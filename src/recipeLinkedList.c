@@ -298,7 +298,10 @@ void printAllRecipeNames(struct recipeStruct *recipeHead){
 		foundRecipe = findRecipe(recipeHead, recipeNameBuffer);
 		if (foundRecipe)
 			printFullRecipeWithPDFOption(foundRecipe);
-//			while ((ch = getchar()) != '\n');
+		else {
+			printf("\n\n\t\tRecipe Not Found (Hit Enter To Continue) ");
+			while ((ch = getchar()) != '\n');
+		}
 	}
 }
 
@@ -418,19 +421,21 @@ void printRecipeByType (struct recipeStruct *headPointer){
 		if (choice < 1 || choice > 9)
 			printf("\t\tInvalid Entry, Try Again: ");
 	} while (choice < 1 || choice > 9);
-	printf("\n\t\t");
+	printf("\n\n\t\t");
 	int numberOfCharactersOnLine = NUMBER_OF_CHARS_ON_SCREEN;
 	int curNameLength = 0;
 	int nextNameLength = 0;
 	for (; cur; cur = cur->next){
-		curNameLength = strlen(cur->recipeName);
-		printf("%s        ", cur->recipeName);
-		numberOfCharactersOnLine -= (curNameLength + 8);
-		if (cur->next)
-			nextNameLength = strlen(cur->next->recipeName);
-		if (numberOfCharactersOnLine - nextNameLength < 1){
-			printf("\n\n\n\t\t");
-			numberOfCharactersOnLine = NUMBER_OF_CHARS_ON_SCREEN;
+		if (cur->recipeType == (choice - 1)){
+			curNameLength = strlen(cur->recipeName);
+			printf("%s        ", cur->recipeName);
+			numberOfCharactersOnLine -= (curNameLength + 8);
+			if (cur->next)
+				nextNameLength = strlen(cur->next->recipeName);
+			if (numberOfCharactersOnLine - nextNameLength < 1){
+				printf("\n\n\n\t\t");
+				numberOfCharactersOnLine = NUMBER_OF_CHARS_ON_SCREEN;
+			}
 		}
 	}
 	printf("\n\n\n\n\n\t\tEnter Name To View Recipe, Or Hit Enter To Continue: ");
@@ -445,11 +450,11 @@ void printRecipeByType (struct recipeStruct *headPointer){
 		foundRecipe = findRecipe(headPointer, recipeNameBuffer);
 		if (foundRecipe)
 			printFullRecipeWithPDFOption(foundRecipe);
-
+		else {
+			printf("\n\n\t\tRecipe Not Found (Hit Enter To Continue) ");
+			while ((ch = getchar()) != '\n');
+		}
 	}
-//	printf("\n\n\t\tHit Enter To Continue\t");
-//	char ch = '\0';
-//	while ((ch = getchar()) != '\n');
 }
 
 /********************************************************************************************************************
