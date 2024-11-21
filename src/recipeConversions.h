@@ -2,18 +2,19 @@
 #define RECIPECONVERSIONS_H
 
 #include "ingredientConversions.h"
+#include "pdfgen.h"
 #define MAX_INGREDIENT_NUMBER 60
 #define MAX_INGREDIENT_TEXT 1000
 #define SCREEN_SIZE 65
 
 #define TOTAL_VERTICAL_POINTS 792
 #define TOTAL_HORIZONTAL_POINTS 612
-#define H_FONT_POINTS 6
 #define V_FONT_POINTS 12
+#define H_FONT_POINTS (V_FONT_POINTS / 2)
 #define SIDE_MARGIN 60
 #define TOP_BOTTOM_MARGIN 60
 #define TOP_OF_PAGE_LINE 720
-#define BOTTOM_OF_PAGE_LINE 90
+#define BOTTOM_OF_PAGE_LINE 60
 #define SPACE_POINTS 5
 
 enum recipeType{
@@ -236,5 +237,21 @@ int recipeBufferToPDFOutput (char *recipeToPDFBuffer, char *recipeNodeText);
 *																													*
 *********************************************************************************************************************/
 void printRecipeToPDF(struct recipeStruct *recipeToPrint);
+
+/********************************************************************************************************************
+* 																													*
+*	  			prints the recipe name in a star-box at the PDF's top and recipe type at the bottom					*
+*				advances the linePointCounter by the number of PDF lines used by the recipe name box				*
+*																													*
+*********************************************************************************************************************/
+void printRecipeNameAndTypeToPDF(struct pdf_doc *pdf, struct recipeStruct *recipeToPrint, int *linePointCounter);
+
+/********************************************************************************************************************
+* 																													*
+*	  			adds a new page to the pdf with the recipe name in a star-box at the PDF's top and					*
+*				recipe type at the bottom, resets linePointCounter to the total minus lines used for the box		*
+*																													*
+*********************************************************************************************************************/
+void addNewPDFPage(struct pdf_doc *pdf, struct recipeStruct *recipeToPrint, int *linePointCounter);
 
 #endif //RECIPECONVERSIONS_H
