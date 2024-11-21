@@ -10,6 +10,8 @@ Carrots	110.000000 g/cup
 Cauliflower	107.000000 g/cup
 Celery	120.000000 g/cup
 Chard	36.000000 g/cup
+Corn Kernels, Fresh	154.000000 g/cup
+Corn Kernels, Frozen	165.000000 g/cup
 Corn, Sweet	145.000000 g/cup
 Corn, White	154.000000 g/cup
 Cucumber	119.000000 g/cup
@@ -33,6 +35,8 @@ Mushrooms, Shiitake	89.000000 g/cup
 Mushrooms, White	96.000000 g/cup
 Okra	100.000000 g/cup
 Onions	142.000000 g/cup
+Peas, Fresh	150.000000 g/cup
+Peas, Frozen	160.000000 g/cup
 Potatoes	150.000000 g/cup
 Pumpkin	116.000000 g/cup
 Pumpkin Puree	260.000000 g/cup

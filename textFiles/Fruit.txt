@@ -34,6 +34,7 @@ Persimmon	168.000000 g/cup
 Pineapple	173.250000 g/cup
 Plum	150.000000 g/cup
 Pomegranate	174.000000 g/cup
+Prunes, Pitted	265.000000 g/cup
 Raspberries	134.000000 g/cup
 Starfruit	120.000000 g/cup
 Strawberries	152.000000 g/cup

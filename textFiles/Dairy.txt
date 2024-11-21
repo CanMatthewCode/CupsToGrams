@@ -1,39 +1,41 @@
-Asiago, Shredded	112.000000 g/cup
+Asiago Cheese, Shredded	112.000000 g/cup
 Blue Cheese	245.438004 g/cup
-Boursin	232.000000 g/cup
+Boursin Cheese	232.000000 g/cup
 Butter, Salted	226.000000 g/cup
+Butter, Salted, Melted	226.000000 g/cup
 Butter, Unsalted	226.000000 g/cup
+Butter, Unsalted, Melted	226.000000 g/cup
 Buttermilk	244.000000 g/cup
-Cheddar	113.000000 g/cup
+Cheddar Cheese	113.000000 g/cup
 Clotted Cream	226.667007 g/cup
-Cotija	120.000000 g/cup
+Cotija Cheese	120.000000 g/cup
 Cottage Cheese	225.000000 g/cup
 Cream Cheese	228.000000 g/cup
 Feta	114.000000 g/cup
-Gorgonzola	112.000000 g/cup
+Gorgonzola Cheese	112.000000 g/cup
 Grated Cheese	113.000000 g/cup
-Gruyere	216.563004 g/cup
-Havarti	112.000000 g/cup
+Gruyere Cheese	216.563004 g/cup
+Havarti Cheese	112.000000 g/cup
 Heavy Cream	238.399994 g/cup
 Kefir	248.000000 g/cup
-Limburger	134.000000 g/cup
+Limburger Cheese	134.000000 g/cup
 Mascarpone	240.000000 g/cup
 Milk, 2%	244.000000 g/cup
 Milk, Skim	244.000000 g/cup
 Milk, Whole	244.000000 g/cup
 Monterey Jack	113.000000 g/cup
-Mozzarella	113.000000 g/cup
-Neufchatel	240.000000 g/cup
+Mozzarella Cheese	113.000000 g/cup
+Neufchatel Cheese	240.000000 g/cup
 Paneer	122.000000 g/cup
 Parmesan, Grated	100.000000 g/cup
-Provolone	245.438004 g/cup
+Provolone Cheese	245.438004 g/cup
 Queso Blanco	118.000000 g/cup
 Queso Fresco	122.000000 g/cup
-Ricotta	227.000000 g/cup
+Ricotta Cheese	227.000000 g/cup
 Ricotta Salaita	122.000000 g/cup
-Roquefort	245.000000 g/cup
+Roquefort Cheese	245.000000 g/cup
 Sour Cream	248.000000 g/cup
-Stracchino	224.000000 g/cup
+Stracchino Cheese	224.000000 g/cup
 Swiss Cheese	113.000000 g/cup
 Whipping Cream	240.000000 g/cup
 Yogurt	245.000000 g/cup

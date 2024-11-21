@@ -369,7 +369,7 @@ void modifyIngredientItemNodeWeight(struct ingredientItem *nodeToModify){
 	           }
 	       }
 	    while (getchar() != '\n');
-	    printf("\n\t\tYou Entered: '%.3f grams', Is This Correct (y/n)?: ", gramsPerCup);
+	    printf("\n\t\tYou Entered: '%.3f Grams', Is This Correct (y/n)?: ", gramsPerCup);
 	    YESNOCHOICE(choice);
     }
     changedNode->gramsPerCup = gramsPerCup;

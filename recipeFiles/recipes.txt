@@ -1,3 +1,69 @@
+Air Fryer Basque Cheesecake	3
+8
+1	Large Eggs	Room Temp	2.00
+0	Sugar, Granulated	1/2 Cup	100.00
+0	Cream Cheese	4 Ozs	113.40
+0	Heavy Cream	1/2 Cup	119.20
+0	Vanilla Extract	3/4 Tsp	3.50
+0	All-Purpose Flour	1 Tablespoon	8.12
+0	All-Purpose Flour	1 Tea	2.71
+0	Salt, Table	1/8 Tsp	0.76
+4
+Preheat air fryer to 375*. Crumbple a 16x12" piece of parchment paper,
+		smooth it out and line a 6x3" springform pan or one with a removable
+		bottom. Crease the paper at the edges, pinching it, so it folds over,
+		and use your fingers to press the paper down as best you can so it snugly
+		hugs the bottom and sides of the pan. 
+
+In a food processor, process the eggs and sugar until smooth, about 30
+		seconds. Scut the croom temp cream cheese into pieces and scatter them
+		evenly over the sugar and egg mixutre. Pour in the cream and vanilla
+		and sprinkle in the flour and salt. Process until smooth and combined,
+		another 30 to 40 seconds.
+
+Pour the batter into the prepared pan and carefully transfer to the hot
+		air fryer basket (use a sling made out of foil to lower and lift the
+		baking pan as it might be snug). Bake for about 25 minutes. At the 15-minute
+		 mark, check the cake, and if it is already quite dark, cover the cake
+		with a larger cake pan that fits over it or with a piece of foil. The
+		cake is ready when a thermometer inserted in the center reads about 155*f,
+		and the edges are set but the middle still slightly jiggles. Carefully
+		transfer the pan to a wire rack and let sit until slightly warm or completely
+		cool, about 1 hour. 
+
+Remove the sides of the pan and slide the cake, plus the papered bottom
+		of the pan, onto a serving plate. Slice into 8 pieces, dipping the knife
+		in hot water and drying between slices. The cake should be tightly wrapped
+		when refrigerated once it has completely cooled, but should be brought
+		back to room temp to serve.
+
+0
+
+
+Buttermilk Waffles	2
+6
+0	All-Purpose Flour	3 Cups	390.00
+0	Baking Powder	1 Tbls	13.80
+0	Baking Soda	3/4 Tsp	3.45
+0	Salt, Kosher	1 Tsp	4.80
+0	Butter, Unsalted, Melted	12 Tbls	169.50
+1	Large Eggs	Lightly Beaten	3.00
+3
+Preheat waffle iron. Put rack in middle of the oven and preheat to 200*f
+
+Whisk together flour, baking powder, baking soda, and salt in a large
+		bowl. Add buttermilk, butter, and eggs and stir until smooth (batter
+		will be thick).
+
+Brush waffle iron lightly with vegetable oil, if necessary, and spoon
+		batter into waffle iron, using 1/2 cup batter for each 4" square belgian
+		waffle, or 1/4 cup batter for each 4" square standard waffle - spreading
+		the batter evenly. Cook according to machine's instructions. Transfer
+		to a baking sheet and keep warm, uncovered in oven.
+
+0
+
+
 Cormeal Cheddar Biscuits	1
 10
 0	Sugar, Granulated	1/4 Cup	49.50
@@ -108,6 +174,47 @@ Proceed with the pie per your recipe’s instructions.
 0
 
 
+Meatloaf	5
+18
+0	Bread Crumbs, Dried	1 Cup	112.00
+0	Milk, Whole	1/3 Cup	81.33
+1	Medium Onion		1.00
+1	Garlic Cloves		3.00
+1	Medium Celery Rib		1.00
+1	Medium Carrot		1.00
+0	Butter, Unsalted	2 Tbls	28.25
+0	Worcestershire Sauce	2 Tbls	34.24
+0	Vinegar, Apple Cider	1 Tbls	14.94
+0	Allspice	1/4 Tsp	0.50
+1	Bacon Slices	1/4 Pound	4.00
+0	Prunes, Pitted	1/2 Cup	132.50
+1	Grams Of Ground Beef	1 1/2 Pounds	680.00
+1	Grams Of Ground Pork	1/2 Pound	227.00
+1	Large Eggs		2.00
+0	Parsley, Fresh	1/3 Cup	20.27
+0	Salt, Kosher	2 Tsp	9.60
+0	Black Pepper	1 1/2 Tsp	3.45
+5
+Preheat oven to 350*f with rack in the middle
+
+Soak bread crumbs in milk in a large bowl. 
+
+Cook finely chopped onion, celery, carrot, and minced garlic in butter
+		in a large heavy skillet over medium heat, stirring occasionally, 5 minutes.
+		Cover skillet and reduce heat to low, cook until carrot is tender, about
+		another 5 minutes. Remove from heat and stir in worcestershire sauce,
+		vinegar, allspice, salt, and pepper. Add to breead crumb mixture.
+
+Finely chop bacon and prunes in a food processor, then add to onion mixture
+		along with the beef, pork, eggs, and parsley, and mix together by hand.
+
+Pack mixture into a 9x5" oval loaf on a 13x9" shallow baking dish or pan.
+		Bake until thermometer inserted in the center reads 155*f, 1 hour to
+		1 hour 20 minutes. Let stand 10 minutes before serving.
+
+0
+
+
 No-Knead Focaccia	1
 8
 0	Yeast	2 1/4 Tsp	7.50
@@ -166,5 +273,49 @@ Focaccia is best eaten the day it's made, but keeps well in the freezer.
 		 slice it, then store the pieces in a freezer-safe container. Reheat
 		when ready on a baking sheet in the oven at 300*
 
+
+
+Peach Crumble Pie	3
+10
+1	Pie Crust		1.00
+1	Medium Peaches	Slightly Firm	8.00
+0	Sugar, Brown	1/2 Cup	105.00
+0	All-Purpose Flour	1/2 Cup	65.00
+0	Lemon Juice	2 Tsp	10.00
+0	Cinnamon	1/4 Tsp	0.65
+0	Sugar, Brown	1/2 Cup	105.00
+0	Cinnamon	1 Tsp	2.60
+0	All-Purpose Flour	3/4 Cup	97.50
+0	Butter, Unsalted	5 Tbl	70.62
+7
+Peel the peaches then cut into 1-2 inch chunks until you have 7 cups.
+		In a large bowl, stir the peach chunks, brown sugar, flour, lemon juice,
+		and cinnamon together until thoroughly combined. Set filling aside as
+		the oven preheats.
+
+Preheat oven to 400*f (~200*c).
+
+On a floured surface, roll out your crust until you have a 12 inch diameter
+		circle. Place the dough in a 9" pie pan, using your fingers to smooth
+		the sides down. Using a slatted spoon, dish peach filling into the crust,
+		leaving the liquid behind. Use a pairing knife to trim the crust edges,
+		then crimp or flute them down.
+
+In a medium bowl, combine the second servings of brown sugar, cinnamon,
+		and flour. Stir in the melted and slightly cooled butter. The topping
+		should be thick and crumbly. Sprinkle over peaches.
+
+Place the pie onto a large baking sheet in the middle of the oven and
+		bake for 20 minutes. Kafter 20 minutes, rotate pie, place pie crust shield
+		on the top to prevent the edges from burning, and turn the oven temperature
+		down to 375*f (190*c). Bake for another 30-35 minutes or until the peach
+		juices are bubbling on the sides and the top is lightly browned. 
+
+Allow the pie to cool for 3 hours at room temp to fully set before cutting.
+		You can place in refrigerator to quicken this as well. 
+
+Serve with vanilla ice cream. Covered pie can store up to 5 days in fridge.
+
+0
 
 
