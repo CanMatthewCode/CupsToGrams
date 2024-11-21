@@ -96,4 +96,12 @@ int getNumericChoice();
 *********************************************************************************************************************/
 void decimalPlaceCheck(float ingredientGrams, char *bufferToFill);
 
+/********************************************************************************************************************
+* 																													*
+*	  			takes the parsed user input for amount and amount type and unifies it into a 						*
+*				standard notation. Uses cupAmount return from user input to check for plurality						*
+*																													*
+*********************************************************************************************************************/
+void unifyMeasurementTypes(char *cupsInputAmountBuffer, char *measurementAmount, char *typeToConvert, float cupAmount);
+
 #endif //INGREDIENTCONVERSIONS_H
