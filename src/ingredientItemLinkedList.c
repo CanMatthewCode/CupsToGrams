@@ -413,7 +413,7 @@ void modifyIngredientItemNodeFlag(struct ingredientItem *nodeToModify){
 *********************************************************************************************************************/
 void printIngredientItemNode(struct ingredientItem *node){
 	printf("\t\t\t\t%-s:", node->ingredientName);
-	int spaceCounter = (26 - strlen(node->ingredientName));
+	int spaceCounter = (32 - strlen(node->ingredientName));
 	for (int i = 0; i < spaceCounter; i++)
 		printf(" ");
 	printf("%6.2f ", node->gramsPerCup);
@@ -430,7 +430,7 @@ void printAllIngredientItemNodes(struct ingredientType *node){
 	struct ingredientItem *itemPointer = typePointer->head;
 	char ch = '\0';
 	int i = 0;
-	int spaceCounter = (38 - (strlen(node->typeName) / 2));
+	int spaceCounter = (39 - (strlen(node->typeName) / 2));
 	printf("\n\n\t\t");
 	for (int c = 0; c < spaceCounter; c++)
 		printf(" ");
