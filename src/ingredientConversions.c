@@ -127,7 +127,7 @@ float cupsToGrams(char *cupsInputAmountBuffer, struct ingredientItem *ingredient
 	float cupAmount = 0.0;
 	float sum = 0;
 	char *currentPosition = NULL;
-	printf("\n\n\n\t\t\"Cups, Tablespoons, Teaspoons, Pounds, Oz\"");
+	printf("\n\n\n\t\t\"Cups, Tablespoons, Teaspoons, Pounds, Oz, Grams\"");
 	printf("\n\n\t\tEnter Amount Of \'%s\' To Convert: ", ingredientToConvert->ingredientName);
 	do {
 		memset(cupsInputAmountBuffer, 0, 20);
@@ -219,10 +219,19 @@ void decimalPlaceCheck(float ingredientGrams, char *bufferToFill){
 	float check = ingredientGrams - (int)ingredientGrams;
 	if (check == 0)
 		sprintf(bufferToFill, "%7d", (int)ingredientGrams);
-	else if (((int)(check * 100) % 10 )== 0)
+	else if (((check * 10) - ((int)(check * 10))) < 0.1)
 		sprintf(bufferToFill, "%7.1f", ingredientGrams);
-	else
+	else{
 		sprintf(bufferToFill, "%7.2f", ingredientGrams);
+		//remove trailing zero from rounded up decimal 
+		int stringSize = strlen(bufferToFill);
+		if (*(bufferToFill + stringSize - 1) == '0'){
+			while (*(bufferToFill + stringSize - 1) != ' '){
+				(*(bufferToFill + stringSize - 1) = *(bufferToFill + stringSize - 2));
+				stringSize--;
+			}
+		}
+	}
 }
 
 /********************************************************************************************************************
@@ -269,10 +278,6 @@ void unifyMeasurementTypes(char *cupsInputAmountBuffer, char *measurementAmount,
 		return;
 	} else if ((strcmp(typeToConvert, "Grams") == 0) || (strcmp(typeToConvert, "Gram") == 0) || (strcmp(typeToConvert, "G") == 0) || (strcmp(typeToConvert, "Gs") == 0)) {
 		memset(cupsInputAmountBuffer, 0, sizeof(*cupsInputAmountBuffer));
-//		if (cupAmount > 1)
-//			sprintf(cupsInputAmountBuffer, "%sGrams", measurementAmount);
-//		else
-//			sprintf(cupsInputAmountBuffer, "%sGram", measurementAmount);
 		return;
 	} else 
 	    return;
