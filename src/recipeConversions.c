@@ -163,7 +163,7 @@ void addNewNonMeasuredIngredient(struct recipeStruct *currentRecipe){
 		YESNOCHOICE(choice);
 	} while (choice != 'Y');
 	strcpy(currentRecipe->ingredients[currentRecipe->numberOfIngredients].ingredientName, buffer);
-	printf("\n\n\t\tEnter The Number of %s In Your Recipe: ", buffer);
+	printf("\n\n\t\tEnter The Number of %s In Your Recipe (Enter 0 To Leave Blank): ", buffer);
 	float inputCheck = 0.0;
 	char amountBuffer[INGREDIENT_BUFFER_LEN] = {'\0'};
 	do {
@@ -178,7 +178,7 @@ void addNewNonMeasuredIngredient(struct recipeStruct *currentRecipe){
 	choice = '\0';
 	do {
 		memset(ingredientNotes, 0, sizeof(ingredientNotes));
-		printf("\t\tEnter Notes For This Ingredient (Size, Weight, How To Prepare, etc): ");
+		printf("\t\tEnter Notes For This Ingredient (Size, Weight, How To Prepare, etc, Or Hit Enter To Leave Empty): ");
 		char ch = '\0';
 		if ((ch = getchar()) == '\n'){
 			break;
@@ -232,7 +232,7 @@ void addNewNote(struct recipeStruct *currentRecipe){
 void setRecipeType(struct recipeStruct *currentRecipe){
 	currentRecipe->recipeType = 0;
 	int choice = 0;
-	puts("\n\n\t\t(1) APPETIZER\t\t(2) BAKED GOOD\t\t(3) BREAKFAST\t\t(4) DESSERT\n\n\t\t(5) LUNCH\t\t(6) ENTREE\t\t(7) SIDE DISH\t\t(8) SNACK\n\n\t\t(9)SOUP");
+	puts("\n\n\t\t(1) APPETIZER\t\t(2) BAKED GOOD\t\t(3) BREAKFAST\t\t(4) DESSERT\n\n\t\t(5) LUNCH\t\t(6) ENTREE\t\t(7) SIDE DISH\t\t(8) SNACK\n\n\t\t(9) SOUP");
 	printf("\n\n\t\tEnter Number(#) Of Food Type: ");
 	do {
 		choice = getNumericChoice();
@@ -267,7 +267,7 @@ int readUserInputIntoRecipe(char directionsBuffer[MAX_INGREDIENT_TEXT]){
 		ch = tolower(ch);
 		if (ch == '\t')
 		    ch = ' ';
-		if (((ch == ' ') || (ch == '\t')) && ((*(temp+counter-1) == ' ')))
+		if (((ch == ' ') || (ch == '\t')) && (((*(temp+counter-1) == ' ')) || (*(temp+counter-1) == '\t')))
 			continue;
 		//capitalize first letter of new sentence
 		if (((*(temp+counter-1) == ' ') && (*(temp+counter-2) == '.')) || ((*(temp+counter-1) == ' ') && (*(temp+counter-2) == '?')) || ((*(temp+counter-1) == ' ') && (*(temp+counter-2) == '!')) || ((*(temp+counter-1) == '\t') && (*(temp+counter-4) == '.')))
@@ -275,6 +275,8 @@ int readUserInputIntoRecipe(char directionsBuffer[MAX_INGREDIENT_TEXT]){
 		//capitalize I when it refers to self
 		if ((((ch == ' ') && (*(temp+counter-1) == 'i')) || ((ch == 39) && (*(temp+counter-1) == 'i'))) && ((*(temp+counter-2) == ' ') || (*(temp+counter-2) == '\t') || (*(temp+counter-2) == '\n')))
 			*(temp+counter-1) = 'I';
+		if (((ch == 'f') || (ch == 'c')) && (*(temp + counter - 1) == '*'))
+			ch = toupper(ch);
 		*(temp+counter) = ch;
 		lineCounter++;
 		if (*(temp+counter) == ' ' && lineCounter > 68){
@@ -326,16 +328,32 @@ void printRecipeIngredients(struct recipeStruct *recipe){
 	for (int i = 0; i < recipe->numberOfIngredients; i++){
 		memset(ingredientGramsPrintBuffer, 0, sizeof(ingredientGramsPrintBuffer));
 		decimalPlaceCheck(recipe->ingredients[i].ingredientGrams, ingredientGramsPrintBuffer);
+		//---> put in checks if ingredients[i].ingredientGrams == 0 to not print the number 0 and just put spaces in - also have an if clause for i == 9 decreasing a space after %d) to account for the extra digit in the double digit 10) on screen
 		if (recipe->ingredients[i].nonWeightedIngredientFlag == 1){
-			printf("\t\t%d)  %s %s ", i + 1, ingredientGramsPrintBuffer, recipe->ingredients[i].ingredientName);
+			if (recipe->ingredients[i].ingredientGrams == 0){
+				printf("\t\t%d)\t    %s ", i + 1, recipe->ingredients[i].ingredientName);
+				if (strlen(recipe->ingredients[i].userCupsInput) > 0)
+					printf("(%s)\n", recipe->ingredients[i].userCupsInput);
+				else (printf("\n"));
+			} else {
+				printf("\t\t%d)  %s %s ", i + 1, ingredientGramsPrintBuffer, recipe->ingredients[i].ingredientName);
+				if (strlen(recipe->ingredients[i].userCupsInput) > 0)
+					printf("(%s)\n", recipe->ingredients[i].userCupsInput);
+				else (printf("\n"));
+			}
+		} else if (i < 9){
+			if (recipe->ingredients[i].ingredientGrams == 1)
+				printf("\t\t%d)  %s Gram Of %s ", i + 1, ingredientGramsPrintBuffer, recipe->ingredients[i].ingredientName);
+			else
+				printf("\t\t%d)  %s Grams Of %s ", i + 1, ingredientGramsPrintBuffer, recipe->ingredients[i].ingredientName);
 			if (strlen(recipe->ingredients[i].userCupsInput) > 0)
 				printf("(%s)\n", recipe->ingredients[i].userCupsInput);
 			else (printf("\n"));
 		} else {
 			if (recipe->ingredients[i].ingredientGrams == 1)
-				printf("\t\t%d)  %s Gram Of %s ", i + 1, ingredientGramsPrintBuffer, recipe->ingredients[i].ingredientName);
+				printf("\t\t%d) %s Gram Of %s ", i + 1, ingredientGramsPrintBuffer, recipe->ingredients[i].ingredientName);
 			else
-				printf("\t\t%d)  %s Grams Of %s ", i + 1, ingredientGramsPrintBuffer, recipe->ingredients[i].ingredientName);
+				printf("\t\t%d) %s Grams Of %s ", i + 1, ingredientGramsPrintBuffer, recipe->ingredients[i].ingredientName);
 			if (strlen(recipe->ingredients[i].userCupsInput) > 0)
 				printf("(%s)\n", recipe->ingredients[i].userCupsInput);
 			else (printf("\n"));
@@ -913,7 +931,7 @@ void printRecipeToPDF(struct recipeStruct *recipeToPrint){
 		#define V_FONT_POINTS 10
 	//ingredientSizeOffset offset is to print all the ingredient names along the same vertical line regardless of the number of grams or individual items used of each ingredient
 		int ingredientSizeOffsetLeft = (largestIngredientSizeLeft + 1.5) * H_FONT_POINTS; //+1.5 for the #) chars
-		int ingredientSizeOffsetRight = (largestIngredientSizeRight + 1.5) * H_FONT_POINTS;
+		int ingredientSizeOffsetRight = (largestIngredientSizeRight + 2.5) * H_FONT_POINTS;
 		for (int i = 0; i < printHalf; i++){
 			memset(ingredientGramsPrintBuffer, 0, sizeof(ingredientGramsPrintBuffer));
 			char ingredientGramsPrintBuffer[11] = {'\0'}; //11 is the max size you could find in the %7.2f buffer input plus a nul character at the end
@@ -941,7 +959,7 @@ void printRecipeToPDF(struct recipeStruct *recipeToPrint){
 				memset(ingredientGramsPrintBuffer, 0, sizeof(ingredientGramsPrintBuffer));
 				char ingredientGramsPrintBuffer[11] = {'\0'}; //11 is the max size you could find in the %7.2f buffer input plus a nul character at the end
 				decimalPlaceCheck(recipeToPrint->ingredients[i + printHalf].ingredientGrams, ingredientGramsPrintBuffer);
-				sprintf(ingredientBuffer, "%d)", i + printHalf + 2);
+				sprintf(ingredientBuffer, "%d)", i + printHalf + 1);
 				pdf_add_text(pdf, NULL, ingredientBuffer, V_FONT_POINTS, (TOTAL_HORIZONTAL_POINTS / 2), TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, PDF_BLACK);
 		//add the size in grams aligned right to the size of the largestIngredientSize buffer
 				if (recipeToPrint->ingredients[i + printHalf].ingredientGrams > 0)
@@ -1015,7 +1033,7 @@ void printRecipeToPDF(struct recipeStruct *recipeToPrint){
 		pdf_add_text_wrap(pdf, NULL, recipeToPDFBufferNumbered, V_FONT_POINTS - 2, SIDE_MARGIN, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, 0, PDF_BLACK, TOTAL_HORIZONTAL_POINTS - (2 * SIDE_MARGIN), PDF_ALIGN_LEFT, &linesPerInstrctionCounter);
 		linePointCounter += (linesPerInstrctionCounter + (.5 * V_FONT_POINTS));
 		//new page check
-		if ((TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter < 84) && (recipeToPrint->numberOfIngredients - i > 2)){
+		if ((TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter < 128) && (recipeToPrint->numberOfInstructions - i > 2)){
 			addNewPDFPage(pdf, recipeToPrint, &linePointCounter);
 			pdf_add_text(pdf, NULL, "        INSTRUCTIONS (cont'd):", V_FONT_POINTS, SIDE_MARGIN, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, PDF_BLACK);
 			linePointCounter += (1.5 * V_FONT_POINTS);
@@ -1038,7 +1056,7 @@ void printRecipeToPDF(struct recipeStruct *recipeToPrint){
 			strcat(recipeToPDFBufferNumbered, recipeToPDFBuffer);
 			pdf_add_text_wrap(pdf, NULL, recipeToPDFBufferNumbered, V_FONT_POINTS - 2, SIDE_MARGIN, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, 0, PDF_BLACK, TOTAL_HORIZONTAL_POINTS - (2 * SIDE_MARGIN), PDF_ALIGN_LEFT, &linesPerNoteCounter);
 			linePointCounter += (linesPerNoteCounter + (.25 * V_FONT_POINTS));
-			if ((TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter < 84) && (recipeToPrint->numberOfNotes - i > 2)){
+			if ((TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter < 128) && (recipeToPrint->numberOfNotes - i > 2)){
 				addNewPDFPage(pdf, recipeToPrint, &linePointCounter);
 				pdf_add_text(pdf, NULL, "        NOTES (cont'd):", V_FONT_POINTS, SIDE_MARGIN, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, PDF_BLACK);
 				linePointCounter += (1.5 * V_FONT_POINTS);
