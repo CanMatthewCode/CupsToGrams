@@ -16,7 +16,7 @@ Gorgonzola Cheese	112.000000 g/cup
 Grated Cheese	113.000000 g/cup
 Gruyere Cheese	216.563004 g/cup
 Havarti Cheese	112.000000 g/cup
-Heavy Cream	238.399994 g/cup
+Heavy Cream	238.400000 g/cup
 Kefir	248.000000 g/cup
 Limburger Cheese	134.000000 g/cup
 Mascarpone	240.000000 g/cup

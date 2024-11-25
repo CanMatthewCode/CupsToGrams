@@ -5,17 +5,24 @@ Bread Crumbs, Fresh	84.000000 g/cup
 Bread Crumbs, Panko	50.000000 g/cup
 Cacao Nibs	160.000000 g/cup
 Chocoalte, Rough Chop	120.000000 g/cup
+Chocoalte, Rough Chop, Bitter	120.000000 g/cup
 Chocolate Chips	170.000000 g/cup
+Chocolate Chips, Bitter	170.000000 g/cup
 Chocolate Chunks	140.000000 g/cup
+Chocolate Chunks, Bitter	140.000000 g/cup
+Chocolate, Baking	170.000000 g/cup
 Chocolate, Fine Chop	180.000000 g/cup
+Chocolate, Fine Chop, Bitter	180.000000 g/cup
 Choocolate, Grated	100.000000 g/cup
 Cocoa Powder	100.000000 g/cup
+Cocoa Powder, Dutch	100.000000 g/cup
 Cornmeal	122.000000 g/cup
 Cornmeal, Fine-Grind	132.000000 g/cup
 Cornstarch	8.000000 g/tbsp
 Cream Of Tartar	9.000000 g/tbsp
 Guar Gum	10.000000 g/tbsp
 Powdered, Buttermilk	7.850000 g/tbsp
+Powdered, Espresso	5.000000 g/tbsp
 Powdered, Instant Coffee	3.000000 g/tbsp
 Powdered, Milk	8.000000 g/tbsp
 Powdered, Pudding Mix	3.000000 g/tbsp

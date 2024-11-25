@@ -1,35 +1,33 @@
 Air Fryer Basque Cheesecake	3
-8
+7
 1	Large Eggs	Room Temp	2.00
 0	Sugar, Granulated	1/2 Cup	100.00
 0	Cream Cheese	4 Ozs	113.40
 0	Heavy Cream	1/2 Cup	119.20
 0	Vanilla Extract	3/4 Tsp	3.50
-0	All-Purpose Flour	1 Tablespoon	8.12
-0	All-Purpose Flour	1 Tea	2.71
-0	Salt, Table	1/8 Tsp	0.76
+0	All-Purpose Flour	4 Tsps	10.83
+0	Salt, Fine	1/8 Tsp	0.76
 4
-Preheat air fryer to 375*. Crumbple a 16x12" piece of parchment paper,
+Preheat air fryer to 375*F. Crumble a 16x12" piece of parchment paper,
 		smooth it out and line a 6x3" springform pan or one with a removable
-		bottom. Crease the paper at the edges, pinching it, so it folds over,
-		and use your fingers to press the paper down as best you can so it snugly
-		hugs the bottom and sides of the pan. 
+		bottom. Crease the paper at the edges so it folds over, and use your
+		fingers to press the paper down so it snugly hugs the bottom and sides
+		of the pan.
 
 In a food processor, process the eggs and sugar until smooth, about 30
-		seconds. Scut the croom temp cream cheese into pieces and scatter them
-		evenly over the sugar and egg mixutre. Pour in the cream and vanilla
-		and sprinkle in the flour and salt. Process until smooth and combined,
-		another 30 to 40 seconds.
+		seconds. Scatter the cream cheese pieces evenly over the sugar and egg
+		mixture. Pour in the cream and vanilla, and sprinkle in the flour and
+		salt. Process until smooth and combined, another 30 to 40 seconds.
 
 Pour the batter into the prepared pan and carefully transfer to the hot
 		air fryer basket (use a sling made out of foil to lower and lift the
 		baking pan as it might be snug). Bake for about 25 minutes. At the 15-minute
-		 mark, check the cake, and if it is already quite dark, cover the cake
+		mark, check the cake, and if it is already quite dark, cover the cake
 		with a larger cake pan that fits over it or with a piece of foil. The
-		cake is ready when a thermometer inserted in the center reads about 155*f,
+		cake is ready when a thermometer inserted in the center reads about 155*F
 		and the edges are set but the middle still slightly jiggles. Carefully
 		transfer the pan to a wire rack and let sit until slightly warm or completely
-		cool, about 1 hour. 
+		cool, about 1 hour.
 
 Remove the sides of the pan and slide the cake, plus the papered bottom
 		of the pan, onto a serving plate. Slice into 8 pieces, dipping the knife
@@ -37,7 +35,11 @@ Remove the sides of the pan and slide the cake, plus the papered bottom
 		when refrigerated once it has completely cooled, but should be brought
 		back to room temp to serve.
 
-0
+2
+Use full fat cream cheese, cut into 1" pieces and softened.
+
+Heavy cream should be at room temperature before use.
+
 
 
 Buttermilk Waffles	2
@@ -49,17 +51,17 @@ Buttermilk Waffles	2
 0	Butter, Unsalted, Melted	12 Tbls	169.50
 1	Large Eggs	Lightly Beaten	3.00
 3
-Preheat waffle iron. Put rack in middle of the oven and preheat to 200*f
+Preheat waffle iron. Put rack in middle of the oven and preheat to 200*F
 
 Whisk together flour, baking powder, baking soda, and salt in a large
 		bowl. Add buttermilk, butter, and eggs and stir until smooth (batter
 		will be thick).
 
 Brush waffle iron lightly with vegetable oil, if necessary, and spoon
-		batter into waffle iron, using 1/2 cup batter for each 4" square belgian
-		waffle, or 1/4 cup batter for each 4" square standard waffle - spreading
-		the batter evenly. Cook according to machine's instructions. Transfer
-		to a baking sheet and keep warm, uncovered in oven.
+		batter into waffle iron. Use 1/2 cup batter for each 4" square belgian
+		waffle, or 1/4 cup per each 4" square standard waffle. Spread the batter
+		evenly. Cook according to machine's instructions. Transfer to a baking
+		sheet and keep warm in the oven.
 
 0
 
@@ -99,20 +101,18 @@ Pour into reserve cheddar mixture and mix together with a spatula. Turn
 
 Cut dough in half; stack 1 half on top of the other. Using your hands
 		and a bench scraper, press back into a rectangle. Repeat process 3 times.
-		 roll out dough to about a 6x4" rectangle. Transfer to a baking sheet
+		Roll out dough to about a 6x4" rectangle. Transfer to a baking sheet
 		and chill at least 1 hour.
 
-Preheat oven to 400*. Cut dough into 8 biscuits. Place on a parchment-lined
-		baking sheet, spacing 3" apart. Brush tops with remaining 2 tbsp. Buttermilk,
+Preheat oven to 400*F. Cut dough into 8 biscuits. Place on a parchment-lined
+		baking sheet, spacing 3" apart. Brush tops with remaining 2 tbsp buttermilk,
 		then sprinkle with flaky sea salt.
 
 Bake biscuits, rotating baking sheet halfway through, until golden brown,
 		25-35 minutes. 
 
-2
-Serve warm. 
-
-Do ahead: dough can be made 1 day ahead. Cover and keep chilled.
+1
+Dough can be made one day ahead. Cover and keep chilled.
 
 
 
@@ -174,6 +174,118 @@ Proceed with the pie per your recipe’s instructions.
 0
 
 
+Flourless Chocolate Cake	3
+14
+0	Butter, Unsalted	1/2 Cup	113.00
+0	Chocolate, Fine Chop	6 Ozs	170.10
+0	Sugar, Granulated	2/3 Cup	133.33
+0	Powdered, Espresso	2 Tsps	3.33
+0	Vanilla Extract	1 1/2 Tsps	7.00
+1	Large Eggs	At Room Temp	4.00
+0	Cocoa Powder	1/3 Cup	33.33
+0	Salt, Kosher	1/8 Tsp	0.60
+0	Baking Powder	1/2 Tsp	2.30
+0	Powdered, Espresso	1 Tsp	1.67
+0	Water, Warm	1 Tsp	4.93
+0	Heavy Cream	1 Cup	238.40
+0	Sugar, Confectioner's	3 Tbsps	21.28
+0	Cocoa Powder	1 Tbsp	6.25
+10
+Preheat your oven to 350*F (177*C) with one rack in the center and one
+		on the lowest rung. Grease an 8-inch round cake pan, line with parchment
+		paper rounds, then grease the parchment paper. Parchment paper helps
+		the cakes seamlessly release from the pans. The cake will stick unless
+		it’s lined and greased. Heat a kettle of water.
+
+Cut the butter into pieces so it melts evenly. Place in a large heat-proof
+		bowl. Add chopped chocolate. Melt in 20 second increments in the microwave,
+		stirring after each increment until completely melted and smooth. Let
+		cool for 2-3 minutes. Or use a double boiler if desired.
+
+Whisk the sugar, first espresso powder, and vanilla extract into the chocolate
+		mixture. Whisk in the eggs until smooth. The mixture will be heavy and
+		tacky, like brownie batter. Whisk in the cocoa powder, salt, and baking
+		powder (if using).
+
+Pour and spread batter into prepared cake pan.
+
+Place a large metal roasting pan or baking dish on the bottom oven rack.
+		Do not use glass. Pour boiling water from kettle about 2 inches up the
+		sides of the pan. Quickly place the cake on the center rack and shut
+		the oven door, trapping steam inside. The steam helps moisten the cake.
+
+Bake for 30 minutes until the edges are set. The cake is done when a toothpick
+		inserted into the center of the cake comes out clean or with just a few
+		crumbs. It’s important to not over-bake this cake, which dries it out.
+		Begin checking it at 25 minutes. Don’t be alarmed if the cake rises
+		tall around the edges and slightly cracks—this is normal (it’s the
+		eggs expanding) and will flatten as it cools.
+
+Remove from the oven, place cake on a cooling rack, and cool for only
+		10 minutes in the cake pan. Run a sharp knife around the edges to help
+		release the warm cake, then quickly invert it onto a serving plate or
+		cake stand. (if it cools completely in the pan, it’s very difficult
+		to release from the pan.) cake will be a little crumbly on the edges.
+		Cool completely at room temp, or in the refrigerator for 1-2 hours.
+
+Once the cake is cool, top with of raspberries and mocha whipped cream
+		(or flavors of your choice).
+
+Using a fork, mix the last tsp espresso powder and your warm water in
+		a very small bowl, then let cool a few minutes. Using a hand or stand
+		mixer fitted with a whisk attachment, whip the heavy cream, sugar, cocoa
+		powder, and espresso mixture on medium-high speed until medium peaks
+		form, about 3-4 minutes. Medium peaks are between soft/loose peaks and
+		stiff peaks and are the perfect consistency for topping and piping on
+		desserts. Serve cake with whipped cream or pipe it on top. Decorate with
+		raspberries and a dusting of confectioners’ sugar, if desired.
+
+Cover and store leftover cake in the refrigerator for up to 5 days.
+
+0
+
+
+Levain's Chocolate Chip Cookie	1
+11
+0	Butter, Unsalted	1 Cup	226.00
+0	Sugar, Brown	1 Cup	210.00
+0	Sugar, Granulated	1/2 Cup	100.00
+1	Eggs		2.00
+0	Cake Flour	1 1/2 Cups	205.50
+0	All-Purpose Flour	1 1/2 Cups	195.00
+0	Cornstarch	1 Tsp	2.67
+0	Baking Soda	3/4 Tsp	3.45
+0	Salt, Kosher	3/4 Tsp	3.60
+0	Chocolate Chips	2 Cups	340.00
+0	Walnuts, Chopped	2 Cups	240.00
+6
+Preheat oven to 410*F.
+
+In a large mixing bowl, cream together the cold cubed butter, brown sugar,
+		and sugar for 4 minutes or until creamy.
+
+Add eggs, one at a time, mixing well after each.
+
+Stir in flours, cornstarch, baking soda, and salt. Mix until just combined
+		to avoid overmixing. Stir in chocolate chips and walnuts. 
+
+Separate dough into large balls and place on silpat or other nonstick
+		surface. They are large, 4 fit on one large cookie sheet. The dough makes
+		8 extra large cookies.
+
+Bake for 9-12 minutes or until golden brown on the top. Let them rest
+		for at least 10 minutes to set.
+
+3
+Use cold butter, cut into small cubes. It takes about 4 minutes to mix
+		with the sugars. 
+
+You can substitute all ap-flour for cake flour if needed.
+
+You can add 1 teaspoon vanilla extract when adding the eggs to the batter.
+
+
+
 Meatloaf	5
 18
 0	Bread Crumbs, Dried	1 Cup	112.00
@@ -195,7 +307,7 @@ Meatloaf	5
 0	Salt, Kosher	2 Tsp	9.60
 0	Black Pepper	1 1/2 Tsp	3.45
 5
-Preheat oven to 350*f with rack in the middle
+Preheat oven to 350*F with rack in the middle.
 
 Soak bread crumbs in milk in a large bowl. 
 
@@ -209,7 +321,7 @@ Finely chop bacon and prunes in a food processor, then add to onion mixture
 		along with the beef, pork, eggs, and parsley, and mix together by hand.
 
 Pack mixture into a 9x5" oval loaf on a 13x9" shallow baking dish or pan.
-		Bake until thermometer inserted in the center reads 155*f, 1 hour to
+		Bake until thermometer inserted in the center reads 155*F, 1 hour to
 		1 hour 20 minutes. Let stand 10 minutes before serving.
 
 0
@@ -252,7 +364,7 @@ Generously butter a 13x9" bakng pan, for thicker focaccia that's perfect
 		rise, uncovered, in a dry, warm spot until doubled in size, at least
 		1 1/2 hours an up to 4 hours.
 
-Preheat oven to 450* with a middle rack set. To see if the dough is ready,
+Preheat oven to 450*F with a middle rack set. To see if the dough is ready,
 		poke it with a finger; if it springs back quickly and doesn't leave a
 		visible indent it is not ready (you can chill ready dough upto 1 hour
 		before baking). Lightly oil your hands. If using a rimmed baking sheet,
@@ -270,8 +382,8 @@ Brush garlic-butter all over focaccia and slice into squares.
 
 1
 Focaccia is best eaten the day it's made, but keeps well in the freezer.
-		 slice it, then store the pieces in a freezer-safe container. Reheat
-		when ready on a baking sheet in the oven at 300*
+		Slice it, then store the pieces in a freezer-safe container. Reheat when
+		ready on a baking sheet in the oven at 300*F
 
 
 
@@ -293,7 +405,7 @@ Peel the peaches then cut into 1-2 inch chunks until you have 7 cups.
 		and cinnamon together until thoroughly combined. Set filling aside as
 		the oven preheats.
 
-Preheat oven to 400*f (~200*c).
+Preheat oven to 400*F (~200*C).
 
 On a floured surface, roll out your crust until you have a 12 inch diameter
 		circle. Place the dough in a 9" pie pan, using your fingers to smooth
@@ -308,13 +420,107 @@ In a medium bowl, combine the second servings of brown sugar, cinnamon,
 Place the pie onto a large baking sheet in the middle of the oven and
 		bake for 20 minutes. Kafter 20 minutes, rotate pie, place pie crust shield
 		on the top to prevent the edges from burning, and turn the oven temperature
-		down to 375*f (190*c). Bake for another 30-35 minutes or until the peach
-		juices are bubbling on the sides and the top is lightly browned. 
+		down to 375*F (190*C). Bake for another 30-35 minutes or until the peach
+		juices are bubbling on the sides and the top is lightly browned.
 
 Allow the pie to cool for 3 hours at room temp to fully set before cutting.
 		You can place in refrigerator to quicken this as well. 
 
 Serve with vanilla ice cream. Covered pie can store up to 5 days in fridge.
+
+0
+
+
+The Original Cronut	1
+11
+0	Bread Flour		525.00
+0	Salt, Kosher		6.00
+0	Sugar, Granulated		64.00
+0	Yeast		11.00
+0	Water, Cold		250.00
+1	Large Egg		1.00
+0	Butter, Unsalted		112.00
+0	Heavy Cream		15.00
+1	Nonstick Spray		0.00
+0	Butter, Unsalted		250.00
+1	Grapeseed Oil		0.00
+18
+Do two days ahead:
+
+Combine the bread flour, salt, sugar, yeast, water, egg whites, buttter,
+		and cream in a stand mixer fitted with a dough hook. Mix until just combined,
+		about 3 minutes. When finished the dough will be rough and have very
+		little gluten development.
+
+Lightly grease a medium bowl with nonstick cooking spray. Transfer the
+		dough to the bowl. Cover with plastic wrap pressed directly on the surface
+		of the dough to prevent a skin from forming. Proof the dough in a warm
+		spot until doubled in size, 2 to 3 hours.
+
+Remove the plastic wrap and punch down the dough by folding the edges
+		into the center, releasing as much of the gas as possible. On a piece
+		of parchment paper, shape into a 10" (35 cm) square. Transfer to a sheet
+		pan, still on the parchment paper, and cover with plastic wrap. Refrigerate
+		overnight.
+
+Butter block: draw a 7-inch (18 cm) square on a piece of parchment paper
+		with a pencil. Flip the parchment over so the butter won't contact the
+		pencil marks. Place the butter in the center of the square and spread
+		evenly with an offset spatula to fill the squre. Refrigerate overnight.
+
+Prepare your favorite ganache recipe and refrigerate.
+
+Do one day ahead:
+
+Laminate: remove the dough from the refrigerator making sure it is very
+		cold throughout. Place the dough on a floured surface and using a rolling
+		pin, roll the dough to your 10" (35 cm) square which is about 1" (2.5
+		cm) thick. Arrange the butter block in the center of the dough so it
+		looks like a diamond in the center of the square (rotated 45 degrees
+		with the corners of the butter block facing the edges of the dough).
+		Pull the corners of the dough up over the center of the butter block.
+		Pinch the seams of dough together to seal the butter inside. You should
+		have a square slightly larger than the butter block.
+
+Very lightly dust your work surface with flour. Roll out the dough from
+		the center with a firm, steady hand. When finished you should have a
+		20" (50 cm) square about 1/4" (6 mm) thick. 
+
+Fld the dough in half horizontally, making sure to line up the edges so
+		you are left with a rectangle. Then fold the dough vertically. You hsould
+		have a 10" (25.5 cm) square of dough with 4 layers. Wrap tightly in plastic
+		and refrigerate for 1 hour.
+
+Repeat the above two steps. Cover tightly with plastic wrap and refrigerate
+		overnight.
+
+Do day of:
+
+On a lightly floured surface, roll the dough to a 15" (40 cm) square about
+		1/2" (1.3 cm) thick. Transfer dough to a half sheet pan, cover with plastic
+		wrap, and refrigerate for 1 hour to relax.
+
+Using a 3 1/2" (9 cm) ring cutter, cut 12 roungds. Cut out the center
+		of each round with a 1" (2.5 cm) ring cutter to create the doughnut shape.
+
+Line a sheet pan with parchment paper and lightly dust the parchment with
+		flour. Place the pastries on the pan, spacing them about 3" (8 cm) apart.
+		Lightly spray a piece of plastic wrap with nonstick spray and lay it
+		on top of the pastries. Proof in a warm spot until tripple in size, about
+		2 hours. 
+
+Fry dough: heat grapeseed oil in a large pot until it reaches 350*F (175*C).
+		Use a deep-frying thermometer to verify that the oil is at the right
+		temperature. Line a platter with several layers of paper towels for draining
+		the pastries. 
+
+Gently place 3 or 4 of them at a time into the hot oil. Fry for about
+		90 seconds on each side , flipping once, until golden brown. Remove from
+		the oil with a slotted spoon and drian on the paper towels.
+
+Check that the oil is at the right temperature. If not, let it heat up
+		again before frying the next batch. Continue until all of them are fried.
+		Let cool completely before filling.
 
 0
 
