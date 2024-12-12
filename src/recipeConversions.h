@@ -33,7 +33,7 @@ struct ingredientStruct{
 	char ingredientName[INGREDIENT_BUFFER_LEN];
 	char userCupsInput[INGREDIENT_BUFFER_LEN];
 	float ingredientGrams;
-	int nonWeightedIngredientFlag;
+	int nonWeighedIngredientFlag;
 };
 
 struct recipeStruct{
