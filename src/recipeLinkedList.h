@@ -2,12 +2,7 @@
 #define RECIPELINKEDLIST_H
 
 #include <stdio.h>
-#include <ctype.h>
-#include <stdlib.h>
-#include <string.h>
 #include "ingredientConversions.h"
-#include "ingredientTypeLinkedList.h"
-#include "ingredientItemLinkedList.h"
 #include "recipeConversions.h"
 
 /********************************************************************************************************************
@@ -42,13 +37,6 @@ struct recipeStruct *placeRecipeStructNode(struct recipeStruct *recipeHead, stru
 
 /********************************************************************************************************************
 * 																													*
-*	 			prints the names of all the nodes in the recipeStruct linked-list alphabetically					*
-*																													*
-*********************************************************************************************************************/
-void printAllRecipeNames(struct recipeStruct *recipeHead);
-
-/********************************************************************************************************************
-* 																													*
 *	  			finds a recipe in the recipeStruct linked list by parsing a buffer to find comparable names			*
 *				returns NULL if no recipe with a partially matching name is found									*
 *																													*
@@ -62,13 +50,6 @@ struct recipeStruct *findRecipe(struct recipeStruct *recipeHead, char buffer[ING
 *																													*
 *********************************************************************************************************************/
 struct recipeStruct *deleteFullRecipeNode(struct recipeStruct *head, struct recipeStruct *recipeToDelete);
-
-/********************************************************************************************************************
-* 																													*
-*	  			prints all recipe nodes of a chosen food type						 								*
-*																													*
-*********************************************************************************************************************/
-void printRecipeByType (struct recipeStruct *headPointer);
 
 /********************************************************************************************************************
 * 																													*

@@ -6,6 +6,7 @@
 #include "ingredientConversions.h"
 #include "ingredientTypeLinkedList.h"
 #include "ingredientItemLinkedList.h"
+#include "recipePrintFunctions.h"
 
 
 /************************************************************************************************************

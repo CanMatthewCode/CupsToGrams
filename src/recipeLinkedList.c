@@ -260,49 +260,6 @@ struct recipeStruct *placeRecipeStructNode(struct recipeStruct *recipeHead, stru
 
 /********************************************************************************************************************
 * 																													*
-*	 			prints the names of all the nodes in the recipeStruct linked-list alphabetically					*
-*																													*
-*********************************************************************************************************************/
-void printAllRecipeNames(struct recipeStruct *recipeHead){
-	struct recipeStruct *cur = NULL;
-	struct recipeStruct *foundRecipe = NULL;
-	clearScreen();
-	puts("\n\n\t\t*********************************************************************************");
-	puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
-	puts("\t\t*\t\t\t  -ALL RECIPES AVAILABLE-       \t\t\t*");
-	puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
-	puts("\t\t*********************************************************************************\n\n");
-	printf("\t\t");
-	int numberOfCharactersOnLine = NUMBER_OF_CHARS_ON_SCREEN;
-	int curNameLength = 0;
-	int nextNameLength = 0;
-	for (cur = recipeHead; cur; cur = cur->next){
-		curNameLength = strlen(cur->recipeName);
-		printf("%s        ", cur->recipeName);
-		numberOfCharactersOnLine -= (curNameLength + 8);
-		if (cur->next)
-			nextNameLength = strlen(cur->next->recipeName);
-		if (numberOfCharactersOnLine - nextNameLength < 1){
-			printf("\n\n\n\t\t");
-			numberOfCharactersOnLine = NUMBER_OF_CHARS_ON_SCREEN;
-		}
-	}
-	printf("\n\n\n\n\n\t\tEnter Name To View Recipe, Or Hit Enter To Continue: ");
-	char ch = '\0';
-	if  ((ch = getchar()) == '\n') {
-		return;
-	} else {
-		ungetc(ch, stdin);
-		char recipeNameBuffer[INGREDIENT_BUFFER_LEN] = {'\0'};
-		readUserInputIntoBuffer(recipeNameBuffer);
-		foundRecipe = findRecipe(recipeHead, recipeNameBuffer);
-		if (foundRecipe)
-			printFullRecipeWithPDFOption(foundRecipe);
-	}
-}
-
-/********************************************************************************************************************
-* 																													*
 *	  			finds a recipe in the recipeStruct linked list by parsing a buffer to find comparable names			*
 *				returns NULL if no recipe with a partially matching name is found									*
 *																													*
@@ -398,59 +355,6 @@ struct recipeStruct *deleteFullRecipeNode(struct recipeStruct *head, struct reci
 		prev->next = NULL; 
 	dumpRecipesFromLinkedList(headPointer);
 	return headPointer;
-}
-
-/********************************************************************************************************************
-* 																													*
-*	  			prints all recipe nodes of a chosen food type						 								*
-*																													*
-*********************************************************************************************************************/
-void printRecipeByType (struct recipeStruct *headPointer){
-	struct recipeStruct *cur = headPointer;
-	clearScreen();
-	puts("\n\n\t\t*********************************************************************************");
-	puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
-	puts("\t\t*\t\t\t  -SHOW RECIPE NAMES BY FOOD TYPE-       \t\t*");
-	puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
-	puts("\t\t*********************************************************************************\n\n");
-	int choice = 0;
-	puts("\n\n\t\t(1) APPETIZER\t\t(2) BAKED GOOD\t\t(3) BREAKFAST\t\t(4) DESSERT\n\n\t\t(5) LUNCH\t\t(6) ENTREE\t\t(7) SIDE DISH\t\t(8) SNACK\n\n\t\t(9) SOUP");
-	printf("\n\n\t\tEnter Number(#) Of Food Type To Print: ");
-	do {
-		choice = getNumericChoice();
-		if (choice < 1 || choice > 9)
-			printf("\t\tInvalid Entry, Try Again: ");
-	} while (choice < 1 || choice > 9);
-	printf("\n\n\t\t");
-	int numberOfCharactersOnLine = NUMBER_OF_CHARS_ON_SCREEN;
-	int curNameLength = 0;
-	int nextNameLength = 0;
-	for (; cur; cur = cur->next){
-		if (cur->recipeType == (choice - 1)){
-			curNameLength = strlen(cur->recipeName);
-			printf("%s        ", cur->recipeName);
-			numberOfCharactersOnLine -= (curNameLength + 8);
-			if (cur->next)
-				nextNameLength = strlen(cur->next->recipeName);
-			if (numberOfCharactersOnLine - nextNameLength < 1){
-				printf("\n\n\n\t\t");
-				numberOfCharactersOnLine = NUMBER_OF_CHARS_ON_SCREEN;
-			}
-		}
-	}
-	printf("\n\n\n\n\n\t\tEnter Name To View Recipe, Or Hit Enter To Continue: ");
-	struct recipeStruct *foundRecipe = NULL;
-	char ch = '\0';
-	if  ((ch = getchar()) == '\n') {
-		return;
-	} else {
-		ungetc(ch, stdin);
-		char recipeNameBuffer[INGREDIENT_BUFFER_LEN] = {'\0'};
-		readUserInputIntoBuffer(recipeNameBuffer);
-		foundRecipe = findRecipe(headPointer, recipeNameBuffer);
-		if (foundRecipe)
-			printFullRecipeWithPDFOption(foundRecipe);
-	}
 }
 
 /********************************************************************************************************************
