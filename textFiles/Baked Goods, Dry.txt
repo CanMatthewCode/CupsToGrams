@@ -21,6 +21,7 @@ Cornmeal, Fine-Grind	132.000000 g/cup
 Cornstarch	8.000000 g/tbsp
 Cream Of Tartar	9.000000 g/tbsp
 Guar Gum	10.000000 g/tbsp
+Matzo Meal	116.000000 g/cup
 Powdered, Buttermilk	7.850000 g/tbsp
 Powdered, Espresso	5.000000 g/tbsp
 Powdered, Instant Coffee	3.000000 g/tbsp

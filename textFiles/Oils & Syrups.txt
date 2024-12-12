@@ -6,6 +6,7 @@ Chocolate Syrup	17.625000 g/tbsp
 Coconut Oil	13.625000 g/tbsp
 Corn Oil	13.500000 g/tbsp
 Corn Syrup	20.500000 g/tbsp
+Corn Syrup, Dark	20.500000 g/tbsp
 Cottonseed Oil	13.625000 g/tbsp
 Fish Oil	13.625000 g/tbsp
 Flaxseed Oil	13.625000 g/tbsp

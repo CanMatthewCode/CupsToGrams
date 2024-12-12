@@ -1,11 +1,18 @@
 Almond Extract	12.600000 g/tbsp
 Almond Milk	248.800003 g/cup
+Amaretto	14.000000 g/tbsp
+Beer	14.900000 g/tbsp
+Bourbon	14.000000 g/tbsp
+Brandy	14.000000 g/tbsp
 Cashew Milk	247.000000 g/cup
+Champagne	14.000000 g/tbsp
 Chocolate, Melted	304.000000 g/cup
 Cocoa Butter	218.000000 g/cup
 Coconut Cream	260.000000 g/cup
 Coconut Milk	241.000000 g/cup
+Cognac	14.000000 g/tbsp
 Condensed Milk	308.000000 g/cup
+Dark Rum	14.000000 g/tbsp
 Egg, Large White	38.000000 g/cup
 Egg, Large Whole	56.000000 g/cup
 Egg, Large Yolk	18.000000 g/cup
@@ -13,15 +20,24 @@ Evaporated Milk	240.000000 g/cup
 Ghee	224.000000 g/cup
 Lard	227.000000 g/cup
 Lemon Extract	12.600000 g/tbsp
+Light Rum	14.000000 g/tbsp
 Oat Milk	241.199997 g/cup
 Pumpkin Pie Mix	270.000000 g/cup
+Red Wine	14.800000 g/tbsp
 Rice Milk	240.000000 g/cup
+Sake	14.800000 g/tbsp
+Sherry	14.000000 g/tbsp
 Soy Milk	243.000000 g/cup
+Spiced Rum	14.000000 g/tbsp
 Sweetened Condensed Milk	306.000000 g/cup
+Tequila	14.000000 g/tbsp
 Vanilla Extract	14.000000 g/tbsp
 Vegetable Shortening	184.000000 g/cup
+Vodka	14.000000 g/tbsp
 Water	236.587997 g/cup
 Water, Cold	236.587997 g/cup
 Water, Hot	236.587997 g/cup
 Water, Ice	236.587997 g/cup
 Water, Warm	236.587997 g/cup
+Whiskey	14.000000 g/tbsp
+White Wine	14.600000 g/tbsp
