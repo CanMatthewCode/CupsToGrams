@@ -195,7 +195,8 @@ struct ingredientItem *findIngredientItemNode(struct ingredientType *head, char 
 			*ingredientTypeNode = foundIngredientsTypes[0];
 		return foundIngredients[0];
 	}
-	int i = 0;
+	int i;
+	printf("\n");
 	for (i = 1; i <= ingredientItemCounter; i++)
 		printf("\t\t%i) %s\n", i, foundIngredients[i-1]->ingredientName);
 	printf("\t\t%i) None Of The Above\n", i);

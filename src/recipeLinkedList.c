@@ -49,7 +49,7 @@ int dumpRecipesFromLinkedList(struct recipeStruct *recipeHead){
 		fprintf(fp, "%s\t%d\n%d", recipe->recipeName, recipe->recipeType, recipe->numberOfIngredients);
 	//loop to dump each ingredient's name, user entered cups, and float value of entered value separated by new lines
 		while (counter < recipe->numberOfIngredients){
-			fprintf(fp, "\n%d\t%s\t%s\t%.2f", recipe->ingredients[counter].nonWeightedIngredientFlag, recipe->ingredients[counter].ingredientName, recipe->ingredients[counter].userCupsInput, recipe->ingredients[counter].ingredientGrams);
+			fprintf(fp, "\n%d\t%s\t%s\t%.2f", recipe->ingredients[counter].nonWeighedIngredientFlag, recipe->ingredients[counter].ingredientName, recipe->ingredients[counter].userCupsInput, recipe->ingredients[counter].ingredientGrams);
 			counter++;
 		}
 	//loop to dump each instruction, followed by two new lines to distinguish each instruction which may have its own internal new line character
@@ -125,7 +125,7 @@ struct recipeStruct *loadRecipesToLinkedList(void){
     	fscanf(fp, " %u %d ", &newNode->recipeType, &newNode->numberOfIngredients);
     //loop to load each ingredient's name, user entered cups, and float value of entered value separated by new lines
     	for (int i = 0; i < newNode->numberOfIngredients; i++){
-    		fscanf(fp, " %d", &newNode->ingredients[i].nonWeightedIngredientFlag);
+    		fscanf(fp, " %d", &newNode->ingredients[i].nonWeighedIngredientFlag);
 			while ((ch = fgetc(fp)) != '\t')
 				;
     		int counter = 0;
@@ -414,7 +414,7 @@ void printRecipeByType (struct recipeStruct *headPointer){
 	puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
 	puts("\t\t*********************************************************************************\n\n");
 	int choice = 0;
-	puts("\n\n\t\t(1) APPETIZER\t\t(2) BAKED GOOD\t\t(3) BREAKFAST\t\t(4) DESSERT\n\n\t\t(5) LUNCH\t\t(6) ENTREE\t\t(7) SIDE DISH\t\t(8) SNACK\n\n\t\t(9)SOUP");
+	puts("\n\n\t\t(1) APPETIZER\t\t(2) BAKED GOOD\t\t(3) BREAKFAST\t\t(4) DESSERT\n\n\t\t(5) LUNCH\t\t(6) ENTREE\t\t(7) SIDE DISH\t\t(8) SNACK\n\n\t\t(9) SOUP");
 	printf("\n\n\t\tEnter Number(#) Of Food Type To Print: ");
 	do {
 		choice = getNumericChoice();
