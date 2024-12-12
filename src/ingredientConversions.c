@@ -5,6 +5,7 @@
 #include "ingredientConversions.h"
 
 
+
 /********************************************************************************************************************
 * 																													*
 *	  			getCups Converts User Input in the form of Cups, Cups Part/Cups, or Cups.Parts to a float value		*
@@ -90,11 +91,11 @@ void clearScreen(void){
 *	 		 parses user input to determine if they mean cups(c), tablespoons(tbsp) or teaspoons(tsp)				*
 *			  returns the divisor number for the fraction of cups to calculate against								*
 *			  return 0 on failure to get Cups, Tablespoons, Teaspoons, Pounds, or Ozs as input						*
-*			use the weightedInputFlag set to 1 when converting weight rather than volume measurements				*
+*			use the weighedInputFlag set to 1 when converting weight rather than volume measurements				*
 *			  and set to 2 if grams are inputted directly															*
 *																													*
 *********************************************************************************************************************/
-float typeOfMeasurement(char *typeToConvert, int *weightedInputFlag){
+float typeOfMeasurement(char *typeToConvert, int *weighedInputFlag){
 	if ((strcmp(typeToConvert, "Cups") == 0) || (strcmp(typeToConvert, "Cup") == 0) || (strcmp(typeToConvert, "C") == 0)){
 		return 1;
 	} else if ((strcmp(typeToConvert, "Tablespoons") == 0) || (strcmp(typeToConvert, "Tablespoon") == 0) || (strcmp(typeToConvert, "Tbsp") == 0) || (strcmp(typeToConvert, "Tbl") == 0) || (strcmp(typeToConvert, "Tbls") == 0)) {
@@ -102,13 +103,13 @@ float typeOfMeasurement(char *typeToConvert, int *weightedInputFlag){
     } else if ((strcmp(typeToConvert, "Teaspoons") == 0) || (strcmp(typeToConvert, "Teaspoon") == 0) || (strcmp(typeToConvert, "Tsp") == 0) || (strcmp(typeToConvert, "Tea") == 0)){
 		return 48;
 	} else if ((strcmp(typeToConvert, "Ounces") == 0) || (strcmp(typeToConvert, "Ounce") == 0) || (strcmp(typeToConvert, "Ozs") == 0) || (strcmp(typeToConvert, "Oz") == 0)) {
-		*weightedInputFlag = 1;
+		*weighedInputFlag = 1;
 		return (1 / 28.34952); //28.34962 is the number of grams per oz - return 1 divided by it so the input is multiplied in the returning function
 	} else if ((strcmp(typeToConvert, "Pounds") == 0) || (strcmp(typeToConvert, "Pound") == 0) || (strcmp(typeToConvert, "Lbs") == 0) || (strcmp(typeToConvert, "Lb") == 0)) {
-		*weightedInputFlag = 1;
+		*weighedInputFlag = 1;
 		return (1 / 453.59237); //453.59237 is the number of grams per pound - return 1 divided by it so the input is multiplied in the returning function 
 	} else if ((strcmp(typeToConvert, "Grams") == 0) || (strcmp(typeToConvert, "Gram") == 0) || (strcmp(typeToConvert, "G") == 0) || (strcmp(typeToConvert, "Gs") == 0)) {
-		*weightedInputFlag = 1;
+		*weighedInputFlag = 1;
 		return 1;
 	} else 
 	    return 0;
@@ -123,7 +124,7 @@ float cupsToGrams(char *cupsInputAmountBuffer, struct ingredientItem *ingredient
 	char measurementAmount[20] = {'\0'};
 	char measurementType[12] = {'\0'};
 	int charsRead = 0;
-	int weightedInputFlag = 0;
+	int weighedInputFlag = 0;
 	float cupAmount = 0.0;
 	float sum = 0;
 	char *currentPosition = NULL;
@@ -140,12 +141,13 @@ float cupsToGrams(char *cupsInputAmountBuffer, struct ingredientItem *ingredient
 		do {
 			if (sscanf(currentPosition, " %19[0-9/. ]%19[A-Za-z]%n", measurementAmount, measurementType, &charsRead) == 2) {
 			//safety for if typeOfMeasurement returns 0 for wrong input
-				if (typeOfMeasurement(measurementType, &weightedInputFlag) == 0){
+				if (typeOfMeasurement(measurementType, &weighedInputFlag) == 0){
 					break;
 				}
 				cupAmount = getCups(measurementAmount);
-				sum += (cupAmount / (typeOfMeasurement(measurementType, &weightedInputFlag)));
-				currentPosition += charsRead; 
+				sum += (cupAmount / (typeOfMeasurement(measurementType, &weighedInputFlag)));
+				currentPosition += charsRead;
+				break;
 			} else {
 				break; //exit the loop if sscanf() fails to read two input items
 			}
@@ -157,10 +159,55 @@ float cupsToGrams(char *cupsInputAmountBuffer, struct ingredientItem *ingredient
 			printf("\n\t\t%s: Not Valid Input, Try Again: ", cupsInputAmountBuffer);
 		}
 	} while (sum == 0);
-	if (weightedInputFlag == 0)
+	if (weighedInputFlag == 0)
 		return sum*ingredientToConvert->gramsPerCup;
 	else
 		return sum;
+}
+
+/********************************************************************************************************************
+* 																													*
+*			  parses a readUserInputIntoBuffer input in weight notation and returns amount in grams					*
+*																													*
+*********************************************************************************************************************/
+float weightToGrams(char *cupsInputAmountBuffer, char *ingredientName){
+	char measurementAmount[20] = {'\0'};
+	char measurementType[12] = {'\0'};
+	int charsRead = 0;
+	int weighedInputFlag = 0;
+	float cupAmount = 0.0;
+	float sum = 0;
+	char *currentPosition = NULL;
+	printf("\n\n\n\t\t\"Pounds, Oz, Grams\"");
+	printf("\n\n\t\tEnter Weight For \'%s\': ", ingredientName);
+	do {
+		memset(cupsInputAmountBuffer, 0, 20);
+		memset(measurementAmount, 0, sizeof(measurementAmount));
+		memset(measurementType, 0, sizeof(measurementType));
+		charsRead = 0;
+		readUserInputIntoBuffer(cupsInputAmountBuffer);
+		currentPosition = cupsInputAmountBuffer;
+		//move through cupsInputAmountBuffer reading the numbers then types in a loop
+		do {
+			if (sscanf(currentPosition, " %19[0-9/. ]%19[A-Za-z]%n", measurementAmount, measurementType, &charsRead) == 2) {
+			//safety for if typeOfMeasurement returns 0 for wrong input
+				if (typeOfMeasurement(measurementType, &weighedInputFlag) == 0){
+					break;
+				}
+				cupAmount = getCups(measurementAmount);
+				sum += (cupAmount / (typeOfMeasurement(measurementType, &weighedInputFlag)));
+				currentPosition += charsRead;
+				break;
+			} else {
+				break; //exit the loop if sscanf() fails to read two input items
+			}
+		} while (*currentPosition != '\0');
+		unifyMeasurementTypes(cupsInputAmountBuffer, measurementAmount, measurementType, cupAmount);
+		if (sum == 0 || weighedInputFlag == 0){
+			printf("\n\t\t%s: Not Valid Input, Try Again: ", cupsInputAmountBuffer);
+		}
+	} while (sum == 0 || weighedInputFlag == 0);
+	return sum;
 }
 
 /********************************************************************************************************************

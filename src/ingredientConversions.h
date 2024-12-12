@@ -40,6 +40,7 @@ struct ingredientType{
 	struct ingredientType *next;
 };
 
+
 /********************************************************************************************************************
 * 																													*
 *	 		 getCups Converts User Input in the form of Cups, Cups Part/Cups, or Cups.Parts to a float value		*
@@ -68,11 +69,11 @@ void clearScreen(void);
 *	 		 parses user input to determine if they mean cups(c), tablespoons(tbsp) or teaspoons(tsp)				*
 *			  returns the divisor number for the fraction of cups to calculate against								*
 *			  return 0 on failure to get Cups, Tablespoons, Teaspoons, Pounds, or Ozs as input						*
-*			use the weightedInputFlag set to 1 when converting weight rather than volume measurements				*
+*			use the weighedInputFlag set to 1 when converting weight rather than volume measurements				*
 *			  and set to 2 if grams are inputted directly															*
 *																													*
 *********************************************************************************************************************/
-float typeOfMeasurement(char *typeToConvert, int *weightedInputFlag);
+float typeOfMeasurement(char *typeToConvert, int *weighedInputFlag);
 
 /********************************************************************************************************************
 * 																													*
@@ -80,6 +81,13 @@ float typeOfMeasurement(char *typeToConvert, int *weightedInputFlag);
 *																													*
 *********************************************************************************************************************/
 float cupsToGrams(char *cupsInputAmountBuffer, struct ingredientItem *ingredientToConvert);
+
+/********************************************************************************************************************
+* 																													*
+*			  parses a readUserInputIntoBuffer input in weight notation and returns amount in grams					*
+*																													*
+*********************************************************************************************************************/
+float weightToGrams(char *cupsInputAmountBuffer, char *ingredientName);
 
 /********************************************************************************************************************
 * 																													*
