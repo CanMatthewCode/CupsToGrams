@@ -66,6 +66,6 @@ void printAllRecipeNames(struct recipeStruct *recipeHead);
 *	  			prints all recipe nodes of a chosen food type						 								*
 *																													*
 *********************************************************************************************************************/
-void printRecipeByType (struct recipeStruct *headPointer);
+void printRecipeByType (struct recipeStruct *recipeHead);
 
 #endif //RECIPEPRINTFUNCTIONS_H

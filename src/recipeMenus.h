@@ -50,7 +50,7 @@ void editRecipeNotesMenu(struct recipeStruct *recipe);
 *				menu for modifying or deleting an existing recipe in the recipeStruct linked list			*
 *																											*
 *************************************************************************************************************/
-struct recipeStruct *modifyExistingRecipeMenu(struct recipeStruct *recipeHeadPointer, struct ingredientType *ingredientHead);
+struct recipeStruct *modifyExistingRecipeMenu(struct recipeStruct *recipeHead, struct ingredientType *ingredientHead);
 
 /************************************************************************************************************
 * 																											*
@@ -58,13 +58,5 @@ struct recipeStruct *modifyExistingRecipeMenu(struct recipeStruct *recipeHeadPoi
 *																											*
 *************************************************************************************************************/
 void printSavedRecipeMenus(struct recipeStruct *recipeHead);
-
-/************************************************************************************************************
-* 																											*
-*				menu for finding recipe from the recipeStruct headPointer									*
-*				and then printing chosen recipe out as a PDF document										*
-*																											*
-*************************************************************************************************************/
-void printRecipeToPDFMenu(struct recipeStruct *recipeHeadPointer);
 
 #endif //RECIPEMENUS_H

@@ -312,12 +312,12 @@ struct recipeStruct *findRecipe(struct recipeStruct *recipeHead, char buffer[ING
 *				returns recipeType pointer to head on success, NULL on failure or cancel							*
 *																													*
 *********************************************************************************************************************/
-struct recipeStruct *deleteFullRecipeNode(struct recipeStruct *head, struct recipeStruct *recipeToDelete){
+struct recipeStruct *deleteFullRecipeNode(struct recipeStruct *recipeHead, struct recipeStruct *recipeToDelete){
 	char confirm = '\0';
 	struct recipeStruct *cur = recipeToDelete;
 	struct recipeStruct *prev = NULL;
 	struct recipeStruct *next = NULL;
-	struct recipeStruct *headPointer = head;
+	struct recipeStruct *headPointer = recipeHead;
 	puts("\n\n\t\txxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 	puts("\t\tx\t\t\t\t\t\t\t\t\t\tx");
 	puts("\t\tx\t\t      -PERMANENTLY DELETE FULL REICPE- \t\t\t\tx");
@@ -326,7 +326,7 @@ struct recipeStruct *deleteFullRecipeNode(struct recipeStruct *head, struct reci
 	printf("\n\n\t\tConfirm PERMANENTLY DELETING \"%s\" Recipe In Full (y/n): ", recipeToDelete->recipeName);
 	YESNOCHOICE(confirm);
 	if (confirm == 'N')
-		return head;
+		return recipeHead;
 	if (headPointer == NULL){
 		printf("\t\tRecipe List is Empty\n");
 		return NULL;
@@ -362,8 +362,8 @@ struct recipeStruct *deleteFullRecipeNode(struct recipeStruct *head, struct reci
 *	 			free full recipeStruct linked-list from memory														*
 *																													*
 *********************************************************************************************************************/
-void freeRecipeStructList(struct recipeStruct *head){
-	struct recipeStruct *cur = head;
+void freeRecipeStructList(struct recipeStruct *recipeHead){
+	struct recipeStruct *cur = recipeHead;
 	struct recipeStruct *temp;
 	while (cur){
 		temp = cur;

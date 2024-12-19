@@ -228,8 +228,8 @@ void printAllRecipeNames(struct recipeStruct *recipeHead){
 *	  			prints all recipe nodes of a chosen food type						 								*
 *																													*
 *********************************************************************************************************************/
-void printRecipeByType (struct recipeStruct *headPointer){
-	struct recipeStruct *cur = headPointer;
+void printRecipeByType (struct recipeStruct *recipeHead){
+	struct recipeStruct *cur = recipeHead;
 	clearScreen();
 	puts("\n\n\t\t*********************************************************************************");
 	puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
@@ -270,7 +270,7 @@ void printRecipeByType (struct recipeStruct *headPointer){
 		ungetc(ch, stdin);
 		char recipeNameBuffer[INGREDIENT_BUFFER_LEN] = {'\0'};
 		readUserInputIntoBuffer(recipeNameBuffer);
-		foundRecipe = findRecipe(headPointer, recipeNameBuffer);
+		foundRecipe = findRecipe(recipeHead, recipeNameBuffer);
 		if (foundRecipe)
 			printFullRecipeWithPDFOption(foundRecipe);
 	}

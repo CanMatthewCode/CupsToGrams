@@ -233,9 +233,9 @@ void editRecipeNotesMenu(struct recipeStruct *recipe){
 *				menu for modifying or deleting an existing recipe in the recipeStruct linked list			*
 *																											*
 *************************************************************************************************************/
-struct recipeStruct *modifyExistingRecipeMenu(struct recipeStruct *recipeHeadPointer, struct ingredientType *ingredientHead){
+struct recipeStruct *modifyExistingRecipeMenu(struct recipeStruct *recipeHead, struct ingredientType *ingredientHead){
 	struct recipeStruct *foundRecipe = NULL;
-	struct recipeStruct *recipeHead = recipeHeadPointer;
+	struct recipeStruct *recipeHeadPointer = recipeHead;
 	char buffer[INGREDIENT_BUFFER_LEN] = {'\0'};
 	clearScreen();
 	puts("\n\n\t\t*********************************************************************************");
@@ -247,8 +247,8 @@ struct recipeStruct *modifyExistingRecipeMenu(struct recipeStruct *recipeHeadPoi
 	readUserInputIntoBuffer(buffer);
 	foundRecipe = findRecipe(recipeHeadPointer, buffer);
 	if (foundRecipe)
-			recipeHead = editRecipeMenu(foundRecipe, recipeHead, ingredientHead);
-	return recipeHead;
+			recipeHeadPointer = editRecipeMenu(foundRecipe, recipeHeadPointer, ingredientHead);
+	return recipeHeadPointer;
 }
 
 /************************************************************************************************************
@@ -300,33 +300,4 @@ void printSavedRecipeMenus(struct recipeStruct *recipeHead){
 		}
 	} while (menu != 'B');
 	return;
-}
-
-/************************************************************************************************************
-* 																											*
-*				menu for finding recipe from the recipeStruct headPointer									*
-*				and then printing chosen recipe out as a PDF document										*
-*																											*
-*************************************************************************************************************/
-void printRecipeToPDFMenu(struct recipeStruct *recipeHeadPointer){
-	struct recipeStruct *foundRecipe = NULL;
-	char buffer[INGREDIENT_BUFFER_LEN] = {'\0'};
-	clearScreen();
-	puts("\n\n\t\t*********************************************************************************");
-	puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
-	puts("\t\t*\t\t\t      -PRINT RECIPE TO PDF- \t\t\t\t*");
-	puts("\t\t*\t\t\t\t\t\t\t\t\t\t*");
-	puts("\t\t*********************************************************************************");
-	printf("\n\t\tEnter Recipe Name To Save As A PDF Document: ");
-	readUserInputIntoBuffer(buffer);
-	foundRecipe = findRecipe(recipeHeadPointer, buffer);
-	if (foundRecipe)
-			printFullRecipe(foundRecipe);
-	char choice = '\0';
-	printf("\n\t\tPrint To PDF (y/n)? ");
-	YESNOCHOICE(choice);
-	if (choice == 'N')
-		return;
-	else 
-		printRecipeToPDF(foundRecipe);
 }

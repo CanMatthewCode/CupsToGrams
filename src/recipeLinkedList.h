@@ -49,13 +49,13 @@ struct recipeStruct *findRecipe(struct recipeStruct *recipeHead, char buffer[ING
 *				returns recipeType pointer to head on success, NULL on failure or cancel							*
 *																													*
 *********************************************************************************************************************/
-struct recipeStruct *deleteFullRecipeNode(struct recipeStruct *head, struct recipeStruct *recipeToDelete);
+struct recipeStruct *deleteFullRecipeNode(struct recipeStruct *recipeHead, struct recipeStruct *recipeToDelete);
 
 /********************************************************************************************************************
 * 																													*
 *	 			free full recipeStruct linked-list from memory														*
 *																													*
 *********************************************************************************************************************/
-void freeRecipeStructList(struct recipeStruct *head);
+void freeRecipeStructList(struct recipeStruct *recipeHead);
 
 #endif //RECIPELINKEDLIST_H
