@@ -773,6 +773,7 @@ void printRecipeToPDF(struct recipeStruct *recipeToPrint){
 	int largestNameCommentSize = 0;
 	int tempNameCommentSize = 0;
 	int nameCommentSizeOffset = 0;
+	struct ingredientStruct *largestIngredientNamePtr = NULL;
 	//check every ingredient's decimal place amount in the total grams to get the largest number of printed digits of every ingredients' grams size
 	char ingredientGramsPrintBuffer[11] = {'\0'};
 	if (recipeToPrint->numberOfIngredients > 6){
@@ -793,14 +794,17 @@ void printRecipeToPDF(struct recipeStruct *recipeToPrint){
 					largestIngredientSizeRight = tempIngredientSize;
 			}
 			tempNameCommentSize = (strlen(recipeToPrint->ingredients[i].ingredientName) + strlen(recipeToPrint->ingredients[i].userCupsInput));
-			if (tempNameCommentSize > largestNameCommentSize)
+			if (tempNameCommentSize > largestNameCommentSize){
 				largestNameCommentSize = tempNameCommentSize;
+				largestIngredientNamePtr = recipeToPrint->ingredients[i];
+			}
 		}
-		if (largestNameCommentSize > 30)
+		//check if the largestNameCommentSize came from a measured ingredient or not, then check it size and decrease font size if needed
+		if ((largestIngredientNamePtr.nonWeighedIngredientFlag == 0 && largestNameCommentSize > 40) || (largestIngredientNamePtr.nonWeighedIngredientFlag == 1 && largestNameCommentSize > 49))
 			nameCommentSizeOffset = 1;
 		#undef V_FONT_POINTS
 		#define V_FONT_POINTS 10
-	//ingredientSizeOffset offset is to print all the ingredient names along the same vertical line regardless of the number of grams or individual items used of each ingredient
+		//ingredientSizeOffset offset is to print all the ingredient names along the same vertical line regardless of the number of grams or individual items used of each ingredient
 		int ingredientSizeOffsetLeft = (largestIngredientSizeLeft + 2) * H_FONT_POINTS; //+1.5 for the #) chars
 		int ingredientSizeOffsetRight = (largestIngredientSizeRight + 2.5) * H_FONT_POINTS;
 		for (int i = 0; i < printHalf; i++){
