@@ -796,11 +796,11 @@ void printRecipeToPDF(struct recipeStruct *recipeToPrint){
 			tempNameCommentSize = (strlen(recipeToPrint->ingredients[i].ingredientName) + strlen(recipeToPrint->ingredients[i].userCupsInput));
 			if (tempNameCommentSize > largestNameCommentSize){
 				largestNameCommentSize = tempNameCommentSize;
-				largestIngredientNamePtr = recipeToPrint->ingredients[i];
+				largestIngredientNamePtr = &recipeToPrint->ingredients[i];
 			}
 		}
 		//check if the largestNameCommentSize came from a measured ingredient or not, then check it size and decrease font size if needed
-		if ((largestIngredientNamePtr.nonWeighedIngredientFlag == 0 && largestNameCommentSize > 40) || (largestIngredientNamePtr.nonWeighedIngredientFlag == 1 && largestNameCommentSize > 49))
+		if ((largestIngredientNamePtr->nonWeighedIngredientFlag == 0 && largestNameCommentSize > 40) || (largestIngredientNamePtr->nonWeighedIngredientFlag == 1 && largestNameCommentSize > 49))
 			nameCommentSizeOffset = 1;
 		#undef V_FONT_POINTS
 		#define V_FONT_POINTS 10
