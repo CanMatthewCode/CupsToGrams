@@ -512,9 +512,10 @@ Pack mixture into a 9x5" oval loaf on a 13x9" shallow baking dish or pan.
 
 
 No-Knead Focaccia	1
-8
+9
 0	Yeast	2 1/4 Tsp	7.50
 0	Honey	2 Tsp	14.08
+0	Water, Warm	2 1/2 Cups	591.00
 0	All-Purpose Flour	5 Cups	650.00
 0	Salt, Kosher	1 Tbsp	14.40
 0	Olive Oil	6 Tbsp	81.00
@@ -529,12 +530,12 @@ Whisk dry yeast, honey, and lukewarm water in a medium bowl and let sit
 Add all-purpose flour and salt and mix with a spatula until a shaggy
 		dough forms and no dry streaks remain.
 
-Pour 4 tbsp extra-virgin olive oil into a big bowl that will fit in your
-		refrigerator. Transfer dough to bowl and turn to coat in oil. Cover with
-		a silicone lid or plastic wrap and chill until dough is doubled in size
-		(it should look very bubbly and alive), at least 8 hours and up to 1
-		day. If you're in a rush, you can also let it rise at room temperature
-		until doubled in size, 3-4 hours.
+Pour 54 grams (4 tbsp) extra-virgin olive oil into a big bowl that will
+		fit in your refrigerator. Transfer dough to bowl and turn to coat in
+		oil. Cover with a silicone lid or plastic wrap and chill until dough
+		is doubled in size (it should look very bubbly and alive), at least 8
+		hours and up to 1 day. If you're in a rush, you can also let it rise
+		at room temperature until doubled in size, 3-4 hours.
 
 Generously butter a 13x9" bakng pan, for thicker focaccia that's perfect
 		for sandwiches, or an 18x13" rimmed baking sheet, for focaccia that's
@@ -685,7 +686,7 @@ Cook several latkes at once, leaving yourself room to turn. Constantly
 		are done, after a few minutes of draining, add them in layers to a sheet
 		pan in the oven. Any remaining rawness will cook off here.
 
-Repeat steps 2-8 with every batch, including the test latke. In between
+Repeat last few steps including test lakta when oil changes. In between
 		batches, carefully remove as much crud from the oil as you can. If the
 		oil becomes too dirty, add additional oil, or if you don't have more
 		room in the pan, replace 2/3 with fresh oil. Be sure to let it come back
