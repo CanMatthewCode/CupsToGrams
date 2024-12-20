@@ -48,7 +48,7 @@ int main (int argc, char **argv){
 		switch (menu){
 			case '1': 	recipeMenus(recipeHead, ingredientHead);
 						break;
-			case '2':	printSavedRecipeMenus(recipeHead);
+			case '2':	recipeHead = printSavedRecipeMenus(recipeHead, ingredientHead);
 						break;
 			case '3': 	clearScreen();
 						ingredientHead = convertIngredientMenu(ingredientHead, adminFlag); 
