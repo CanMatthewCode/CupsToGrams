@@ -12,6 +12,7 @@
 /************************************************************************************************************
 * 																											*
 *				menu function for all recipe functions														*
+*				returns a pointer to the recipeStruct linked list head										*
 *																											*
 *************************************************************************************************************/
 struct recipeStruct *recipeMenus(struct recipeStruct *recipeHead, struct ingredientType *ingredientHead){
@@ -231,6 +232,7 @@ void editRecipeNotesMenu(struct recipeStruct *recipe){
 /************************************************************************************************************
 * 																											*
 *				menu for modifying or deleting an existing recipe in the recipeStruct linked list			*
+*				returns a pointer to the recipeStruct linked list head in case of delete recipe				*
 *																											*
 *************************************************************************************************************/
 struct recipeStruct *modifyExistingRecipeMenu(struct recipeStruct *recipeHead, struct ingredientType *ingredientHead){
@@ -254,10 +256,12 @@ struct recipeStruct *modifyExistingRecipeMenu(struct recipeStruct *recipeHead, s
 /************************************************************************************************************
 * 																											*
 *				menu function for printing all recipes, printing by type, or find recipe to print			*
+*				returns a pointer to the recipeStruct linked list head in case of delete recipe				*
 *																											*
 *************************************************************************************************************/
-void printSavedRecipeMenus(struct recipeStruct *recipeHead){
+struct recipeStruct *printSavedRecipeMenus(struct recipeStruct *recipeHead, struct ingredientType *ingredientHead){
 	char menu = '\0';
+	struct recipeStruct *recipeHeadPointer = recipeHead;
 	char recipeBuffer[INGREDIENT_BUFFER_LEN] = {'\0'};
 	clearScreen();
 	struct recipeStruct *foundRecipe = NULL;
@@ -288,16 +292,16 @@ void printSavedRecipeMenus(struct recipeStruct *recipeHead){
 						readUserInputIntoBuffer(recipeBuffer);
 						foundRecipe = findRecipe(recipeHead, recipeBuffer);
 						if (foundRecipe)
-							printFullRecipeWithPDFOption(foundRecipe);
+							recipeHeadPointer = printFullRecipeWithPDFOption(foundRecipe, recipeHead, ingredientHead);
 						break;
-			case '2':	printAllRecipeNames(recipeHead);
+			case '2':	recipeHeadPointer = printAllRecipeNames(recipeHead, ingredientHead);
 						break;
-			case '3':	printRecipeByType(recipeHead);
+			case '3':	recipeHeadPointer = printRecipeByType(recipeHead, ingredientHead);
 						break;
-			case 'B':	return;
+			case 'B':	return recipeHeadPointer;
 			default:	clearScreen();
 						printf("\n\t\tInvalid Selection, Try Again\n");
 		}
 	} while (menu != 'B');
-	return;
+	return recipeHeadPointer;
 }

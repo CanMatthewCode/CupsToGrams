@@ -13,6 +13,7 @@
 /************************************************************************************************************
 * 																											*
 *				menu function for all recipe functions														*
+*				returns a pointer to the recipeStruct linked list head										*
 *																											*
 *************************************************************************************************************/
 struct recipeStruct *recipeMenus(struct recipeStruct *recipeHead, struct ingredientType *ingredientHead);
@@ -20,6 +21,7 @@ struct recipeStruct *recipeMenus(struct recipeStruct *recipeHead, struct ingredi
 /************************************************************************************************************
 * 																											*
 *				menu for editing an already filled in recipeStruct 											*
+*				returns a pointer to the recipeStruct linked list head in case of delete recipe				*
 *																											*
 *************************************************************************************************************/
 struct recipeStruct *editRecipeMenu(struct recipeStruct *recipe, struct recipeStruct *recipeHead, struct ingredientType *ingredientHead);
@@ -48,6 +50,7 @@ void editRecipeNotesMenu(struct recipeStruct *recipe);
 /************************************************************************************************************
 * 																											*
 *				menu for modifying or deleting an existing recipe in the recipeStruct linked list			*
+*				returns a pointer to the recipeStruct linked list head in case of delete recipe				*
 *																											*
 *************************************************************************************************************/
 struct recipeStruct *modifyExistingRecipeMenu(struct recipeStruct *recipeHead, struct ingredientType *ingredientHead);
@@ -55,8 +58,9 @@ struct recipeStruct *modifyExistingRecipeMenu(struct recipeStruct *recipeHead, s
 /************************************************************************************************************
 * 																											*
 *				menu function for printing all recipes, printing by type, or find recipe to print			*
+*				returns a pointer to the recipeStruct linked list head in case of delete recipe				*
 *																											*
 *************************************************************************************************************/
-void printSavedRecipeMenus(struct recipeStruct *recipeHead);
+struct recipeStruct *printSavedRecipeMenus(struct recipeStruct *recipeHead, struct ingredientType *ingredientHead);
 
 #endif //RECIPEMENUS_H
