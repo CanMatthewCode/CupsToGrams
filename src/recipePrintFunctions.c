@@ -4,6 +4,7 @@
 #include "ingredientConversions.h"
 #include "recipeLinkedList.h"
 #include "recipePrintFunctions.h"
+#include "recipeMenus.h"
 
 /********************************************************************************************************************
 * 																													*
@@ -164,10 +165,11 @@ void printFullRecipe(struct recipeStruct *recipe){
 *				with the option to print the recipe to PDF															*
 *																													*
 *********************************************************************************************************************/
-void printFullRecipeWithPDFOption(struct recipeStruct *recipe){
+struct recipeStruct *printFullRecipeWithPDFOption(struct recipeStruct *recipe, struct recipeStruct *recipeHead, struct ingredientType *ingredientHead){
+	struct recipeStruct *recipeHeadPointer = recipeHead;
 	char ch = '\0';
 	printFullRecipe(recipe);
-	printf("\n\n\n\n\n\t\t(P) Print To PDF\t\t\t\tOr Press Enter To Continue ");
+	printf("\n\n\n\n\n\t\t(P) Print To PDF\t   (M) Modify Recipe\t      Or Press Enter To Continue:");
 	do {
 		ch = toupper(getchar());
 		if (ch == 'P'){
@@ -177,7 +179,12 @@ void printFullRecipeWithPDFOption(struct recipeStruct *recipe){
 			while ((ch = getchar()) != '\n');
 			ch = '\0';
 		}
+		if (ch == 'M'){
+			while ((ch = getchar()) != '\n');
+			recipeHeadPointer = editRecipeMenu(recipe, recipeHeadPointer, ingredientHead);
+		}
 	} while (ch != '\n');
+	return recipeHeadPointer;
 }
 
 /********************************************************************************************************************
@@ -185,8 +192,9 @@ void printFullRecipeWithPDFOption(struct recipeStruct *recipe){
 *	 			prints the names of all the nodes in the recipeStruct linked-list alphabetically					*
 *																													*
 *********************************************************************************************************************/
-void printAllRecipeNames(struct recipeStruct *recipeHead){
+struct recipeStruct *printAllRecipeNames(struct recipeStruct *recipeHead, struct ingredientType *ingredientHead){
 	struct recipeStruct *cur = NULL;
+	struct recipeStruct *recipeHeadPointer = recipeHead;
 	struct recipeStruct *foundRecipe = NULL;
 	clearScreen();
 	puts("\n\n\t\t*********************************************************************************");
@@ -212,15 +220,16 @@ void printAllRecipeNames(struct recipeStruct *recipeHead){
 	printf("\n\n\n\n\n\t\tEnter Name To View Recipe, Or Hit Enter To Continue: ");
 	char ch = '\0';
 	if  ((ch = getchar()) == '\n') {
-		return;
+		return recipeHeadPointer;
 	} else {
 		ungetc(ch, stdin);
 		char recipeNameBuffer[INGREDIENT_BUFFER_LEN] = {'\0'};
 		readUserInputIntoBuffer(recipeNameBuffer);
 		foundRecipe = findRecipe(recipeHead, recipeNameBuffer);
 		if (foundRecipe)
-			printFullRecipeWithPDFOption(foundRecipe);
+			recipeHeadPointer = printFullRecipeWithPDFOption(foundRecipe, recipeHeadPointer, ingredientHead);
 	}
+	return recipeHeadPointer;
 }
 
 /********************************************************************************************************************
@@ -228,7 +237,8 @@ void printAllRecipeNames(struct recipeStruct *recipeHead){
 *	  			prints all recipe nodes of a chosen food type						 								*
 *																													*
 *********************************************************************************************************************/
-void printRecipeByType (struct recipeStruct *recipeHead){
+struct recipeStruct *printRecipeByType (struct recipeStruct *recipeHead, struct ingredientType *ingredientHead){
+	struct recipeStruct *recipeHeadPointer = recipeHead;
 	struct recipeStruct *cur = recipeHead;
 	clearScreen();
 	puts("\n\n\t\t*********************************************************************************");
@@ -265,13 +275,14 @@ void printRecipeByType (struct recipeStruct *recipeHead){
 	struct recipeStruct *foundRecipe = NULL;
 	char ch = '\0';
 	if  ((ch = getchar()) == '\n') {
-		return;
+		return recipeHeadPointer;
 	} else {
 		ungetc(ch, stdin);
 		char recipeNameBuffer[INGREDIENT_BUFFER_LEN] = {'\0'};
 		readUserInputIntoBuffer(recipeNameBuffer);
 		foundRecipe = findRecipe(recipeHead, recipeNameBuffer);
 		if (foundRecipe)
-			printFullRecipeWithPDFOption(foundRecipe);
+			recipeHeadPointer = printFullRecipeWithPDFOption(foundRecipe, recipeHeadPointer, ingredientHead);
 	}
+	return recipeHeadPointer;
 }

@@ -52,20 +52,20 @@ void printFullRecipe(struct recipeStruct *recipe);
 *				with the option to print the recipe to PDF															*
 *																													*
 *********************************************************************************************************************/
-void printFullRecipeWithPDFOption(struct recipeStruct *recipe);
+struct recipeStruct *printFullRecipeWithPDFOption(struct recipeStruct *recipe, struct recipeStruct *recipeHead, struct ingredientType *ingredientHead);
 
 /********************************************************************************************************************
 * 																													*
 *	 			prints the names of all the nodes in the recipeStruct linked-list alphabetically					*
 *																													*
 *********************************************************************************************************************/
-void printAllRecipeNames(struct recipeStruct *recipeHead);
+struct recipeStruct *printAllRecipeNames(struct recipeStruct *recipeHead, struct ingredientType *ingredientHead);
 
 /********************************************************************************************************************
 * 																													*
 *	  			prints all recipe nodes of a chosen food type						 								*
 *																													*
 *********************************************************************************************************************/
-void printRecipeByType (struct recipeStruct *recipeHead);
+struct recipeStruct *printRecipeByType (struct recipeStruct *recipeHead, struct ingredientType *ingredientHead);
 
 #endif //RECIPEPRINTFUNCTIONS_H
