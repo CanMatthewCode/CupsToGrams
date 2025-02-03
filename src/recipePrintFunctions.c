@@ -204,12 +204,23 @@ struct recipeStruct *printAllRecipeNames(struct recipeStruct *recipeHead, struct
 	puts("\t\t*********************************************************************************\n\n");
 	printf("\t\t");
 	int numberOfCharactersOnLine = NUMBER_OF_CHARS_ON_SCREEN;
+	int recipeSpaces = NUMBER_OF_CHARS_ON_SCREEN / 2;
 	int curNameLength = 0;
 	int nextNameLength = 0;
 	for (cur = recipeHead; cur; cur = cur->next){
+		int offset = 0;
 		curNameLength = strlen(cur->recipeName);
-		printf("%s        ", cur->recipeName);
-		numberOfCharactersOnLine -= (curNameLength + 8);
+		while (((recipeSpaces - curNameLength) / 2) - offset > 0){
+			printf(" ");
+			offset += 1;
+			}
+		printf("%s", cur->recipeName);
+		offset = 0;
+		while (((recipeSpaces - curNameLength) / 2) - offset > 0){
+			printf(" ");
+			offset += 1;
+			}
+		numberOfCharactersOnLine -= recipeSpaces;
 		if (cur->next)
 			nextNameLength = strlen(cur->next->recipeName);
 		if (numberOfCharactersOnLine - nextNameLength < 1){
