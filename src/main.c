@@ -31,7 +31,7 @@ int main (int argc, char **argv){
 		puts("\t\t*********************************************************************************");
 		puts("\n\n\t\tMain Menu Options:\n");
 	
-		puts("\t\t(1) Recipe Conversions\n\t\t(2) See Saved Recipes"
+		puts("\t\t(1) Convert New Recipe\n\t\t(2) See Saved Recipes"
 			 "\n\t\t(3) Convert An Ingredient\n\t\t(4) See Ingredient Lists"
 			 "\n\n\t\t(Q) Quit");
 		printf("\n\n\t\tEnter Selection: ");
@@ -46,7 +46,7 @@ int main (int argc, char **argv){
 				printf("\t\tInvalid Selection: ");
     	} while (strchr("1234Q", menu) == NULL);
 		switch (menu){
-			case '1': 	recipeMenus(recipeHead, ingredientHead);
+			case '1': 	recipeHead = convertNewRecipe(recipeHead, ingredientHead);
 						break;
 			case '2':	recipeHead = printSavedRecipeMenus(recipeHead, ingredientHead);
 						break;
