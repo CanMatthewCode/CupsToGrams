@@ -1,3 +1,0 @@
-				MENU OPTIONS
-Add new recipe by type View existing recipes by type Print recipe by type
-Add new ingredient Convert ingredient amount Exit (saves all documents and dumps)

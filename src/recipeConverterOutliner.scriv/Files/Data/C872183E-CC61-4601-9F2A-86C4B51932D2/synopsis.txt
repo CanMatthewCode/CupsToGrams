@@ -1,5 +1,0 @@
-When you add new ingredient you get a list of all the main folders.  When you chose one, you get a new menu of the sub folders.  
-
-After choosing your sub-folder you get asked for the conversion ratio to fill the struct and save it.  
-
-Each main item .txt file has a marker telling the number of items (or it can read the number of linked-list items?) and pulls the names to populate the menu

@@ -42,24 +42,36 @@ Heavy cream should be at room temperature before use.
 
 
 
-Baked Orange Roughy	5
-6
-1	Can Campbell's Tomato Soup		1.00
-0	White Wine	1/3 Cup	77.87
-0	Cheddar Cheese	1 Cup	113.00
-0	Parsley, Fresh	2 Tbsps	7.60
-1	Small Onion	Minced	1.00
-1	Fish Fillets	Orange Roughy Or Snapper	4.00
-4
-Combine soup, wine, and grated cheese in a sauce-pan. Stir over low heat
-		until cheese melts and is blended.
+Banana Bread	1
+10
+0	Butter, Unsalted	4 Ozs	113.00
+0	Sugar, Granulated	1 1/4 Cups	250.00
+1	Eggs		2.00
+0	Baking Soda	1 Tsp	4.60
+0	Sour Cream	4 Tbsps	62.00
+0	Banana, Mashed	1 Cup	250.00
+0	Salt, Sea	1/4 Tsp	1.20
+0	Vanilla Extract	1 Tsp	4.67
+0	All-Purpose Flour	1 1/2 Cups	195.00
+0	Blueberries	1/2 Cup	74.00
+7
+Cream soft butter and sugar together until whipped. 
 
-Add parsley and onions. 
+Beat eggs slightly, then add to mixture slowly as you mix in.
 
-Arrange fish in shallow baking pan (or one each in an individual ramekin
-		type small dish) and pour sauce over fish.
+Dissolve baking soda into the sour cream in a small bowl, then mix well
+		into batter.
 
-Bake at 375*F for about 25 minutes, or until the fish flakes with a fork.
+Add flour, salt, vanilla extract, and banana to the batter and mix until
+		fully incorporated.
+
+Butter or use baking spray on a loaf pan, then pour in batter, layering
+		it with berries of your choice.
+
+Bake at 350*F for 1 hour to 1 hour 30 minutes, or until a toothpick in
+		the center comes out clean.
+
+Cool on a rack for 20 minutes then remove from pan and cool to room temperature.
 
 0
 
@@ -429,45 +441,29 @@ Bake at 375*F for 35 minutes or until a knife inserted off-center comes
 0
 
 
-Levain's Chocolate Chip Cookie	1
-11
-0	Butter, Unsalted	1 Cup	226.00
-0	Sugar, Brown	1 Cup	210.00
-0	Sugar, Granulated	1/2 Cup	100.00
-1	Eggs		2.00
-0	Cake Flour	1 1/2 Cups	205.50
-0	All-Purpose Flour	1 1/2 Cups	195.00
-0	Cornstarch	1 Tsp	2.67
-0	Baking Soda	3/4 Tsp	3.45
-0	Salt, Kosher	3/4 Tsp	3.60
-0	Chocolate Chips	2 Cups	340.00
-0	Walnuts, Chopped	2 Cups	240.00
+Julia Child's Crepes	2
 6
-Preheat oven to 410*F.
+1	Large Eggs		4.00
+0	Milk, Whole	1 Cup	244.00
+0	Water, Ice	1 Cup	237.00
+0	Salt, Sea	1/2 Tsp	2.40
+0	All-Purpose Flour	2 Cups	260.00
+0	Butter, Unsalted, Melted	1/4 Cup	56.50
+4
+Crack eggs into a blender, add liquid ingredients, then dry, and mix on
+		low speed for one minute to build gluten. Pause and wipe down glass sides
+		if needed.
 
-In a large mixing bowl, cream together the cold cubed butter, brown sugar,
-		and sugar for 4 minutes or until creamy.
+Cover and refrigerate for 2 hours or overnight (up to 24 hours).
 
-Add eggs, one at a time, mixing well after each.
+Mix by hand to reincorporate then melt butter on a medium heat non-stick
+		pan.
 
-Stir in flours, cornstarch, baking soda, and salt. Mix until just combined
-		to avoid overmixing. Stir in chocolate chips and walnuts. 
+Pour batter into pan while rolling pan in a circle to evenly distribute
+		the liquid as it quickly cooks. Flip when the edges crisp up and the
+		underside is just golden.
 
-Separate dough into large balls and place on silpat or other nonstick
-		surface. They are large, 4 fit on one large cookie sheet. The dough makes
-		8 extra large cookies.
-
-Bake for 9-12 minutes or until golden brown on the top. Let them rest
-		for at least 10 minutes to set.
-
-3
-Use cold butter, cut into small cubes. It takes about 4 minutes to mix
-		with the sugars. 
-
-You can substitute all ap-flour for cake flour if needed.
-
-You can add 1 teaspoon vanilla extract when adding the eggs to the batter.
-
+0
 
 
 Meatloaf	5
@@ -570,6 +566,28 @@ Focaccia is best eaten the day it's made, but keeps well in the freezer.
 		Slice it, then store the pieces in a freezer-safe container. Reheat when
 		ready on a baking sheet in the oven at 300*F
 
+
+
+Orange Roughy	5
+6
+1	Can Campbell's Tomato Soup		1.00
+0	White Wine	1/3 Cup	77.87
+0	Cheddar Cheese	1 Cup	113.00
+0	Parsley, Fresh	2 Tbsps	7.60
+1	Small Onion	Minced	1.00
+1	Fish Fillets	Orange Roughy Or Snapper	4.00
+4
+Combine soup, wine, and grated cheese in a sauce-pan. Stir over low heat
+		until cheese melts and is blended.
+
+Add parsley and onions. 
+
+Arrange fish in shallow baking pan (or one each in an individual ramekin
+		type small dish) and pour sauce over fish.
+
+Bake at 375*F for about 25 minutes, or until the fish flakes with a fork.
+
+0
 
 
 Peach Crumble Pie	3
@@ -722,6 +740,48 @@ Sprinkle top with walnuts.
 Place everything in a casserole dish and bake at 350*F for half hour.
 
 0
+
+
+The Chocolate Chip Cookie	1
+11
+0	Butter, Unsalted	1 Cup	226.00
+0	Sugar, Brown	1 Cup	210.00
+0	Sugar, Granulated	1/2 Cup	100.00
+1	Eggs		2.00
+0	Cake Flour	1 1/2 Cups	205.50
+0	All-Purpose Flour	1 1/2 Cups	195.00
+0	Cornstarch	1 Tsp	2.67
+0	Baking Soda	3/4 Tsp	3.45
+0	Salt, Kosher	3/4 Tsp	3.60
+0	Chocolate Chips	1 1/2 Cups	255.00
+0	Walnuts, Chopped	1 1/2 Cups	180.00
+6
+Preheat oven to 410*F.
+
+In a large mixing bowl, cream together the cold butter (cut into small
+		cubes) and sugar for 4 minutes or until creamy.
+
+Add eggs, one at a time, mixing well after each.
+
+Mix together the flours, cornstarch, baking soda, and salt. Stir dry ingredients
+		into wet until just combined to avoid overmixing. Stir in chocolate chips
+		and walnuts.
+
+Separate dough into large balls and place on silpat or other nonstick
+		surface. At 150 grams each these cookies are wonderfully large. For a
+		more 'normal' or child sized cookie, weigh them to 50 grams each (and
+		if you want to make 'way-too-big' ones, weigh them to 200 grams).
+
+For the 150 gram balls, bake 10 - 14 minutes. For 50 grams, cookies, bake
+		9 - 12 minutes. For the 200 gram mother-of-all-cookie, bake 12 - 15 minutes.
+
+3
+Add flake salt on top before baking to taste if desired.
+
+You can substitute all ap-flour for cake flour if needed.
+
+You can add 1 teaspoon vanilla extract when adding the eggs to the batter.
+
 
 
 The Original Cronut	1

@@ -1,5 +1,0 @@
-Store recipes in .txt files in one folder
-
-Store ingredients in a series of sub folder dependent on their food relations (dairy is main: cheese, milk, butter, etc).  
-
-Main folders are .txt files, sub_folders are all lines in the .txt file (milk and it’s struct, butter and it’s struct)
