@@ -270,7 +270,7 @@ struct recipeStruct *printRecipeByType (struct recipeStruct *recipeHead, struct 
 	int curNameLength = 0;
 	int nextNameLength = 0;
 	for (; cur; cur = cur->next){
-		if (cur->recipeType == (choice - 1)){
+		if (cur->recipeType == (enum recipeType)(choice - 1)){
 			curNameLength = strlen(cur->recipeName);
 			printf("%s        ", cur->recipeName);
 			numberOfCharactersOnLine -= (curNameLength + 8);

@@ -287,7 +287,7 @@ struct recipeStruct *findRecipe(struct recipeStruct *recipeHead, char buffer[ING
 	}
 	if ((recipeCounter == 1) && (strcmp(foundRecipes[0]->recipeName, buffer) == 0))
 		return foundRecipes[0];
-	int i = 0;
+	unsigned int i = 0;
 	for (i = 1; i <= recipeCounter; i++)
 		printf("\t\t%i) %s\n", i, foundRecipes[i-1]->recipeName);
 	printf("\t\t%i) None Of The Above\n", i);
