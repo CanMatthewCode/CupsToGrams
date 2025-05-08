@@ -35,18 +35,16 @@ void setExePath(){
 		#error "Unknown Platform"
 	#endif
 	
-	//remove exe name from pathway /recipeConverter/recipeConverter
+	//remove exe name from pathway /recipeConverter by truncating at last \ or /
 	#ifdef _WIN32
-		if (strstr(pathwayBuffer, "\\recipeConverter\\recipeConverter.exe") != NULL){
-		int pathwaySize = strlen(pathwayBuffer);
-		for (int i = pathwaySize; i > pathwaySize - 19; i--) // 'recipeConverter.exe' is 19 char long
-			pathwayBuffer[i] = '\0';
+		char *lastSlash = strrchr(pathwayBuffer, '\\');
+		if (lastSlash != NULL){
+			*lastSlash = '\0';
 	}
 	#else
-		if (strstr(pathwayBuffer, "/recipeConverter/recipeConverter") != NULL){
-		int pathwaySize = strlen(pathwayBuffer);
-		for (int i = pathwaySize; i > pathwaySize - 16; i--) // 'recipeConverter' is 15 chars long
-			pathwayBuffer[i] = '\0';
-	}
+		char *lastSlash = strrchr(pathwayBuffer, '/');
+		if (lastSlash != NULL){
+			*lastSlash = '\0';
+		}
 	#endif
 }
