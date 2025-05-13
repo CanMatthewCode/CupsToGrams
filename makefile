@@ -1,6 +1,15 @@
 # Compiler and flags
-CC = gcc
-CFLAGS = -Wall -Wextra -g3 -std=c11 -I$(INCLUDE_DIR) -pedantic -I./src -MMD -MP
+CC := gcc
+UNAME_S := $(shell uname -s)
+
+# Common flags
+CFLAGS = -Wall -Wextra -fsanitize=address -fsanitize=undefined -g -std=c11 -I$(INCLUDE_DIR) -pedantic -I./src -MMD -MP
+LDFLAGS = -lm -fsanitize=address
+
+#Platform-specific flag additions
+ifeq ($(UNAME_S),Linux)
+	LDFLAGS += -lasan -lubsan
+endif
 
 # Directories
 SRC_DIR := src
@@ -23,7 +32,7 @@ all: $(TARGET)
 
 # Rule to build the executable
 $(TARGET): $(OBJECTS) | $(PDF_DIR)
-	$(CC) $(OBJECTS) -o $(TARGET)
+	$(CC) $(OBJECTS) -o $(TARGET) $(LDFLAGS)
 	
 #Create PDFs Output Directory
 $(PDF_DIR):

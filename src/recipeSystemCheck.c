@@ -7,6 +7,7 @@
 	#include <mach-o/dyld.h>
 #elif __linux__
 	#include <unistd.h>
+	#include <linux/limits.h>
 #elif _WIN32
 	#include <windows.h>
 	#include <direct.h>
