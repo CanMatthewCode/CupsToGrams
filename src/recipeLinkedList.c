@@ -195,23 +195,11 @@ struct recipeStruct *placeRecipeStructNode(struct recipeStruct *recipeHead, stru
 	struct recipeStruct *cur = recipeHead;
 	struct recipeStruct *prev = NULL;
 	struct recipeStruct *newNode = newRecipe;
-	struct recipeStruct *head = NULL;
+
 	//if cur == NULL it is the first node
 	if (cur == NULL)
 		return newNode;
-	if (strcmp(newNode->recipeName, cur->recipeName) == 0){
-		printf("\n\t\tRecipe Already Exists, Change Recipe Name (y) or Delete Recipe(n)? ");
-		char choice = '\0';
-		YESNOCHOICE(choice);
-		if (choice == 'Y'){
-			head = modifyRecipeName(recipeHead, newNode);
-			return head;
-		} else {
-			free(newNode);
-			newNode = NULL;
-			return NULL;
-		}
-	}
+	
 	//if buffer is smaller than 1st node, it is new 1st node
 	if ((cur != NULL) && (strcmp(newNode->recipeName, cur->recipeName) < 0)){
 		newNode->next = cur;
@@ -221,20 +209,6 @@ struct recipeStruct *placeRecipeStructNode(struct recipeStruct *recipeHead, stru
 	//loop to check the rest
 	for ( ; cur->next != NULL && (strcmp(newNode->recipeName, cur->recipeName) > 0); prev = cur, cur = cur->next)
 		;
-	//check if it is an existing node already
-	if (strcmp(newNode->recipeName, cur->recipeName) == 0){
-		printf("\n\t\tRecipe Already Exists, Change Recipe Name (y) or Delete Recipe(n)? ");
-		char choice = '\0';
-		YESNOCHOICE(choice);
-		if (choice == 'Y'){
-			head = modifyRecipeName(recipeHead, newNode);
-			return head;
-		} else {
-			free(newNode);
-			newNode = NULL;
-			return NULL;
-		}
-	}
 	//final node case
 	if ((strcmp(newNode->recipeName, cur->recipeName) > 0) && cur->next == NULL){
 		newNode->prev = cur;
@@ -256,6 +230,23 @@ struct recipeStruct *placeRecipeStructNode(struct recipeStruct *recipeHead, stru
 	while (cur->prev != NULL)
 		cur = cur->prev;
 	return cur;
+}
+
+/********************************************************************************************************************
+* 																													*
+*	 			finds if a recipe name already exists in the recipe linked-list										*
+*				returns pointer to the recipe on success, NULL on failure											*
+*																													*
+*********************************************************************************************************************/
+struct recipeStruct *doesRecipeNameExist(struct recipeStruct *recipeHead, char buffer[INGREDIENT_BUFFER_LEN]){
+	struct recipeStruct *cur = recipeHead;
+//	struct recipeStruct *next = NULL;
+	while (cur){
+		if (strcmp(buffer, cur->recipeName) == 0)
+			return cur;
+		cur = cur->next;
+	}
+	return NULL;
 }
 
 /********************************************************************************************************************
@@ -354,6 +345,7 @@ struct recipeStruct *deleteFullRecipeNode(struct recipeStruct *recipeHead, struc
 	} else if (prev && (!next))
 		prev->next = NULL; 
 	dumpRecipesFromLinkedList(headPointer);
+	free(cur);
 	return headPointer;
 }
 

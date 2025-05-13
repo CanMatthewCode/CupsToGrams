@@ -36,8 +36,12 @@ struct recipeStruct *convertNewRecipe(struct recipeStruct *recipeHead, struct in
 		printRecipeName(newRecipe);
 		printf("\n\n\t\tIs The Above Correct (y/n)? ");
 		YESNOCHOICE(choice);
+		struct recipeStruct *temp = doesRecipeNameExist(recipeHead, buffer);
+			if (temp){
+				printf("\n\n\t\tRecipe Name Already Exists, Please Rename");
+				choice = 'N';
+			}
 	} while (choice != 'Y');
-	strcpy(newRecipe->recipeName, buffer);
 	clearScreen();
 	printRecipeName(newRecipe);
 	printRecipeIngredients(newRecipe);
@@ -327,6 +331,11 @@ struct recipeStruct *modifyRecipeName(struct recipeStruct *recipeHead, struct re
 		readUserInputIntoBuffer(buffer);
 		printf("\n\n\t\t\t%s\n\n\n\t\tIs This Correct (y/n)? ", buffer);
 		YESNOCHOICE(choice);
+		struct recipeStruct *temp = doesRecipeNameExist(recipeHead, buffer);
+			if (temp){
+				printf("\n\n\t\tRecipe Name Already Exists, Please Rename");
+				choice = 'N';
+			}
 	} while (choice != 'Y');
 	strcpy(recipe->recipeName, buffer);
 	//if it is still in the right place alphabetically:

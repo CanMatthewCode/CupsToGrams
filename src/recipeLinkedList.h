@@ -37,6 +37,14 @@ struct recipeStruct *placeRecipeStructNode(struct recipeStruct *recipeHead, stru
 
 /********************************************************************************************************************
 * 																													*
+*	 			finds if a recipe name already exists in the recipe linked-list										*
+*				returns pointer to the recipe on success, NULL on failure											*
+*																													*
+*********************************************************************************************************************/
+struct recipeStruct *doesRecipeNameExist(struct recipeStruct *recipeHead, char buffer[INGREDIENT_BUFFER_LEN]);
+
+/********************************************************************************************************************
+* 																													*
 *	  			finds a recipe in the recipeStruct linked list by parsing a buffer to find comparable names			*
 *				returns NULL if no recipe with a partially matching name is found									*
 *																													*
