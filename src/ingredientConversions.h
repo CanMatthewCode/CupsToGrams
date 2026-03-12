@@ -94,7 +94,7 @@ float weightToGrams(char *cupsInputAmountBuffer, char *ingredientName);
 *	  			accepts user input only if it is numeric and within -999 to 999 bounds								*
 *																													*
 *********************************************************************************************************************/
-int getNumericChoice();
+int getNumericChoice(void);
 
 /********************************************************************************************************************
 * 																													*

@@ -23,7 +23,7 @@ char pathwayBuffer[PATH_MAX] = {'\0'};
 *				needed .txt files to load in relative to the exe													*
 *																													*
 *********************************************************************************************************************/
-void setExePath(){
+void setExePath(void){
 	//get the correct platform dependent path to the exe
 	#ifdef __APPLE__
 		uint32_t size = sizeof(pathwayBuffer);

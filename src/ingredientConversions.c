@@ -172,7 +172,7 @@ float cupsToGrams(char *cupsInputAmountBuffer, struct ingredientItem *ingredient
 *********************************************************************************************************************/
 float weightToGrams(char *cupsInputAmountBuffer, char *ingredientName){
 	char measurementAmount[20] = {'\0'};
-	char measurementType[12] = {'\0'};
+	char measurementType[20] = {'\0'};
 	int charsRead = 0;
 	int weighedInputFlag = 0;
 	float cupAmount = 0.0;

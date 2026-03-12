@@ -12,6 +12,6 @@ extern char pathwayBuffer[PATH_MAX];
 *				needed .txt files to load in relative to the exe													*
 *																													*
 *********************************************************************************************************************/
-void setExePath();
+void setExePath(void);
 
 #endif //RECIPESYSTEMCHECK_H
