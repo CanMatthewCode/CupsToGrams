@@ -289,42 +289,46 @@ void decimalPlaceCheck(float ingredientGrams, char *bufferToFill){
 *********************************************************************************************************************/
 void unifyMeasurementTypes(char *cupsInputAmountBuffer, char *measurementAmount, char *typeToConvert, float cupAmount){
 	if ((strcmp(typeToConvert, "Cups") == 0) || (strcmp(typeToConvert, "Cup") == 0) || (strcmp(typeToConvert, "C") == 0)){
-		memset(cupsInputAmountBuffer, 0, sizeof(*cupsInputAmountBuffer));
+		memset(cupsInputAmountBuffer, 20, sizeof(*cupsInputAmountBuffer));
 		if (cupAmount > 1)
 			snprintf(cupsInputAmountBuffer, strlen(measurementAmount) + 5, "%sCups", measurementAmount);
 		else
 			snprintf(cupsInputAmountBuffer, strlen(measurementAmount) + 4, "%sCup", measurementAmount);
 		return;
 	} else if ((strcmp(typeToConvert, "Tablespoons") == 0) || (strcmp(typeToConvert, "Tablespoon") == 0) || (strcmp(typeToConvert, "Tbsp") == 0) || (strcmp(typeToConvert, "Tbl") == 0) || (strcmp(typeToConvert, "Tbls") == 0)) {
-		memset(cupsInputAmountBuffer, 0, sizeof(*cupsInputAmountBuffer));
+		memset(cupsInputAmountBuffer, 20, sizeof(*cupsInputAmountBuffer));
 		if (cupAmount > 1)
 			snprintf(cupsInputAmountBuffer, strlen(measurementAmount) + 6, "%sTbsps", measurementAmount);
 		else
 			snprintf(cupsInputAmountBuffer, strlen(measurementAmount) + 5, "%sTbsp", measurementAmount);
 		return;
     } else if ((strcmp(typeToConvert, "Teaspoons") == 0) || (strcmp(typeToConvert, "Teaspoon") == 0) || (strcmp(typeToConvert, "Tsp") == 0) || (strcmp(typeToConvert, "Tea") == 0)){
-		memset(cupsInputAmountBuffer, 0, sizeof(*cupsInputAmountBuffer));
+		memset(cupsInputAmountBuffer, 20, sizeof(*cupsInputAmountBuffer));
 		if (cupAmount > 1)
 			snprintf(cupsInputAmountBuffer, strlen(measurementAmount) + 5, "%sTsps", measurementAmount);
 		else
 			snprintf(cupsInputAmountBuffer, strlen(measurementAmount) + 4, "%sTsp", measurementAmount);
 		return;
 	} else if ((strcmp(typeToConvert, "Ounces") == 0) || (strcmp(typeToConvert, "Ounce") == 0) || (strcmp(typeToConvert, "Ozs") == 0) || (strcmp(typeToConvert, "Oz") == 0)) {
-		memset(cupsInputAmountBuffer, 0, sizeof(*cupsInputAmountBuffer));
+		memset(cupsInputAmountBuffer, 20, sizeof(*cupsInputAmountBuffer));
 		if (cupAmount > 1)
 			snprintf(cupsInputAmountBuffer, strlen(measurementAmount) + 4, "%sOzs", measurementAmount);
 		else
 			snprintf(cupsInputAmountBuffer, strlen(measurementAmount) + 3, "%sOz", measurementAmount);
 		return;
 	} else if ((strcmp(typeToConvert, "Pounds") == 0) || (strcmp(typeToConvert, "Pound") == 0) || (strcmp(typeToConvert, "Lbs") == 0) || (strcmp(typeToConvert, "Lb") == 0)) {
-		memset(cupsInputAmountBuffer, 0, sizeof(*cupsInputAmountBuffer));
+		memset(cupsInputAmountBuffer, 20, sizeof(*cupsInputAmountBuffer));
 		if (cupAmount > 1)
 			snprintf(cupsInputAmountBuffer, strlen(measurementAmount) + 4, "%sLbs", measurementAmount);
 		else
 			snprintf(cupsInputAmountBuffer, strlen(measurementAmount) + 3, "%sLb", measurementAmount);
 		return;
 	} else if ((strcmp(typeToConvert, "Grams") == 0) || (strcmp(typeToConvert, "Gram") == 0) || (strcmp(typeToConvert, "G") == 0) || (strcmp(typeToConvert, "Gs") == 0)) {
-		memset(cupsInputAmountBuffer, 0, sizeof(*cupsInputAmountBuffer));
+		memset(cupsInputAmountBuffer, 20, sizeof(*cupsInputAmountBuffer));
+		if (cupAmount > 1)
+			snprintf(cupsInputAmountBuffer, strlen(measurementAmount) + 6, "%sGrams", measurementAmount);
+		else
+			snprintf(cupsInputAmountBuffer, strlen(measurementAmount) + 5, "%sGram", measurementAmount);
 		return;
 	} else 
 	    return;

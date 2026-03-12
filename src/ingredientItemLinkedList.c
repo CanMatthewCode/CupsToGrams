@@ -236,7 +236,7 @@ struct ingredientItem *addNewIngredientItemNode(char buffer[INGREDIENT_BUFFER_LE
 	    }
 	newNode->gramsPerCup = gramsPerCup;
     }
-    while (getchar () != '\n');
+    while (getchar() != '\n');
 	//enter functionality to populate ingredientItem->gramsPerCup and set tablespoonFlag
 	printf("\t\tEnter Measurement Type (cups/tbsp): ");
   	char ch = '\0';
@@ -249,7 +249,7 @@ struct ingredientItem *addNewIngredientItemNode(char buffer[INGREDIENT_BUFFER_LE
 						break;
 			default:	printf("\t\tInvalid Selection, Try Again: ");
 		}
-		while (getchar () != '\n');
+		while (getchar() != '\n');
 	} while ((ch != 'C') && (ch != 'T'));
 	return newNode;
 }
@@ -451,7 +451,7 @@ void printAllIngredientItemNodes(struct ingredientType *node){
 * 																													*
 *	 			delete an ingredientItem node						 				 								*
 *				accepts the ingredientItem node to be deleted and it's attached ingredientType node as parameters	*
-*				returns 0 on success, 1 on cancel													*
+*				returns 0 on success, 1 on cancel																	*
 *																													*
 *********************************************************************************************************************/
 int deleteIngredientItemNode(struct ingredientItem *node, struct ingredientType *headNode){
