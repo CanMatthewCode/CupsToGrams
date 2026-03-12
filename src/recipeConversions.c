@@ -773,8 +773,6 @@ void printRecipeToPDF(struct recipeStruct *recipeToPrint){
 	pdf_add_text(pdf, NULL, "        INGREDIENTS:", 12, SIDE_MARGIN, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, PDF_BLACK);
 	linePointCounter += (1.5 * V_FONT_POINTS);
 	char ingredientBuffer[INGREDIENT_BUFFER_LEN * 2] = {'\0'};
-	//lineCounter so you don't get page overflow
-	int lineCounter = 0;
 	int largestIngredientSize = 0;
 	int largestIngredientSizeLeft = 0;
 	int largestIngredientSizeRight = 0;
@@ -862,7 +860,6 @@ void printRecipeToPDF(struct recipeStruct *recipeToPrint){
 				pdf_add_text(pdf, NULL, ingredientBuffer, V_FONT_POINTS - nameCommentSizeOffset, (TOTAL_HORIZONTAL_POINTS / 2) + ingredientSizeOffsetRight, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, PDF_BLACK);
 			}
 			linePointCounter += 1.5 * V_FONT_POINTS;
-			lineCounter++;
 		}
 		#undef V_FONT_POINTS
 		#define V_FONT_POINTS 12
@@ -898,7 +895,6 @@ void printRecipeToPDF(struct recipeStruct *recipeToPrint){
 			}
 			pdf_add_text(pdf, NULL, ingredientBuffer, V_FONT_POINTS, SIDE_MARGIN + ingredientSizeOffset, TOTAL_VERTICAL_POINTS - TOP_BOTTOM_MARGIN - linePointCounter, PDF_BLACK);
 			linePointCounter += 1.25 * V_FONT_POINTS;
-			lineCounter++;
 		}
 	}
 	//add instructions
