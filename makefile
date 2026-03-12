@@ -3,8 +3,8 @@ CC := gcc
 UNAME_S := $(shell uname -s)
 
 # Common flags
-CFLAGS = -Wall -Wextra -fsanitize=address -fsanitize=undefined -g -std=c11 -I$(INCLUDE_DIR) -pedantic -I./src -MMD -MP
-LDFLAGS = -lm -fsanitize=address
+CFLAGS = -Wall -Wextra -std=c11 -I$(INCLUDE_DIR) -pedantic -I./src -MMD -MP
+LDFLAGS = -lm
 
 #Platform-specific flag additions
 ifeq ($(UNAME_S),Linux)
@@ -30,6 +30,11 @@ DEPS := $(OBJS:.o=.d)
 # Default target
 all: $(TARGET)
 
+# Debug target
+debug: CFLAGS += -fsanitize=address -fsanitize=undefined -g
+debug: LDFLAGS +=  -fsanitize=address
+debug: $(TARGET)
+
 # Rule to build the executable
 $(TARGET): $(OBJECTS) | $(PDF_DIR)
 	$(CC) $(OBJECTS) -o $(TARGET) $(LDFLAGS)
@@ -51,4 +56,4 @@ clean:
 	rm -rf $(BUILD_DIR) $(TARGET)
 
 # Phony targets
-.PHONY: all clean
+.PHONY: all clean debug
