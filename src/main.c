@@ -50,11 +50,9 @@ int main (int argc, char **argv){
 						break;
 			case '2':	recipeHead = printSavedRecipeMenus(recipeHead, ingredientHead);
 						break;
-			case '3': 	clearScreen();
-						ingredientHead = convertIngredientMenu(ingredientHead, adminFlag); 
+			case '3': 	ingredientHead = convertIngredientMenu(ingredientHead, adminFlag); 
 						break; 
-			case '4':	clearScreen();
-						printAllIngredientItemsInTypeNode(ingredientHead);
+			case '4':	printAllIngredientItemsInTypeNode(ingredientHead);
 						break;
 			case 'Q':	if (ingredientHead)
 							freeIngredientItemList(ingredientHead);
