@@ -276,8 +276,11 @@ int readUserInputIntoRecipe(char directionsBuffer[MAX_INGREDIENT_TEXT]){
 	    if ((counter == 0) && (ch == '\n'))
     	    printf("\t\tInvalid Entry: ");
     } while (ch == '\n');
-	while ((ch == ' ') || (ch == '\t') || (ch == '\n'))
+	while ((ch == ' ') || (ch == '\t') || (ch == '\n')){
 		ch = getchar();
+		if ((counter == 0) && (ch == '\n'))
+    		printf("\t\tInvalid Entry: ");
+	}
 	ch = toupper(ch);
 	*temp = ch;
 	counter = 1;

@@ -66,7 +66,7 @@ int dumpRecipesFromLinkedList(struct recipeStruct *recipeHead){
 			fprintf(fp, "%s\n\n", recipe->recipeNotes[counter]);
 			counter++;
 		}
-	//print * character to distinguish between recipes and to scan later to get a count of number of recipes
+	//print alarm character to distinguish between recipes and to scan later to get a count of number of recipes
 		fprintf(fp, "\n\a\n");
 	//move on to the next recipe in the linked list alphabetically
 		recipe = recipe->next;
