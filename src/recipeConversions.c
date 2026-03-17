@@ -396,8 +396,6 @@ void modifyIngredientAmount(struct recipeStruct *recipe, struct ingredientType *
 				printf("\n\n\t\tIs This Correct (y/n)? ");
 				YESNOCHOICE(choice);
 			} while (choice != 'Y');
-	//		printf("\n\n\t\tIngredient Not Found");
-	//		return;
 		} else {
 			do {
 				recipe->ingredients[menu - 1].ingredientGrams = cupsToGrams(cupsInputAmountBuffer, foundNewIngredient);

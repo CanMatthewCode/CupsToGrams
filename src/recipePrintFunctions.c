@@ -118,25 +118,25 @@ void printRecipeNotes(struct recipeStruct *recipe){
 void printRecipeType(struct recipeStruct *recipe){
 	char enumValue[12] = {'\0'};
 	switch (recipe->recipeType){
-		case 0:		strcpy(enumValue, "APPETIZER");
-					break;
-		case 1:		strcpy(enumValue, "BAKED GOOD");
-					break;
-		case 2:		strcpy(enumValue, "BREAKFAST");
-					break;
-		case 3:		strcpy(enumValue, "DESSERT");
-					break;
-		case 4:		strcpy(enumValue, "LUNCH");
-					break;
-		case 5:		strcpy(enumValue, "ENTREE");
-					break;
-		case 6:		strcpy(enumValue, "SIDE DISH");
-					break;
-		case 7:		strcpy(enumValue, "SNACK");
-					break;
-		case 8:		strcpy(enumValue, "SOUP");
-					break;
-		default:	break;
+		case APPETIZER:		strcpy(enumValue, "APPETIZER");
+							break;
+		case BAKED_GOOD:	strcpy(enumValue, "BAKED GOOD");
+							break;
+		case BREAKFAST:		strcpy(enumValue, "BREAKFAST");
+							break;
+		case DESSERT:		strcpy(enumValue, "DESSERT");
+							break;
+		case LUNCH:			strcpy(enumValue, "LUNCH");
+							break;
+		case ENTREE:		strcpy(enumValue, "ENTREE");
+							break;
+		case SIDE:		strcpy(enumValue, "SIDE DISH");
+							break;
+		case SNACK:			strcpy(enumValue, "SNACK");
+							break;
+		case SOUP:			strcpy(enumValue, "SOUP");
+							break;
+		default:			break;
 	}
 	printf("\t\t%81s", enumValue);
 }
